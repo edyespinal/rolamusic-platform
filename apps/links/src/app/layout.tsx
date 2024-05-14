@@ -6,7 +6,7 @@ const font = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ROLA | Links",
-  description: "Links relevantes para la comunidad de ROLA",
+  description: "Síguenos y no te pierdas nada",
 };
 
 export default function RootLayout({
