@@ -2,29 +2,11 @@
 
 import React from "react";
 import Image from "next/image";
+import { Platforms, links } from "./helpers/links";
 
 export default function Home() {
-  const redirectTo = (app: "youtube" | "instagram" | "tiktok" | "web") => {
-    switch (app) {
-      case "youtube":
-        document.location = "https://urlgeni.us/youtube/channel/rola-youtube";
-
-        break;
-      case "instagram":
-        document.location = "https://urlgeni.us/instagram/rola-instagram";
-
-        break;
-      case "tiktok":
-        document.location = "https://urlgeni.us/tiktok/rola-tiktok";
-
-        break;
-      case "web":
-        document.location = "https://rolamusic.app";
-
-        break;
-      default:
-        break;
-    }
+  const redirectTo = (platform: Platforms) => {
+    window.location.href = links[platform];
   };
 
   return (
@@ -51,6 +33,12 @@ export default function Home() {
           onClick={() => redirectTo("instagram")}
         >
           Instagram
+        </button>
+        <button
+          className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
+          onClick={() => redirectTo("spotify")}
+        >
+          Spotify
         </button>
         <button
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
