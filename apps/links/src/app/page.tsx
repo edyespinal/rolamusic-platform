@@ -19,27 +19,26 @@ export default function Home() {
         <Link
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
           href="https://urlgeni.us/youtube/channel/rola-youtube"
-          target="_blank"
         >
           YouTube
         </Link>
         <Link
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href="https://urlgeni.us/tiktok/rola-tiktok"
+          href="https://urlgeni.us/instagram/rola-instagram"
           target="_blank"
         >
           Instagram
         </Link>
         <Link
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href="https://rolamusic.app"
+          href="https://urlgeni.us/tiktok/rola-tiktok"
           target="_blank"
         >
           TikTok
         </Link>
         <Link
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href="https://urlgeni.us/instagram/rola-instagram"
+          href="https://rolamusic.app"
           target="_blank"
         >
           Web
