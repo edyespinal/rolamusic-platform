@@ -1,8 +1,32 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
+  const redirectTo = (app: "youtube" | "instagram" | "tiktok" | "web") => {
+    switch (app) {
+      case "youtube":
+        document.location = "https://urlgeni.us/youtube/channel/rola-youtube";
+
+        break;
+      case "instagram":
+        document.location = "https://urlgeni.us/instagram/rola-instagram";
+
+        break;
+      case "tiktok":
+        document.location = "https://urlgeni.us/tiktok/rola-tiktok";
+
+        break;
+      case "web":
+        document.location = "https://rolamusic.app";
+
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
       <div className="text-center space-y-4 pb-12">
@@ -16,33 +40,30 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col gap-4 items-center">
-        <Link
+        <button
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href="https://urlgeni.us/youtube/channel/rola-youtube"
+          onClick={() => redirectTo("youtube")}
         >
           YouTube
-        </Link>
-        <Link
+        </button>
+        <button
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href="https://urlgeni.us/instagram/rola-instagram"
-          target="_blank"
+          onClick={() => redirectTo("instagram")}
         >
           Instagram
-        </Link>
-        <Link
+        </button>
+        <button
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href="https://urlgeni.us/tiktok/rola-tiktok"
-          target="_blank"
+          onClick={() => redirectTo("tiktok")}
         >
           TikTok
-        </Link>
-        <Link
+        </button>
+        <button
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href="https://rolamusic.app"
-          target="_blank"
+          onClick={() => redirectTo("web")}
         >
           Web
-        </Link>
+        </button>
       </div>
     </main>
   );
