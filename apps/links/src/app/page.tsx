@@ -16,7 +16,7 @@ export default function Home() {
     youtube:
       device === "desktop"
         ? "https://www.youtube.com/@rolamusicapp"
-        : "vnd.youtube://user/rolamusicapp",
+        : "youtube.com/@rolamusicapp",
     tiktok:
       device === "desktop"
         ? "https://www.tiktok.com/@rolamusicapp"
@@ -33,17 +33,25 @@ export default function Home() {
           alt="Logo"
         />
       </div>
+
       <div className="flex flex-col gap-4 items-center">
         <Link
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href={links.instagram}
+          href="https://rolamusic.app/"
+          target="_blank"
+        >
+          ROLA
+        </Link>
+        <Link
+          className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
+          href={links.youtube}
           target="_blank"
         >
           YouTube
         </Link>
         <Link
           className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href={links.youtube}
+          href={links.instagram}
           target="_blank"
         >
           Instagram
@@ -54,13 +62,6 @@ export default function Home() {
           target="_blank"
         >
           TikTok
-        </Link>
-        <Link
-          className="w-60 text-center bg-white text-black py-2 px-8 rounded-full hover:bg-brand"
-          href="https://rolamusic.app/"
-          target="_blank"
-        >
-          ROLA
         </Link>
       </div>
     </main>
