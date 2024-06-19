@@ -3,9 +3,8 @@ import { Container } from "../../../components/Container";
 
 function SignInPage() {
   return (
-    <Container>
+    <Container className="flex items-center justify-center h-svh">
       <SignIn />
-      hello
     </Container>
   );
 }

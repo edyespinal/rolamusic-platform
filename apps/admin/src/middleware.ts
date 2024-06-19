@@ -1,14 +1,17 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// const isPublicRoute = createRouteMatcher(["/auth/sign-out", "/auth/sign-in"]);
+const isPublicRoute = createRouteMatcher(["/auth(.*)"]);
 
-export default clerkMiddleware();
-
-// export default clerkMiddleware((auth, req) => {
-// if (!isPublicRoute(req)) {
-//   auth().protect();
-// }
-// });
+export default clerkMiddleware((auth, req) => {
+  if (
+    !isPublicRoute(req) &&
+    !process.env.ADMIN_EMAILS?.split(",").includes(
+      auth().sessionClaims?.email as string
+    )
+  ) {
+    auth().protect();
+  }
+});
 
 export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
