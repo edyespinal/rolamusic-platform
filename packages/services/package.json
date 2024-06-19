@@ -1,0 +1,26 @@
+{
+  "name": "@rola/services",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    "./constants": "./constants/index.ts",
+    "./firebase": "./firebase/index.ts",
+    "./schemas": "./schemas/index.ts",
+    "./storage": "./uploadthing/index.ts",
+    "./utils": "./utils/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@rola/eslint-config": "workspace:^",
+    "@rola/typescript-config": "workspace:^",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@uploadthing/react": "^6.6.0",
+    "firebase": "^10.12.0",
+    "uploadthing": "^6.12.0",
+    "zod": "^3.23.8"
+  }
+}
