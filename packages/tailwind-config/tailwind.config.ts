@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
-const config: Omit<Config, "content"> = {
+const config: Omit<Config, "content" | "mode"> = {
+  mode: "jit",
   theme: {
     extend: {
       colors: {
