@@ -6,7 +6,7 @@ import { Platforms, links } from "./helpers/links";
 
 export default function Home() {
   const redirectTo = (platform: Platforms) => {
-    window.location.href = links[platform];
+    window.open(links[platform], "_blank");
   };
 
   return (
