@@ -2,14 +2,15 @@
   "name": "platform",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
+    "build": "dotenv -- turbo build",
+    "dev": "dotenv -- turbo dev",
+    "lint": "dotenv -- turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "@rola/eslint-config": "workspace:*",
     "@rola/typescript-config": "workspace:*",
+    "dotenv-cli": "^7.4.2",
     "prettier": "^3.2.5",
     "turbo": "latest"
   },
