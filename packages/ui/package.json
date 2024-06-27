@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@rola/eslint-config": "workspace:*",
+    "@rola/tailwind-config": "workspace:^",
     "@rola/typescript-config": "workspace:*",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
