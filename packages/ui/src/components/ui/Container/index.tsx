@@ -21,11 +21,22 @@ const containerVariants = cva("mx-auto w-full", {
 type ContainerProps = React.HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof containerVariants> & {
     asChild?: boolean;
+    as?: React.ElementType;
   };
 
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
-  ({ children, className, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "div";
+  (
+    {
+      children,
+      className,
+      size,
+      as: asElement = "div",
+      asChild = false,
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : asElement;
 
     return (
       <Comp

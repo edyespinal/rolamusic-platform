@@ -47,7 +47,7 @@ const Title = React.forwardRef<HTMLHeadingElement, TitleProps>(
     return (
       <Component
         ref={ref}
-        className={cn(titleVariants({ order }), className)}
+        className={cn(titleVariants({ order, align }), className)}
         {...props}
       >
         {children}
