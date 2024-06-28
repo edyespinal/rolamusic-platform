@@ -1,16 +1,16 @@
-import { Container, Underline } from "@rola/ui/components";
+import { Container, Text, Title, Underline } from "@rola/ui/components";
 
 function LegalNoticePage() {
   return (
     <Container className="pt-12 pb-24">
       <div className="pb-12">
-        <h1 className="text-2xl text-center  uppercase font-bold">
+        <Title order={3} className="uppercase">
           Condiciones de Uso
-        </h1>
+        </Title>
         <Underline />
       </div>
 
-      <p className="mb-12">
+      <Text className="mb-12">
         En cumplimiento de lo previsto en la Ley Orgánica 34/2002, de 11 de
         julio, de Servicios de la Sociedad de la Información y Comercio
         Electrónico LSSICE, ROLA informa al usuario que dicha empresa es la
@@ -19,26 +19,26 @@ function LegalNoticePage() {
         internet. Los datos identificativos de ROLA se especifican a
         continuación. El presente Aviso Legal tiene como objeto establecer las
         Condiciones Generales que regulan el acceso y uso de este sitio web.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Datos indentificativos
-      </h2>
+      </Title>
       <div className="mb-12">
-        <p>
+        <Text>
           Domicilio: C/Cuesta de San Francisco 10, Las Rozas, Madrid - 28231
-        </p>
-        <p>Teléfono: 911 933 480</p>
-        <p>
+        </Text>
+        <Text>Teléfono: 911 933 480</Text>
+        <Text>
           Correo electrónico: <a href="mailto:hola@rola.es">hola@rola.es</a>
-        </p>
-        <p>Datos fiscales: CIF-DNI 55113758P</p>
+        </Text>
+        <Text>Datos fiscales: CIF-DNI 55113758P</Text>
       </div>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Aceptación del usuario
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         El acceso y/o uso de este sitio web atribuye la condición de usuario e
         implica necesariamente la sumisión y aceptación de las Condiciones
         Generales incluidas en este Aviso Legal, sin reservas, en toda su
@@ -61,12 +61,12 @@ function LegalNoticePage() {
         derecho adquirido para la otra parte. El usuario queda informado y
         acepta que el acceso a la presente web no supone, en modo alguno, el
         inicio de una relación comercial con ROLA.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Utilización del sitio web (1): generalidades
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         El usuario asume la responsabilidad del uso del presente sitio web y se
         compromete a la realización de un correcto uso del mismo y de los
         contenidos y servicios ofrecidos en él. A tales efectos, y con carácter
@@ -104,12 +104,12 @@ function LegalNoticePage() {
         y perjuicios que ROLA pueda sufrir como consecuencia del incumplimiento
         de cualquiera de las obligaciones a las que queda sometido por las
         presentes Condiciones Generales.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Utilización del sitio web (2): registro y contraseñas
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         El usuario se hace responsable del registro que pudiera ser necesario
         para solicitar o utilizar determinados servicios. Así, el usuario es
         responsable de aportar información veraz y lícita en dicho registro. Si
@@ -122,12 +122,12 @@ function LegalNoticePage() {
         inmediata cancelación. ROLA queda eximida de cualquier responsabilidad
         que pudiera derivarse del uso indebido de las contraseñas por terceros
         no autorizados.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Exclusión de garantías y responsabilidades
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         ROLA informa que la información contenida en los documentos y gráficos
         de esta web se publican «como están» sin garantías de ninguna clase y
         rechazan toda garantía respecto a esta información, incluyendo todas las
@@ -138,21 +138,21 @@ function LegalNoticePage() {
         pérdida de datos o beneficios, que puedan derivarse de una acción
         contractual o extracontractual en relación con el uso o utilización de
         información disponible en esta web.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Contenidos y modificaciones
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         La información contenida en esta web podría incluir erratas o errores y
         está sometida a cambios constantes, por lo que ROLA se reserva el
         derecho a actualizar, modificar o eliminar dicha información.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Propiedad Intelectual e Industrial
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         Los derechos de propiedad intelectual de este sitio web, su diseño
         gráfico y códigos son titularidad de ROLA. Todos los derechos
         reservados. La totalidad del contenido artístico y a su efecto la
@@ -167,38 +167,38 @@ function LegalNoticePage() {
         distribución, comunicación pública, transformación o cualquier otra
         actividad que se pueda realizar con los contenidos de sus páginas web ni
         aun citando las fuentes, salvo consentimiento por escrito de ROLA.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Enlaces («links») de terceros
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         ROLA no asume responsabilidad alguna por la información contenida en
         páginas web de terceros a las que se pueda acceder por «links» o enlaces
         desde cualquier página web propiedad de ROLA. La presencia de «links» o
         enlaces en las páginas web de ROLA tiene finalidad meramente informativa
         y en ningún caso supone sugerencia, invitación o recomendación sobre los
         mismos.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Política de Cookies
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         Se expone en una se cción exclusiva: ver Política de cookies.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Política de Privacidad
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         Se expone en su una sección exclusiva: ver Política de Privacidad.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Derecho de exclusión y medidas generales
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         ROLA se reserva el derecho a limitar o denegar, sin previo aviso, el
         acceso a este sitio web a cualquier usuario que no cumpla la legislación
         vigente y las presentes Condiciones Generales que regulan el acceso y
@@ -206,12 +206,12 @@ function LegalNoticePage() {
         acciones estén disponibles en derecho para exigir las responsabilidades
         que se deriven del incumplimiento por parte de un usuario de cualquiera
         de las disposiciones de estas Condiciones Generales.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Legislación
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         El presente Aviso Legal así como cualquier relación entre el usuario y
         el sitio web http://www.rola.es se encuentran regidos por la legislación
         española. Para cualquier cuestión litigiosa, ambas partes, con renuncia
@@ -227,22 +227,22 @@ function LegalNoticePage() {
         de residencia en España se entenderá realizado bajo su exclusiva
         responsabilidad, exonerando a ROLA de cualquier responsabilidad en la
         medida en que así lo permita la legislación aplicable.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Actualización del Aviso Legal
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         ROLA se reserva expresamente el derecho a realizar cambios en el
         presente Aviso Legal cuando lo estime necesario, en cuyo caso estos
         quedarán debidamente publicados aquí mismo. El usuario reconoce y acepta
         que es su responsabilidad revisar el Aviso Legal.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Aceptación del acuerdo de servicio de Stripe
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         Los servicios de procesamiento de pago para artistas en ROLA son
         proporcionados por Stripe y están sujetos al Acuerdo de cuentas
         conectadas de Stripe (
@@ -272,7 +272,7 @@ function LegalNoticePage() {
         sobre usted y su negocio, y autoriza a ROLA a compartir dicha
         información y los datos de las transacciones relacionadas con el uso de
         los servicios de procesamiento de pago proporcionados por Stripe.
-      </p>
+      </Text>
     </Container>
   );
 }

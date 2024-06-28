@@ -1,1 +1,1 @@
-module.exports = require("@rola/ui/postcss.config");
+module.exports = require("@rola/tailwind-config/postcss.config");

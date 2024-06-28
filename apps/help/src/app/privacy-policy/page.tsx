@@ -1,70 +1,74 @@
-import { Container, Underline } from "@rola/ui/components";
+import { Container, Text, Title, Underline } from "@rola/ui/components";
 
 function PrivacyPolicyPage() {
   return (
     <Container className="pt-12 pb-24">
       <div className="pb-12">
-        <h1 className="text-2xl text-center uppercase font-bold">
+        <Title order={3} className="uppercase">
           Política de Privacidad
-        </h1>
+        </Title>
         <Underline />
       </div>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         ¿Quién es el Responsable del tratamiento de sus datos?
-      </h2>
+      </Title>
       <div className="mb-12">
-        <p>Razón social: ROLA - Cristhian Pagoaga Aguilera</p>
-        <p>CIF-DNI: 55113758P</p>
-        <p>Dirección: C/Cuesta de San Francisco 10, 28231 Las Rozas, Madrid</p>
-        <p>Teléfono: 911 933 480</p>
-        <p>
+        <Text>Razón social: ROLA - Cristhian Pagoaga Aguilera</Text>
+        <Text>CIF-DNI: 55113758P</Text>
+        <Text>
+          Dirección: C/Cuesta de San Francisco 10, 28231 Las Rozas, Madrid
+        </Text>
+        <Text>Teléfono: 911 933 480</Text>
+        <Text>
           Email:{" "}
           <a href="mailto:hola@rola.es" className="hover:text-brand">
             hola@rola.es
           </a>
-        </p>
+        </Text>
       </div>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         ¿Con qué finalidad tratamos sus datos personales?
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         En ROLA tratamos la información recibida en el formulario de inscripción
         con la finalidad de gestionar las solicitudes recibidas a través de la
         web. En aquellos casos en los que haya marcado la correspondiente
         casilla, también podremos enviar actualizaciones sobre productos,
         promociones, ofertas especiales, noticias y eventos por diferentes
         medios, incluido el correo electrónico.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         ¿Por cuánto tiempo conservaremos sus datos?
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         Los datos del formulario de inscripción serán conservados hasta la
         resolución de la relación con el interesado. Los datos para el envío de
         comunicaciones comerciales serán conservados hasta que el interesado
         solicite la baja.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         ¿Cuál es la legitimación para el tratamiento de sus datos?
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         El consentimiento del interesado al cumplimentar el formulario de
         inscripción. El envío de comunicaciones comerciales está basado en el
         consentimiento del interesado al marcar la casilla de aceptación.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         ¿A qué destinatarios se comunicarán sus datos?
-      </h2>
-      <p className="mb-12">No se comunicarán datos, salvo obligación legal.</p>
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      </Title>
+      <Text className="mb-12">
+        No se comunicarán datos, salvo obligación legal.
+      </Text>
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         ¿Cuáles son sus derechos cuando nos facilita sus datos?
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         Cualquier persona tiene derecho a obtener confirmación sobre si en ROLA
         estamos tratando datos personales que les conciernan o no. Las personas
         interesadas tienen derecho a si acceder a sus datos personales, así como
@@ -89,12 +93,12 @@ function PrivacyPolicyPage() {
         <a href="mailto:hola@rola.es">hola@rola.es</a>, junto con prueba válida
         en derecho, como fotocopia del D.N.I. e indicando en el asunto
         “PROTECCIÓN DE DATOS”.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         ¿Cómo hemos obtenido sus datos?
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         Los datos personales que tratamos en ROLA han sido facilitados por el
         propio interesado. El interesado que envía la información a ROLA
         garantiza y responde, en cualquier caso, de la exactitud, vigencia y
@@ -106,12 +110,12 @@ function PrivacyPolicyPage() {
         sean de elaboración propia y de las que se indique otra fuente, por lo
         que tampoco asume responsabilidad alguna en cuanto a hipotéticos
         perjuicios que pudieran originarse por el uso de dicha información.
-      </p>
+      </Text>
 
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Uso común con redes sociales
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         Si el afectado opta por acceder a los Servicios a través de su cuenta en
         las redes sociales (es decir, Facebook, Twitter, YouTube o LinkedIn) o
         hace clic en uno de los botones de conexión o vínculos de las redes
@@ -125,21 +129,23 @@ function PrivacyPolicyPage() {
         recopilen su información, examine la política de privacidad de la
         correspondiente red social y/o desconéctese de la misma antes de
         utilizar nuestros Servicios.
-      </p>
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">Menores</h2>
-      <p className="mb-12">
+      </Text>
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
+        Menores
+      </Title>
+      <Text className="mb-12">
         Los menores de 18 años no podrán hacer uso del formulario de
         inscripción.
-      </p>
-      <h2 className="text-xl font-medium uppercase pb-4 text-brand">
+      </Text>
+      <Title order={4} align="left" className="uppercase pb-4 text-brand">
         Cambios en la Política de Privacidad
-      </h2>
-      <p className="mb-12">
+      </Title>
+      <Text className="mb-12">
         ROLA se reserva el derecho a modificar la presente política para
         adaptarla a novedades legislativas o jurisprudenciales. En dichos
         supuestos ROLA anunciará en esta página los cambios introducidos con
         razonable antelación a su puesta en práctica.
-      </p>
+      </Text>
     </Container>
   );
 }

@@ -34,9 +34,10 @@ function Footer() {
           >
             Contacto
           </a>
-          <div className="flex bg-brand px-8 py-4 gap-8">
+          <div className="flex bg-brand text-black px-8 py-4 gap-8">
             <a
               href="http://www.instagram.com/rolamusic.app/"
+              className="hover:text-white"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -44,6 +45,7 @@ function Footer() {
             </a>
             <a
               href="http://www.youtube.com/@rolamusicapp"
+              className="hover:text-white"
               target="_blank"
               rel="noopener noreferrer"
             >

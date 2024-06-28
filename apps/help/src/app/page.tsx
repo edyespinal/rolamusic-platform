@@ -1,17 +1,17 @@
-import { Container, Underline } from "@rola/ui/components";
+import { Container, Text, Title, Underline } from "@rola/ui/components";
 
 export default function HomePage() {
   return (
-    <Container className="pt-12 px-4 pb-24 lg:px-0">
+    <Container size="sm" className="pt-12 px-4 pb-24 lg:px-0">
       <div className="text-2xl text-center uppercase font-bold pb-8">
-        <h1>Centro de Ayuda</h1>
+        <Title order={3}>Centro de Ayuda</Title>
         <Underline />
       </div>
       <div className="lg:text-center">
-        <p className="mb-4">
+        <Text className="mb-4">
           Si tienes preguntas o necesitas ayuda, puedes contactar con nuestro
           equipo al siguiente correo electrónico:
-        </p>
+        </Text>
         <a
           href="mailto:hola@rolamusic.app"
           className="text-brand hover:underline"

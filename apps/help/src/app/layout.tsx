@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { cn } from "@rola/tailwind-config/utils";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import "./styles/globals.css";
+import { Header } from "@components/Header";
+import { Footer } from "@components/Footer";
+import { LayoutProps } from "@typings/globals";
+import "@styles/globals.css";
 
 const font = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ROLA | Help",
   description: "Página de ayuda de ROLA",
-};
-
-type LayoutProps = {
-  children: React.ReactNode;
 };
 
 function RootLayout(props: Readonly<LayoutProps>) {
