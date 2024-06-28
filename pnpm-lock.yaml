@@ -142,6 +142,9 @@ importers:
 
   apps/links:
     dependencies:
+      '@rola/ui':
+        specifier: workspace:^
+        version: link:../../packages/ui
       next:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
@@ -204,7 +207,7 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(eslint@8.57.0)
       eslint-config-turbo:
-        specifier: ^1.12.4
+        specifier: ^1.13.3
         version: 1.13.3(eslint@8.57.0)
       eslint-plugin-only-warn:
         specifier: ^1.1.0

@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { useForm } from "react-hook-form";
 import Image from "next/image";
-import { Artist, ArtistCommunity, User } from "@rola/services/schemas";
+
 import { provincesOptions, years } from "@rola/services/utils";
 import {
   Button,
+  Container,
   FileInput,
   Form,
   FormControl,
@@ -22,89 +22,20 @@ import {
   SelectValue,
   Switch,
   Textarea,
-  useToast,
 } from "@rola/ui/components";
-import { Container } from "../../../components/Container";
-import { services } from "@rola/services/firebase";
+import { PageUIProps } from "./types";
+import { useArtistsPageData } from "./data";
 
-type PageProps = {
-  artist: Artist;
-  admin: User;
-  community: ArtistCommunity;
-};
-
-type FormValues = {
-  artist: Artist;
-  community: ArtistCommunity;
-};
-
-function ArtistPageUI({ admin, artist, community }: PageProps) {
-  const { toast } = useToast();
-  const form = useForm<FormValues>({
-    defaultValues: {
-      artist,
-      community,
-    },
-  });
-
-  const [profileImgUrl, setProfileImgUrl] = React.useState(artist.profileURL);
-  const [coverImgUrl, setCoverImgUrl] = React.useState(artist.coverURL);
-  const [isUploading, setIsUploading] = React.useState(false);
-
-  async function uploadProfileImage(files: File[]) {
-    setIsUploading(true);
-
-    const imagUrl = await services.updateArtistProfileImage(
-      artist.id,
-      files[0] as File
-    );
-
-    setProfileImgUrl(imagUrl);
-    setIsUploading(false);
-
-    toast({
-      title: "Imagen de perfil actualizada",
-      description: "Imagen de perfil actualizada correctamente",
-    });
-  }
-
-  async function uploadCoverImage(files: File[]) {
-    setIsUploading(true);
-
-    const imagUrl = await services.updateArtistCoverImage(
-      artist.id,
-      files[0] as File
-    );
-
-    setCoverImgUrl(imagUrl);
-    setIsUploading(false);
-
-    toast({
-      title: "Imagen de perfil actualizada",
-      description: "Imagen de perfil actualizada correctamente",
-    });
-  }
-
-  async function onSubmit(values: FormValues) {
-    try {
-      await services.updateArtist(artist.id, values.artist);
-      await services.updateCommunity(artist.id, values.community);
-
-      toast({
-        title: "Artista actualizado",
-        description: "Artista actualizado correctamente",
-      });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-
-      toast({
-        title: "Error",
-        description: "No se pudo actualizar el artista",
-        variant: "destructive",
-      });
-    }
-  }
+function ArtistPageUI({ admin, artist, community }: PageUIProps) {
+  const {
+    form,
+    profileImgUrl,
+    coverImgUrl,
+    isUploading,
+    uploadProfileImage,
+    uploadCoverImage,
+    onSubmit,
+  } = useArtistsPageData({ artist, community });
 
   return (
     <Container>

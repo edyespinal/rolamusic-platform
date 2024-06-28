@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import "./styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+
 import { cn } from "@rola/tailwind-config/utils";
 import { Toaster } from "@rola/ui/components";
+import "@styles/globals.css";
 
 const fonts = Montserrat({ subsets: ["latin"] });
 

@@ -1,8 +1,8 @@
 import { cn } from "@rola/tailwind-config/utils";
-import { LayoutProps } from "../../types";
-import { Header } from "../components/Header";
-import { Container, Underline } from "@rola/ui/components";
-import { Sidebar } from "../components/Sidebar";
+import { LayoutProps } from "@typings/globals";
+import { Header } from "@components/Header";
+import { Container, Title, Underline } from "@rola/ui/components";
+import { Sidebar } from "@components/Sidebar";
 
 function AdminLayout(props: Readonly<LayoutProps>) {
   const { children } = props;
@@ -13,7 +13,9 @@ function AdminLayout(props: Readonly<LayoutProps>) {
 
       <main className="flex flex-col gap-12 py-12">
         <div>
-          <h1 className="uppercase text-xl font-semibold">Admin Dashboard</h1>
+          <Title order={4} align="left">
+            Admin Dashboard
+          </Title>
           <Underline align="left" size="xs" />
         </div>
 

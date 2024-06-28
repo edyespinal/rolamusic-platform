@@ -1,18 +1,15 @@
 "use client";
 
-import { Artist } from "@rola/services/schemas";
-import { Container } from "@rola/ui/components";
-
+import { Container, Title } from "@rola/ui/components";
 import { ArtistRow } from "./components/ArtistRow";
+import { PageUIProps } from "./types";
 
-type PageProps = {
-  artists: Artist[];
-};
-
-function ArtistsPageUI({ artists }: PageProps) {
+function ArtistsPageUI({ artists }: PageUIProps) {
   return (
     <Container>
-      <h1 className="text-2xl font-semibold pb-4">Artists</h1>
+      <Title order={3} align="left" className="pb-4">
+        Artistas
+      </Title>
       <div>
         {artists.map((artist) => (
           <ArtistRow key={artist.id} artist={artist} />

@@ -1,17 +1,17 @@
 import Link from "next/link";
 
-import { Button, Container, Underline } from "@rola/ui/components";
-
-import { Header } from "./components/Header";
+import { Button, Container, Title, Underline } from "@rola/ui/components";
+import { Header } from "@components/Header";
 
 function HomePage() {
   return (
     <Container size="lg">
       <Header />
-
-      <main className="text-center">
+      <Container size="sm" className="text-center py-24">
         <div className="pb-12">
-          <h1 className="uppercase text-xl font-semibold">Admin Dashboard</h1>
+          <Title order={4} className="uppercase">
+            Admin Dashboard
+          </Title>
           <Underline />
         </div>
 
@@ -27,7 +27,7 @@ function HomePage() {
             </Button>
           </Link>
         </div>
-      </main>
+      </Container>
     </Container>
   );
 }

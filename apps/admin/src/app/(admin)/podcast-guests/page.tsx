@@ -1,18 +1,25 @@
 import { services } from "@rola/services/firebase";
-import { Container } from "../../components/Container";
+import { Container, Text, Title } from "@rola/ui/components";
 
 async function PodcastGuestsPage() {
   const guests = await services.getGuests();
 
   return (
     <Container>
-      <h1 className="text-2xl font-semibold">Invitados</h1>
+      <Title order={3} align="left" className="pb-4">
+        Invitados
+      </Title>
 
-      <div>
+      <Container>
         {guests.map((guest) => (
-          <div key={guest.id} className="border-b border-gray-dark p-2">
-            <h3 className="font-semibold">{guest.name}</h3>
-            <p>{guest.email}</p>
+          <Container
+            key={guest.id}
+            className="border-b border-gray-dark p-2 mb-4"
+          >
+            <Title order={5} align="left">
+              {guest.name}
+            </Title>
+            <Text>{guest.email}</Text>
             <div className="flex gap-4">
               {guest.socials?.map((social) => {
                 if (!social.url) {
@@ -32,9 +39,9 @@ async function PodcastGuestsPage() {
                 );
               })}
             </div>
-          </div>
+          </Container>
         ))}
-      </div>
+      </Container>
     </Container>
   );
 }

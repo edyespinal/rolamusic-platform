@@ -1,8 +1,5 @@
 import React from "react";
-
-type LayoutProps = {
-  children: React.ReactNode;
-};
+import { LayoutProps } from "@typings/globals";
 
 function AuthLayout(props: Readonly<LayoutProps>) {
   const { children } = props;

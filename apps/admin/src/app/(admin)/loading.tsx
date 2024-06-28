@@ -1,11 +1,11 @@
 "use client";
 
-import { Container, Icon } from "@rola/ui/components";
+import { Container, Loader } from "@rola/ui/components";
 
 function AdminLoading() {
   return (
     <Container className="h-full flex items-center justify-center">
-      <Icon name="loader-2" size={36} className="animate-spin text-brand" />
+      <Loader />
     </Container>
   );
 }

@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+
 import { Artist } from "@rola/services/schemas";
 import {
   DropdownMenu,
@@ -7,8 +9,8 @@ import {
   Icon,
   DropdownMenuContent,
   DropdownMenuItem,
+  Container,
 } from "@rola/ui/components";
-import Link from "next/link";
 import { activateArtist } from "../actions";
 
 type ComponentProps = {
@@ -19,7 +21,7 @@ function ArtistRow({ artist }: ComponentProps) {
   const [active, setActive] = React.useState(artist.active);
 
   return (
-    <div
+    <Container
       key={artist.id}
       className="flex items-center border-b border-gray-dark p-2 hover:bg-card"
     >
@@ -52,7 +54,7 @@ function ArtistRow({ artist }: ComponentProps) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </div>
+    </Container>
   );
 }
 

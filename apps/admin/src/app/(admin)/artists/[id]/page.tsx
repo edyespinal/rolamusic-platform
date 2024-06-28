@@ -1,11 +1,6 @@
 import { services } from "@rola/services/firebase";
 import { ArtistPageUI } from "./ui";
-
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
+import { PageProps } from "./types";
 
 async function ArtistPage(props: PageProps) {
   const { id } = props.params;

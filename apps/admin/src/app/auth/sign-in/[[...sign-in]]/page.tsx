@@ -1,5 +1,5 @@
 import { SignIn } from "@clerk/nextjs";
-import { Container } from "../../../components/Container";
+import { Container } from "@rola/ui/components";
 
 function SignInPage() {
   return (
