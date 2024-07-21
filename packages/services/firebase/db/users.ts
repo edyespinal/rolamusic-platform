@@ -1,6 +1,7 @@
-import { doc, getDoc, getDocs } from "firebase/firestore";
+import { doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { User } from "../../schemas/users";
-import { usersCollection } from "./db";
+import { artistsCollection, usersCollection } from "./db";
+import { Artist } from "../../schemas";
 
 async function getUsers(): Promise<User[]> {
   const usersDocs = await getDocs(usersCollection);
@@ -34,4 +35,22 @@ async function getUser(id: string): Promise<User> {
   return userData;
 }
 
-export const usersServices = { getUsers, getUser };
+async function getUserArtists(userId: string): Promise<Artist[]> {
+  const artistsQuery = query(artistsCollection, where("admin", "==", userId));
+  const { docs } = await getDocs(artistsQuery);
+
+  if (!docs.length) {
+    return [];
+  }
+
+  const artists = docs.map((doc) => {
+    return {
+      ...doc.data(),
+      id: doc.id,
+    };
+  });
+
+  return artists;
+}
+
+export const usersServices = { getUsers, getUser, getUserArtists };

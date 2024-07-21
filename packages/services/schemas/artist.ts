@@ -88,17 +88,20 @@ const artistSchema = z.object({
     .min(1, "La biografía del artista no puede estar vacía")
     .optional(),
   year: z.string().optional(),
+  members: z.array(artistMemberSchema),
   fans: z.array(z.string()),
-  fansSummary: z.object({
-    total: z.number().nonnegative(),
-    topFans: z.array(
-      z.object({
-        id: z.string(),
-        displayName: z.string(),
-        photoURL: z.string().url(),
-      })
-    ),
-  }),
+  fansSummary: z
+    .object({
+      total: z.number().nonnegative(),
+      topFans: z.array(
+        z.object({
+          id: z.string(),
+          displayName: z.string(),
+          photoURL: z.string().url(),
+        })
+      ),
+    })
+    .optional(),
   coverURL: z.string().optional(),
   profileURL: z.string().optional(),
   location: z.object({
