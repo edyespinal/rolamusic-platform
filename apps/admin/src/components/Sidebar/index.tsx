@@ -13,7 +13,7 @@ function Sidebar() {
     <Container as="nav" className="flex flex-col gap-4">
       <Link
         href="/artists"
-        className={cn("py-1 px-4", pathname === "/artists" && selected)}
+        className={cn("py-1 px-4", pathname.includes("/artists") && selected)}
       >
         <Title order={5} align="left">
           Artistas

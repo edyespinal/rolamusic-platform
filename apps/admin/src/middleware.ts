@@ -9,7 +9,7 @@ export default clerkMiddleware((auth, req) => {
       auth().sessionClaims?.email as string
     )
   ) {
-    auth().protect();
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 });
 

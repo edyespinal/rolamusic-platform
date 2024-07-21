@@ -14,6 +14,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  Icon,
   Input,
   Select,
   SelectContent,
@@ -25,6 +26,7 @@ import {
 } from "@rola/ui/components";
 import { PageUIProps } from "./types";
 import { useArtistsPageData } from "./data";
+import Link from "next/link";
 
 function ArtistPageUI({ admin, artist, community }: PageUIProps) {
   const {
@@ -39,8 +41,14 @@ function ArtistPageUI({ admin, artist, community }: PageUIProps) {
 
   return (
     <Container>
+      <Link href="/artists">
+        <Button size="icon" variant="outline">
+          <Icon name="arrow-left" />
+        </Button>
+      </Link>
+
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-8">
           <FormField
             control={form.control}
             name="artist.active"

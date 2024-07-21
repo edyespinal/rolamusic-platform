@@ -6,13 +6,11 @@ import React from "react";
 
 function ErrorPage({ reset }: { reset: () => void }) {
   return (
-    <Container className="flex flex-col items-center justify-center gap-2 h-svh">
+    <Container className="grid place-items-center h-svh">
       <Title order={3}>404</Title>
-      <Text className="mb-8">Lo sentimos, algo ha salido mal.</Text>
+      <Text>Lo sentimos, algo ha salido mal.</Text>
       <Button onClick={() => reset()}>Intentar de nuevo</Button>
-      <Link href="/">
-        <Button variant="link">Volver al inicio</Button>
-      </Link>
+      <Link href="/">Volver al inicio</Link>
     </Container>
   );
 }
