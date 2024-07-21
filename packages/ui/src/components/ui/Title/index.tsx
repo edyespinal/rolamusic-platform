@@ -3,14 +3,14 @@ import { VariantProps, cva } from "class-variance-authority";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "../../../lib/utils";
 
-const titleVariants = cva("text-center", {
+const titleVariants = cva("text-center font-semibold", {
   variants: {
     order: {
-      1: "text-4xl font-semibold",
-      2: "text-3xl font-semibold",
-      3: "text-2xl font-semibold",
-      4: "text-xl font-semibold",
-      5: "text-lg font-semibold",
+      1: "text-4xl",
+      2: "text-3xl",
+      3: "text-2xl",
+      4: "text-xl",
+      5: "text-lg",
     },
     align: {
       left: "text-left",

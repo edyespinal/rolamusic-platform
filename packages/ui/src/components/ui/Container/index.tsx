@@ -14,7 +14,7 @@ const containerVariants = cva("mx-auto w-full", {
     },
   },
   defaultVariants: {
-    size: "md",
+    size: "full",
   },
 });
 
