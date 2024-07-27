@@ -1,6 +1,7 @@
 export * from "./Accordion";
 export * from "./Avatar";
 export * from "./Button";
+export * from "./Checkbox";
 export * from "./Collapsible";
 export * from "./Container";
 export * from "./DropdownMenu";
@@ -8,6 +9,7 @@ export * from "./FileInput";
 export * from "./Form";
 export * from "./Icon";
 export * from "./Input";
+export * from "./InputOTP";
 export * from "./Loader";
 export * from "./Logo";
 export * from "./Progress";

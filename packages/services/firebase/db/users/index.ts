@@ -1,7 +1,8 @@
 import { doc, getDoc, getDocs, query, where } from "firebase/firestore";
-import { User } from "../../schemas/users";
-import { artistsCollection, usersCollection } from "./db";
-import { Artist } from "../../schemas";
+import { User } from "../../../schemas/users";
+import { artistsCollection, usersCollection } from "../db";
+import { Artist } from "../../../schemas";
+import { createUser } from "./createUser";
 
 async function getUsers(): Promise<User[]> {
   const usersDocs = await getDocs(usersCollection);
@@ -53,4 +54,4 @@ async function getUserArtists(userId: string): Promise<Artist[]> {
   return artists;
 }
 
-export const usersServices = { getUsers, getUser, getUserArtists };
+export const usersServices = { getUsers, getUser, getUserArtists, createUser };
