@@ -5,6 +5,7 @@ import { Header } from "@components/Header";
 import { Footer } from "@components/Footer";
 import { LayoutProps } from "@typings/globals";
 import "@styles/globals.css";
+import { Container } from "@rola/ui/components";
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -25,7 +26,7 @@ function RootLayout(props: Readonly<LayoutProps>) {
         )}
       >
         <Header />
-        <main>{children}</main>
+        <Container size="md">{children}</Container>
         <Footer />
       </body>
     </html>
