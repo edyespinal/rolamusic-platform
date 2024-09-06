@@ -5,9 +5,10 @@
   "jsxSingleQuote": false,
   "printWidth": 80,
   "quoteProps": "as-needed",
-  "semi": true,
+  "semi": false,
   "singleQuote": false,
   "tabWidth": 2,
   "trailingComma": "es5",
-  "useTabs": false
+  "useTabs": false,
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
