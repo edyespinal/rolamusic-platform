@@ -1,10 +1,13 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { artistCommunityCollection, artistsCollection } from "../db";
-import { Artist, ArtistCommunity } from "../../../schemas";
+import { artistsCollection } from "../db";
+import { Artist } from "../../../schemas";
 import { uploadFile } from "../../storage";
 import { getArtists } from "./getArtists";
 import { getArtist } from "./getArtist";
 import { createArtist } from "./createArtist";
+import { getArtistPaymentDetails } from "./getArtistPaymentDetails";
+import { updateCommunity } from "./updateCommunity";
+import { getArtistCommunity } from "./getArtistCommunity";
 
 async function updateArtist(id: string, data: Partial<Artist>) {
   try {
@@ -54,43 +57,15 @@ async function updateArtistCoverImage(id: string, file: File) {
   return imgUrl;
 }
 
-async function getArtistCommunity(id: string): Promise<ArtistCommunity> {
-  const community = await getDoc(doc(artistCommunityCollection(id), id));
-
-  if (!community.exists()) {
-    return {
-      message: "",
-      videoURL: "",
-      songs: [],
-    };
-  }
-
-  const communityData = {
-    ...community.data(),
-    id: community.id,
-  };
-
-  return communityData;
-}
-
-async function updateCommunity(id: string, data: Partial<ArtistCommunity>) {
-  try {
-    await setDoc(doc(artistCommunityCollection(id), id), data, { merge: true });
-
-    return true;
-  } catch (error) {
-    throw new Error("Error updating community");
-  }
-}
-
 export const artistsServices = {
   getArtists,
   getArtist,
+  getArtistCommunity,
+  getArtistPaymentDetails,
   createArtist,
   activateArtist,
   updateArtist,
   updateArtistProfileImage,
   updateArtistCoverImage,
-  getArtistCommunity,
   updateCommunity,
 };

@@ -9,7 +9,10 @@ export async function createUser(newUser: User) {
   const userQuery = query(usersCollection, where("email", "==", newUser.email));
   const { docs: usersDocs } = await getDocs(userQuery);
 
-  if (!usersDocs.length) {
+  // eslint-disable-next-line no-console
+  console.log("Starts id", usersDocs[0]?.id.startsWith("user_"));
+
+  if (!usersDocs[0]) {
     await setDoc(
       userRef,
       {
@@ -28,10 +31,16 @@ export async function createUser(newUser: User) {
       status: 201,
       message: "User created",
     };
-  }
 
-  // ! TEMP: Create user with Clerk Id
-  if (usersDocs.length > 0 && usersDocs[0]) {
+    // ! TEMP: Create user with Clerk Id
+  } else if (usersDocs[0]) {
+    if (usersDocs[0].id.startsWith("user_")) {
+      return {
+        status: 200,
+        message: "User already migrated",
+      };
+    }
+
     const existingData = {
       ...usersDocs[0].data(),
       id: usersDocs[0].id,
