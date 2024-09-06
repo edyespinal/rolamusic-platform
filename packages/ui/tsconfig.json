@@ -4,7 +4,6 @@
     "baseUrl": ".",
     "paths": {
       "@ui/*": ["./src/*"],
-      "@utils": ["./src/lib/utils.ts"],
     }
   },
   "include": ["src"],

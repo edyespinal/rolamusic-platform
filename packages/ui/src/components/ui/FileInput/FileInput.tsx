@@ -1,13 +1,13 @@
 import React from "react";
 import Dropzone, { DropzoneProps, FileRejection } from "react-dropzone";
-import { cn } from "../../../lib/utils";
-import { Icon } from "../Icon";
-import { ScrollArea } from "../ScrollArea";
+import { cn } from "@rola/tailwind-config/utils";
+import { Icon } from "../Icon/Icon";
+import { ScrollArea } from "../ScrollArea/ScrollArea";
 import { FileCard } from "./FileCard";
 import { useControllableState } from "../../../hooks/useControllableState";
 import { fileHasPreview, formatFileSize } from "./helpers";
 import { useToast } from "../Toast/use-toast";
-import { Button } from "../Button";
+import { Button } from "../Button/Button";
 
 type FileInputProps = React.HTMLAttributes<HTMLDivElement> & {
   value?: File[];
@@ -85,9 +85,6 @@ function FileInput(props: FileInputProps) {
   );
 
   function onRemove(index: number) {
-    // eslint-disable-next-line no-console
-    console.log({ index, files });
-
     if (!files) return;
     const newFiles = files.filter((_, i) => i !== index);
 

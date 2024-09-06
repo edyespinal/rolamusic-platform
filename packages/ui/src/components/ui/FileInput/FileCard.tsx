@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Progress } from "../Progress";
+import { Progress } from "../Progress/Progress";
 import { fileHasPreview, formatFileSize } from "./helpers";
-import { Button } from "../Button";
-import { Icon } from "../Icon";
+import { Button } from "../Button/Button";
+import { Icon } from "../Icon/Icon";
 
 type FileCardProps = {
   file: File;

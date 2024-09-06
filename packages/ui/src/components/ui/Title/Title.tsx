@@ -1,7 +1,7 @@
 import React from "react";
 import { VariantProps, cva } from "class-variance-authority";
 import { Slot } from "@radix-ui/react-slot";
-import { cn } from "../../../lib/utils";
+import { cn } from "@rola/tailwind-config/utils";
 
 const titleVariants = cva("text-center font-semibold", {
   variants: {

@@ -1,7 +1,7 @@
 import { Slot } from "@radix-ui/react-slot";
 import React from "react";
 import { type VariantProps, cva } from "class-variance-authority";
-import { cn } from "../../../lib/utils";
+import { cn } from "@rola/tailwind-config/utils";
 
 const containerVariants = cva("mx-auto w-full", {
   variants: {
