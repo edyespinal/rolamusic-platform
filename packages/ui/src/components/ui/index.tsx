@@ -14,6 +14,7 @@ export * from "./Form/Form";
 export * from "./Icon/Icon";
 export * from "./Input/Input";
 export * from "./InputOTP/InputOTP";
+export * from "./Label/Label";
 export * from "./Loader/Loader";
 export * from "./Logo/Logo";
 export * from "./MultiSelect/MultiSelect";
