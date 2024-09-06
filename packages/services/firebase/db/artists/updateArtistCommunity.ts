@@ -10,7 +10,7 @@ import { artistCommunityCollection } from "../db";
  * @return {Promise<boolean>} A Promise that resolves with true if the update was successful, or rejects with an error message if the update failed.
  * @throws {Error} If the update failed.
  */
-async function updateCommunity(
+async function updateArtistCommunity(
   id: string,
   data: Partial<ArtistCommunity>
 ): Promise<boolean> {
@@ -23,4 +23,4 @@ async function updateCommunity(
   }
 }
 
-export { updateCommunity };
+export { updateArtistCommunity };

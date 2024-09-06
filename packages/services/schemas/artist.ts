@@ -30,13 +30,19 @@ const artistCommunitySchema = z.object({
 });
 
 const artistPaymentSchema = z.object({
-  type: z.literal(PARTICULAR).or(z.literal(FREELANCE)).or(z.literal(COMPANY)),
+  type: z.union([
+    z.literal(PARTICULAR),
+    z.literal(FREELANCE),
+    z.literal(COMPANY),
+  ]),
+  stripeAccountId: z.string().optional(),
   document: z.object({
-    type: z
-      .literal(DNI)
-      .or(z.literal(NIE))
-      .or(z.literal(CIF))
-      .or(z.literal(NIF)),
+    type: z.union([
+      z.literal(DNI),
+      z.literal(NIE),
+      z.literal(NIF),
+      z.literal(CIF),
+    ]),
     number: z.string(),
   }),
   name: z.string(),
@@ -47,8 +53,8 @@ const artistPaymentSchema = z.object({
     postalCode: z.string(),
     country: z.string(),
   }),
-  paymentPreference: z.object({
-    type: z.literal(BANK_TRANSFER).or(z.literal(PAYPAL)),
+  paymentPreferences: z.object({
+    type: z.union([z.literal(BANK_TRANSFER), z.literal(PAYPAL)]),
     country: z.string(),
     details: z.object({
       email: z.string().email("El correo electrónico no es válido").optional(),

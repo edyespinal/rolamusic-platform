@@ -6,8 +6,9 @@ import { getArtists } from "./getArtists";
 import { getArtist } from "./getArtist";
 import { createArtist } from "./createArtist";
 import { getArtistPaymentDetails } from "./getArtistPaymentDetails";
-import { updateCommunity } from "./updateCommunity";
+import { updateArtistCommunity } from "./updateArtistCommunity";
 import { getArtistCommunity } from "./getArtistCommunity";
+import { updateArtistPaymentDetails } from "./updateArtistPaymentDetails";
 
 async function updateArtist(id: string, data: Partial<Artist>) {
   try {
@@ -67,5 +68,6 @@ export const artistsServices = {
   updateArtist,
   updateArtistProfileImage,
   updateArtistCoverImage,
-  updateCommunity,
+  updateArtistCommunity,
+  updateArtistPaymentDetails,
 };

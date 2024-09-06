@@ -2,29 +2,11 @@ import React from "react";
 import { ArtistPayment } from "@rola/services/schemas";
 import { useToast } from "@rola/ui/components";
 import { useForm } from "react-hook-form";
-
-// type FormValues = {
-//   name: string
-//   type: ArtistPayment["type"]
-//   documentType: ArtistPayment["document"]["type"]
-//   documentNumber: string
-//   street: string
-//   city: string
-//   province: string
-//   postalCode: string
-//   country: string
-//   preference: ArtistPayment["paymentPreference"]
-//   preferenceType: ArtistPayment["paymentPreference"]["type"]
-//   preferenceCountry: string
-//   preferenceEmail: string
-//   preferenceBank: string
-//   preferenceAccountHolder: string
-//   preferenceAccountNumber: string
-// };
+import { services } from "@rola/services/firebase";
 
 type FormValues = ArtistPayment;
 
-const useArtistPaymentDetailsData = (payment: ArtistPayment) => {
+const useArtistPaymentDetailsData = (id: string, payment: ArtistPayment) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { toast } = useToast();
 
@@ -37,10 +19,9 @@ const useArtistPaymentDetailsData = (payment: ArtistPayment) => {
   async function handleSubmit(values: FormValues) {
     setIsLoading(true);
 
-    // eslint-disable-next-line no-console
-    console.log(values);
-
     try {
+      await services.updateArtistPaymentDetails(id, values);
+
       toast({
         title: "Detalles de pago actualizados",
         description: "Detalles de pago actualizados correctamente",

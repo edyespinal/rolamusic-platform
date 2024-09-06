@@ -58,7 +58,7 @@ function ArtistPageUI({
       </Container>
 
       {!artist.active && (
-        <Container className="mb-8">
+        <Container className="pb-8">
           <Alert variant="destructive" title="Artista inactivo">
             Este artista no está activo en la plataforma.
           </Alert>

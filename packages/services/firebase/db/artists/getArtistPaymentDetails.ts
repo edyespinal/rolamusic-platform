@@ -21,6 +21,8 @@ async function getArtistPaymentDetails(id: string): Promise<ArtistPayment> {
     id: paymentDoc.id,
   };
 
+  delete paymentData.stripeAccountId;
+
   return paymentData;
 }
 
