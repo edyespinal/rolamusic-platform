@@ -1,3 +1,5 @@
+export type Genre = keyof typeof genresMap;
+
 export const genresMap = {
   ACUSTICO: "Acústico",
   ALTERNATIVO: "Alternativo",
@@ -37,4 +39,6 @@ export const genresListOptions = genresList.map((genre: Genre) => ({
   label: genresMap[genre],
 }));
 
-export type Genre = keyof typeof genresMap;
+export const formatGenres = (genres: Genre[]): string => {
+  return genres.map((genre) => genresMap[genre].toLowerCase()).join(" | ");
+};

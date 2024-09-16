@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "exports": {
-    "./constants": "./constants/index.ts",
-    "./firebase": "./firebase/index.ts",
-    "./schemas": "./schemas/index.ts",
-    "./storage": "./uploadthing/index.ts",
-    "./utils": "./utils/index.ts"
+    "./constants": "./src/constants/index.ts",
+    "./firebase": "./src/firebase/index.ts",
+    "./schemas": "./src/schemas/index.ts",
+    "./storage": "./src/uploadthing/index.ts",
+    "./stripe": "./src/stripe/index.ts",
+    "./utils": "./src/utils/index.ts"
   },
   "scripts": {
     "lint": "eslint ."
@@ -15,6 +16,8 @@
   "devDependencies": {
     "@rola/eslint-config": "workspace:^",
     "@rola/typescript-config": "workspace:^",
+    "@types/node": "^22.5.5",
+    "stripe": "^16.11.0",
     "typescript": "^5.4.5"
   },
   "dependencies": {

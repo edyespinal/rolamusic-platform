@@ -2,10 +2,8 @@
   "extends": "@rola/typescript-config/base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@schemas/*": ["./schemas/*"]
-    }
   },
+  "include": ["src"],
   "exclude": ["node_modules"]
 
 }

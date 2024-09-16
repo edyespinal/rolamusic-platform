@@ -1,24 +1,29 @@
 import {
-  CollectionReference,
+  getFirestore,
   DocumentData,
   collection,
-  getFirestore,
+  CollectionReference,
   writeBatch,
 } from "firebase/firestore";
-
 import {
   ARTISTS,
   COMMUNITY_INFO,
-  GUESTS,
   PAYMENT_DETAILS,
+  GUESTS,
   USERS,
+  PODCAST_EPISODES,
 } from "../../constants";
-import { Artist, ArtistCommunity, ArtistPayment } from "../../schemas";
-import { Guest } from "../../schemas/guest";
-import { User } from "../../schemas/users";
+import {
+  Artist,
+  ArtistCommunity,
+  ArtistPayment,
+  Guest,
+  User,
+  PodcastEpisode,
+} from "../../schemas";
 import { app } from "../app";
 
-export const db = getFirestore(app);
+const db = getFirestore(app);
 
 function createCollection<T = DocumentData>(collectionName: string) {
   return collection(db, collectionName) as CollectionReference<T>;
@@ -48,14 +53,18 @@ const artistPaymentCollection = createSubCollection<ArtistPayment>(
 );
 const guestsCollection = createCollection<Guest>(GUESTS);
 const usersCollection = createCollection<User>(USERS);
+const podcastEpisodeCollection =
+  createCollection<PodcastEpisode>(PODCAST_EPISODES);
 
 const batch = writeBatch(db);
 
 export {
+  db,
   artistsCollection,
   artistCommunityCollection,
   artistPaymentCollection,
   guestsCollection,
+  podcastEpisodeCollection,
   usersCollection,
   batch,
 };

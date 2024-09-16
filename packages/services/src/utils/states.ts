@@ -1,4 +1,4 @@
-const provinces: Record<string, string> = {
+const states: Record<string, string> = {
   ALAVA: "Álava",
   ALBACETE: "Albacete",
   ALICANTE: "Alicante",
@@ -54,9 +54,9 @@ const provinces: Record<string, string> = {
   ZARAGOZA: "Zaragoza",
 };
 
-const provincesOptions = Object.keys(provinces).map((province) => ({
-  value: province,
-  label: provinces[province],
+const statesOptions = Object.keys(states).map((state) => ({
+  value: state,
+  label: states[state],
 }));
 
-export { provinces, provincesOptions };
+export { states, statesOptions };

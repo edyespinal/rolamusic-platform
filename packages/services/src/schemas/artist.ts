@@ -10,6 +10,7 @@ import {
   PARTICULAR,
   PAYPAL,
 } from "../constants";
+import { Genre } from "../utils/genres";
 
 const artistMemberSchema = z.object({
   name: z
@@ -36,6 +37,11 @@ const artistPaymentSchema = z.object({
     z.literal(COMPANY),
   ]),
   stripeAccountId: z.string().optional(),
+  stripeAccountActive: z.boolean().optional(),
+  name: z.string(),
+  email: z.string().email("El correo electrónico no es válido"),
+  registrationNumber: z.string().optional(),
+  taxId: z.string().optional(),
   document: z.object({
     type: z.union([
       z.literal(DNI),
@@ -45,11 +51,10 @@ const artistPaymentSchema = z.object({
     ]),
     number: z.string(),
   }),
-  name: z.string(),
   address: z.object({
     street: z.string(),
     city: z.string(),
-    province: z.string(),
+    state: z.string(),
     postalCode: z.string(),
     country: z.string(),
   }),
@@ -88,7 +93,7 @@ const artistSchema = z.object({
   slug: z.string().optional(),
   active: z.boolean(),
   email: z.string().email("El correo electrónico no es válido"),
-  genres: z.array(z.string()),
+  genres: z.array(z.custom<Genre>()),
   bio: z
     .string()
     .min(1, "La biografía del artista no puede estar vacía")
@@ -113,8 +118,7 @@ const artistSchema = z.object({
   location: z.object({
     country: z.string(),
     city: z.string(),
-    province: z.string(),
-    postalCode: z.string(),
+    state: z.string(),
   }),
   phone: z
     .object({
@@ -136,3 +140,6 @@ export type ArtistMember = z.infer<typeof artistMemberSchema>;
 export type ArtistCommunity = z.infer<typeof artistCommunitySchema>;
 export type ArtistPayment = z.infer<typeof artistPaymentSchema>;
 export type ArtistAlbums = z.infer<typeof artistAlbumsSchema>;
+export type ArtistSocials = z.infer<typeof artistSocialsSchema>;
+
+export type ArtistSubscriptionTier = "basic" | "premium" | "gold";
