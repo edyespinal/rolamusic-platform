@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Rekasa";
+  src: url("/static/fonts/Rekasa.woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Brushzilla";
+  src: url("/static/fonts/Brushzilla.otf");
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --brand: 178 90% 38%;
@@ -15,7 +27,7 @@
     --gray-dark: 0 0% 35%;
 
     --background: 0 0% 25%;
-    --background-dark: 0 0% 12%;
+    --background-dark: 0 0% 9%;
     --foreground: 0 0% 90%;
 
     --card: 0 0% 12%;
@@ -39,6 +51,7 @@
     --border: 0 0% 15%;
     --input: 0 0% 15%;
     --ring: 0 0% 85%;
+    --radius: 0.5rem;
   }
 }
 

@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        display: ["Rekasa", "cursive"],
+        brush: ["Brushzilla", "cursive"],
+      },
       colors: {
         brand: {
           DEFAULT: "hsl(var(--brand))",
