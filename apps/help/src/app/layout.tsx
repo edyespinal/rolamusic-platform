@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { cn } from "@rola/tailwind-config/utils";
-import { Header } from "@components/Header";
-import { Footer } from "@components/Footer";
+import { Header } from "@components/Header/Header";
+import { Footer } from "@components/Footer/Footer";
 import { LayoutProps } from "@typings/globals";
 import "@styles/globals.css";
 import { Container } from "@rola/ui/components";

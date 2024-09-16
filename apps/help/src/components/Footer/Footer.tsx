@@ -1,12 +1,13 @@
+import React from "react";
 import { Container, Icon } from "@rola/ui/components";
 import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="border-t border-brand text-center lg:pt-0">
+    <footer className="border-brand border-t text-center lg:pt-0">
       <Container
         size="xl"
-        className="flex flex-col justify-between items-center gap-4 px-8 lg:flex-row lg:px-0"
+        className="flex flex-col items-center justify-between gap-4 px-8 lg:flex-row lg:px-0"
       >
         <div className="flex flex-col gap-4 lg:flex-row">
           <Link href="/legal-notice" className="hover:underline">
@@ -20,11 +21,11 @@ function Footer() {
           </Link>
         </div>
 
-        <div className="hidden text-neutral-500 text-sm lg:block ">
+        <div className="hidden text-sm text-neutral-500 lg:block">
           Todos los derechos reservados &copy; {new Date().getFullYear()}
         </div>
 
-        <div className="flex flex-col gap-4 items-center lg:flex-row">
+        <div className="flex flex-col items-center gap-4 lg:flex-row">
           <Link href="/faq" className="text-brand hover:underline">
             Preguntas frecuentes
           </Link>
@@ -34,7 +35,7 @@ function Footer() {
           >
             Contacto
           </a>
-          <div className="flex bg-brand text-black px-8 py-4 gap-8">
+          <div className="bg-brand flex gap-8 px-8 py-4 text-black">
             <a
               href="http://www.instagram.com/rolamusic.app/"
               className="hover:text-white"
