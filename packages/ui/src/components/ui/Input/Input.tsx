@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@rola/tailwind-config/utils";
+import { FormField } from "../Form/Form";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -10,8 +11,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         type={type}
         className={cn(
-          "flex h-10 w-full border border-gray-dark rounded bg-background-dark px-3 py-2 text-sm ring-offset-brand",
-          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-dark",
+          "border-gray-dark bg-background-dark ring-offset-brand flex h-10 w-full rounded border px-3 py-2 text-sm",
+          "focus-visible:ring-brand-dark focus-visible:outline-none focus-visible:ring-1",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "placeholder:text-muted-foreground",
