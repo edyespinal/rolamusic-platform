@@ -1,12 +1,18 @@
-import { services } from "@rola/services/firebase";
+import { db } from "@rola/services/firebase";
 import { ArtistPageUI } from "./ui";
 import { PageProps } from "./types";
+import { redirect } from "next/navigation";
 
 async function ArtistPage(props: PageProps) {
   const { id } = props.params;
-  const artist = await services.getArtist(id);
-  const admin = await services.getUser(artist.admin);
-  const community = await services.getArtistCommunity(id);
+  const artist = await db.artists.getArtist(id);
+
+  if (!artist) {
+    redirect("/404");
+  }
+
+  const admin = await db.users.getUser(artist.admin);
+  const community = await db.artists.getArtistCommunity(id);
 
   return <ArtistPageUI artist={artist} community={community} admin={admin} />;
 }

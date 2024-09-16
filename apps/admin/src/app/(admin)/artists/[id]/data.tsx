@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useForm } from "react-hook-form";
-import { services } from "@rola/services/firebase";
+import { db } from "@rola/services/firebase";
 import { useToast } from "@rola/ui/components";
 import { FormValues, PageUIProps } from "./types";
 
@@ -25,7 +25,7 @@ const useArtistsPageData = ({
   async function uploadProfileImage(files: File[]) {
     setIsUploading(true);
 
-    const imagUrl = await services.updateArtistProfileImage(
+    const imagUrl = await db.artists.updateArtistProfileImage(
       artist.id,
       files[0] as File
     );
@@ -42,7 +42,7 @@ const useArtistsPageData = ({
   async function uploadCoverImage(files: File[]) {
     setIsUploading(true);
 
-    const imagUrl = await services.updateArtistCoverImage(
+    const imagUrl = await db.artists.updateArtistCoverImage(
       artist.id,
       files[0] as File
     );
@@ -58,17 +58,14 @@ const useArtistsPageData = ({
 
   async function onSubmit(values: FormValues) {
     try {
-      await services.updateArtist(artist.id, values.artist);
-      await services.updateCommunity(artist.id, values.community);
+      await db.artists.updateArtist(artist.id, values.artist);
+      await db.artists.updateArtistCommunity(artist.id, values.community);
 
       toast({
         title: "Artista actualizado",
         description: "Artista actualizado correctamente",
       });
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-
       toast({
         title: "Error",
         description: "No se pudo actualizar el artista",

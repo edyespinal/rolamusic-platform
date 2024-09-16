@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { provincesOptions, years } from "@rola/services/utils";
+import { statesOptions, years } from "@rola/services/utils";
 import {
   Button,
   Container,
@@ -106,7 +106,7 @@ function ArtistPageUI({ admin, artist, community }: PageUIProps) {
           <div className="grid grid-cols-2 gap-4">
             <FormField
               control={form.control}
-              name="artist.location.province"
+              name="artist.location.state"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Provincia</FormLabel>
@@ -120,12 +120,9 @@ function ArtistPageUI({ admin, artist, community }: PageUIProps) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {provincesOptions.map((provincia) => (
-                        <SelectItem
-                          value={provincia.value}
-                          key={provincia.value}
-                        >
-                          {provincia.label}
+                      {statesOptions.map((state) => (
+                        <SelectItem value={state.value} key={state.value}>
+                          {state.label}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -247,7 +244,7 @@ function ArtistPageUI({ admin, artist, community }: PageUIProps) {
 
       <p className="pb-8 pt-16 text-center text-lg font-semibold">Imágenes</p>
       <div className="grid gap-x-4 lg:grid-cols-2">
-        <div className="flex flex-col gap-4 justify-center items-center">
+        <div className="flex flex-col items-center justify-center gap-4">
           <p className="text-center text-lg font-semibold">Imagen de perfil</p>
           <div className="size-48">
             {profileImgUrl ? (
@@ -274,7 +271,7 @@ function ArtistPageUI({ admin, artist, community }: PageUIProps) {
           />
         </div>
 
-        <div className="flex flex-col gap-4 justify-center items-center">
+        <div className="flex flex-col items-center justify-center gap-4">
           <p className="text-center text-lg font-semibold">Portada</p>
           <div className="size-48">
             {coverImgUrl ? (

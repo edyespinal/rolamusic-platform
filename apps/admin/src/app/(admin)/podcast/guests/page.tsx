@@ -1,20 +1,21 @@
-import { services } from "@rola/services/firebase";
+import { db } from "@rola/services/firebase";
+import { Guest } from "@rola/services/schemas";
 import { Container, Text, Title } from "@rola/ui/components";
 
 async function PodcastGuestsPage() {
-  const guests = await services.getGuests();
+  const guests = await db.podcast.getGuests();
 
   return (
     <Container>
-      <Title order={3} align="left" className="pb-4">
+      <Title order={3} underline align="left" className="pb-4">
         Invitados
       </Title>
 
       <Container>
-        {guests.map((guest) => (
+        {guests.map((guest: Guest) => (
           <Container
             key={guest.id}
-            className="border-b border-gray-dark p-2 mb-4"
+            className="border-gray-dark mb-4 border-b p-2"
           >
             <Title order={5} align="left">
               {guest.name}
@@ -32,7 +33,7 @@ async function PodcastGuestsPage() {
                     key={social.name}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-neutral-400 hover:text-primary "
+                    className="hover:text-primary text-neutral-400"
                   >
                     {social.name}
                   </a>
