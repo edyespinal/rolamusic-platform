@@ -5,11 +5,15 @@ import { useForm } from "react-hook-form";
 import { db } from "@rola/services/firebase";
 import { useToast } from "@rola/ui/components";
 import { FormValues, PageUIProps } from "./types";
+import { Artist, ArtistCommunity } from "@rola/services/schemas";
 
 const useArtistsPageData = ({
   artist,
   community,
-}: Omit<PageUIProps, "admin">) => {
+}: {
+  artist: Artist;
+  community: ArtistCommunity | null;
+}) => {
   const { toast } = useToast();
   const [profileImgUrl, setProfileImgUrl] = React.useState(artist.profileURL);
   const [coverImgUrl, setCoverImgUrl] = React.useState(artist.coverURL);
@@ -18,7 +22,7 @@ const useArtistsPageData = ({
   const form = useForm<FormValues>({
     defaultValues: {
       artist,
-      community,
+      community: community ? community : {},
     },
   });
 

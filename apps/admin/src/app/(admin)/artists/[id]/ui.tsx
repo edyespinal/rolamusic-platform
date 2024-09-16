@@ -27,8 +27,17 @@ import {
 import { PageUIProps } from "./types";
 import { useArtistsPageData } from "./data";
 import Link from "next/link";
+import { Artist, ArtistCommunity, User } from "@rola/services/schemas";
 
-function ArtistPageUI({ admin, artist, community }: PageUIProps) {
+function ArtistPageUI({
+  admin,
+  artist,
+  community,
+}: {
+  admin: User;
+  artist: Artist;
+  community: ArtistCommunity | null;
+}) {
   const {
     form,
     profileImgUrl,
@@ -201,7 +210,7 @@ function ArtistPageUI({ admin, artist, community }: PageUIProps) {
                   </FormItem>
                 )}
               />
-              {community.videoURL && (
+              {community?.videoURL && (
                 <Image
                   src={`https://img.youtube.com/vi/${
                     community.videoURL?.split("v=")[1]?.split("&")[0]
