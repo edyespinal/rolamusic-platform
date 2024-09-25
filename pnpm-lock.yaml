@@ -276,6 +276,9 @@ importers:
       next:
         specifier: 14.2.7
         version: 14.2.7(react-dom@18.3.1)(react@18.3.1)
+      posthog-js:
+        specifier: ^1.163.0
+        version: 1.163.0
       react:
         specifier: ^18
         version: 18.3.1
@@ -464,6 +467,9 @@ importers:
       cmdk:
         specifier: ^1.0.0
         version: 1.0.0(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
       embla-carousel-autoplay:
         specifier: ^8.3.0
         version: 8.3.0(embla-carousel@8.3.0)
@@ -476,6 +482,9 @@ importers:
       lucide-react:
         specifier: ^0.314.0
         version: 0.314.0(react@18.3.1)
+      react-day-picker:
+        specifier: ^9.1.0
+        version: 9.1.0(react@18.3.1)
       react-dropzone:
         specifier: ^14.2.3
         version: 14.2.3(react@18.3.1)
@@ -3828,6 +3837,10 @@ packages:
       is-data-view: 1.0.1
     dev: true
 
+  /date-fns@4.1.0:
+    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
+    dev: false
+
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
     peerDependencies:
@@ -4776,6 +4789,10 @@ packages:
     engines: {node: '>=0.8.0'}
     dependencies:
       websocket-driver: 0.7.4
+    dev: false
+
+  /fflate@0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
     dev: false
 
   /file-entry-cache@6.0.1:
@@ -6073,6 +6090,18 @@ packages:
       picocolors: 1.1.0
       source-map-js: 1.2.0
 
+  /posthog-js@1.163.0:
+    resolution: {integrity: sha512-gpLbxZkOm06oOWg0uvCxBIVIHrhX3A5hxf9eAi/Z+aFP9DvWxwHQdGUkIWjnYUyxXilIbLxBPvWmiM98dYsAHA==}
+    dependencies:
+      fflate: 0.4.8
+      preact: 10.24.0
+      web-vitals: 4.2.3
+    dev: false
+
+  /preact@10.24.0:
+    resolution: {integrity: sha512-aK8Cf+jkfyuZ0ZZRG9FbYqwmEiGQ4y/PUO4SuTWoyWL244nZZh7bd5h2APd4rSNDYTBNghg1L+5iJN3Skxtbsw==}
+    dev: false
+
   /prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
@@ -6199,6 +6228,15 @@ packages:
 
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+
+  /react-day-picker@9.1.0(react@18.3.1):
+    resolution: {integrity: sha512-AU+kgdir7qCy9hx1zipQZacsENIwDnfY5fA1m6OGOzh+MNPPZm8oxpxR6/enlrvH4AckXOKc94RHDTKLGSq8Aw==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      date-fns: 4.1.0
+      react: 18.3.1
+    dev: false
 
   /react-dom@18.3.1(react@18.3.1):
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
@@ -7158,6 +7196,10 @@ packages:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
     dev: true
+
+  /web-vitals@4.2.3:
+    resolution: {integrity: sha512-/CFAm1mNxSmOj6i0Co+iGFJ58OS4NRGVP+AWS/l509uIK5a1bSoIVaHz/ZumpHTfHSZBpgrJ+wjfpAOrTHok5Q==}
+    dev: false
 
   /websocket-driver@0.7.4:
     resolution: {integrity: sha512-b17KeDIQVjvb0ssuSDF2cYXSg2iztliJ4B9WdsuB6J952qCPKmnVq4DyW5motImXHDC1cBT/1UezrJVsKw5zjg==}

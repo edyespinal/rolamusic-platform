@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
-import { Button, Container, Logo, Text, Title } from "@rola/ui/components";
+import { Button, Container, Logo, Text } from "@rola/ui/components";
 import { Platforms, links } from "@helpers/links";
 import Image from "next/image";
 import Talks from "@assets/img/rola-talks.jpg";
 import Sessions from "@assets/img/rola-sessions.jpg";
+import Shop from "@assets/img/rola-shop.webp";
+import RockHand from "@assets/img/rock-hand.svg";
 
 function HomePageUI() {
   const redirectTo = (platform: Platforms) => {
@@ -19,10 +21,10 @@ function HomePageUI() {
 
       <Container
         size="sm"
-        className="mb-8 grid grid-cols-1 gap-4 lg:grid-cols-2"
+        className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3"
       >
         <Container>
-          <Text className="text-center">Lo último de ROLA Talks</Text>
+          <Text className="text-center">ROLA Talks</Text>
           <Image
             src={Talks}
             alt="Rola Talks"
@@ -31,7 +33,7 @@ function HomePageUI() {
           />
         </Container>
         <Container>
-          <Text className="text-center">Disfruta de las ROLA Sessions</Text>
+          <Text className="text-center">ROLA Sessions</Text>
           <Image
             src={Sessions}
             alt="Rola Sessions"
@@ -39,9 +41,18 @@ function HomePageUI() {
             onClick={() => redirectTo("rolaSessions")}
           />
         </Container>
+        <Container>
+          <Text className="text-center">ROLA Shop</Text>
+          <Image
+            src={Shop}
+            alt="Rola Shop"
+            className="rounded"
+            onClick={() => redirectTo("rolaShop")}
+          />
+        </Container>
       </Container>
 
-      <div className="w-60 items-center space-y-4">
+      <Container className="mb-16 w-60 items-center space-y-4">
         <Button full onClick={() => redirectTo("youtube")}>
           YouTube
         </Button>
@@ -54,10 +65,14 @@ function HomePageUI() {
         <Button full onClick={() => redirectTo("tiktok")}>
           TikTok
         </Button>
+        <Button full onClick={() => redirectTo("rolaShop")}>
+          Tienda ROLA
+        </Button>
         <Button full onClick={() => redirectTo("web")}>
           Web
         </Button>
-      </div>
+      </Container>
+      <Image src={RockHand} alt="Rock Hand" className="mx-auto size-8" />
     </main>
   );
 }

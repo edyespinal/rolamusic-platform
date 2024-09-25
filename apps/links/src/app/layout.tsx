@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "@styles/globals.css";
 import { LayoutProps } from "@typings/globals";
+import { PHProvider } from "./providers";
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<LayoutProps>) {
   return (
     <html lang="es">
-      <body className={font.className}>{children}</body>
+      <PHProvider>
+        <body className={font.className}>{children}</body>
+      </PHProvider>
     </html>
   );
 }
