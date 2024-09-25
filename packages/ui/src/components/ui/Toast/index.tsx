@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@rola/tailwind-config/utils";
 import {
   Toast,
   ToastClose,
@@ -15,9 +16,27 @@ function Toaster() {
 
   return (
     <ToastProvider>
-      {toasts.map(function ({ id, title, description, action, ...props }) {
+      {toasts.map(function ({
+        id,
+        title,
+        description,
+        action,
+        icon,
+        variant = "default",
+        ...props
+      }) {
         return (
-          <Toast key={id} {...props}>
+          <Toast key={id} variant={variant} {...props}>
+            {icon && (
+              <span
+                className={cn(
+                  "rounded-full p-4",
+                  variant === "default" ? "bg-green-800" : "bg-destructive"
+                )}
+              >
+                {icon}
+              </span>
+            )}
             <div className="grid gap-1">
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (

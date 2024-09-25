@@ -3,6 +3,7 @@ export * from "./Alert/Alert";
 export * from "./Avatar/Avatar";
 export * from "./Badge/Badge";
 export * from "./Button/Button";
+export * from "./Calendar/Calendar";
 export * from "./Carousel/Carousel";
 export * from "./Checkbox/Checkbox";
 export * from "./Collapsible/Collapsible";
