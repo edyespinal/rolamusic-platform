@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import "@styles/globals.css";
+import dynamic from "next/dynamic";
 import { LayoutProps } from "@typings/globals";
 import { PHProvider } from "./providers";
+import "@styles/globals.css";
+
+const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
+  ssr: false,
+});
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -15,6 +20,7 @@ export default function RootLayout({ children }: Readonly<LayoutProps>) {
   return (
     <html lang="es">
       <PHProvider>
+        <PostHogPageView />
         <body className={font.className}>{children}</body>
       </PHProvider>
     </html>
