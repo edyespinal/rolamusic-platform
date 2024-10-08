@@ -10,6 +10,7 @@ import {
   ToastViewport,
 } from "./toast";
 import { useToast } from "./use-toast";
+import { Separator } from "../Separator/Separator";
 
 function Toaster() {
   const { toasts } = useToast();
@@ -37,7 +38,7 @@ function Toaster() {
                 {icon}
               </span>
             )}
-            <div className="grid gap-1">
+            <div className="ml-0">
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
                 <ToastDescription>{description}</ToastDescription>

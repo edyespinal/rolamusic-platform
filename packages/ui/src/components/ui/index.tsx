@@ -25,6 +25,7 @@ export * from "./Progress/Progress";
 export * from "./RadioGroup/RadioGroup";
 export * from "./ScrollArea/ScrollArea";
 export * from "./Select/Select";
+export * from "./Separator/Separator";
 export * from "./Sheet/Sheet";
 export * from "./Switch/Switch";
 export * from "./Text/Text";
