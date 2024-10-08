@@ -6,7 +6,7 @@ function Header() {
   return (
     <Container as="header" size="xl" className="px-4 py-4 lg:px-0">
       <Link href="/">
-        <Logo variant="horizontal" />
+        <Logo variant="horizontal" size="xs" />
       </Link>
     </Container>
   );
