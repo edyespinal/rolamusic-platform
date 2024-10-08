@@ -11,7 +11,7 @@ function Header() {
       className="flex items-center justify-between py-4"
     >
       <Link href="/">
-        <Logo variant="horizontal" />
+        <Logo variant="horizontal" size="xs" />
       </Link>
       <SignedIn>
         <UserButton afterSignOutUrl="/sign-in" />
