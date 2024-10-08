@@ -4,6 +4,12 @@
   "scripts": {
     "build": "dotenv -- turbo build",
     "dev": "dotenv -- turbo dev",
+    "dev-admin": "dotenv -- turbo dev --filter=...admin",
+    "dev-links": "dotenv -- turbo dev --filter=...links",
+    "dev-help": "dotenv -- turbo dev --filter=...help",
+    "dev-artists": "dotenv -- turbo dev --filter=...artists",
+    "dev-fans": "dotenv -- turbo dev --filter=...fans",
+    "dev-profiles": "dotenv -- turbo dev --filter=...profiles",
     "lint": "dotenv -- turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
