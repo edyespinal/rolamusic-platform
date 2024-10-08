@@ -27,6 +27,12 @@ const config = {
           DEFAULT: "hsl(var(--brand))",
           light: "hsl(var(--brand-light))",
           dark: "hsl(var(--brand-dark))",
+          black: "hsl(var(--brand-black))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          light: "hsl(var(--secondary-light))",
+          dark: "hsl(var(--secondary-dark))",
         },
         black: "hsl(var(--black))",
         white: "hsl(var(--white))",
@@ -43,10 +49,6 @@ const config = {
           dark: "hsl(var(--background-dark))",
         },
         foreground: "hsl(var(--foreground))",
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
