@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { LayoutProps } from "@typings/globals";
 import { PHProvider } from "./providers";
 import "@styles/globals.css";
+import { cn } from "@rola/tailwind-config/utils";
 
 const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
   ssr: false,
@@ -21,7 +22,7 @@ export default function RootLayout({ children }: Readonly<LayoutProps>) {
     <html lang="es">
       <PHProvider>
         <PostHogPageView />
-        <body className={font.className}>{children}</body>
+        <body className={cn("bg-black", font.className)}>{children}</body>
       </PHProvider>
     </html>
   );
