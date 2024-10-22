@@ -1,0 +1,38 @@
+{
+  "name": "profiles",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3005",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^5.0.9",
+    "@rola/services": "workspace:^",
+    "@rola/ui": "workspace:^",
+    "@uploadthing/react": "^7.0.2",
+    "next": "14.2.7",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.51.4",
+    "uploadthing": "^7.0.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^14.1.1",
+    "@rola/eslint-config": "workspace:^",
+    "@rola/tailwind-config": "workspace:^",
+    "@rola/typescript-config": "workspace:^",
+    "@types/eslint": "^8.56.5",
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.6.2"
+  }
+}
