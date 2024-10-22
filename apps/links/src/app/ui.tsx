@@ -63,7 +63,7 @@ function HomePageUI() {
         </Button>
         <Button full onClick={() => redirectTo("spotify")}>
           <Icon name="audio-waveform" className="mr-2" />
-          Spotify
+          ROLA Playlists
         </Button>
         <Button full onClick={() => redirectTo("tiktok")}>
           <Icon name="music-2" className="mr-2" />

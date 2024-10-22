@@ -4,7 +4,7 @@ export const links = {
   rolaSessions: "https://tapthe.link/rola-sessions",
   rolaShop: "https://tapthe.link/rola-shop",
   instagram: "https://tapthe.link/rola-instagram",
-  spotify: "https://tapthe.link/rola-spotify",
+  spotify: "https://tapthe.link/lo-ultimo",
   tiktok: "https://tapthe.link/rola-tiktok",
   web: "https://rolamusic.app",
 } as const;
