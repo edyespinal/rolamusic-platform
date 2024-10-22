@@ -36,7 +36,8 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.5",
-    "@uploadthing/react": "^6.6.0",
+    "@rola/services": "workspace:^",
+    "@uploadthing/react": "^7.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
@@ -50,7 +51,7 @@
     "react-hook-form": "^7.51.4",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "uploadthing": "^6.12.0",
+    "uploadthing": "^7.1.0",
     "zod": "^3.23.8"
   },
   "exports": {
