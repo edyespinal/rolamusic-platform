@@ -1,9 +1,9 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
-import { services } from "@rola/services/firebase";
+import { db } from "@rola/services/firebase";
 import { Artist } from "@rola/services/schemas";
-import { RequiredFields } from "@rola/services/utils";
+import { RequiredFields } from "../../../../../../packages/services/src/utils";
 
 export async function createArtist(values: RequiredFields<Omit<Artist, "id">>) {
   const user = await currentUser();
@@ -12,15 +12,14 @@ export async function createArtist(values: RequiredFields<Omit<Artist, "id">>) {
     throw new Error("User not found");
   }
 
-  return services.createArtist({
+  return db.artists.createArtist({
     name: values.name,
     email: values.email,
     genres: [],
     location: {
       country: "",
       city: "",
-      postalCode: "",
-      province: values.location.province,
+      state: values.location.state,
     },
     members: values.members ?? [],
     year: values.year ?? "",

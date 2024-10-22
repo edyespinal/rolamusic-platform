@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Footer } from "@components/Footer";
-import { Header } from "@components/Header";
+import { Footer } from "@components/Footer/Footer";
+import { Header } from "@components/Header/Header";
 import { Button, Container, Text, Title, Underline } from "@rola/ui/components";
 import { Artist } from "@rola/services/schemas";
 import { ArtistCard } from "./components/ArtistCard";
@@ -11,7 +11,7 @@ type HomePageProps = {
 
 function HomePageUI({ artists }: HomePageProps) {
   return (
-    <Container size="xl" className="grid grid-rows-[auto_1fr_auto] h-svh">
+    <Container size="xl" className="grid h-svh grid-rows-[auto_1fr_auto]">
       <Header />
       <Container size="full" className="h-full py-12">
         <Container className="mb-8">
@@ -33,6 +33,7 @@ function HomePageUI({ artists }: HomePageProps) {
         ) : (
           <Container size="full" className="mx-auto text-center">
             <Text>Selecciona el artista que deseas editar</Text>
+
             <Container
               size="lg"
               className="flex flex-wrap justify-center gap-8 pt-8"

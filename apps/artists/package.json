@@ -12,11 +12,14 @@
     "@clerk/nextjs": "^5.0.9",
     "@rola/services": "workspace:^",
     "@rola/ui": "workspace:^",
+    "@uploadthing/react": "^7.0.3",
     "jotai": "^2.8.4",
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.51.4"
+    "react-hook-form": "^7.51.4",
+    "uploadthing": "^7.1.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@rola/eslint-config": "workspace:^",

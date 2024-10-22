@@ -1,12 +1,29 @@
+import { redirect } from "next/navigation";
+import { currentUser } from "@clerk/nextjs/server";
+import { db } from "@rola/services/firebase";
 import { ArtistPageUI } from "./ui";
-import { services } from "@rola/services/firebase";
 
 async function ArtistPage(props: { params: { id: string } }) {
   const { id } = props.params;
-  const artist = await services.getArtist(id);
-  const community = await services.getArtistCommunity(id);
+  const user = await currentUser();
+  const artist = await db.artists.getArtist(id);
+  let community = await db.artists.getArtistCommunity(id);
 
-  return <ArtistPageUI artist={artist} community={community} />;
+  if (!community) {
+    community = {
+      message: "",
+      videoURL: "",
+      songs: [],
+    };
+  }
+
+  if (!artist || !user) {
+    redirect("/404");
+  }
+
+  return (
+    <ArtistPageUI artist={artist} community={community} userId={user.id} />
+  );
 }
 
 export default ArtistPage;

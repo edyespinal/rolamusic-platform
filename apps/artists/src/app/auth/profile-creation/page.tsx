@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { ProfileCreationUI } from "./ui";
-import { services } from "@rola/services/firebase";
+import { db } from "@rola/services/firebase";
 
 async function ProfileCreationPage() {
   const user = await currentUser();
@@ -9,7 +9,7 @@ async function ProfileCreationPage() {
     throw new Error("User not found");
   }
 
-  await services.createUser({
+  await db.users.createUser({
     id: user.id,
     email: user.emailAddresses[0]?.emailAddress || "",
     displayName: user.fullName || "",

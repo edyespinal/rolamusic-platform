@@ -4,21 +4,12 @@ import React from "react";
 import { Artist, ArtistCommunity, ArtistMember } from "@rola/services/schemas";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useToast } from "@rola/ui/components";
-import { services } from "@rola/services/firebase";
+import { db } from "@rola/services/firebase";
 
-export type FormValues = {
-  email: string;
-  name: string;
-  genres: string[];
-  year: string;
-  province: string;
-  profileURL: string;
-  coverURL: string;
-  bio: string;
-  message: string;
-  videoURL: string;
-  songs: string[];
-  members: ArtistMember[];
+export type FormValues = Artist & {
+  message?: string;
+  videoURL?: string;
+  songs?: { id: string }[];
 };
 
 const useArtistData = (artist: Artist, community: ArtistCommunity) => {
@@ -31,13 +22,17 @@ const useArtistData = (artist: Artist, community: ArtistCommunity) => {
       name: artist.name,
       genres: artist.genres,
       year: artist.year,
-      province: artist.location.province,
+      location: {
+        state: artist.location?.state ?? "",
+      },
       profileURL: artist.profileURL,
       coverURL: artist.coverURL,
       bio: artist.bio,
-      message: community.message ?? "",
-      videoURL: community.videoURL ?? "",
-      songs: community.songs ?? [],
+      message: community?.message ?? "",
+      videoURL: community?.videoURL ?? "",
+      songs: community?.songs?.length
+        ? community?.songs?.map((song) => ({ id: song }))
+        : [{ id: "" }, { id: "" }],
       members: artist.members,
     },
   });
@@ -46,16 +41,36 @@ const useArtistData = (artist: Artist, community: ArtistCommunity) => {
     fields: members,
     append: addMember,
     remove: removeMember,
-  } = useFieldArray({
+  } = useFieldArray<FormValues, "members", "id">({
     control: form.control,
     name: "members",
   });
+
+  const {
+    fields: songs,
+    append: appendSong,
+    remove: removeSong,
+  } = useFieldArray<FormValues, "songs", "id">({
+    control: form.control,
+    name: "songs",
+    rules: {
+      maxLength: { value: 3, message: "error message" },
+    },
+  });
+
+  function addSong() {
+    if (songs.length >= 3) {
+      return;
+    }
+
+    appendSong({ id: "" });
+  }
 
   async function handleSubmit(values: FormValues) {
     setIsLoading(true);
 
     try {
-      await services.updateArtist(artist.id, {
+      await db.artists.updateArtist(artist.id, {
         ...artist,
         email: values.email,
         name: values.name,
@@ -63,7 +78,7 @@ const useArtistData = (artist: Artist, community: ArtistCommunity) => {
         year: values.year,
         location: {
           ...artist.location,
-          province: values.province,
+          state: values.location.state,
         },
         profileURL: values.profileURL,
         coverURL: values.coverURL,
@@ -71,10 +86,10 @@ const useArtistData = (artist: Artist, community: ArtistCommunity) => {
         members: values.members,
       });
 
-      await services.updateCommunity(artist.id, {
+      await db.artists.updateArtistCommunity(artist.id, {
         message: values.message ?? "",
         videoURL: values.videoURL ?? "",
-        songs: values.songs ?? [],
+        songs: values.songs?.map((song) => song.id) ?? [],
       });
 
       toast({
@@ -99,6 +114,9 @@ const useArtistData = (artist: Artist, community: ArtistCommunity) => {
     addMember,
     removeMember,
     handleSubmit,
+    songs,
+    addSong,
+    removeSong,
     isLoading,
   };
 };

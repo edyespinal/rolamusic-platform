@@ -20,8 +20,8 @@ function Sidebar({ artist }: { artist: Artist }) {
 
   return (
     <React.Fragment>
-      <Container className="pb-8 text-center space-y-2">
-        <Avatar className="size-32 mx-auto">
+      <Container className="space-y-2 pb-8 text-center">
+        <Avatar className="mx-auto size-32">
           <AvatarImage src={artist?.profileURL} alt={`${artist.name}`} />
           <AvatarFallback>
             <Title order={1}>{artist.name[0]}</Title>
@@ -35,7 +35,7 @@ function Sidebar({ artist }: { artist: Artist }) {
 
       <Container className="mb-12">
         <Container className="mb-8">
-          <Text className="mb-2 bg-brand px-2 font-bold uppercase text-neutral-900">
+          <Text className="bg-brand mb-2 px-2 font-bold uppercase text-neutral-900">
             Menú del artista
           </Text>
           <Container className="flex flex-col space-y-2">
@@ -51,8 +51,8 @@ function Sidebar({ artist }: { artist: Artist }) {
           </Container>
         </Container>
 
-        <Container>
-          <Text className="mb-2 bg-brand px-2 font-bold uppercase text-neutral-900">
+        {/*  <Container>
+          <Text className="bg-brand mb-2 px-2 font-bold uppercase text-neutral-900">
             Gestionar mi comunidad
           </Text>
           <Container className="flex flex-col space-y-2">
@@ -60,10 +60,10 @@ function Sidebar({ artist }: { artist: Artist }) {
               href={`/artists/${artist?.id}/community`}
               pathname={pathname}
             >
-              Comunidad
+              Mi Comunidad
             </SidebarLink>
           </Container>
-        </Container>
+        </Container> */}
       </Container>
     </React.Fragment>
   );

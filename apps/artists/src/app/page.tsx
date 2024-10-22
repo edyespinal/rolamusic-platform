@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { HomePageUI } from "./home/ui";
-import { services } from "@rola/services/firebase";
+import { db } from "@rola/services/firebase";
 
 async function HomePage() {
   const user = await currentUser();
@@ -9,7 +9,7 @@ async function HomePage() {
     throw new Error("User not found");
   }
 
-  const userArtists = await services.getUserArtists(user.id);
+  const userArtists = await db.users.getUserArtists(user.id);
 
   return <HomePageUI artists={userArtists} />;
 }

@@ -4,7 +4,7 @@ import React from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { createArtist } from "./actions";
 import { useToast } from "@rola/ui/components";
-import { RequiredFields } from "@rola/services/utils";
+import { RequiredFields } from "../../../../../../packages/services/src/utils";
 import { Artist } from "@rola/services/schemas";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";

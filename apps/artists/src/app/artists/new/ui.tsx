@@ -21,7 +21,10 @@ import {
   Underline,
 } from "@rola/ui/components";
 import { useNewArtistData } from "./data";
-import { provincesOptions, yearsOptions } from "@rola/services/utils";
+import {
+  statesOptions,
+  yearsOptions,
+} from "../../../../../../packages/services/src/utils";
 
 function NewArtistPageUI() {
   const { form, handleOnSubmit, fields, append, remove, isLoading } =
@@ -37,10 +40,10 @@ function NewArtistPageUI() {
       <Container size="full">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleOnSubmit)}>
-            <Title order={5} align="left" className="text-brand uppercase pb-4">
+            <Title order={5} align="left" className="text-brand pb-4 uppercase">
               Información del artista
             </Title>
-            <Container size="full" className="grid lg:grid-cols-2 gap-4 pb-12">
+            <Container size="full" className="grid gap-4 pb-12 lg:grid-cols-2">
               <FormField
                 control={form.control}
                 name="name"
@@ -109,7 +112,7 @@ function NewArtistPageUI() {
 
               <FormField
                 control={form.control}
-                name="location.province"
+                name="location.state"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel required>Provincia</FormLabel>
@@ -123,12 +126,9 @@ function NewArtistPageUI() {
                           <SelectValue placeholder="Provincia" />
                         </SelectTrigger>
                         <SelectContent>
-                          {provincesOptions.map((province) => (
-                            <SelectItem
-                              key={province.value}
-                              value={province.value}
-                            >
-                              {province.label}
+                          {statesOptions.map((state) => (
+                            <SelectItem key={state.value} value={state.value}>
+                              {state.label}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -140,7 +140,7 @@ function NewArtistPageUI() {
               />
             </Container>
 
-            <Title order={5} align="left" className="text-brand uppercase pb-4">
+            <Title order={5} align="left" className="text-brand pb-4 uppercase">
               Integrantes
             </Title>
 
@@ -148,7 +148,7 @@ function NewArtistPageUI() {
               <Container
                 size="full"
                 key={member.id}
-                className="flex gap-4 items-end pb-4"
+                className="flex items-end gap-4 pb-4"
               >
                 <FormField
                   control={form.control}

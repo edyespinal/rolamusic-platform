@@ -158,9 +158,6 @@ const useSignInData = () => {
 
       router.push("/auth/profile-creation");
     } catch (error: any) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-
       toast({
         title: "Error",
         description: "No se pudo verificar el código",

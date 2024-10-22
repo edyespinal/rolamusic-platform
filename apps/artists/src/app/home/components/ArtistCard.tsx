@@ -30,17 +30,17 @@ function ArtistCard({ artist }: ArtistCardProps) {
   return (
     <Container
       className={cn(
-        "size-72 relative grid place-items-center gap-4 rounded border border-gray p-4",
-        "hover:bg-neutral-900 hover:cursor-pointer",
+        "border-gray relative grid size-72 place-items-center gap-4 rounded border p-4",
+        "hover:cursor-pointer hover:bg-neutral-900",
         artist.active
           ? "bg-transparent"
-          : "bg-gray-dark opacity-50 hover:bg-gray-dark"
+          : "bg-gray-dark hover:bg-gray-dark opacity-50"
       )}
       onClick={handleClick}
     >
-      <Icon name="square-pen" className="absolute right-2 top-2 text-brand" />
+      <Icon name="square-pen" className="text-brand absolute right-2 top-2" />
       <Avatar className="size-24">
-        <AvatarImage src={artist.profileURL} />
+        <AvatarImage src={artist.profileURL} alt={artist.name} />
         <AvatarFallback>
           <Text className="text-4xl font-semibold">{artist.name[0]}</Text>
         </AvatarFallback>

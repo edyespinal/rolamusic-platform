@@ -56,9 +56,6 @@ function EmailVerification({
     setResendAvailable(false);
   }
 
-  // eslint-disable-next-line no-console
-  console.log({ resendAvailable, seconds });
-
   return (
     <Container size="sm" className="space-y-4">
       <Form {...form}>
@@ -116,7 +113,7 @@ function EmailVerification({
         >
           Reenviar código
         </Button>
-        <Text className="text-xs text-gray opacity-80">
+        <Text className="text-gray text-xs opacity-80">
           {!resendAvailable &&
             `(${seconds} segundos antes de poder reenviar el código)`}
         </Text>
