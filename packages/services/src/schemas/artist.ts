@@ -7,10 +7,11 @@ import {
   FREELANCE,
   NIE,
   NIF,
-  PARTICULAR,
+  INDIVIDUAL,
   PAYPAL,
 } from "../constants";
 import { Genre } from "../utils/genres";
+import { AddressSchema } from "./utils";
 
 const artistMemberSchema = z.object({
   name: z
@@ -32,15 +33,20 @@ const artistCommunitySchema = z.object({
 
 const artistPaymentSchema = z.object({
   type: z.union([
-    z.literal(PARTICULAR),
+    z.literal(INDIVIDUAL),
     z.literal(FREELANCE),
     z.literal(COMPANY),
   ]),
   stripeAccountId: z.string().optional(),
-  stripeAccountActive: z.boolean().optional(),
-  name: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
   email: z.string().email("El correo electrónico no es válido"),
-  registrationNumber: z.string().optional(),
+  phone: z
+    .object({
+      countryCode: z.string(),
+      number: z.string(),
+    })
+    .optional(),
   taxId: z.string().optional(),
   document: z.object({
     type: z.union([
@@ -51,23 +57,40 @@ const artistPaymentSchema = z.object({
     ]),
     number: z.string(),
   }),
-  address: z.object({
-    street: z.string(),
-    city: z.string(),
-    state: z.string(),
-    postalCode: z.string(),
-    country: z.string(),
-  }),
-  paymentPreferences: z.object({
-    type: z.union([z.literal(BANK_TRANSFER), z.literal(PAYPAL)]),
-    country: z.string(),
-    details: z.object({
-      email: z.string().email("El correo electrónico no es válido").optional(),
-      bank: z.string().optional(),
-      accountHolder: z.string().optional(),
-      accountNumber: z.string().optional(),
-    }),
-  }),
+  address: AddressSchema,
+  paymentPreferences: z
+    .object({
+      type: z.union([z.literal(BANK_TRANSFER), z.literal(PAYPAL)]),
+      country: z.string(),
+      currency: z.string().optional(),
+      metadata: z.record(z.string()).optional(),
+      paypal: z
+        .object({
+          email: z.string().email("El correo electrónico no es válido"),
+        })
+        .optional(),
+      bank: z.object({
+        bankName: z.string(),
+        accountHolder: z.string().optional(),
+        accountNumber: z.string().optional(),
+        stripeBankAccountId: z.string().optional(),
+      }),
+    })
+    .optional(),
+  representative: z
+    .object({
+      firstName: z.string(),
+      lastName: z.string(),
+      email: z.string().email("El correo electrónico no es válido"),
+      phone: z.string(),
+      address: AddressSchema,
+      dateOfBirth: z.object({
+        year: z.string(),
+        month: z.string(),
+        day: z.string(),
+      }),
+    })
+    .optional(),
 });
 
 const artistAlbumsSchema = z.array(

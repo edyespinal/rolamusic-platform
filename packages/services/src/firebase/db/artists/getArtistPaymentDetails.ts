@@ -27,8 +27,6 @@ async function getArtistPaymentDetails(
       id: paymentDoc.id,
     };
 
-    delete paymentData.stripeAccountId;
-
     return paymentData;
   } catch (e) {
     const error = e as FirestoreError;

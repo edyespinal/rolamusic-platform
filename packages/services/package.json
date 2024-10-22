@@ -6,7 +6,6 @@
     "./constants": "./src/constants/index.ts",
     "./firebase": "./src/firebase/index.ts",
     "./schemas": "./src/schemas/index.ts",
-    "./storage": "./src/uploadthing/index.ts",
     "./stripe": "./src/stripe/index.ts",
     "./utils": "./src/utils/index.ts"
   },
@@ -21,9 +20,10 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@uploadthing/react": "^6.6.0",
+    "@clerk/nextjs": "^5.0.9",
+    "@uploadthing/react": "^7.0.3",
     "firebase": "^10.12.0",
-    "uploadthing": "^6.12.0",
+    "uploadthing": "^7.1.0",
     "zod": "^3.23.8"
   }
 }

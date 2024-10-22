@@ -7,7 +7,7 @@ export const PODCAST_EPISODES = "podcastEpisodes";
 export const COMMUNITY_INFO = "supportInfo";
 export const PAYMENT_DETAILS = "paymentInfo";
 
-export const PARTICULAR = "particular";
+export const INDIVIDUAL = "individual";
 export const FREELANCE = "freelance";
 export const COMPANY = "company";
 
