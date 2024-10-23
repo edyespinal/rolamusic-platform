@@ -29,12 +29,9 @@ const useArtistsPageData = ({
   async function uploadProfileImage(files: File[]) {
     setIsUploading(true);
 
-    const imagUrl = await db.artists.updateArtistProfileImage(
-      artist.id,
-      files[0] as File
-    );
+    const imagUrl = await db.artists.updateArtistProfileImage(artist.id, "");
 
-    setProfileImgUrl(imagUrl);
+    setProfileImgUrl(imagUrl.url);
     setIsUploading(false);
 
     toast({
@@ -46,12 +43,9 @@ const useArtistsPageData = ({
   async function uploadCoverImage(files: File[]) {
     setIsUploading(true);
 
-    const imagUrl = await db.artists.updateArtistCoverImage(
-      artist.id,
-      files[0] as File
-    );
+    const imagUrl = await db.artists.updateArtistCoverImage(artist.id, "");
 
-    setCoverImgUrl(imagUrl);
+    setCoverImgUrl(imagUrl.url);
     setIsUploading(false);
 
     toast({

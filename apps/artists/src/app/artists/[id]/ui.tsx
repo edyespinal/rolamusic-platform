@@ -213,6 +213,7 @@ function ArtistPageUI({
                 )}
                 <UploadButton
                   endpoint="artistProfileImage"
+                  // @ts-ignore
                   input={{
                     userId,
                     artistId: artist.id,
@@ -264,6 +265,7 @@ function ArtistPageUI({
                 )}
                 <UploadButton
                   endpoint="artistCoverImage"
+                  // @ts-ignore
                   input={{
                     userId,
                     artistId: artist.id,

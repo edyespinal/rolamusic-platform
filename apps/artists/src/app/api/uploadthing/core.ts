@@ -7,7 +7,7 @@ import { db } from "@rola/services/firebase";
 
 const uploader = createUploadthing();
 
-const storageFileRouter = {
+const storageFileRouter: FileRouter = {
   artistProfileImage: uploader({
     "image/jpeg": {
       acl: "public-read",

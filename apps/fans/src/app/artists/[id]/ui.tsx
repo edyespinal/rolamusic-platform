@@ -18,7 +18,7 @@ type ArtistPageProps = {
   profileURL?: string;
   genres: Genre[];
   bio?: string;
-  songs: string[];
+  songs?: string[];
 };
 
 function ArtistPageUI({
@@ -112,7 +112,7 @@ function ArtistPageUI({
         </Title>
         <Text className="mb-8">{bio}</Text>
 
-        {songs.length && (
+        {songs?.length && (
           <Container className="grid gap-4 lg:grid-cols-2">
             {songs.map((song) => (
               <AudioPlayer key={song} songId={song} />

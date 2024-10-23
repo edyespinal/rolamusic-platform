@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Container, Title } from "@rola/ui/components";
-import { ErrorPageProps } from "@typings/globals";
+import { ErrorPageProps } from "../../../typings/globals";
 
 export default function Error({ reset }: ErrorPageProps) {
   return (

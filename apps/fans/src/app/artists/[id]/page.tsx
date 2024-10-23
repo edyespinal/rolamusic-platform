@@ -6,7 +6,7 @@ async function ArtistPage({ params }: { params: { id: string } }) {
   const { id } = params;
 
   const artist = await db.artists.getArtist(id);
-  const community = await db.artists.getArtistCommunity(id);
+  let community = await db.artists.getArtistCommunity(id);
 
   if (!artist) {
     redirect("/404");
@@ -20,7 +20,7 @@ async function ArtistPage({ params }: { params: { id: string } }) {
       profileURL={artist.profileURL}
       genres={artist.genres}
       bio={artist.bio}
-      songs={community.songs}
+      songs={community?.songs ?? []}
     />
   );
 }
