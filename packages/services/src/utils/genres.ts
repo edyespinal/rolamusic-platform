@@ -40,5 +40,8 @@ export const genresListOptions = genresList.map((genre: Genre) => ({
 }));
 
 export const formatGenres = (genres: Genre[]): string => {
-  return genres.map((genre) => genresMap[genre].toLowerCase()).join(" | ");
+  return genres
+    .slice(0, 3)
+    .map((genre) => genresMap[genre].toLowerCase())
+    .join(" | ");
 };

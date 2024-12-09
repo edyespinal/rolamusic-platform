@@ -12,6 +12,7 @@ import {
 } from "../constants";
 import { Genre } from "../utils/genres";
 import { AddressSchema } from "./utils";
+import { subscribe } from "diagnostics_channel";
 
 const artistMemberSchema = z.object({
   name: z
@@ -29,6 +30,22 @@ const artistCommunitySchema = z.object({
     .optional(),
   videoURL: z.string().optional(),
   songs: z.array(z.string()).optional(),
+  subscriptions: z.object({
+    total: z.number().nonnegative(),
+    types: z.array(
+      z.object({
+        name: z.string(),
+        subscribers: z.number(),
+      })
+    ),
+    topFans: z.array(
+      z.object({
+        id: z.string(),
+        displayName: z.string(),
+        photoURL: z.string().url(),
+      })
+    ),
+  }),
 });
 
 const artistPaymentSchema = z.object({

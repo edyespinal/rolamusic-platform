@@ -1,4 +1,5 @@
 export const ARTISTS = "artists";
+export const FANS = "fans";
 export const GUESTS = "guestlist";
 export const USERS = "users";
 export const PODCAST = "podcast";
@@ -24,6 +25,7 @@ export const subscriptionTiers = {
     type: "basic",
     value: 300,
     label: "Básico",
+    priceId: "prod_PZDA0PphUBx7m8",
     description:
       "El apoyo a tu artista es indispensable para su crecimiento musical. Gracias por ser parte del soporte que le permitirá seguir desarrollando su talento.",
   },
@@ -31,6 +33,7 @@ export const subscriptionTiers = {
     type: "premium",
     value: 600,
     label: "Premium",
+    priceId: "prod_PZDAWgwos4LDp6",
     description:
       "No es cuestión de cuánto… es el hecho de hacerle saber que crees en su talento y estás dispuesto a apoyarlo en el camino a cumplir sus objetivos.",
   },
@@ -38,6 +41,7 @@ export const subscriptionTiers = {
     type: "gold",
     value: 900,
     label: "Gold",
+    priceId: "prod_PZDAOE6OqA34P2",
     description:
       "El apoyo a tu artista es indispensable para su crecimiento musical. Gracias por ser parte del soporte que le permitirá seguir desarrollando su talento.",
   },
