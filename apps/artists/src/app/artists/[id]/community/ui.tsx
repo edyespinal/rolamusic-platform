@@ -1,8 +1,17 @@
 import React from "react";
 import { Alert, Container, Text, Title, Underline } from "@rola/ui/components";
 import { Artist, ArtistCommunity } from "@rola/services/schemas";
+import Stripe from "stripe";
 
-function ArtistCommunityPageUI({ artist }: { artist: Artist }) {
+function ArtistCommunityPageUI({
+  artist,
+  community,
+  balance,
+}: {
+  artist: Artist;
+  community: ArtistCommunity;
+  balance: Stripe.Balance;
+}) {
   return (
     <Container className="pb-24">
       <Container className="pb-12">
@@ -27,6 +36,24 @@ function ArtistCommunityPageUI({ artist }: { artist: Artist }) {
           mantener un vínculo cercano con tu seguidores para mantener viva la
           llama y las suscripciones.
         </Text>
+      </Container>
+      <Container className="flex gap-4 pt-8">
+        <div className="bg-background min-w-64 rounded p-4">
+          <Title order={4} align="left">
+            Subscriptores
+          </Title>
+          <Title className="text-brand" align="left">
+            {community.subscriptions?.total ?? 0}
+          </Title>
+        </div>
+        <div className="bg-background min-w-64 rounded p-4">
+          <Title order={4} align="left">
+            Balance
+          </Title>
+          <Title className="text-brand" align="left">
+            {balance.available[0]?.amount ?? 0} {balance.available[0]?.currency}
+          </Title>
+        </div>
       </Container>
     </Container>
   );

@@ -51,9 +51,9 @@ function Sidebar({ artist }: { artist: Artist }) {
           </Container>
         </Container>
 
-        {/*  <Container>
+        <Container>
           <Text className="bg-brand mb-2 px-2 font-bold uppercase text-neutral-900">
-            Gestionar mi comunidad
+            Comunidad
           </Text>
           <Container className="flex flex-col space-y-2">
             <SidebarLink
@@ -63,7 +63,7 @@ function Sidebar({ artist }: { artist: Artist }) {
               Mi Comunidad
             </SidebarLink>
           </Container>
-        </Container> */}
+        </Container>
       </Container>
     </React.Fragment>
   );

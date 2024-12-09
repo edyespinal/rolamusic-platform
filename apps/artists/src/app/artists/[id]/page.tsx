@@ -14,6 +14,11 @@ async function ArtistPage(props: { params: { id: string } }) {
       message: "",
       videoURL: "",
       songs: [],
+      subscriptions: {
+        topFans: [],
+        total: 0,
+        types: [],
+      },
     };
   }
 
