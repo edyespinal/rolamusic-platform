@@ -21,6 +21,7 @@ const config = {
       fontFamily: {
         display: ["Rekasa", "cursive"],
         brush: ["Brushzilla", "cursive"],
+        rola: ["ROLA", "cursive"],
       },
       colors: {
         brand: {

@@ -14,6 +14,12 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "ROLA";
+  src: url("/static/fonts/RolaMusic-Regular.otf");
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --brand: 177 64% 45%;
