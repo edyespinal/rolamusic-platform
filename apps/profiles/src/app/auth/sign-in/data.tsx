@@ -4,14 +4,21 @@ import React from "react";
 import { LoginType, LoginValues } from "./types";
 import { useForm } from "react-hook-form";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useToast } from "@rola/ui/components";
+import { setUserRole } from "./actions";
 
 const useSignInData = () => {
   const [loginType, setLoginType] = React.useState<LoginType>("google");
   const [isLoading, setIsLoading] = React.useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect_url");
+
+  const role =
+    process.env.NEXT_PUBLIC_ARTISTS_APP === redirectUrl ? "artist" : "fan";
+
   const { toast } = useToast();
   const { signIn, setActive } = useSignIn();
   const { signUp } = useSignUp();
@@ -43,7 +50,7 @@ const useSignInData = () => {
     signIn.authenticateWithRedirect({
       strategy: "oauth_google",
       redirectUrl: "/auth/sso-callback",
-      redirectUrlComplete: "/",
+      redirectUrlComplete: redirectUrl || "/",
     });
   }
 
@@ -66,7 +73,7 @@ const useSignInData = () => {
           session: result.createdSessionId,
         });
 
-        router.push("/");
+        router.push(searchParams.get("redirect_url") ?? "/");
       }
     } catch (error) {
       setIsLoading(false);
@@ -147,14 +154,20 @@ const useSignInData = () => {
     try {
       setIsLoading(true);
 
-      await signUp.attemptVerification({
+      const { createdUserId } = await signUp.attemptVerification({
         strategy: "email_code",
         code: values.code,
       });
 
+      if (!createdUserId) {
+        throw new Error("No se pudo verificar el código");
+      }
+
       await setActive({
         session: signUp.createdSessionId,
       });
+
+      await setUserRole(createdUserId, role);
 
       router.push("/auth/profile-creation");
     } catch (error: any) {

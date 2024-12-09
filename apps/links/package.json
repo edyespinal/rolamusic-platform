@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@rola/ui": "workspace:^",
+    "fans": "^1.0.9",
     "next": "14.2.7",
     "posthog-js": "^1.163.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.1",
