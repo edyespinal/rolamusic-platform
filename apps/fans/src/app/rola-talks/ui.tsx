@@ -30,10 +30,12 @@ function RolaTalksPageUI({
   return (
     <Container>
       <PageHeader background="bg-[url('/static/img/talks-header.png')]">
-        <Title type="rola" order={1} align="left">
-          El podcast de <br />
-          la música independiente
-        </Title>
+        <Container size="md" className="flex h-full items-center">
+          <Title type="rola" order={1} align="left">
+            El podcast de <br />
+            la música independiente
+          </Title>
+        </Container>
       </PageHeader>
 
       <Container size="md" className="py-12">
