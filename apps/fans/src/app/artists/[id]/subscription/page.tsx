@@ -13,6 +13,7 @@ async function ArtistSubscriptionPage({ params }: { params: { id: string } }) {
 
   return (
     <ArtistSubscriptionPageUI
+      id={id}
       name={artist.name}
       profileURL={artist.profileURL}
       coverURL={artist.coverURL}

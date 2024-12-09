@@ -1,24 +1,36 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Artist } from "@rola/services/schemas";
 import { formatGenres, Genre } from "@rola/services/utils";
-import { Text, Title } from "@rola/ui/components";
+import { Text } from "@rola/ui/components";
 import { ArtistAvatar } from "@components/ArtistAvatar/ArtistAvatar";
+import { cn } from "@rola/tailwind-config/utils";
 
 function ArtistCard({
   id,
   image,
   name,
   genres,
+  size = "default",
+  classNames,
 }: {
   id: string;
   image: string | undefined;
   name: string;
   genres: Genre[];
+  size?: "default" | "sm";
+  classNames?: string;
 }) {
   return (
-    <Link href={`/artists/${id}`} className="w-32 text-center lg:w-48">
-      <ArtistAvatar image={image} name={name} className="mx-auto mb-1" />
+    <Link
+      href={`/artists/${id}`}
+      className={cn("mx-auto max-w-48 text-center", classNames)}
+    >
+      <ArtistAvatar
+        image={image}
+        name={name}
+        size={size === "default" ? "default" : "md"}
+        className="mx-auto mb-1"
+      />
+      <Text className="line-clamp-1 font-semibold">{name}</Text>
       {genres && (
         <Text className="text-brand line-clamp-1 text-sm lowercase">
           {formatGenres(genres)}

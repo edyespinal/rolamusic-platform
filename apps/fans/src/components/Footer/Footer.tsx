@@ -3,10 +3,10 @@ import { Container, Icon } from "@rola/ui/components";
 function Footer() {
   return (
     <Container
-      size="xl"
-      className="flex w-full flex-col justify-between border-t border-brand p-0 text-sm lg:flex-row"
+      size="lg"
+      className="border-brand flex w-full flex-col justify-between border-t p-0 text-sm lg:flex-row"
     >
-      <div className="flex flex-col gap-4 pt-2 text-center lg:flex-row">
+      <div className="flex flex-col gap-2 pt-2 text-center lg:flex-row">
         <a
           href="https://help.rolamusic.app/legal-notice"
           target="_blank"
@@ -34,13 +34,14 @@ function Footer() {
         </a>
       </div>
 
-      <div className="hidden pt-2 font-thin lg:block">
-        Todos los derechos reservados - ROLA &reg; {new Date().getFullYear()}
+      <div className="hidden pt-2 text-center text-xs font-thin lg:block">
+        Todos los derechos reservados <br />
+        ROLA &reg; {new Date().getFullYear()}
       </div>
 
       <div className="mt-2 w-full text-center lg:mt-0 lg:w-auto">
         <div className="lg:flex lg:justify-between">
-          <div className="mb-4 mt-2 flex w-full flex-col justify-center gap-4 px-2 font-medium text-brand lg:flex-row">
+          <div className="text-brand mb-4 mt-2 flex w-full flex-col justify-center gap-2 px-2 font-medium lg:flex-row">
             <a
               href="https://help.rolamusic.app/faq"
               className="hover:text-white"
@@ -55,7 +56,7 @@ function Footer() {
             </a>
           </div>
 
-          <div className="mx-auto flex max-w-[30%] items-center justify-center gap-4 bg-brand px-4 py-2 text-xl text-neutral-900">
+          <div className="bg-brand mx-auto flex max-w-[30%] items-center justify-center gap-4 px-4 py-2 text-xl text-neutral-900">
             <a
               href="https://www.instagram.com/rolamusic.app"
               className="hover:text-white"

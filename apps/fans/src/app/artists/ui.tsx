@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { ArtistCard } from "@components/ArtistCard/ArtistCard";
 import { Artist } from "@rola/services/schemas";
 import {
@@ -11,7 +10,6 @@ import {
   CarouselNext,
   CarouselPrevious,
   Container,
-  Icon,
   Select,
   SelectContent,
   SelectItem,
@@ -19,12 +17,22 @@ import {
   Text,
   Title,
 } from "@rola/ui/components";
-import slide1 from "@assets/img/artists-slide-01.jpg";
-import slide2Text from "@assets/img/artists-slide-02-txt.png";
-import Link from "next/link";
-import { useArtistsPageData } from "./data";
 
-function ArtistsPageUI({ artists }: { artists: Artist[] }) {
+import { useArtistsPageData } from "./data";
+import { SignedIn } from "@clerk/nextjs";
+import { useIsMobile } from "@rola/ui/hooks";
+import { PageHeader } from "@components/PageHeader/PageHeader";
+import { cn } from "@rola/tailwind-config/utils";
+
+function ArtistsPageUI({
+  artists,
+  supporting,
+}: {
+  artists: Artist[];
+  supporting: Array<
+    Pick<Artist, "id" | "name" | "profileURL" | "genres">
+  > | null;
+}) {
   const {
     displayedArtists,
     selectedSorting,
@@ -35,42 +43,74 @@ function ArtistsPageUI({ artists }: { artists: Artist[] }) {
     handleFilterChange,
   } = useArtistsPageData(artists);
 
+  const isMobile = useIsMobile(768);
+
+  // eslint-disable-next-line no-console
+  console.log({ isMobile });
+
   return (
     <Container>
-      <Carousel className="relative -mt-20 mb-12 max-h-[75vh] w-full overflow-hidden">
-        <CarouselContent>
-          <CarouselItem>
-            <Image
-              src={slide1}
-              alt="Apoya a tus artistas independientes favoritos"
-              style={{ minWidth: "100%" }}
-            />
-          </CarouselItem>
-          <CarouselItem className="bg-[url('/static/img/artists-slide-02.jpg')] bg-cover bg-no-repeat">
-            <Container
-              size="xl"
-              className="z-0 flex h-full flex-col justify-center gap-4"
+      <PageHeader background="bg-[url('/static/img/artists-header-mobile.png')] lg:bg-[url('/static/img/artists-header.png')]">
+        <Container
+          size="lg"
+          className="flex h-full justify-center lg:mt-0 lg:items-center"
+        >
+          <Title
+            type="rola"
+            order={2}
+            className="mt-8 text-center lg:ml-auto lg:mt-0 lg:text-right"
+          >
+            Apoya a tus
+            <br />
+            artistas favoritos
+          </Title>
+        </Container>
+      </PageHeader>
+
+      <SignedIn>
+        <Container size="md" className="py-12">
+          <Title order={3} underline className="pb-8 uppercase">
+            Mis artistas
+          </Title>
+          {supporting && (
+            <Carousel
+              opts={{ loop: true }}
+              className="mx-auto max-w-60 lg:max-w-screen-sm"
             >
-              <Image
-                src={slide2Text}
-                alt="ROLA Talks. El podcast de la música independiente"
-              />
-              <Link href="/rola-talks">
-                <Button>Descúbrelo</Button>
-              </Link>
-            </Container>
-          </CarouselItem>
-        </CarouselContent>
-        <CarouselPrevious className="absolute left-8 z-10" />
-        <CarouselNext className="absolute right-8 z-10" />
-      </Carousel>
+              <CarouselContent>
+                {supporting.map((artist) => (
+                  <CarouselItem
+                    key={artist.id}
+                    className={cn(
+                      supporting.length === 1
+                        ? "basis-full"
+                        : supporting.length === 2
+                          ? "lg:basis-1/2"
+                          : "lg:basis-1/3"
+                    )}
+                  >
+                    <ArtistCard
+                      id={artist.id}
+                      image={artist.profileURL}
+                      name={artist.name}
+                      genres={artist.genres}
+                      size={isMobile ? "sm" : "default"}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          )}
+        </Container>
+      </SignedIn>
 
-      <Container size="xl" className="pb-24">
+      <Container size="lg" className="pb-24 pt-12">
         <Title order={3} underline className="pb-8 uppercase">
-          Artistas
+          Artistas ROLA
         </Title>
-
-        <Container className="flex flex-col items-center justify-between gap-4 pb-8 lg:flex-row">
+        <Container className="flex flex-col items-center justify-between gap-4 pb-12 lg:flex-row">
           <div className="grid grid-cols-[auto_1fr] items-center gap-4">
             <Text>Ordenar por:</Text>
             <Select onValueChange={handleSortingChange}>
@@ -87,7 +127,11 @@ function ArtistsPageUI({ artists }: { artists: Artist[] }) {
               </SelectTrigger>
               <SelectContent>
                 {sortingOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    className="text-brand"
+                  >
                     {option.label}
                   </SelectItem>
                 ))}
@@ -113,7 +157,11 @@ function ArtistsPageUI({ artists }: { artists: Artist[] }) {
               </SelectTrigger>
               <SelectContent>
                 {filterOptions.map((filter) => (
-                  <SelectItem key={filter.value} value={filter.value}>
+                  <SelectItem
+                    key={filter.value}
+                    value={filter.value}
+                    className="text-brand bg-teal-500"
+                  >
                     {filter.label}
                   </SelectItem>
                 ))}
@@ -121,8 +169,7 @@ function ArtistsPageUI({ artists }: { artists: Artist[] }) {
             </Select>
           </div>
         </Container>
-
-        <Container className="grid grid-cols-2 justify-items-center gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-5 lg:gap-x-16 lg:gap-y-8">
+        <Container className="grid grid-cols-2 gap-y-8 px-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:px-0">
           {displayedArtists.map((artist) => (
             <ArtistCard
               key={artist.id}
@@ -130,8 +177,52 @@ function ArtistsPageUI({ artists }: { artists: Artist[] }) {
               image={artist.profileURL}
               name={artist.name}
               genres={artist.genres}
+              size={isMobile ? "sm" : "default"}
             />
           ))}
+        </Container>
+
+        <SignedIn>
+          {supporting?.length === 0 && (
+            <Container className="px-4 text-center lg:px-0">
+              <Title order={3} underline className="pb-8 uppercase">
+                Mis Artistas
+              </Title>
+              <div className="bg-background mx-auto max-w-lg rounded px-12 py-8">
+                <Text>
+                  Ha llegado el momento de cambiar la historia de la música
+                  independiente
+                </Text>
+                <Title type="rola" order={5} className="text-brand">
+                  Apoya a tus artistas favoritos
+                </Title>
+              </div>
+            </Container>
+          )}
+        </SignedIn>
+      </Container>
+
+      <Container className="bg-[url('/static/img/artists-footer.png')] bg-cover bg-center bg-no-repeat py-32">
+        <Container size="lg" className="flex flex-col gap-y-8 px-4 lg:px-0">
+          <Title type="rola" order={2} align="left" className="text-black">
+            ¿Eres músico y te gustaría crear <br />
+            tu propia comunidad de fans en ROLA?
+          </Title>
+
+          <Text className="max-w-screen-md">
+            Acercar a tus seguidores y crear una comunidad con ellos no solo
+            fortalece vínculos, también te brinda un soporte para que puedas
+            seguir trabajando y dedicarle más tiempo y esfuerzo a los más
+            importante, tu música.
+          </Text>
+
+          <a
+            href="https://artists.rolamusic.app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="secondary">Quiero crear mi comunidad</Button>
+          </a>
         </Container>
       </Container>
     </Container>

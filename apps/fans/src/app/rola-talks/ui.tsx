@@ -2,6 +2,7 @@
 
 import { PodcastEpisode } from "@rola/services/schemas";
 import {
+  AspectRatio,
   Button,
   Container,
   Form,
@@ -9,16 +10,17 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  Icon,
   Input,
   Text,
   Title,
 } from "@rola/ui/components";
 import Image from "next/image";
 import { useRolaTalksData } from "./data";
+import { PageHeader } from "@components/PageHeader/PageHeader";
 
 function RolaTalksPageUI({
   episodes,
-  totalEpisodes,
 }: {
   episodes: PodcastEpisode[];
   totalEpisodes: number;
@@ -26,14 +28,16 @@ function RolaTalksPageUI({
   const { form, handleSubmit, isLoading } = useRolaTalksData(episodes);
 
   return (
-    <Container className="pb-12">
-      <Container className="3xl:min-h-[800px] -mt-20 h-[50vh] w-full bg-[url('/static/img/talks-header.jpg')] bg-cover bg-center bg-no-repeat lg:min-h-[75vh]"></Container>
-
-      <Container size="xl" className="py-12">
-        <Title order={2} underline className="mb-8">
-          ROLA Talks
+    <Container>
+      <PageHeader background="bg-[url('/static/img/talks-header.png')]">
+        <Title type="rola" order={1} align="left">
+          El podcast de <br />
+          la música independiente
         </Title>
-        <Container className="flex flex-col gap-4">
+      </PageHeader>
+
+      <Container size="md" className="py-12">
+        <Container className="flex flex-col gap-4 pb-12">
           <Text>
             En ROLA Talks exploramos el día a día de estos músicos, desde las
             largas horas de ensayo hasta las inspiraciones que dan vida a sus
@@ -45,193 +49,150 @@ function RolaTalksPageUI({
             Cada episodio es una ventana a la diversidad y la autenticidad de la
             música independiente. Conocemos el origen de sus proyectos, desde la
             chispa inicial de una idea hasta la confluencia de influencias que
-            dan forma a su sonido único. Además, exploramos los obstáculos que
-            han enfrentado en su camino, desde la lucha por la visibilidad hasta
-            los desafíos en la producción y distribución de su música.
+            dan forma a su sonido único.
           </Text>
-          <Text>
-            En ROLA Talks celebramos las metas alcanzadas y las aspiraciones que
-            impulsan a estos artistas. Desde pequeños logros hasta grandes
-            hitos, cada paso es un testimonio del compromiso, la pasión y la
-            dedicación que define a estos talentosos músicos.
-          </Text>
+        </Container>
+
+        <Title order={2} underline className="mb-4 font-normal">
+          Destacados
+        </Title>
+
+        <Container className="grid grid-cols-3 items-start gap-8 pb-12">
+          {episodes.map((episode) => (
+            <div
+              key={episode.id}
+              className="flex basis-1/3 flex-col justify-center gap-4"
+            >
+              <a href={episode.url} target="_blank" rel="noopener noreferrer">
+                <AspectRatio
+                  ratio={4 / 3}
+                  className="relative hover:opacity-80"
+                >
+                  <Image
+                    src={`https://img.youtube.com/vi/${episode.id}/0.jpg`}
+                    alt={episode.title}
+                    sizes="100vw"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                    }}
+                    width={400}
+                    height={300}
+                  />
+                  <Icon
+                    name="play-circle"
+                    size={64}
+                    strokeWidth={1.5}
+                    className="text-brand absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/50 p-1"
+                  />
+                </AspectRatio>
+              </a>
+              <Text className="text-primary text-brand line-clamp-2 text-left text-sm font-semibold">
+                {`ROLA Talks | ${episode.guest && `${episode.guest} · `} ${
+                  episode.title
+                } - ${episode.number.toString().padStart(2, "0")}`}
+              </Text>
+            </div>
+          ))}
+        </Container>
+
+        <Container className="text-center">
+          <a
+            href="https://youtube.com/playlist?list=PLCyrtUMjK4nHoJ-wwPSMvn15bZWyJfhqW&si=RhdqusjGWyfun9xE"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button>Ver más</Button>
+          </a>
         </Container>
       </Container>
 
-      <Title order={3} underline className="mb-4 font-normal">
-        Últimos episodios
-      </Title>
-      <Container size="xl" className="grid grid-cols-3 items-start gap-8 pb-12">
-        {episodes.map((episode) => (
-          <div
-            key={episode.id}
-            className="flex basis-1/3 flex-col justify-center gap-4 hover:brightness-125"
-          >
-            <a href={episode.url} target="_blank" rel="noopener noreferrer">
-              <Image
-                src={`https://img.youtube.com/vi/${episode.id}/0.jpg`}
-                alt={episode.title}
-                width={400}
-                height={200}
-              />
-            </a>
-            <Text className="text-primary line-clamp-2 text-left text-sm">
-              {`ROLA Talks | ${episode.guest && `${episode.guest} · `} ${
-                episode.title
-              } - ${episode.number.toString().padStart(2, "0")}`}
+      <Container className="bg-[url('/static/img/talks-form.png')] bg-cover bg-center bg-no-repeat py-24">
+        <Container size="md">
+          <Title type="rola" order={2} className="mb-8 text-center text-black">
+            ¿Te gustaría participar <br /> en un episodio de ROLA Talks?
+          </Title>
+
+          <Container className="flex flex-col gap-4">
+            <Text>
+              Rellena el siguiente formulario para que podamos invitarte a
+              grabar un episodio con nosotros y conocer tu historia de primera
+              mano.
             </Text>
-          </div>
-        ))}
-      </Container>
 
-      <Container size="xl">
-        <Title order={3} underline className="mb-8 mt-24 text-center uppercase">
-          ¿Te gustaría participar en un episodio de ROLA Talks?
-        </Title>
+            <form onSubmit={form.handleSubmit(handleSubmit)}>
+              <Form {...form}>
+                <Container className="grid gap-x-12 gap-y-8 pb-16 lg:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel required>Nombre</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Tu nombre" {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
 
-        <Container className="flex flex-col gap-4">
-          <Text>
-            Este podcast está dedicado a amplificar voces emergentes y a dar a
-            conocer la riqueza de la escena musical independiente. Cada episodio
-            es una invitación a sumergirse en la creatividad, la innovación y la
-            autenticidad que caracterizan a estos artistas que desafían los
-            límites y rompen barreras en la búsqueda de su expresión artística.
-          </Text>
-          <Text>
-            Únete a nosotros en ROLA Talks, donde la música independiente
-            encuentra su voz y su espacio para brillar. Rellena el siguiente
-            formulario para que podamos invitarte a grabar un episodio con
-            nosotros y conocer tu historia de primera mano.
-          </Text>
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel required>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="Tu correo electrónico"
+                            {...field}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
 
-          <form onSubmit={form.handleSubmit(handleSubmit)}>
-            <Form {...form}>
-              <Container className="grid gap-x-16 gap-y-8 pb-16 lg:grid-cols-2">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel required>Nombre</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Tu nombre" {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
+                  <FormField
+                    control={form.control}
+                    name={"link"}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            type="url"
+                            placeholder="Link de Spotify o YouTube"
+                            {...field}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name={"instagram"}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            type="url"
+                            placeholder="Perfil de Instagram"
+                            {...field}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </Container>
 
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel required>Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="Tu correo electrónico"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name={"website"}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input type="url" placeholder="Sitio web" {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name={"youtube"}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          type="url"
-                          placeholder="Canal de YouTube"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name={"instagram"}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          type="url"
-                          placeholder="Cuenta de Instagram"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name={"twitter"}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          type="url"
-                          placeholder="Cuenta de Twitter"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name={"tiktok"}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          type="url"
-                          placeholder="Cuenta de TikTok"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name={"music"}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          type="url"
-                          placeholder="Música (Spotify, Bandcamp, Apple Music, etc)"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </Container>
-
-              <Container className="text-center">
-                <Button type="submit" loading={isLoading}>
-                  Enviar
-                </Button>
-              </Container>
-            </Form>
-          </form>
+                <Container className="text-center">
+                  <Button type="submit" variant="secondary" loading={isLoading}>
+                    Enviar
+                  </Button>
+                </Container>
+              </Form>
+            </form>
+          </Container>
         </Container>
       </Container>
     </Container>

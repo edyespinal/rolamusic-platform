@@ -10,6 +10,7 @@ import { useArtistPageData } from "./data";
 import { subscriptionTiers } from "@rola/services/constants";
 import Link from "next/link";
 import { AudioPlayer } from "@components/AudioPlayer/AudioPlayer";
+import { PageHeader } from "@components/PageHeader/PageHeader";
 
 type ArtistPageProps = {
   id: string;
@@ -34,7 +35,7 @@ function ArtistPageUI({
     useArtistPageData();
 
   return (
-    <Container className="mb-24">
+    <Container>
       <Container className="relative -mt-20 min-h-[25vh] lg:min-h-[50vh]">
         <Image
           src={coverURL ?? "/static/img/artists-landing-header.jpg"}
@@ -148,6 +149,7 @@ function ArtistPageUI({
             <SubscriptionTier
               extended
               type={subscriptionTiers.basic.type}
+              selected={selectedSubscription === subscriptionTiers.basic.type}
               onClick={() =>
                 handleSubscriptionChange(subscriptionTiers.basic.type)
               }

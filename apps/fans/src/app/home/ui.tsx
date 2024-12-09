@@ -1,78 +1,106 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button, Container, Text, Title } from "@rola/ui/components";
-import { Footer } from "@components/Footer/Footer";
-import { Header } from "@components/Header/Header";
-import rolaLogo from "@assets/img/logo-rola-home.png";
-import ManWithHeadphones from "@assets/img/man-with-headphones.png";
-import RolaOnPhone from "@assets/img/rola-on-phone.png";
-import GuitarIcon from "@assets/img/icons/guitar.svg";
-import ThumbsUpIcon from "@assets/img/icons/thumbs-up.svg";
-import RockHandIcon from "@assets/img/icons/rock-hand.svg";
+import {
+  AspectRatio,
+  Button,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  Container,
+  Text,
+  Title,
+} from "@rola/ui/components";
+import rolaLogo from "@assets/img/logo-hand.png";
+import lineV from "@assets/img/linea-v.png";
+import Curilero from "@assets/img/landing-section-2.png";
+import { cn } from "@rola/tailwind-config/utils";
+import { highlightedArtists } from "./data";
 
 function HomePageUI() {
   return (
     <Container>
-      <Container className="3xl:min-h-[800px] z-0 -mt-20 grid min-h-[100vh] place-items-center bg-[url('/static/img/landing-header.jpg')] bg-cover bg-center bg-no-repeat lg:min-h-[75vh]">
-        <div className="flex flex-col items-center lg:flex-row">
-          <Image
-            src={rolaLogo}
-            alt="Rola"
-            className="mx-auto mb-12 max-w-[60vw] lg:-mt-12 lg:mb-0 lg:mr-12"
-            style={{
-              maxWidth: "75%",
-              height: "auto",
-            }}
-          />
-          <Container className="text-center lg:text-left">
-            <Title className="mb-8 font-normal uppercase">
+      <Container
+        className={cn(
+          "z-0 flex min-h-[100vh] items-start justify-center bg-cover bg-center bg-no-repeat",
+          "bg-[url('/static/img/landing-header-mobile.png')] lg:bg-[url('/static/img/landing-header.png')]",
+          "3xl:min-h-[800px] -mt-20 lg:min-h-[75vh]"
+        )}
+      >
+        <Container
+          size="lg"
+          className="mt-36 flex flex-col items-start justify-center px-4 lg:flex-row lg:px-0"
+        >
+          <div className="mx-auto flex flex-col items-center lg:mx-0 lg:flex-row lg:gap-4">
+            <Image
+              src={rolaLogo}
+              alt="Rola"
+              className="lg:mb-0 lg:mr-12"
+              style={{
+                maxWidth: "250px",
+                height: "auto",
+              }}
+            />
+            <Image
+              src={lineV}
+              alt="Línea"
+              className="-my-8 rotate-90 lg:my-0 lg:mr-12 lg:block lg:rotate-0"
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100px",
+              }}
+            />
+          </div>
+          <Container>
+            <Title
+              order={4}
+              className="mb-8 text-center font-normal uppercase lg:text-left"
+            >
               Conoce nuevos artistas <br />
-              Disfruta de su música y su contenido <br />
+              Disfruta de su música y su contenido exclusivo <br />
               Forma parte de su comunidad
             </Title>
-            <Link href="/artists">
-              <Button>Ver artistas</Button>
-            </Link>
+            <div className="text-center lg:text-left">
+              <Link href="/artists" prefetch>
+                <Button>Ver artistas</Button>
+              </Link>
+            </div>
           </Container>
-        </div>
+        </Container>
       </Container>
 
       <Container className="bg-background-dark z-10">
-        <Container
-          size="xl"
-          className="flex min-h-[50vh] px-4 py-24 lg:pb-0 xl:min-h-[auto]"
-        >
-          <div className="-mt-12 lg:max-w-[50%] lg:flex-none">
-            <Title order={2} align="left" underline className="mb-8 uppercase">
-              ¿Qué es ROLA?
+        <Container className="flex min-h-[50vh] flex-col px-4 pb-0 pt-24 lg:flex-row xl:min-h-[auto]">
+          <Image
+            src={Curilero}
+            alt="Rola en móvil"
+            className="-mt-48 hidden lg:block"
+            style={{
+              maxWidth: "600px",
+              height: "auto",
+            }}
+          />
+          <div className="z-20 lg:-ml-24 lg:max-w-[50%] lg:flex-none">
+            <Title type="rola" order={2} align="left" className="mb-8">
+              Conecta con la música de una manera especial
             </Title>
             <Text className="mb-4">
-              ROLA es una comunidad y un punto de encuentro para mentes
-              musicales inquietas. Te invitamos a descubrir artistas musicales,
-              donde la creatividad y la pasión se desbordan en cada nota. Con
-              ROLA, podrás disfrutar de contenido exclusivo, desde canciones
-              inéditas hasta videos detrás de escena. Es como tener un pase VIP
-              al corazón de la escena musical independiente. ¡Prepárate para
-              sentir la música en su estado más puro!
+              Apoyar y ver crecer a tus artistas favoritos es es solo uno de los
+              beneficios de pertenecer a su comunidad, también accedes a
+              contenido,, merchandising y eventos creados única y especialmente
+              para ti.
             </Text>
-            <Text className="mb-4">
-              Únete a otros entusiastas como tú y apoya a tus artistas favoritos
-              mientras se abren camino en la industria. Con tu apoyo estás
-              impulsando sus carreras y ayudándolos a alcanzar nuevas alturas.
-              Juntos, estamos creando un movimiento musical independiente único
-              y emocionante.
-            </Text>
-            <Text>
-              Así que si estás listo para explorar nuevos sonidos, conectarte
-              con músicos apasionados y ser parte de una revolución musical,
-              ROLA es tu boleto de entrada. Únete a nosotros y sé parte de la
-              evolución musical. ¡Vamos a hacer historia juntos!
-            </Text>
+
+            <Link href="/artists" prefetch>
+              <Button>Conectar</Button>
+            </Link>
           </div>
+
           <Image
-            src={ManWithHeadphones}
-            alt="Hombre con auriculares"
-            className="-mt-36 ml-24 hidden grow lg:block"
+            src={Curilero}
+            alt="Rola en móvil"
+            className="z-10 -mt-8 block lg:hidden"
             style={{
               maxWidth: "100%",
               height: "auto",
@@ -81,114 +109,67 @@ function HomePageUI() {
         </Container>
       </Container>
 
-      <Container className="bg-[url('/static/img/landing-section-3.jpg')] bg-cover bg-center bg-no-repeat py-24">
-        <Container size="md" className="px-4">
-          <Title order={2} underline className="mb-8 uppercase">
-            ¿Cómo funciona?
+      <Container className="bg-[url('/static/img/landing-section-3.png')] bg-cover bg-center bg-no-repeat py-32">
+        <Container size="lg" className="px-4">
+          <Title type="rola" order={2} className="mb-8 text-black">
+            ¿Y si ese artista que tanto te inspira es el próximo gran exponente
+            de la música?
           </Title>
           <Text className="mb-4 text-center">
-            ROLA es una plataforma revolucionaria que pone el poder en tus manos
-            para apoyar a tus artistas favoritos. ¿Cómo funciona? Es simple.
-            Mediante una suscripción a su contenido exclusivo, te conviertes en
-            un apoyo directo para el artista, ayudándoles a financiar sus costos
-            y continuar creando música de calidad. ¡Es una experiencia win-win!
-            Tú obtienes acceso a material único y emocionante, mientras ellos
-            pueden enfocarse en lo que hacen mejor: hacer música. Es una forma
-            efectiva y gratificante de contribuir al éxito de tus artistas
-            independientes preferidos.
+            Muchos talentos quedan en el camino por falta de recursos, pero hoy
+            tú puedes marcar la diferencia. <br /> Apoya e impulsa a los músicos
+            independientes y se parte del cambio en su historia.
           </Text>
-          <Text className="mb-4 text-center">
-            Apoyar un artista y formar parte de su comunidad cuesta desde casi
-            lo mismo que una sola cerveza... ¿Qué tal si invitas a “esa cerveza”
-            a tu artista favorito? ;)
-          </Text>
+          <div className="text-center">
+            <Link href="/artists" prefetch>
+              <Button variant="secondary">Quiero apoyar</Button>
+            </Link>
+          </div>
         </Container>
       </Container>
 
-      <div className="-mt-12 h-auto w-full bg-transparent lg:hidden">
-        <Image
-          src={RolaOnPhone}
-          alt="Rola en móvil"
-          style={{
-            maxWidth: "100%",
-            height: "auto",
-          }}
-        />
-      </div>
+      <Container
+        size="lg"
+        className="flex flex-col items-center gap-16 px-4 py-24 lg:flex-row"
+      >
+        <Container className="lg:w-2/5">
+          <Title type="rola" order={3} className="mb-8 lg:text-left">
+            Descubre nuevos artistas y disfruta de su música.
+          </Title>
 
-      <Container className="">
-        <Container
-          size="xl"
-          className="px-4 py-12 lg:flex lg:justify-between lg:pb-0"
-        >
-          <Image
-            src={RolaOnPhone}
-            alt="Rola en móvil"
-            className="-mb-[1px] -mt-32 hidden lg:block"
-            style={{
-              height: "auto",
-            }}
-          />
-          <Container className="lg:max-w-[50%]">
-            <Title order={2} underline className="mb-8 uppercase">
-              Impacto
-            </Title>
-            <Text className="text-center lg:text-right">
-              El acercar a los seguidores con sus artistas favoritos y crear
-              comunidad con ellos, permite no solo fortalecer vínculos, también
-              se brinda un soporte a los artistas para que puedan seguir
-              trabajando. Creemos fuertemente que mientras menos se preocupen
-              los artistas por las actividades que conllevan la
-              auto-financiación, mayor será la calidad de su trabajo, puesto que
-              pueden dedicar más tiempo y esfuerzo en su música.
-            </Text>
-            <div className="mt-12">
-              <div className="border-brand mx-auto flex flex-wrap justify-between gap-8 border-b-4 pb-4 md:w-1/2 lg:ml-auto">
-                <div className="text-center">
-                  <Image
-                    src={GuitarIcon}
-                    alt="Ícono de Guitarra"
-                    className="mx-auto"
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                    }}
-                  />
-                  <Text className="text-brand font-medium uppercase">
-                    Talento
-                  </Text>
-                </div>
-                <div className="text-center">
-                  <Image
-                    src={ThumbsUpIcon}
-                    alt="Pulgar arriba"
-                    className="mx-auto"
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                    }}
-                  />
-                  <Text className="text-brand font-medium uppercase">
-                    Calidad
-                  </Text>
-                </div>
-                <div className="text-center">
-                  <Image
-                    src={RockHandIcon}
-                    alt="Mano de Rock"
-                    className="mx-auto"
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                    }}
-                  />
-                  <Text className="text-brand font-medium uppercase">
-                    Pasión
-                  </Text>
-                </div>
-              </div>
-            </div>
-          </Container>
+          <Text className="pb-8 text-center lg:text-left">
+            Hay mucha música y talento por descubrir. Aquí puedes conectar de
+            manera rápida y directa con la escena musical independiente y
+            encontrar tu próximo artista favorito.
+          </Text>
+          <div className="text-center lg:text-left">
+            <Link href="/artists" prefetch>
+              <Button>Descubrir</Button>
+            </Link>
+          </div>
+        </Container>
+
+        <Container className="lg:w-3/5">
+          <Carousel opts={{ loop: true }}>
+            <CarouselContent>
+              {highlightedArtists.map(({ id, url, alt }, i) => (
+                <CarouselItem key={i} className="lg:basis-1/3">
+                  <Link href={`/artists/${id}`} prefetch>
+                    <AspectRatio ratio={2 / 3}>
+                      <Image
+                        src={url}
+                        alt={alt}
+                        fill
+                        className="bg-brand h-full w-full rounded-lg object-cover hover:opacity-65"
+                      />
+                    </AspectRatio>
+                  </Link>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-2 lg:-left-12" />
+            <CarouselNext className="right-2 lg:-right-12" />
+          </Carousel>
         </Container>
       </Container>
     </Container>

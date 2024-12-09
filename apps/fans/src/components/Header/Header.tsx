@@ -1,28 +1,23 @@
 import Link from "next/link";
-import { SignedIn } from "@clerk/nextjs";
-import { UserMenu } from "@components/UserMenu/UserMenu";
-import { Button, Container, Logo } from "@rola/ui/components";
-import { NavLink } from "./NavLink";
+import { Container, Logo } from "@rola/ui/components";
+import { Navigation } from "@components/Navigation/Navigation";
 
 function Header() {
   return (
-    <Container className="z-[99] flex h-20 items-center bg-gradient-to-b from-black to-transparent">
-      <Container size="xl" className="flex items-center justify-between">
+    <Container className="bg-background-dark z-[99] flex h-20 items-center lg:bg-transparent lg:bg-gradient-to-b lg:from-black lg:to-transparent lg:shadow-none">
+      <Container
+        size="lg"
+        className="flex items-center justify-between px-4 lg:px-0"
+      >
         <Link href="/">
-          <Logo variant="horizontal" size="xs" />
+          <div className="hidden lg:block">
+            <Logo variant="horizontal" size="xs" />
+          </div>
+          <div className="block lg:hidden">
+            <Logo variant="icon" size="xs" />
+          </div>
         </Link>
-        <div className="flex items-center justify-end gap-4">
-          <Container className="hidden items-center gap-8 lg:flex">
-            <NavLink href="/">Inicio</NavLink>
-            <NavLink href="/artists">Artistas</NavLink>
-            <NavLink href="/rola-talks">ROLA Talks</NavLink>
-            <NavLink href="/artist-information">¿Eres artista?</NavLink>
-            <Button size="xs">Iniciar sesión de artista</Button>
-          </Container>
-          <SignedIn>
-            <UserMenu />
-          </SignedIn>
-        </div>
+        <Navigation />
       </Container>
     </Container>
   );

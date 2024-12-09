@@ -29,7 +29,18 @@ function ArtistAvatar({ image, name, size, className }: ArtistsAvatarProps) {
     <Avatar className={cn(artistAvatarVariants({ size }), className)}>
       <AvatarImage src={image} />
       <AvatarFallback>
-        <Text className="text-6xl font-semibold">{name[0]}</Text>
+        <Text
+          className={cn(
+            "font-semibold",
+            size === "sm" && "text-4xl",
+            size === "md" && "text-5xl",
+            size === "default" && "text-6xl",
+            size === "lg" && "text-7xl",
+            size === "xl" && "text-8xl"
+          )}
+        >
+          {name[0]}
+        </Text>
       </AvatarFallback>
     </Avatar>
   );

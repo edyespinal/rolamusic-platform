@@ -44,7 +44,14 @@ function SubscriptionTier({
 
       {extended && (
         <div className="flex grow flex-col justify-between px-6 pb-4">
-          <Text className="mb-8 border-t pt-4">
+          <Text
+            className={cn(
+              "mb-8 pt-4",
+              selected
+                ? "border-t border-t-transparent"
+                : "border-t-brand border-t"
+            )}
+          >
             {subscriptionTiers[type].description}
           </Text>
         </div>

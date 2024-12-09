@@ -8,12 +8,8 @@ import { PodcastEpisode } from "@rola/services/schemas";
 type FormValues = {
   name: string;
   email: string;
-  website: string;
-  youtube: string;
+  link: string;
   instagram: string;
-  tiktok: string;
-  twitter: string;
-  music: string;
 };
 
 const useRolaTalksData = (episodes: PodcastEpisode[]) => {
@@ -24,12 +20,8 @@ const useRolaTalksData = (episodes: PodcastEpisode[]) => {
     defaultValues: {
       name: "",
       email: "",
-      website: "",
-      youtube: "",
+      link: "",
       instagram: "",
-      tiktok: "",
-      twitter: "",
-      music: "",
     },
   });
 
@@ -41,12 +33,8 @@ const useRolaTalksData = (episodes: PodcastEpisode[]) => {
         name: values.name,
         email: values.email,
         socials: [
-          { name: "website", url: values.website },
-          { name: "youtube", url: values.youtube },
+          { name: "link", url: values.link },
           { name: "instagram", url: values.instagram },
-          { name: "tiktok", url: values.tiktok },
-          { name: "twitter", url: values.twitter },
-          { name: "music", url: values.music },
         ],
       });
 
