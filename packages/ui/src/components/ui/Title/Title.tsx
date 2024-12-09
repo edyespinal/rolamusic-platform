@@ -4,14 +4,18 @@ import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@rola/tailwind-config/utils";
 import { Underline } from "../Underline/Underline";
 
-const titleVariants = cva("text-center font-semibold", {
+const titleVariants = cva("", {
   variants: {
+    type: {
+      default: "!font-semibold",
+      rola: "font-rola tracking-tighter",
+    },
     order: {
-      1: "text-4xl",
-      2: "text-3xl",
-      3: "text-2xl",
-      4: "text-xl",
-      5: "text-lg",
+      1: "text-3xl lg:text-4xl",
+      2: "text-2xl lg:text-3xl",
+      3: "text-xl lg:text-2xl",
+      4: "text-lg lg:text-xl",
+      5: "text-md lg:text-lg",
     },
     align: {
       left: "text-left",
@@ -19,6 +23,33 @@ const titleVariants = cva("text-center font-semibold", {
       right: "text-right",
     },
   },
+  compoundVariants: [
+    {
+      type: "rola",
+      order: 1,
+      className: "text-7xl lg:text-8xl !leading-[56px]",
+    },
+    {
+      type: "rola",
+      order: 2,
+      className: "text-6xl lg:text-7xl !leading-[48px]",
+    },
+    {
+      type: "rola",
+      order: 3,
+      className: "text-5xl lg:text-6xl !leading-10",
+    },
+    {
+      type: "rola",
+      order: 4,
+      className: "text-4xl lg:text-5xl !leading-8",
+    },
+    {
+      type: "rola",
+      order: 5,
+      className: "text-3xl lg:text-4xl !leading-6",
+    },
+  ],
   defaultVariants: {
     order: 1,
     align: "center",
@@ -36,6 +67,7 @@ const Title = React.forwardRef<HTMLHeadingElement, TitleProps>(
     {
       className,
       children,
+      type = "default",
       order = 1,
       align = "center",
       underline = false,
@@ -52,7 +84,7 @@ const Title = React.forwardRef<HTMLHeadingElement, TitleProps>(
     return (
       <Component
         ref={ref}
-        className={cn(titleVariants({ order, align }), className)}
+        className={cn(titleVariants({ type, order, align }), className)}
         {...props}
       >
         {children}

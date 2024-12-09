@@ -1,9 +1,10 @@
 import { Vertical } from "./variants/Vertical";
 import { Horizontal } from "./variants/Horizontal";
 import { Main } from "./variants/Main";
+import { Icon } from "./variants/Icon";
 
 type ComponentProps = {
-  variant?: "default" | "horizontal" | "vertical";
+  variant?: "default" | "horizontal" | "vertical" | "icon";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 };
 
@@ -24,6 +25,9 @@ function Logo(props: ComponentProps) {
 
     case "vertical":
       return <Vertical size={sizeMap[size]} />;
+
+    case "icon":
+      return <Icon size={sizeMap[size]} />;
 
     default:
       return <Main size={sizeMap[size]} />;
