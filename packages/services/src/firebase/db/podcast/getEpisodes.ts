@@ -1,4 +1,4 @@
-import { ARTISTS } from "../../../constants";
+import { PODCAST } from "../../../constants";
 import { PodcastEpisode } from "../../../schemas/podcast";
 import { ServiceError } from "../../../utils/serviceError";
 import {
@@ -42,6 +42,9 @@ export async function getEpisodes({
     );
     const totalEpisodes = totalEpisodesSnapshot.data().count;
 
+    // eslint-disable-next-line no-console
+    console.log({ totalEpisodes, pageSize, page, order, start });
+
     if (totalEpisodes === 0) {
       return { episodes: [], totalEpisodes };
     }
@@ -49,7 +52,7 @@ export async function getEpisodes({
     const episodesQuery = query(
       podcastEpisodeCollection,
       limit(pageSize ? pageSize : totalEpisodes),
-      orderBy("number", order),
+      orderBy("publishedAt", order),
       startAt(start ? start : totalEpisodes - 1 - pageSize * (page - 1))
     );
     const episodesDocs = await getDocs(episodesQuery);
@@ -70,7 +73,7 @@ export async function getEpisodes({
     const error = e as FirestoreError;
 
     throw new ServiceError({
-      service: ARTISTS,
+      service: PODCAST,
       code: error.code,
       message: error.message,
     });
