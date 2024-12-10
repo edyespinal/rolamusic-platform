@@ -68,11 +68,11 @@ function ArtistsPageUI({
       </PageHeader>
 
       <SignedIn>
-        <Container size="md" className="py-12">
-          <Title order={3} underline className="pb-8 uppercase">
-            Mis artistas
-          </Title>
-          {supporting && (
+        {supporting?.length ? (
+          <Container size="md" className="py-12">
+            <Title order={3} underline className="pb-8 uppercase">
+              Mis artistas
+            </Title>
             <Carousel
               opts={{ loop: true }}
               className="mx-auto max-w-60 lg:max-w-screen-sm"
@@ -102,8 +102,8 @@ function ArtistsPageUI({
               <CarouselPrevious />
               <CarouselNext />
             </Carousel>
-          )}
-        </Container>
+          </Container>
+        ) : null}
       </SignedIn>
 
       <Container size="lg" className="pb-24 pt-12">
@@ -169,7 +169,7 @@ function ArtistsPageUI({
             </Select>
           </div>
         </Container>
-        <Container className="grid grid-cols-2 gap-y-8 px-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:px-0">
+        <Container className="grid grid-cols-2 gap-y-8 px-4 pb-24 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:px-0">
           {displayedArtists.map((artist) => (
             <ArtistCard
               key={artist.id}
@@ -183,7 +183,7 @@ function ArtistsPageUI({
         </Container>
 
         <SignedIn>
-          {supporting?.length === 0 && (
+          {supporting?.length === 0 ? (
             <Container className="px-4 text-center lg:px-0">
               <Title order={3} underline className="pb-8 uppercase">
                 Mis Artistas
@@ -198,7 +198,7 @@ function ArtistsPageUI({
                 </Title>
               </div>
             </Container>
-          )}
+          ) : null}
         </SignedIn>
       </Container>
 
