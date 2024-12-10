@@ -24,16 +24,20 @@ function RolaTalksPageUI({ episodes }: { episodes: PodcastEpisode[] }) {
 
   return (
     <Container>
-      <PageHeader background="bg-[url('/static/img/talks-header.png')]">
-        <Container size="md" className="flex h-full items-center">
-          <Title type="rola" order={1} align="left">
+      <PageHeader background="bg-[url('/static/img/talks-header-mobile.png')] lg:bg-[url('/static/img/talks-header.png')]">
+        <Container size="md" className="flex h-full lg:items-center">
+          <Title
+            type="rola"
+            order={1}
+            className="mt-8 text-center lg:mt-0 lg:text-left"
+          >
             El podcast de <br />
             la música independiente
           </Title>
         </Container>
       </PageHeader>
 
-      <Container size="md" className="py-12">
+      <Container size="md" className="px-4 py-12 lg:px-0">
         <Container className="flex flex-col gap-4 pb-12">
           <Text>
             En ROLA Talks exploramos el día a día de estos músicos, desde las
@@ -54,11 +58,11 @@ function RolaTalksPageUI({ episodes }: { episodes: PodcastEpisode[] }) {
           Destacados
         </Title>
 
-        <Container className="grid grid-cols-3 items-start gap-8 pb-12">
+        <Container className="grid items-start gap-8 pb-12 lg:grid-cols-3">
           {episodes.map((episode) => (
             <div
               key={episode.id}
-              className="flex basis-1/3 flex-col justify-center gap-4"
+              className="flex flex-col justify-center gap-4 pb-4"
             >
               <a href={episode.url} target="_blank" rel="noopener noreferrer">
                 <AspectRatio
@@ -105,7 +109,7 @@ function RolaTalksPageUI({ episodes }: { episodes: PodcastEpisode[] }) {
       </Container>
 
       <Container className="bg-[url('/static/img/talks-form.png')] bg-cover bg-center bg-no-repeat py-24">
-        <Container size="md">
+        <Container size="md" className="px-4 lg:px-0">
           <Title type="rola" order={2} className="mb-8 text-center text-black">
             ¿Te gustaría participar <br /> en un episodio de ROLA Talks?
           </Title>
@@ -119,15 +123,14 @@ function RolaTalksPageUI({ episodes }: { episodes: PodcastEpisode[] }) {
 
             <form onSubmit={form.handleSubmit(handleSubmit)}>
               <Form {...form}>
-                <Container className="grid gap-x-12 gap-y-8 pb-16 lg:grid-cols-2">
+                <Container className="grid gap-x-12 gap-y-4 pb-16 lg:grid-cols-2 lg:gap-y-8">
                   <FormField
                     control={form.control}
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel required>Nombre</FormLabel>
                         <FormControl>
-                          <Input placeholder="Tu nombre" {...field} />
+                          <Input placeholder="Tu nombre *" {...field} />
                         </FormControl>
                       </FormItem>
                     )}
@@ -138,11 +141,10 @@ function RolaTalksPageUI({ episodes }: { episodes: PodcastEpisode[] }) {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel required>Email</FormLabel>
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="Tu correo electrónico"
+                            placeholder="Tu correo electrónico *"
                             {...field}
                           />
                         </FormControl>

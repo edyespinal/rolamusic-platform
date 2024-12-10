@@ -169,7 +169,7 @@ function ArtistsPageUI({
             </Select>
           </div>
         </Container>
-        <Container className="grid grid-cols-2 gap-y-8 px-4 pb-24 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:px-0">
+        <Container className="grid grid-cols-2 gap-y-8 px-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:px-0">
           {displayedArtists.map((artist) => (
             <ArtistCard
               key={artist.id}
@@ -184,7 +184,7 @@ function ArtistsPageUI({
 
         <SignedIn>
           {supporting?.length === 0 ? (
-            <Container className="px-4 text-center lg:px-0">
+            <Container className="px-4 pt-24 text-center lg:px-0">
               <Title order={3} underline className="pb-8 uppercase">
                 Mis Artistas
               </Title>
