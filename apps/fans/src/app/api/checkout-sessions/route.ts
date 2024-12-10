@@ -19,12 +19,8 @@ export async function POST(request: Request) {
     console.error(error);
 
     return Response.json(
-      {
-        error: "Failed to create checkout session",
-      },
-      {
-        status: 500,
-      }
+      { error: "Failed to create checkout session" },
+      { status: 500 }
     );
   }
 }
