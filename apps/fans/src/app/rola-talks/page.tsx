@@ -2,11 +2,9 @@ import { db } from "@rola/services/firebase";
 import { RolaTalksPageUI } from "./ui";
 
 async function RolaTalksPage() {
-  const { episodes, totalEpisodes } = await db.podcast.getEpisodes({
-    pageSize: 3,
-  });
+  const { episodes } = await db.podcast.getLatestEpisodes();
 
-  return <RolaTalksPageUI episodes={episodes} totalEpisodes={totalEpisodes} />;
+  return <RolaTalksPageUI episodes={episodes} />;
 }
 
 export default RolaTalksPage;

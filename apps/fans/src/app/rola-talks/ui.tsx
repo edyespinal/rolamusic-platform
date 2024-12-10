@@ -19,12 +19,7 @@ import Image from "next/image";
 import { useRolaTalksData } from "./data";
 import { PageHeader } from "@components/PageHeader/PageHeader";
 
-function RolaTalksPageUI({
-  episodes,
-}: {
-  episodes: PodcastEpisode[];
-  totalEpisodes: number;
-}) {
+function RolaTalksPageUI({ episodes }: { episodes: PodcastEpisode[] }) {
   const { form, handleSubmit, isLoading } = useRolaTalksData(episodes);
 
   return (
