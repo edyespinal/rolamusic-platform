@@ -1,136 +1,187 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button, Container, Text, Title, Underline } from "@rola/ui/components";
-import RolaLogo from "@assets/img/logo-rola-home.png";
-import Apoyo from "@assets/img/t_apoyo.png";
-import Gestion from "@assets/img/t_gestion.png";
-import Financiacion from "@assets/img/t_financiacion.png";
-import ManWithBass from "@assets/img/man-with-bass.png";
-import RolaOnPhone from "@assets/img/artists-rola-on-phone.png";
+import { cn } from "@rola/tailwind-config/utils";
+import RolaLogo from "@assets/img/logo-hand.png";
+import LineV from "@assets/img/linea-v.png";
+import Singer from "@assets/img/artist-info-section-2.png";
+import Musicians from "@assets/img/artist-info-section-4.png";
 
 function ArtistInformationPageUI() {
   return (
     <Container>
-      <Container className="3xl:min-h-[800px] -mt-20 grid min-h-[100vh] place-items-center bg-[url(/static/img/artists-landing-header.jpg)] bg-cover bg-center bg-no-repeat lg:min-h-[60vh]">
-        <div className="mx-auto flex flex-col items-center gap-8 lg:flex-row">
-          <Image src={RolaLogo} alt="Rola logo" className="max-w-[60vw]" />
+      <Container
+        className={cn(
+          "z-0 flex min-h-[100vh] items-start justify-center bg-cover bg-center bg-no-repeat",
+          "bg-[url('/static/img/artist-info-header-mobile.png')] lg:bg-[url('/static/img/artist-info-header.png')]",
+          "3xl:min-h-[800px] -mt-20 lg:min-h-[75vh]"
+        )}
+      >
+        <Container
+          size="lg"
+          className="mt-36 flex flex-col items-start justify-center px-4 lg:flex-row lg:px-0"
+        >
+          <div className="mx-auto flex flex-col items-center lg:mx-0 lg:flex-row lg:gap-4">
+            <Image
+              src={RolaLogo}
+              alt="Rola"
+              className="lg:mb-0 lg:mr-12"
+              style={{
+                maxWidth: "250px",
+                height: "auto",
+              }}
+            />
+            <Image
+              src={LineV}
+              alt="Línea"
+              className="-my-8 rotate-90 lg:my-0 lg:mr-12 lg:block lg:rotate-0"
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100px",
+              }}
+            />
+          </div>
           <div>
-            <Title className="mb-8 text-center font-normal uppercase lg:text-left">
-              Conecta, comparte <br />y crece con tu música
+            <Title
+              order={4}
+              className="mb-8 text-center font-normal uppercase lg:text-left"
+            >
+              Conecta con tus fans <br />
+              Comparte <br />y crece con tu música
             </Title>
+            <div className="flex gap-4">
+              <a
+                href="https://artists.rolamusic.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button>Ver artistas</Button>
+              </a>
+              <a
+                href="https://artists.rolamusic.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="secondary">Ver artistas</Button>
+              </a>
+            </div>
+          </div>
+        </Container>
+      </Container>
+
+      <Container className="bg-background-dark z-10">
+        <Container
+          size="lg"
+          className="flex min-h-[50vh] flex-col pb-0 pt-24 lg:flex-row lg:justify-between xl:min-h-[auto]"
+        >
+          <Container className="z-20 flex-1 pb-24">
+            <Title type="rola" order={2} align="left" className="mb-8">
+              Apoyo, gestión y financiación para artistas musicales
+            </Title>
+            <Text className="mb-4">
+              En ROLA puedes alcanzar tus objetivos financieros gracias al
+              soporte de una comunidad de fans, en la que trabajaremos juntos
+              para que sea cada vez más grande y puedas expandir y hacer crecer
+              tu proyecto.
+            </Text>
+
             <a
               href="https://artists.rolamusic.app/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Container className="text-center lg:text-left">
-                <Button>Cuenta de artista</Button>
-              </Container>
+              <Button>Crear mi comunidad de fans</Button>
             </a>
-          </div>
-        </div>
-      </Container>
-
-      <Container
-        size="xl"
-        className="flex pb-24 pt-12 text-center lg:min-h-[50vh] lg:pt-12 lg:text-left xl:min-h-[auto]"
-      >
-        <Container className="space-y-8 px-4">
-          <div className="flex flex-col gap-4">
-            <Image src={Apoyo} alt="Apoyo" className="z-10" />
-            <div className="-mt-14">
-              <Underline align="left" />
-            </div>
-            <Text>
-              Conecta con una comunidad de artistas, comparte experiencias,
-              colabora en proyectos, obtén consejos de profesionales y expande
-              tu red de contactos en la industria musical.
-            </Text>
-          </div>
-          <div className="flex flex-col gap-4">
-            <Image src={Gestion} alt="Gestión" className="z-10" />
-            <div className="-mt-6">
-              <Underline align="left" />
-            </div>
-            <Text>
-              Accede a herramientas y recursos necesarios para gestionar y
-              llevar tu carrera al siguiente nivel desde la palma de tu mano.
-            </Text>
-          </div>
-          <div className="flex flex-col gap-4">
-            <Image src={Financiacion} alt="Financiación" className="z-10" />
-            <div className="-mt-8">
-              <Underline align="left" />
-            </div>
-            <Text>
-              Alcanza tus objetivos financieros gracias al soporte de una
-              comunidad de fans, en la que trabajaremos juntos para que sea cada
-              vez más grande y puedas expandir tu talento sin que esto suponga
-              un gasto adicional para ti.
-            </Text>
-          </div>
-        </Container>
-        <Image
-          src={ManWithBass}
-          alt="Hombre con auriculares"
-          className="ml-24 hidden grow lg:block"
-          style={{
-            height: "auto",
-            minWidth: "540px",
-          }}
-        />
-      </Container>
-
-      <div className="-mt-12 h-auto w-full bg-transparent lg:hidden">
-        <Image
-          src={RolaOnPhone}
-          alt="Rola en móvil"
-          style={{
-            maxWidth: "100%",
-            height: "auto",
-          }}
-        />
-      </div>
-
-      <Container
-        size="lg"
-        className="min-h-[50vh] py-12 lg:flex lg:justify-between lg:pb-0 xl:min-h-[auto]"
-      >
-        <div className="-mb-[1px]">
+          </Container>
           <Image
-            src={RolaOnPhone}
-            alt="Rola en móvil"
-            className="-mt-16 hidden lg:block"
+            src={Singer}
+            alt="Cantante"
+            className="-mr-12 -mt-48 hidden flex-none lg:block"
             style={{
+              maxWidth: "400px",
               height: "auto",
-              width: "500px",
             }}
           />
-        </div>
-        <div className="flex items-start lg:max-w-[50%]">
-          <div className="px-4 text-center lg:text-right">
-            <Title order={2} underline className="mb-4 uppercase">
-              ¿Estás listo?
-            </Title>
 
-            <Text>
-              Te acompañaremos en cada paso y te ayudaremos a conseguir tus
-              objetivos, al igual que ampliar tus seguidores y con ello tus
-              beneficios.
+          <Image
+            src={Singer}
+            alt="Cantante"
+            className="z-10 -mt-8 block lg:hidden"
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+            }}
+          />
+        </Container>
+      </Container>
+
+      <Container className="bg-[url('/static/img/artist-info-section-3.png')] bg-cover bg-center bg-no-repeat py-32">
+        <Container size="lg" className="px-4">
+          <Title type="rola" order={2} className="mb-8 text-black">
+            Comparte el contenido que quieras y olvídate de seguir tendencias y
+            algoritmos.
+          </Title>
+          <Text className="mb-4 text-center">
+            Se tu mismo, este es un espacio donde los artistas pueden expresarse
+            y compartir lo que realmente son y conectar con una comunidad que
+            valora y apoya su talento.
+          </Text>
+          <div className="text-center">
+            <a
+              href="https://artists.rolamusic.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="secondary">Crear mi cuenta de artista</Button>
+            </a>
+          </div>
+        </Container>
+      </Container>
+
+      <Container className="bg-background-dark z-10">
+        <Container
+          size="lg"
+          className="flex min-h-[50vh] flex-col px-4 pb-0 pt-20 lg:flex-row lg:justify-between lg:px-0 xl:min-h-[auto]"
+        >
+          <Image
+            src={Musicians}
+            alt="Artistas"
+            className="-ml-32 -mt-40 mr-8 hidden lg:block"
+            style={{
+              maxWidth: "600px",
+              height: "auto",
+            }}
+          />
+          <div className="z-20 pb-20 text-center lg:max-w-[50%] lg:flex-none lg:text-right">
+            <Title type="rola" order={2} className="mb-8">
+              Gana dinero con tu música e impulsa tu carrera.
+            </Title>
+            <Text className="mb-4">
+              Con ROLA puedes obtener ingresos recurrentes a través de la
+              suscripción de los fans a tu comunidad y generar otros ingresos
+              con las actividades que realizamos para potenciar tu proyecto
+              musical.
             </Text>
 
-            <div className="py-12">
-              <Link
-                href="https://artists.rolamusic.app/auth/login"
-                target="_blank"
-              >
-                <Button size="lg" className="py-1">
-                  Quiero impulsar <br /> mi carrera musical
-                </Button>
-              </Link>
-            </div>
+            <a
+              href="https://artists.rolamusic.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button>Comenzar</Button>
+            </a>
           </div>
-        </div>
+
+          <Image
+            src={Musicians}
+            alt="Artistas"
+            className="z-10 -mt-8 block lg:hidden"
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+            }}
+          />
+        </Container>
       </Container>
     </Container>
   );
