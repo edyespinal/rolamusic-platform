@@ -16,9 +16,6 @@ const useSignInData = () => {
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("redirect_url");
 
-  const role =
-    process.env.NEXT_PUBLIC_ARTISTS_APP === redirectUrl ? "artist" : "fan";
-
   const { toast } = useToast();
   const { signIn, setActive } = useSignIn();
   const { signUp } = useSignUp();
@@ -167,7 +164,7 @@ const useSignInData = () => {
         session: signUp.createdSessionId,
       });
 
-      await setUserRole(createdUserId, role);
+      await setUserRole(createdUserId, "fan");
 
       router.push("/auth/profile-creation");
     } catch (error: any) {

@@ -1,6 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { ProfileCreationUI } from "./ui";
 import { db } from "@rola/services/firebase";
+import { stripe } from "@rola/services/stripe";
 
 async function ProfileCreationPage() {
   const user = await currentUser();
@@ -8,6 +9,10 @@ async function ProfileCreationPage() {
   if (!user) {
     throw new Error("User not found");
   }
+
+  const { id } = await stripe.customers.createCustomer(
+    user.emailAddresses[0]?.emailAddress || ""
+  );
 
   await db.users.createUser({
     id: user.id,
@@ -17,6 +22,7 @@ async function ProfileCreationPage() {
     artists: [],
     supporting: [],
     genres: [],
+    stripeAccountId: id,
   });
 
   return <ProfileCreationUI />;

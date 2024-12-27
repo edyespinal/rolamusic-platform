@@ -12,8 +12,8 @@ import {
   Text,
   Title,
 } from "@rola/ui/components";
-import rolaLogo from "@assets/img/logo-hand.png";
-import lineV from "@assets/img/linea-v.png";
+import RolaLogo from "@assets/img/logo-hand.png";
+import LineV from "@assets/img/linea-v.png";
 import Curilero from "@assets/img/landing-section-2.png";
 import { cn } from "@rola/tailwind-config/utils";
 import { highlightedArtists } from "./data";
@@ -34,7 +34,7 @@ function HomePageUI() {
         >
           <div className="mx-auto flex flex-col items-center lg:mx-0 lg:flex-row lg:gap-4">
             <Image
-              src={rolaLogo}
+              src={RolaLogo}
               alt="Rola"
               className="lg:mb-0 lg:mr-12"
               style={{
@@ -43,7 +43,7 @@ function HomePageUI() {
               }}
             />
             <Image
-              src={lineV}
+              src={LineV}
               alt="Línea"
               className="-my-8 rotate-90 lg:my-0 lg:mr-12 lg:block lg:rotate-0"
               style={{
@@ -52,7 +52,7 @@ function HomePageUI() {
               }}
             />
           </div>
-          <Container>
+          <div>
             <Title
               order={4}
               className="mb-8 text-center font-normal uppercase lg:text-left"
@@ -66,12 +66,12 @@ function HomePageUI() {
                 <Button>Ver artistas</Button>
               </Link>
             </div>
-          </Container>
+          </div>
         </Container>
       </Container>
 
       <Container className="bg-background-dark z-10">
-        <Container className="flex min-h-[50vh] flex-col px-4 pb-0 pt-24 lg:flex-row xl:min-h-[auto]">
+        <Container className="flex min-h-[50vh] flex-col px-4 pb-0 pt-24 lg:flex-row lg:px-0 xl:min-h-[auto]">
           <Image
             src={Curilero}
             alt="Rola en móvil"
