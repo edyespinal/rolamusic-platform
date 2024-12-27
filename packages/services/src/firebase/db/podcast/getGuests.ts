@@ -4,12 +4,6 @@ import { Guest } from "../../../schemas/guest";
 import { ServiceError } from "../../../utils/serviceError";
 import { guestsCollection } from "../db";
 
-/**
- * Retrieves a list of guests from the guests collection.
- *
- * @returns A promise that resolves to an array of guest data, including the ID.
- * @throws ServiceError if the query fails.
- */
 async function getGuests(): Promise<Guest[]> {
   try {
     const guestsDocs = await getDocs(guestsCollection);
