@@ -1,6 +1,9 @@
 import { setDoc, doc } from "firebase/firestore";
+import { FirebaseError } from "firebase/app";
 import { Artist } from "../../../schemas";
 import { artistsCollection } from "../db";
+import { ARTISTS } from "../../../constants";
+import { ServiceError } from "../../../utils/serviceError";
 
 async function updateArtist(id: string, data: Partial<Artist>) {
   try {
@@ -9,8 +12,14 @@ async function updateArtist(id: string, data: Partial<Artist>) {
     return {
       success: true,
     };
-  } catch (error) {
-    throw new Error("Error updating artist");
+  } catch (e) {
+    const error = e as FirebaseError;
+
+    throw new ServiceError({
+      service: ARTISTS,
+      code: error.code ?? "unknown",
+      message: error.message ?? "unknown",
+    });
   }
 }
 
