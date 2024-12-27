@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Artist, ArtistCommunity, ArtistMember } from "@rola/services/schemas";
+import { Artist, ArtistCommunity } from "@rola/services/schemas";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useToast } from "@rola/ui/components";
 import { db } from "@rola/services/firebase";

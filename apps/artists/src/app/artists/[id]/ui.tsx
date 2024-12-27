@@ -39,13 +39,13 @@ import {
 import { useArtistData } from "./data";
 
 function ArtistPageUI({
+  userId,
   artist,
   community,
-  userId,
 }: {
+  userId: string;
   artist: Artist;
   community: ArtistCommunity;
-  userId: string;
 }) {
   const {
     form,

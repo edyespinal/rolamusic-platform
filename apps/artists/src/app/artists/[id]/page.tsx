@@ -5,19 +5,33 @@ import { ArtistPageUI } from "./ui";
 
 async function ArtistPage(props: { params: { id: string } }) {
   const { id } = props.params;
-  const user = await currentUser();
-  const artist = await db.artists.getArtist(id);
-  let community = await db.artists.getArtistCommunity(id);
+
+  let [user, artist, community] = await Promise.all([
+    currentUser(),
+    db.artists.getArtist(id),
+    db.artists.getArtistCommunity(id),
+  ]);
 
   if (!community) {
     community = {
       message: "",
       videoURL: "",
       songs: [],
+      posts: [],
       subscriptions: {
         topFans: [],
         total: 0,
-        types: [],
+        tiers: {
+          basic: {
+            subscribers: [],
+            tier: {
+              name: "basic",
+              label: "Básico",
+              prices: [],
+              description: "",
+            },
+          },
+        },
       },
     };
   }
@@ -27,7 +41,7 @@ async function ArtistPage(props: { params: { id: string } }) {
   }
 
   return (
-    <ArtistPageUI artist={artist} community={community} userId={user.id} />
+    <ArtistPageUI userId={user.id} artist={artist} community={community} />
   );
 }
 
