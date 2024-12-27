@@ -1,5 +1,6 @@
 export const ARTISTS = "artists";
 export const FANS = "fans";
+export const SUBSCRIPTION_TIERS = "subscriptionTiers";
 export const GUESTS = "guestlist";
 export const USERS = "users";
 export const PODCAST = "podcast";
@@ -20,29 +21,11 @@ export const NIF = "NIF";
 export const BANK_TRANSFER = "bankTransfer";
 export const PAYPAL = "paypal";
 
-export const subscriptionTiers = {
-  basic: {
-    type: "basic",
-    value: 300,
-    label: "Básico",
-    priceId: "prod_PZDA0PphUBx7m8",
-    description:
-      "El apoyo a tu artista es indispensable para su crecimiento musical. Gracias por ser parte del soporte que le permitirá seguir desarrollando su talento.",
-  },
-  premium: {
-    type: "premium",
-    value: 600,
-    label: "Premium",
-    priceId: "prod_PZDAWgwos4LDp6",
-    description:
-      "No es cuestión de cuánto… es el hecho de hacerle saber que crees en su talento y estás dispuesto a apoyarlo en el camino a cumplir sus objetivos.",
-  },
-  gold: {
-    type: "gold",
-    value: 900,
-    label: "Gold",
-    priceId: "prod_PZDAOE6OqA34P2",
-    description:
-      "El apoyo a tu artista es indispensable para su crecimiento musical. Gracias por ser parte del soporte que le permitirá seguir desarrollando su talento.",
-  },
-} as const;
+export const ARTIST_POST_TYPES = {
+  TEXT: "text",
+  PHOTO: "photo",
+  AUDIO: "audio",
+  VIDEO: "video",
+  LINK: "link",
+  PDF: "pdf",
+};
