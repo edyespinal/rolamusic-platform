@@ -103,9 +103,9 @@ const useArtistData = (artist: Artist, community: ArtistCommunity) => {
         description: "No se pudo actualizar el artista",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   return {

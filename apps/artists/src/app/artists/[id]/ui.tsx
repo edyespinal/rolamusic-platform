@@ -87,6 +87,7 @@ function ArtistPageUI({
                   <FormControl>
                     <Input
                       type="email"
+                      required
                       placeholder="Correo electrónico"
                       {...field}
                     />
@@ -106,6 +107,7 @@ function ArtistPageUI({
                   <FormControl>
                     <Input
                       type="text"
+                      required
                       placeholder="Nombre del artista"
                       {...field}
                     />
@@ -153,6 +155,7 @@ function ArtistPageUI({
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    required
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -314,9 +317,9 @@ function ArtistPageUI({
               name="bio"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Acerca de {artist.name}</FormLabel>
+                  <FormLabel required>Acerca de {artist.name}</FormLabel>
                   <FormControl>
-                    <Textarea {...field} />
+                    <Textarea required {...field} />
                   </FormControl>
                 </FormItem>
               )}

@@ -107,7 +107,7 @@ async function updateStripeAccounts(
         postal_code: payload.address.postalCode,
       },
       id_number: payload.document.number,
-      phone: `${payload.phone?.countryCode}${payload.phone?.number}`,
+      phone: `${payload.phone?.countryCode || "+34"}${payload.phone?.number}`,
     },
     email: payload.email,
     metadata: {
