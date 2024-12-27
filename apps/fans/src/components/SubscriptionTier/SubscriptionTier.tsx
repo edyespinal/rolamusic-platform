@@ -1,5 +1,4 @@
 import { ArtistSubscriptionTier } from "@rola/services/schemas";
-import { subscriptionTiers } from "@rola/services/constants";
 import { cn } from "@rola/tailwind-config/utils";
 import { Button, Container, Icon, Text, Title } from "@rola/ui/components";
 import Link from "next/link";
