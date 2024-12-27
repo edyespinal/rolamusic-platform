@@ -2,15 +2,24 @@
 
 import Image from "next/image";
 import { ArtistAvatar } from "@components/ArtistAvatar/ArtistAvatar";
-import { Artist, ArtistCommunity } from "@rola/services/schemas";
 import { formatGenres, Genre } from "@rola/services/utils";
-import { Button, Container, Text, Title } from "@rola/ui/components";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  Container,
+  Dialog,
+  DialogContent,
+  Text,
+  Title,
+} from "@rola/ui/components";
+import {
+  ArtistCommunity,
+  ArtistSubscriptionTier,
+} from "@rola/services/schemas";
 import { SubscriptionTier } from "@components/SubscriptionTier/SubscriptionTier";
-import { useArtistPageData } from "./data";
-import { subscriptionTiers } from "@rola/services/constants";
-import Link from "next/link";
-import { AudioPlayer } from "@components/AudioPlayer/AudioPlayer";
-import { PageHeader } from "@components/PageHeader/PageHeader";
 
 type ArtistPageProps = {
   id: string;
@@ -19,7 +28,16 @@ type ArtistPageProps = {
   profileURL?: string;
   genres: Genre[];
   bio?: string;
-  songs?: string[];
+  community: ArtistCommunity;
+  subscriptionTiers: ArtistSubscriptionTier[];
+  supporting?: {
+    id: string;
+    name: string;
+    tier: string;
+    profileURL: string;
+    genres: Genre[];
+    type: string;
+  } | null;
 };
 
 function ArtistPageUI({
@@ -29,14 +47,13 @@ function ArtistPageUI({
   profileURL,
   genres,
   bio,
-  songs,
+  community,
+  subscriptionTiers,
+  supporting,
 }: ArtistPageProps) {
-  const { selectedSubscription, handleSubscriptionChange } =
-    useArtistPageData();
-
   return (
     <Container>
-      <Container className="relative -mt-20 min-h-[25vh] lg:min-h-[50vh]">
+      <Container className="bg-background-dark relative -mt-20 min-h-[25vh] lg:min-h-[50vh]">
         <Image
           src={coverURL ?? "/static/img/artists-landing-header.jpg"}
           alt={name}
@@ -47,137 +64,56 @@ function ArtistPageUI({
         />
       </Container>
 
-      <Container
-        size="xl"
-        className="mb-24 flex flex-col px-4 lg:flex-row lg:gap-12"
-      >
+      <Container size="lg" className="flex justify-center">
         <ArtistAvatar
           image={profileURL}
           name={name}
-          size="lg"
-          className="-mt-4"
+          size="xl"
+          className="-mt-8"
         />
+      </Container>
+
+      <Container
+        size="lg"
+        className="mb-24 flex flex-col px-4 lg:flex-row lg:gap-12 lg:px-0"
+      >
         <Container className="flex flex-col">
-          <Container className="pb-4 pt-8">
-            <Title order={2} align="left" className="font-bold">
+          <Container className="pb-4 pt-8 text-center">
+            <Title order={2} className="font-bold">
               {name}
             </Title>
             <Text className="text-brand">{formatGenres(genres)}</Text>
+            <Text className="py-4">
+              69 miembros <span className="px-4"> | </span> 42 publicaciones
+            </Text>
           </Container>
-          <Text className="pb-8 text-justify">
-            Te damos la bienvenida al perfil de artista en ROLA, donde podrás
-            explorar su trabajo y profunda pasión por la música. También
-            encontrarás las opciones de cómo brindar tu apoyo y contribuir a
-            impulsar su carrera musical.
-          </Text>
-          <Container>
-            <Container className="mb-4 flex flex-col justify-between gap-4 pb-2 lg:flex-row">
-              <SubscriptionTier
-                type={subscriptionTiers.basic.type}
-                selected={selectedSubscription === subscriptionTiers.basic.type}
-                onClick={() =>
-                  handleSubscriptionChange(subscriptionTiers.basic.type)
-                }
-              />
-              <SubscriptionTier
-                type={subscriptionTiers.premium.type}
-                selected={
-                  selectedSubscription === subscriptionTiers.premium.type
-                }
-                onClick={() =>
-                  handleSubscriptionChange(subscriptionTiers.premium.type)
-                }
-              />
-              <SubscriptionTier
-                type={subscriptionTiers.gold.type}
-                selected={selectedSubscription === subscriptionTiers.gold.type}
-                onClick={() =>
-                  handleSubscriptionChange(subscriptionTiers.gold.type)
-                }
-              />
+
+          <Text className="pb-8 text-justify">{bio}</Text>
+
+          {!supporting && subscriptionTiers.length > 0 && (
+            <Container>
+              <Title order={2} underline className="pb-12 uppercase">
+                Elige tu suscripción
+              </Title>
+              <Carousel>
+                <CarouselContent>
+                  {subscriptionTiers.map((tier, i) => (
+                    <CarouselItem className="lg:basis-1/3">
+                      <SubscriptionTier
+                        key={tier.name}
+                        artistId={id}
+                        tier={tier}
+                        highlighted={i === 1 ? "Recomendada" : undefined}
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+              <Container className="mb-4 flex flex-col justify-between gap-8 pb-2 lg:flex-row"></Container>
             </Container>
-            <Container className="text-center lg:text-left">
-              <Link
-                href={`/artists/${id}/subscription?tier=${selectedSubscription}`}
-              >
-                <Button>Suscribirme</Button>
-              </Link>
-            </Container>
-          </Container>
-        </Container>
-      </Container>
-
-      <Container size="xl" className="mb-24">
-        <Title order={2} underline className="mb-8 text-center uppercase">
-          Acerca de {name}
-        </Title>
-        <Text className="mb-8">{bio}</Text>
-
-        {songs?.length && (
-          <Container className="grid gap-4 lg:grid-cols-2">
-            {songs.map((song) => (
-              <AudioPlayer key={song} songId={song} />
-            ))}
-          </Container>
-        )}
-      </Container>
-
-      <Container size="xl">
-        <Title order={2} underline className="mb-8 px-4 text-center uppercase">
-          ¿Cómo apadrinar a tu artista favorito?
-        </Title>
-
-        <Text className="mb-12 text-justify">
-          Hoy es un buen día para apoyar a tu artista favorito. Con frecuencia,
-          pasamos por alto las dificultades y obstáculos que enfrentan los
-          músicos en su búsqueda de llevar a cabo su pasión. Los costos
-          asociados con la renta de espacios de ensayo, el mantenimiento de sus
-          instrumentos, el alquiler de salas de grabación y el tiempo dedicado a
-          abrirse camino en la industria musical son solo algunas de las cargas
-          que llevan sobre sus hombros. Es por ello que hoy, queremos dar un
-          paso adelante y decir: estamos aquí para impulsar tu música. Creemos
-          en tu talento y estamos listos para brindarte nuestro apoyo. Te
-          ofrecemos tres opciones, adaptadas a tu disponibilidad y deseo de
-          respaldar a los artistas. Cualquiera que elijas, no solo te
-          proporcionará la satisfacción de respaldar a tus artistas favoritos,
-          sino que también te dará acceso a su contenido exclusivo en nuestra
-          plataforma.
-        </Text>
-
-        <Container>
-          <Container className="mb-4 flex flex-col justify-between gap-4 lg:flex-row">
-            <SubscriptionTier
-              extended
-              type={subscriptionTiers.basic.type}
-              selected={selectedSubscription === subscriptionTiers.basic.type}
-              onClick={() =>
-                handleSubscriptionChange(subscriptionTiers.basic.type)
-              }
-            />
-            <SubscriptionTier
-              extended
-              type={subscriptionTiers.premium.type}
-              selected={selectedSubscription === subscriptionTiers.premium.type}
-              onClick={() =>
-                handleSubscriptionChange(subscriptionTiers.premium.type)
-              }
-            />
-            <SubscriptionTier
-              extended
-              type={subscriptionTiers.gold.type}
-              selected={selectedSubscription === subscriptionTiers.gold.type}
-              onClick={() =>
-                handleSubscriptionChange(subscriptionTiers.gold.type)
-              }
-            />
-          </Container>
-          <Container className="text-center">
-            <Link
-              href={`/artists/${id}/subscription?tier=${selectedSubscription}`}
-            >
-              <Button>Suscribirse</Button>
-            </Link>
-          </Container>
+          )}
         </Container>
       </Container>
     </Container>
