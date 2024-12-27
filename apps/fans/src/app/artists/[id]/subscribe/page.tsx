@@ -31,9 +31,7 @@ async function SubscriptionPage({
     redirect("/404");
   }
 
-  const selectedTier: ArtistSubscriptionTier = tiers.find(
-    (t) => t.name === tier
-  );
+  const selectedTier = tiers.find((t) => t.name === tier);
 
   if (!selectedTier) {
     redirect("/404");

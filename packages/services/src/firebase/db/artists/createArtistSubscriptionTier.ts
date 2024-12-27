@@ -1,13 +1,13 @@
-import { addDoc, collection } from "firebase/firestore";
-import { ARTISTS, SUBSCRIPTION_TIERS } from "../../../constants";
+import { addDoc } from "firebase/firestore";
+import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { FirebaseError } from "firebase/app";
-import { artistSubscriptionTiersCollection, db } from "../db";
-import { ArtistSubscriptionTier } from "@/schemas";
+import { artistSubscriptionTiersCollection } from "../db";
+import { ArtistSubscriptionTier } from "../../../schemas";
 
 async function createArtistSubscriptionTier(
   artistId: string,
-  payload: ArtistSubscriptionTier
+  payload: Omit<ArtistSubscriptionTier, "id">
 ) {
   try {
     const ref = artistSubscriptionTiersCollection(artistId);

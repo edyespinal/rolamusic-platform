@@ -1,9 +1,9 @@
-import { collection, getDocs } from "firebase/firestore";
-import { ARTISTS, SUBSCRIPTION_TIERS } from "../../../constants";
+import { getDocs } from "firebase/firestore";
+import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { FirebaseError } from "firebase/app";
-import { artistSubscriptionTiersCollection, db } from "../db";
-import { ArtistSubscriptionTier } from "@/schemas";
+import { artistSubscriptionTiersCollection } from "../db";
+import { ArtistSubscriptionTier } from "../../../schemas";
 
 async function getArtistSubscriptionTiers(
   artistId: string

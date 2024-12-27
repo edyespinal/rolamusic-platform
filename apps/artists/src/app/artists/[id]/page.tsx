@@ -25,10 +25,22 @@ async function ArtistPage(props: { params: { id: string } }) {
           basic: {
             subscribers: [],
             tier: {
+              id: "",
+              active: false,
               name: "basic",
               label: "Básico",
-              prices: [],
+              prices: {
+                monthly: {
+                  value: 0,
+                  priceId: "",
+                },
+                yearly: {
+                  value: 0,
+                  priceId: "",
+                },
+              },
               description: "",
+              perks: [],
             },
           },
         },

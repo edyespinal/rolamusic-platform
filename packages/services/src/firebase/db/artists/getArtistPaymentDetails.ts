@@ -2,7 +2,7 @@ import { getDoc, doc, FirestoreError } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { artistPaymentCollection } from "../db";
-import { ArtistPayment } from "@/schemas";
+import { ArtistPayment } from "../../../schemas";
 
 async function getArtistPaymentDetails(
   id: string

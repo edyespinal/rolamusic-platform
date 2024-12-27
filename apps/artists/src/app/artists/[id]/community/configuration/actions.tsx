@@ -24,11 +24,11 @@ async function createNewSubscriptionTier(
     description: payload.description,
     prices: {
       monthly: {
-        value: price.data.monthly.unit_amount,
+        value: price.data.monthly.unit_amount || 0,
         priceId: price.data.monthly.id,
       },
       yearly: {
-        value: price.data.yearly.unit_amount,
+        value: price.data.yearly.unit_amount || 0,
         priceId: price.data.yearly.id,
       },
     },

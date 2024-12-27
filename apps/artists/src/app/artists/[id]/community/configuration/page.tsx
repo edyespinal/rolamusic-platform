@@ -1,5 +1,6 @@
 import { db } from "@rola/services/firebase";
 import { CommunityConfigurationPageUI } from "./ui";
+import { redirect } from "next/navigation";
 
 async function CommunityConfigurationPage({
   params,
@@ -13,6 +14,10 @@ async function CommunityConfigurationPage({
     db.artists.getArtistSubscriptionTiers(id),
     db.artists.getArtistPaymentDetails(id),
   ]);
+
+  if (!artist || !payment?.stripeAccountId) {
+    return redirect("/404");
+  }
 
   if (!tiers) {
     tiers = [];

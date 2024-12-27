@@ -1,4 +1,4 @@
-import { ARTIST_POST_TYPES } from "@/constants";
+import { ARTIST_POST_TYPES } from "../../constants";
 import { z } from "zod";
 
 export const postComment = z.object({

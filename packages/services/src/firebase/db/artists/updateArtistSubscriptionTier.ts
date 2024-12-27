@@ -2,8 +2,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { ARTISTS, SUBSCRIPTION_TIERS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { FirebaseError } from "firebase/app";
-import { artistSubscriptionTiersCollection, db } from "../db";
-import { ArtistSubscriptionTier } from "@/schemas";
+import { db } from "../db";
+import { ArtistSubscriptionTier } from "../../../schemas";
 
 async function updateArtistSubscriptionTier(
   artistId: string,

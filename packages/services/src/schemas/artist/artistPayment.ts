@@ -9,7 +9,7 @@ import {
   NIE,
   NIF,
   PAYPAL,
-} from "@/constants";
+} from "../../constants";
 import { AddressSchema } from "../utils";
 
 export const artistPaymentSchema = z.object({
