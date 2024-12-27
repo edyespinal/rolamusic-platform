@@ -11,26 +11,30 @@ async function createSession({
   returnUrl: string;
 }) {
   try {
-    return stripe.checkout.sessions.create(
-      {
-        ui_mode: "hosted",
-        mode: "subscription",
-        line_items: [
-          {
-            price: priceId,
-            quantity: 1,
-          },
-        ],
-        subscription_data: {
-          application_fee_percent: 30,
+    return stripe.checkout.sessions.create({
+      ui_mode: "hosted",
+      mode: "subscription",
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
         },
-        success_url: `${returnUrl}&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${returnUrl}`,
+      ],
+      subscription_data: {
+        transfer_data: {
+          destination: stripeAccountId,
+          amount_percent: 70,
+        },
       },
-      {
-        stripeAccount: stripeAccountId,
-      }
-    );
+      automatic_tax: {
+        enabled: true,
+        liability: {
+          type: "self",
+        },
+      },
+      success_url: `${returnUrl}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${returnUrl}`,
+    });
   } catch (e) {
     const error = e as Stripe.StripeRawError;
 

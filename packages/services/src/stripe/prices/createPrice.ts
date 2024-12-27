@@ -8,44 +8,29 @@ async function createPrice(
   value: number
 ) {
   try {
-    const product = await stripe.products.create(
-      {
-        name: `${artistName}-${name}`,
-      },
-      {
-        stripeAccount: stripeAccountId,
-      }
-    );
+    const product = await stripe.products.create({
+      name: `${artistName}-${name}`,
+    });
 
     const [monthlyPrice, yearlyPrice] = await Promise.all([
-      stripe.prices.create(
-        {
-          currency: "eur",
-          unit_amount: value,
-          nickname: name,
-          recurring: {
-            interval: "month",
-          },
-          product: product.id,
+      stripe.prices.create({
+        currency: "eur",
+        unit_amount: value,
+        nickname: name,
+        recurring: {
+          interval: "month",
         },
-        {
-          stripeAccount: stripeAccountId,
-        }
-      ),
-      stripe.prices.create(
-        {
-          currency: "eur",
-          unit_amount: value * 10,
-          nickname: name,
-          recurring: {
-            interval: "year",
-          },
-          product: product.id,
+        product: product.id,
+      }),
+      stripe.prices.create({
+        currency: "eur",
+        unit_amount: value * 10,
+        nickname: name,
+        recurring: {
+          interval: "year",
         },
-        {
-          stripeAccount: stripeAccountId,
-        }
-      ),
+        product: product.id,
+      }),
     ]);
 
     return {
