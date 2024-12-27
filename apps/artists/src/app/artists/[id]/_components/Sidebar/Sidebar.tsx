@@ -62,6 +62,12 @@ function Sidebar({ artist }: { artist: Artist }) {
             >
               Mi Comunidad
             </SidebarLink>
+            <SidebarLink
+              href={`/artists/${artist?.id}/community/configuration`}
+              pathname={pathname}
+            >
+              Configuración
+            </SidebarLink>
           </Container>
         </Container>
       </Container>

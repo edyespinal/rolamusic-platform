@@ -24,8 +24,6 @@ async function ArtistCommunityPage({ params }: { params: { id: string } }) {
     artistPayment.stripeAccountId
   );
 
-  console.log("Artist", artistBalance, artistCommunity);
-
   return (
     <ArtistCommunityPageUI
       artist={artist}
