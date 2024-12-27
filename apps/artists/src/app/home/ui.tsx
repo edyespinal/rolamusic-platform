@@ -5,11 +5,7 @@ import { Button, Container, Text, Title, Underline } from "@rola/ui/components";
 import { Artist } from "@rola/services/schemas";
 import { ArtistCard } from "./components/ArtistCard";
 
-type HomePageProps = {
-  artists: Artist[];
-};
-
-function HomePageUI({ artists }: HomePageProps) {
+function HomePageUI({ artists }: { artists: Artist[] }) {
   return (
     <Container size="xl" className="grid h-svh grid-rows-[auto_1fr_auto]">
       <Header />
