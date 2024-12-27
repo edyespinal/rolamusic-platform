@@ -6,7 +6,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { User } from "@rola/services/schemas";
 
 const getCachedArtists = unstable_cache(
-  async () => db.artists.getArtists(50),
+  async () => db.artists.getActiveArtists(50),
   ["artists"],
   {
     revalidate: false,

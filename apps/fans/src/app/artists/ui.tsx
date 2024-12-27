@@ -45,9 +45,6 @@ function ArtistsPageUI({
 
   const isMobile = useIsMobile(768);
 
-  // eslint-disable-next-line no-console
-  console.log({ isMobile });
-
   return (
     <Container>
       <PageHeader background="bg-[url('/static/img/artists-header-mobile.png')] lg:bg-[url('/static/img/artists-header.png')]">
