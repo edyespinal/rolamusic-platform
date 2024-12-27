@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@rola/tailwind-config/utils";
-import { Container, Title } from "@rola/ui/components";
+import { Container, Text, Title } from "@rola/ui/components";
 
 function Sidebar() {
   const pathname = usePathname();
-  const selected = "bg-brand text-black font-semibold";
+  const selected = "text-brand-dark font-semibold";
 
   return (
     <Container as="nav" className="flex flex-col gap-4">
+      <Text className="bg-brand px-2 font-semibold uppercase text-black">
+        Artistas
+      </Text>
       <Link
         href="/artists"
         className={cn("px-4 py-1", pathname.includes("/artists") && selected)}
@@ -19,6 +22,9 @@ function Sidebar() {
           Artistas
         </Title>
       </Link>
+      <Text className="bg-brand px-2 font-semibold uppercase text-black">
+        Podcast
+      </Text>
       <Link
         href="/podcast/guests"
         className={cn("px-4 py-1", pathname === "/podcast/guests" && selected)}
