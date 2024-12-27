@@ -2,7 +2,6 @@ import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@rola/services/firebase";
 import { stripe } from "@rola/services/stripe";
 import { redirect } from "next/navigation";
-import { ArtistSubscriptionTier } from "@rola/services/schemas";
 
 async function SubscriptionPage({
   params,
