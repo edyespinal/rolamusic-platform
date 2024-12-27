@@ -3,6 +3,7 @@ import { User } from "../../../schemas/users";
 import { artistsCollection, usersCollection } from "../db";
 import { Artist } from "../../../schemas";
 import { createUser } from "./createUser";
+import { subscribeToArtist } from "./subscribeToArtist";
 
 async function getUsers(): Promise<User[]> {
   const usersDocs = await getDocs(usersCollection);
@@ -54,4 +55,10 @@ async function getUserArtists(userId: string): Promise<Artist[]> {
   return artists;
 }
 
-export const usersServices = { getUsers, getUser, getUserArtists, createUser };
+export const usersServices = {
+  getUsers,
+  getUser,
+  getUserArtists,
+  createUser,
+  subscribeToArtist,
+};
