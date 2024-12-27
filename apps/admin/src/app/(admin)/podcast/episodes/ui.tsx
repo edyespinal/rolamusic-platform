@@ -25,7 +25,7 @@ function EpisodesPageUI({
           episodesInfo.episodes.map((episode) => (
             <Container
               key={episode.id}
-              className="grid grid-cols-2 gap-2 border-b pb-4"
+              className="border-background grid grid-cols-2 gap-2 border-b pb-4"
             >
               <Text className="text-brand col-span-1 px-4 font-semibold uppercase">
                 Episodio {episode.number}

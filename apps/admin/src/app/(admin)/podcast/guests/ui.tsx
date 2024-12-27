@@ -16,7 +16,7 @@ function PodcastGuestsPageUI({ guests }: { guests: Guest[] }) {
           guests.map((guest) => (
             <Container
               key={guest.id}
-              className="border-gray-dark mb-4 border-b p-2"
+              className="border-background mb-4 border-b p-2"
             >
               <Title order={5} align="left">
                 {guest.name}
