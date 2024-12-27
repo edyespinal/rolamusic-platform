@@ -12,6 +12,7 @@ import {
   GUESTS,
   USERS,
   PODCAST_EPISODES,
+  SUBSCRIPTION_TIERS,
 } from "../../constants";
 import {
   Artist,
@@ -20,6 +21,7 @@ import {
   Guest,
   User,
   PodcastEpisode,
+  ArtistSubscriptionTier,
 } from "../../schemas";
 import { app } from "../app";
 
@@ -51,6 +53,9 @@ const artistPaymentCollection = createSubCollection<ArtistPayment>(
   ARTISTS,
   PAYMENT_DETAILS
 );
+const artistSubscriptionTiersCollection =
+  createSubCollection<ArtistSubscriptionTier>(ARTISTS, SUBSCRIPTION_TIERS);
+
 const guestsCollection = createCollection<Guest>(GUESTS);
 const usersCollection = createCollection<User>(USERS);
 const podcastEpisodeCollection =
@@ -63,6 +68,7 @@ export {
   artistsCollection,
   artistCommunityCollection,
   artistPaymentCollection,
+  artistSubscriptionTiersCollection,
   guestsCollection,
   podcastEpisodeCollection,
   usersCollection,
