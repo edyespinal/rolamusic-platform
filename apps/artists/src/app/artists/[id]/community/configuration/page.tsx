@@ -1,6 +1,5 @@
 import { db } from "@rola/services/firebase";
 import { CommunityConfigurationPageUI } from "./ui";
-import { redirect } from "next/navigation";
 import { IncompleteProfileUI } from "../incomplete-profile.ui";
 
 async function CommunityConfigurationPage({
