@@ -1,7 +1,15 @@
 import React from "react";
 import { Container, Text, Title } from "@rola/ui/components";
+import Link from "next/link";
 
-function IncompleteProfileUI({ missingData = "tu perfil" }) {
+function IncompleteProfileUI({
+  link,
+}: {
+  link: {
+    href: string;
+    text: string;
+  };
+}) {
   return (
     <Container>
       <Title order={2} underline align="left">
@@ -9,7 +17,9 @@ function IncompleteProfileUI({ missingData = "tu perfil" }) {
       </Title>
       <Text className="pt-4">
         Necesitamos un poco más de información. Completa
-        <span className="text-brand font-semibold">{` ${missingData} `}</span>
+        <Link href={link.href} className="text-brand font-semibold">
+          {` ${link.text} `}
+        </Link>
         para poder configurar tu comunidad.
       </Text>
     </Container>

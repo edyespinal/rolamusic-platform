@@ -17,11 +17,17 @@ async function ArtistCommunityPage({ params }: { params: { id: string } }) {
   ]);
 
   if (!artist || !artistPayment?.stripeAccountId || !artistCommunity) {
-    const missingData = !artist
-      ? "tu información de artista"
-      : "tus datos bancarios y fiscales";
+    const link = !artist
+      ? {
+          href: `/artists/${id}`,
+          text: "tu información de artista",
+        }
+      : {
+          href: `/artists/${id}/payment-details`,
+          text: "tus datos bancarios y fiscales",
+        };
 
-    return <IncompleteProfileUI missingData={missingData} />;
+    return <IncompleteProfileUI link={link} />;
   }
 
   const artistBalance = await stripe.accounts.getBalance(
