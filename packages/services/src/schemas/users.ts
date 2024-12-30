@@ -20,7 +20,7 @@ const userSchema = z.object({
     })
   ),
   genres: z.array(z.string()),
-  stripeAccountId: z.string().optional(),
+  stripeAccountId: z.string(),
 });
 
 export { userSchema };

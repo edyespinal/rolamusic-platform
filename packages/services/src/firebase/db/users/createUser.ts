@@ -33,6 +33,7 @@ export async function createUser(newUser: User) {
           artists: [],
           supporting: [],
           genres: [],
+          stripeAccountId: newUser.stripeAccountId,
         },
         { merge: true }
       );
@@ -65,6 +66,7 @@ export async function createUser(newUser: User) {
           })) || [],
         supporting: existingData.supporting || [],
         genres: existingData.genres || [],
+        stripeAccountId: newUser.stripeAccountId,
       };
 
       batch.set(userRef, updatedData, { merge: true });
