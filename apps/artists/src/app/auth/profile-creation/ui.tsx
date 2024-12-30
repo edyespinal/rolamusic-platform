@@ -18,7 +18,7 @@ function ProfileCreationUI() {
   });
 
   return (
-    <Container size="sm" className="py-24 flex flex-col items-center gap-4">
+    <Container size="sm" className="flex flex-col items-center gap-4 py-24">
       <Loader size="xl" />
       <div className="text-center">
         <Text>Estamos creando tu cuenta...</Text>
