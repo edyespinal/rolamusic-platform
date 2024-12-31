@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { currentArtist } from "../../../store";
 
-const useNewArtistData = () => {
+const useNewArtistData = (email = "") => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [, setArtist] = useAtom(currentArtist);
   const { toast } = useToast();
@@ -20,7 +20,7 @@ const useNewArtistData = () => {
     defaultValues: {
       name: "",
       admin: "",
-      email: "",
+      email,
       genres: [],
       location: {},
       members: [],

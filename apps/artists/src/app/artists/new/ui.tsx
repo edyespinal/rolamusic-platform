@@ -26,9 +26,9 @@ import {
   yearsOptions,
 } from "../../../../../../packages/services/src/utils";
 
-function NewArtistPageUI() {
+function NewArtistPageUI({ userEmail }: { userEmail?: string }) {
   const { form, handleOnSubmit, fields, append, remove, isLoading } =
-    useNewArtistData();
+    useNewArtistData(userEmail);
 
   return (
     <Container size="lg">
