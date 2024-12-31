@@ -8,7 +8,7 @@ async function ArtistPage({ params }: { params: { id: string } }) {
   const payment = await db.artists.getArtistPaymentDetails(id);
 
   if (!artist) {
-    return redirect("/404");
+    throw new Error("Algo ha salido mal cargando la información del artista");
   }
 
   return <ArtistPaymentDetailsUI artist={artist} payment={payment} />;
