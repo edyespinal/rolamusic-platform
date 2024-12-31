@@ -1,14 +1,8 @@
-import { string, z } from "zod";
+import { z } from "zod";
 import { subscriptionTierSchema } from "./subscriptionTier";
 import { artistPostSchema } from "./artistPost";
 
 export const artistCommunitySchema = z.object({
-  message: z
-    .string()
-    .min(1, "El mensaje de la comunidad no puede estar vacío")
-    .optional(),
-  videoURL: z.string().optional(),
-  songs: z.array(z.string()).optional(),
   posts: z.array(artistPostSchema),
   subscriptions: z.object({
     total: z.number().nonnegative(),

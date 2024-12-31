@@ -13,7 +13,7 @@ export const artistSchema = z.object({
   bio: z
     .string()
     .min(1, "La biografía del artista no puede estar vacía")
-    .max(504, "La biografñia del artista no puede tener más de 504 caracteres")
+    .max(504, "La biografía del artista no puede tener más de 504 caracteres")
     .optional(),
   year: z.string().optional(),
   members: z.array(artistMemberSchema),
