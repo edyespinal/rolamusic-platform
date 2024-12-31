@@ -3,9 +3,8 @@
 import { Footer } from "@components/Footer/Footer";
 import { Header } from "@components/Header/Header";
 import { Button, Container, Text, Title } from "@rola/ui/components";
-import Link from "next/link";
 
-function Error({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorPage({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <Container size="xl" className="grid h-svh grid-rows-[auto_1fr_auto]">
       <Header />
@@ -34,4 +33,4 @@ function Error({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export default Error;
+export default ErrorPage;
