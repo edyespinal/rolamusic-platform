@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+import Link from "next/link";
 import {
   Avatar,
   AvatarFallback,
@@ -9,11 +11,11 @@ import {
   Text,
   Title,
 } from "@rola/ui/components";
-import React from "react";
-import { Artist } from "@rola/services/schemas";
-import { SidebarLink } from "./SidebarLink";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { SidebarLink } from "./SidebarLink";
+import { Artist } from "@rola/services/schemas";
+import { useAtom } from "jotai";
+import { currentArtist } from "../../../../../store";
 
 function Sidebar({ artist }: { artist: Artist }) {
   const pathname = usePathname();
@@ -29,7 +31,7 @@ function Sidebar({ artist }: { artist: Artist }) {
         </Avatar>
         <Text className="font-semibold">{artist.name}</Text>
         <Link href="/">
-          <Button size="sm">Gestionar otro artista</Button>
+          <Button size="sm">Gestionar mis artistas</Button>
         </Link>
       </Container>
 
