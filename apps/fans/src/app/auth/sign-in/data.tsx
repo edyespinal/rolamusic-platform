@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useToast } from "@rola/ui/components";
-import { setUserRole } from "./actions";
 
 const useSignInData = () => {
   const [loginType, setLoginType] = React.useState<LoginType>("google");
@@ -163,8 +162,6 @@ const useSignInData = () => {
       await setActive({
         session: signUp.createdSessionId,
       });
-
-      await setUserRole(createdUserId, "fan");
 
       router.push("/auth/profile-creation");
     } catch (error: any) {
