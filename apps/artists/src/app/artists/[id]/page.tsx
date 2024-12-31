@@ -6,55 +6,16 @@ import { ArtistPageUI } from "./ui";
 async function ArtistPage(props: { params: { id: string } }) {
   const { id } = props.params;
 
-  let [user, artist, community] = await Promise.all([
+  let [user, artist] = await Promise.all([
     currentUser(),
     db.artists.getArtist(id),
-    db.artists.getArtistCommunity(id),
   ]);
 
-  if (!community) {
-    community = {
-      message: "",
-      videoURL: "",
-      songs: [],
-      posts: [],
-      subscriptions: {
-        topFans: [],
-        total: 0,
-        tiers: {
-          basic: {
-            subscribers: [],
-            tier: {
-              id: "",
-              active: false,
-              name: "basic",
-              label: "Básico",
-              prices: {
-                monthly: {
-                  value: 0,
-                  priceId: "",
-                },
-                yearly: {
-                  value: 0,
-                  priceId: "",
-                },
-              },
-              description: "",
-              perks: [],
-            },
-          },
-        },
-      },
-    };
-  }
-
   if (!artist || !user) {
-    redirect("/404");
+    throw new Error("Algo ha salido mal cargando la información del artista");
   }
 
-  return (
-    <ArtistPageUI userId={user.id} artist={artist} community={community} />
-  );
+  return <ArtistPageUI userId={user.id} artist={artist} />;
 }
 
 export default ArtistPage;

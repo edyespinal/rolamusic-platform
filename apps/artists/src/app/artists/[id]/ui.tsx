@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import {
   Button,
@@ -28,7 +29,7 @@ import {
   Title,
   Underline,
 } from "@rola/ui/components";
-import { UploadButton } from "../../../utils/uploadthing";
+import { UTUploadButton } from "../../../utils/uploadthing";
 import { Artist, ArtistCommunity } from "@rola/services/schemas";
 import {
   genresListOptions,
@@ -37,30 +38,24 @@ import {
   years,
 } from "@rola/services/utils";
 import { useArtistData } from "./data";
+import { InactiveArtistAlert } from "./_components/InactiveArtist";
 
-function ArtistPageUI({
-  userId,
-  artist,
-  community,
-}: {
-  userId: string;
-  artist: Artist;
-  community: ArtistCommunity;
-}) {
+function ArtistPageUI({ userId, artist }: { userId: string; artist: Artist }) {
   const {
     form,
+    imageUrls,
+    setImageUrls,
     members,
     addMember,
     removeMember,
-    songs,
-    addSong,
-    removeSong,
     handleSubmit,
     isLoading,
-  } = useArtistData(artist, community);
+  } = useArtistData(artist);
 
   return (
     <Container className="pb-24">
+      {!artist.active && <InactiveArtistAlert />}
+
       <Container className="pb-12">
         <Title order={2} align="left" underline>
           Información del artista
@@ -86,9 +81,9 @@ function ArtistPageUI({
                   <FormLabel required>Correo electrónico</FormLabel>
                   <FormControl>
                     <Input
-                      type="email"
+                      type="text"
                       required
-                      placeholder="Correo electrónico"
+                      placeholder="Correo electrónica de contacto"
                       {...field}
                     />
                   </FormControl>
@@ -115,6 +110,7 @@ function ArtistPageUI({
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="genres"
@@ -123,7 +119,7 @@ function ArtistPageUI({
                   <FormLabel required>Géneros</FormLabel>
                   <FormControl>
                     <MultiSelector
-                      values={field.value}
+                      values={field.value ?? []}
                       onValuesChange={field.onChange}
                     >
                       <MultiSelectorTrigger>
@@ -146,6 +142,7 @@ function ArtistPageUI({
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="year"
@@ -204,23 +201,22 @@ function ArtistPageUI({
             <Container className="flex flex-col items-center justify-center gap-4">
               <Text>Imagen de perfil</Text>
               <Container className="border-gray flex h-96 flex-col items-center justify-center gap-4 rounded border-2 border-dashed p-4">
-                {artist.profileURL && (
+                {imageUrls.profileURL && (
                   <div className="relative size-96">
                     <Image
-                      src={artist.profileURL}
+                      src={imageUrls.profileURL}
                       alt="Imagen de perfil"
                       objectFit="contain"
                       fill
                     />
                   </div>
                 )}
-                <UploadButton
+                <UTUploadButton
                   endpoint="artistProfileImage"
-                  // @ts-ignore
                   input={{
                     userId,
                     artistId: artist.id,
-                    profileUrl: artist.profileURL ?? "",
+                    profileUrl: imageUrls.profileURL ?? "",
                   }}
                   content={{
                     button({ isUploading }) {
@@ -242,9 +238,10 @@ function ArtistPageUI({
                     return files;
                   }}
                   onClientUploadComplete={(res) => {
-                    console.log("onClientUploadComplete", res);
-
-                    form.setValue("profileURL", res[0]?.url);
+                    setImageUrls({
+                      ...imageUrls,
+                      profileURL: res[0]?.url,
+                    });
                   }}
                   onUploadError={(error) => {
                     console.error("onUploadError", error);
@@ -256,23 +253,22 @@ function ArtistPageUI({
             <Container className="flex flex-col items-center justify-center gap-4">
               <Text>Imagen de portada</Text>
               <Container className="border-gray flex h-96 flex-col items-center justify-center gap-4 rounded border-2 border-dashed p-4">
-                {artist.coverURL && (
+                {imageUrls.coverURL && (
                   <div className="relative size-96">
                     <Image
-                      src={artist.coverURL}
+                      src={imageUrls.coverURL}
                       alt="Imagen de portada"
                       objectFit="contain"
                       fill
                     />
                   </div>
                 )}
-                <UploadButton
+                <UTUploadButton
                   endpoint="artistCoverImage"
-                  // @ts-ignore
                   input={{
                     userId,
                     artistId: artist.id,
-                    coverUrl: artist.coverURL ?? "",
+                    coverUrl: imageUrls.coverURL ?? "",
                   }}
                   content={{
                     button({ isUploading }) {
@@ -294,10 +290,13 @@ function ArtistPageUI({
                     return files;
                   }}
                   onClientUploadComplete={(res) => {
-                    console.log("onClientUploadComplete", res);
+                    setImageUrls({
+                      ...imageUrls,
+                      coverURL: res[0]?.url,
+                    });
                   }}
                   onUploadError={(error) => {
-                    console.log("onUploadError", error);
+                    console.error("onUploadError", error);
                   }}
                 />
               </Container>
@@ -324,91 +323,6 @@ function ArtistPageUI({
                 </FormItem>
               )}
             />
-          </Container>
-
-          <Title
-            order={5}
-            align="left"
-            className="text-brand mb-4 font-semibold uppercase"
-          >
-            Información para tu Comunidad
-          </Title>
-
-          <Container className="grid gap-4 pb-4">
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Información para tu comunidad</FormLabel>
-                  <FormControl>
-                    <Textarea {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </Container>
-
-          <Container className="grid gap-4 pb-8 lg:grid-cols-2">
-            <FormField
-              control={form.control}
-              name="videoURL"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>URL de video</FormLabel>
-                  <FormControl>
-                    <Input type="text" placeholder="URL de video" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-
-            <Container>
-              {songs.map((song, index) => (
-                <Container key={song.id} className="mb-4 flex items-end gap-4">
-                  <FormField
-                    key={index}
-                    control={form.control}
-                    name={`songs.${index}.id`}
-                    render={({ field }) => (
-                      <FormItem className="grow">
-                        <FormLabel>ID de la canción en Spotify</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Identificador de la canción"
-                            {...field}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="icon"
-                    onClick={() => removeSong(index)}
-                  >
-                    <Icon name="x" />
-                  </Button>
-                </Container>
-              ))}
-
-              {songs.length < 2 && (
-                <Container className="ml-auto">
-                  <Button
-                    type="button"
-                    size="xs"
-                    variant="outline"
-                    onClick={() => addSong()}
-                  >
-                    <Icon name="plus" />
-                    Agregar canción
-                  </Button>
-                </Container>
-              )}
-            </Container>
           </Container>
 
           <Title

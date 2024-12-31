@@ -1,38 +1,32 @@
 "use client";
 
 import React from "react";
-import { Artist, ArtistCommunity } from "@rola/services/schemas";
 import { useFieldArray, useForm } from "react-hook-form";
+import { Artist, ArtistCommunity } from "@rola/services/schemas";
 import { useToast } from "@rola/ui/components";
-import { db } from "@rola/services/firebase";
+import { updateArtist } from "./actions";
 
-export type FormValues = Artist & {
-  message?: string;
-  videoURL?: string;
-  songs?: { id: string }[];
-};
+export type FormValues = Partial<Artist>;
 
-const useArtistData = (artist: Artist, community: ArtistCommunity) => {
-  const [isLoading, setIsLoading] = React.useState(false);
+const useArtistData = (artist: Artist) => {
   const { toast } = useToast();
+
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [imageUrls, setImageUrls] = React.useState({
+    profileURL: artist.profileURL,
+    coverURL: artist.coverURL,
+  });
 
   const form = useForm<FormValues>({
     defaultValues: {
-      email: artist.email,
       name: artist.name,
+      email: artist.email,
       genres: artist.genres,
       year: artist.year,
       location: {
         state: artist.location?.state ?? "",
       },
-      profileURL: artist.profileURL,
-      coverURL: artist.coverURL,
       bio: artist.bio,
-      message: community?.message ?? "",
-      videoURL: community?.videoURL ?? "",
-      songs: community?.songs?.length
-        ? community?.songs?.map((song) => ({ id: song }))
-        : [{ id: "" }, { id: "" }],
       members: artist.members,
     },
   });
@@ -46,58 +40,21 @@ const useArtistData = (artist: Artist, community: ArtistCommunity) => {
     name: "members",
   });
 
-  const {
-    fields: songs,
-    append: appendSong,
-    remove: removeSong,
-  } = useFieldArray<FormValues, "songs", "id">({
-    control: form.control,
-    name: "songs",
-    rules: {
-      maxLength: { value: 3, message: "error message" },
-    },
-  });
-
-  function addSong() {
-    if (songs.length >= 3) {
-      return;
-    }
-
-    appendSong({ id: "" });
-  }
-
   async function handleSubmit(values: FormValues) {
     setIsLoading(true);
 
     try {
-      await db.artists.updateArtist(artist.id, {
-        ...artist,
-        email: values.email,
-        name: values.name,
-        genres: values.genres,
-        year: values.year,
-        location: {
-          ...artist.location,
-          state: values.location.state,
-        },
-        profileURL: values.profileURL,
-        coverURL: values.coverURL,
-        bio: values.bio,
-        members: values.members,
-      });
+      const res = await updateArtist(artist, values);
 
-      await db.artists.updateArtistCommunity(artist.id, {
-        message: values.message ?? "",
-        videoURL: values.videoURL ?? "",
-        songs: values.songs?.map((song) => song.id) ?? [],
-      });
+      if (!res.success) {
+        throw new Error(res.message);
+      }
 
       toast({
         title: "Artista actualizado",
         description: "Artista actualizado correctamente",
       });
     } catch (error) {
-      console.error(error);
       toast({
         title: "Error",
         description: "No se pudo actualizar el artista",
@@ -110,13 +67,12 @@ const useArtistData = (artist: Artist, community: ArtistCommunity) => {
 
   return {
     form,
+    imageUrls,
+    setImageUrls,
     members,
     addMember,
     removeMember,
     handleSubmit,
-    songs,
-    addSong,
-    removeSong,
     isLoading,
   };
 };
