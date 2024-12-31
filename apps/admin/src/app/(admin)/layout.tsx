@@ -13,10 +13,9 @@ function AdminLayout(props: Readonly<LayoutProps>) {
 
       <main className="flex flex-col gap-12 py-12">
         <div>
-          <Title order={4} align="left">
+          <Title order={3} underline>
             Admin Dashboard
           </Title>
-          <Underline align="left" size="xs" />
         </div>
 
         <div className="flex gap-12">

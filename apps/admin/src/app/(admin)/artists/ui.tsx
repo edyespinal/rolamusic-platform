@@ -19,7 +19,7 @@ function ArtistsPageUI({
 }) {
   return (
     <Container>
-      <Title order={3} align="left" className="pb-4">
+      <Title order={3} align="left" underline className="pb-4">
         Artistas
       </Title>
       <Container className="border-gray-dark flex items-center border-b">
