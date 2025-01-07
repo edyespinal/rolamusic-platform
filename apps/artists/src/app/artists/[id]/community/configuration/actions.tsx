@@ -19,6 +19,7 @@ async function createNewSubscriptionTier(
 
   await db.artists.createArtistSubscriptionTier(artistId, {
     active: payload.active,
+    recommended: payload.recommended,
     name: payload.name,
     label: payload.label,
     description: payload.description,
@@ -43,6 +44,7 @@ async function updateSubscriptionTier(
 ) {
   await db.artists.updateArtistSubscriptionTier(artistId, subscriptionId, {
     active: payload.active,
+    recommended: payload.recommended,
     label: payload.label,
     description: payload.description,
     perks: payload.perks?.map((perk) => perk.name).filter(Boolean) || [],

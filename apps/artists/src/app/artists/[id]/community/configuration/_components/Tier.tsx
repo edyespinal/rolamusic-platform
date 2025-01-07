@@ -45,7 +45,7 @@ function Tier({
   );
   const { perkFields, addPerk, removePerk } = usePerksArray(index);
 
-  const [isEditable, setIsEditable] = React.useState(false);
+  const [isEditable, setIsEditable] = React.useState(!tier.name);
 
   return (
     <Container
@@ -83,7 +83,25 @@ function Tier({
         control={form.control}
         name={`tiers.${index}.active`}
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="flex items-center gap-2">
+            <FormLabel className="mt-1">Activo</FormLabel>
+            <FormControl>
+              <Switch
+                disabled={!isEditable}
+                checked={field.value}
+                onCheckedChange={(value) => field.onChange(value)}
+              />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
+        name={`tiers.${index}.recommended`}
+        render={({ field }) => (
+          <FormItem className="flex items-center gap-2">
+            <FormLabel className="mt-1">Recomendada</FormLabel>
             <FormControl>
               <Switch
                 disabled={!isEditable}
@@ -102,7 +120,13 @@ function Tier({
           <FormItem>
             <FormLabel required>Nombre</FormLabel>
             <FormControl>
-              <Input type="text" disabled={!!tier.prices} required {...field} />
+              <Input
+                type="text"
+                disabled={!isEditable || !!tier.name}
+                readOnly={!!tier.prices}
+                required
+                {...field}
+              />
             </FormControl>
           </FormItem>
         )}
@@ -148,7 +172,8 @@ function Tier({
               <FormControl>
                 <Input
                   type="number"
-                  disabled={!!tier.prices}
+                  disabled={!isEditable || !!tier.name}
+                  readOnly={!!tier.prices}
                   required
                   min={3}
                   {...field}

@@ -1,8 +1,7 @@
-import { ArtistSubscriptionTier } from "@rola/services/schemas";
-
 export type FormTier = {
   tierId?: string;
   active: boolean;
+  recommended: boolean;
   name: string;
   label: string;
   description?: string;

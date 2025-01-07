@@ -34,9 +34,11 @@ function ArtistCard({ artist }: { artist: Artist }) {
       )}
       onClick={handleClick}
     >
-      <span className="bg-destructive absolute -top-2 left-4 w-32 rounded-br-xl rounded-tl-xl px-4 text-sm">
-        No activo
-      </span>
+      {!artist.active && (
+        <span className="bg-destructive absolute -top-2 left-4 w-32 rounded-br-xl rounded-tl-xl px-4 text-sm">
+          No activo
+        </span>
+      )}
       <Icon name="square-pen" className="text-brand absolute right-4 top-4" />
       <Avatar className="size-24">
         <AvatarImage src={artist.profileURL} alt={artist.name} />

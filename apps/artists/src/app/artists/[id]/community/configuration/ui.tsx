@@ -42,14 +42,15 @@ function CommunityConfigurationPageUI({
               />
             ))}
 
-            <Container className="mt-6 text-right">
+            <Container className="mt-6">
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
                 onClick={() =>
                   addTier({
-                    active: false,
+                    active: true,
+                    recommended: false,
                     name: "",
                     label: "",
                     description: "",

@@ -5,14 +5,14 @@ import { db } from "@rola/services/firebase";
 import { Artist } from "@rola/services/schemas";
 import { RequiredFields } from "../../../../../../packages/services/src/utils";
 
-export async function createArtist(values: RequiredFields<Omit<Artist, "id">>) {
+export async function createArtist(values: RequiredFields<Artist>) {
   const user = await currentUser();
 
   if (!user) {
     throw new Error("User not found");
   }
 
-  return db.artists.createArtist({
+  const artist = await db.artists.createArtist({
     name: values.name,
     email: values.email,
     genres: [],
@@ -27,4 +27,11 @@ export async function createArtist(values: RequiredFields<Omit<Artist, "id">>) {
     fans: [],
     active: false,
   });
+
+  await db.artists.createArtistCommunity(artist.id);
+
+  return {
+    success: true,
+    artist,
+  };
 }

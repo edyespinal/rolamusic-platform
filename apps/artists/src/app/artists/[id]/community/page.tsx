@@ -16,7 +16,7 @@ async function ArtistCommunityPage({ params }: { params: { id: string } }) {
     artistCommunityPromise,
   ]);
 
-  if (!artist || !artistPayment?.stripeAccountId || !artistCommunity) {
+  if (!artist || !artistPayment?.stripeAccountId) {
     const link = !artist
       ? {
           href: `/artists/${id}`,
@@ -37,7 +37,7 @@ async function ArtistCommunityPage({ params }: { params: { id: string } }) {
   return (
     <ArtistCommunityPageUI
       artist={artist}
-      community={artistCommunity}
+      community={artistCommunity || null}
       balance={artistBalance}
     />
   );

@@ -71,6 +71,7 @@ const useCommunityConfigurationData = (
       if (!tier.prices || !tier.tierId) {
         await createNewSubscriptionTier(artistId, artistName, stripeAccountId, {
           active: tier.active,
+          recommended: tier.recommended,
           name: tier.name,
           label: tier.label,
           description: tier.description,
@@ -88,6 +89,7 @@ const useCommunityConfigurationData = (
 
       await updateSubscriptionTier(artistId, tier.tierId, {
         active: tier.active,
+        recommended: tier.recommended,
         label: tier.label,
         description: tier.description,
         perks: tier.perks,

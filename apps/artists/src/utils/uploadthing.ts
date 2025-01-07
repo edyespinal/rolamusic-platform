@@ -4,7 +4,7 @@ import {
 } from "@uploadthing/react";
 import { type StorageFileRouter } from "../app/api/uploadthing/core";
 
-const UploadButton = generateUploadButton<StorageFileRouter>();
-const UploadDropzone = generateUploadDropzone<StorageFileRouter>();
+const UTUploadButton = generateUploadButton<StorageFileRouter>();
+const UTUploadDropzone = generateUploadDropzone<StorageFileRouter>();
 
-export { UploadButton, UploadDropzone };
+export { UTUploadButton, UTUploadDropzone };

@@ -41,7 +41,7 @@ function HomePageUI({ artists }: { artists: Artist[] }) {
                 className="flex flex-wrap justify-center gap-8 pt-8"
               >
                 {artists.map((artist) => (
-                  <ArtistCard artist={artist} />
+                  <ArtistCard key={artist.id} artist={artist} />
                 ))}
               </Container>
             </Container>
