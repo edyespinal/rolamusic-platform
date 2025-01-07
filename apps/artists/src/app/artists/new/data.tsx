@@ -30,7 +30,7 @@ const useNewArtistData = (email = "") => {
     name: "members",
   });
 
-  async function handleOnSubmit(values: RequiredFields<Artist>) {
+  async function handleOnSubmit(values: RequiredFields<Omit<Artist, "id">>) {
     setIsLoading(true);
 
     try {

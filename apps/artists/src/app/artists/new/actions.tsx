@@ -5,7 +5,7 @@ import { db } from "@rola/services/firebase";
 import { Artist } from "@rola/services/schemas";
 import { RequiredFields } from "../../../../../../packages/services/src/utils";
 
-export async function createArtist(values: RequiredFields<Artist>) {
+export async function createArtist(values: RequiredFields<Omit<Artist, "id">>) {
   const user = await currentUser();
 
   if (!user) {
