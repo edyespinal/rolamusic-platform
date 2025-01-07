@@ -13,15 +13,17 @@ async function ArtistPage({ params }: { params: { id: string } }) {
     db.artists.getArtistCommunity(artistId),
   ]);
 
-  if (!artist || !community || !tiers) {
+  if (!artist || !community) {
     redirect("/404");
   }
 
-  let isSupporting = null;
+  let isSupporting = undefined;
 
   if (userAuth) {
     const user = await db.users.getUser(userAuth.id);
-    isSupporting = user.supporting.find((s) => s.id === artist.id) as any;
+    const supported = user.supporting.find((s) => s.id === artist.id);
+
+    isSupporting = supported?.active ? supported : undefined;
   }
 
   return (
@@ -33,7 +35,7 @@ async function ArtistPage({ params }: { params: { id: string } }) {
       genres={artist.genres}
       bio={artist.bio}
       community={community}
-      subscriptionTiers={tiers}
+      subscriptionTiers={tiers || []}
       supporting={isSupporting}
     />
   );

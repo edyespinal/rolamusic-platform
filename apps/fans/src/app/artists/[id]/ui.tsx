@@ -18,6 +18,7 @@ import {
 import {
   ArtistCommunity,
   ArtistSubscriptionTier,
+  User,
 } from "@rola/services/schemas";
 import { SubscriptionTier } from "@components/SubscriptionTier/SubscriptionTier";
 
@@ -30,14 +31,7 @@ type ArtistPageProps = {
   bio?: string;
   community: ArtistCommunity;
   subscriptionTiers: ArtistSubscriptionTier[];
-  supporting?: {
-    id: string;
-    name: string;
-    tier: string;
-    profileURL: string;
-    genres: Genre[];
-    type: string;
-  } | null;
+  supporting?: User["supporting"][number];
 };
 
 function ArtistPageUI({
@@ -84,7 +78,9 @@ function ArtistPageUI({
             </Title>
             <Text className="text-brand">{formatGenres(genres)}</Text>
             <Text className="py-4">
-              69 miembros <span className="px-4"> | </span> 42 publicaciones
+              {community?.subscriptions.total ?? 0} miembros{" "}
+              <span className="px-4"> | </span> {community?.posts.length ?? 0}{" "}
+              publicaciones
             </Text>
           </Container>
 
@@ -97,16 +93,24 @@ function ArtistPageUI({
               </Title>
               <Carousel>
                 <CarouselContent>
-                  {subscriptionTiers.map((tier, i) => (
-                    <CarouselItem className="lg:basis-1/3">
-                      <SubscriptionTier
-                        key={tier.name}
-                        artistId={id}
-                        tier={tier}
-                        highlighted={i === 1 ? "Recomendada" : undefined}
-                      />
-                    </CarouselItem>
-                  ))}
+                  {subscriptionTiers.map((tier, i) => {
+                    if (!tier.active) {
+                      return null;
+                    }
+
+                    return (
+                      <CarouselItem className="mx-auto lg:basis-1/3">
+                        <SubscriptionTier
+                          key={tier.name}
+                          artistId={id}
+                          tier={tier}
+                          highlighted={
+                            tier.recommended ? "Recomendada" : undefined
+                          }
+                        />
+                      </CarouselItem>
+                    );
+                  })}
                 </CarouselContent>
                 <CarouselPrevious />
                 <CarouselNext />

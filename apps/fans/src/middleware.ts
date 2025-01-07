@@ -6,6 +6,7 @@ const isPublicRoute = createRouteMatcher([
   "/artist-information",
   "/artists(.*)",
   "/auth(.*)",
+  "/api/revalidate",
 ]);
 
 export default clerkMiddleware((auth, req) => {

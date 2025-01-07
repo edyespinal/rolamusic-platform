@@ -1,7 +1,7 @@
 "use client";
 
 import { ArtistCard } from "@components/ArtistCard/ArtistCard";
-import { Artist } from "@rola/services/schemas";
+import { Artist, User } from "@rola/services/schemas";
 import {
   Button,
   Carousel,
@@ -29,9 +29,7 @@ function ArtistsPageUI({
   supporting,
 }: {
   artists: Artist[];
-  supporting: Array<
-    Pick<Artist, "id" | "name" | "profileURL" | "genres">
-  > | null;
+  supporting: User["supporting"] | null;
 }) {
   const {
     displayedArtists,
@@ -75,26 +73,32 @@ function ArtistsPageUI({
               className="mx-auto max-w-60 lg:max-w-screen-sm"
             >
               <CarouselContent>
-                {supporting.map((artist) => (
-                  <CarouselItem
-                    key={artist.id}
-                    className={cn(
-                      supporting.length === 1
-                        ? "basis-full"
-                        : supporting.length === 2
-                          ? "lg:basis-1/2"
-                          : "lg:basis-1/3"
-                    )}
-                  >
-                    <ArtistCard
-                      id={artist.id}
-                      image={artist.profileURL}
-                      name={artist.name}
-                      genres={artist.genres}
-                      size={isMobile ? "sm" : "default"}
-                    />
-                  </CarouselItem>
-                ))}
+                {supporting.map((artist) => {
+                  if (!artist.active) {
+                    return null;
+                  }
+
+                  return (
+                    <CarouselItem
+                      key={artist.id}
+                      className={cn(
+                        supporting.length === 1
+                          ? "basis-full"
+                          : supporting.length === 2
+                            ? "lg:basis-1/2"
+                            : "lg:basis-1/3"
+                      )}
+                    >
+                      <ArtistCard
+                        id={artist.id}
+                        image={artist.profileURL}
+                        name={artist.name}
+                        genres={artist.genres}
+                        size={isMobile ? "sm" : "default"}
+                      />
+                    </CarouselItem>
+                  );
+                })}
               </CarouselContent>
               <CarouselPrevious />
               <CarouselNext />

@@ -1,7 +1,10 @@
+"use client";
+
 import { ArtistSubscriptionTier } from "@rola/services/schemas";
 import { cn } from "@rola/tailwind-config/utils";
 import { Button, Container, Icon, Text, Title } from "@rola/ui/components";
 import Link from "next/link";
+import React from "react";
 
 function SubscriptionTier({
   artistId,
@@ -12,6 +15,8 @@ function SubscriptionTier({
   tier: ArtistSubscriptionTier;
   highlighted?: string;
 }) {
+  const [isLoading, setIsLoading] = React.useState(false);
+
   return (
     <Container
       className={cn(
@@ -38,13 +43,15 @@ function SubscriptionTier({
         type="rola"
         order={2}
         align="left"
-        className="text-brand overflow-hidden truncate text-wrap uppercase"
+        className="text-brand truncate text-wrap uppercase"
       >
         {tier.label}
       </Title>
 
-      <Link href={`/artists/${artistId}/subscribe?tier=${tier.name}`}>
-        <Button>Unirme a la comunidad</Button>
+      <Link href={`/artists/${artistId}/subscribe?tier=${tier.id}`}>
+        <Button loading={isLoading} onClick={() => setIsLoading(true)}>
+          Unirme a la comunidad
+        </Button>
       </Link>
 
       <Container>

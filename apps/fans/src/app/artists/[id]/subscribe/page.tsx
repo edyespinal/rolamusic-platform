@@ -30,7 +30,7 @@ async function SubscriptionPage({
     redirect("/404");
   }
 
-  const selectedTier = tiers.find((t) => t.name === tier);
+  const selectedTier = tiers.find((t) => t.id === tier);
 
   if (!selectedTier) {
     redirect("/404");
@@ -39,7 +39,7 @@ async function SubscriptionPage({
   const checkoutSession = await stripe.checkout.createSession({
     priceId: selectedTier.prices.monthly.priceId,
     stripeAccountId: paymentDetails.stripeAccountId,
-    returnUrl: `${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}/subscribe/success?tier=${selectedTier.name}`,
+    returnUrl: `${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}/subscribe/success?tier=${selectedTier.id}`,
   });
 
   if (!checkoutSession?.url) {

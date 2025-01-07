@@ -18,16 +18,9 @@ async function OrderPlacedPage({
     return redirect("/404");
   }
 
-  try {
-    await db.users.subscribeToArtist(user.id, artistId, tier as string);
+  await db.users.subscribeToArtist(user.id, artistId, tier as string);
 
-    return <OrderPlacedPageUI />;
-    // redirect(`/artists/${artistId}`);
-  } catch (error) {
-    console.log(error);
-
-    redirect("/404");
-  }
+  return <OrderPlacedPageUI />;
 }
 
 export default OrderPlacedPage;
