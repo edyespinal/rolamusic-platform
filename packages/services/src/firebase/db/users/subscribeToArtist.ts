@@ -16,29 +16,32 @@ import { USERS } from "../../../constants";
 export async function subscribeToArtist(
   userId: string,
   artistId: string,
-  tier: string
+  tierId: string
 ) {
   try {
     const userRef = doc(usersCollection, userId);
     const user = await getDoc(userRef);
 
     if (!user.exists()) {
-      throw new Error("User not found");
+      return {
+        success: false,
+        message: "No se encontró el usuario",
+        data: null,
+      };
     }
 
     const userData = user.data();
+
     const isSupporting = userData.supporting.find(
       (artist) => artist.id === artistId
     );
 
-    if (isSupporting) {
+    if (isSupporting?.active) {
       return {
-        success: true,
-        message: "You are already supporting this artist",
+        success: false,
+        message: "Ya estás suscrito a este artista",
         data: {
-          supporting: userData.supporting.filter(
-            (artist) => artist.id !== artistId
-          ),
+          supporting: userData.supporting,
         },
       };
     }
@@ -55,19 +58,29 @@ export async function subscribeToArtist(
     ]);
 
     if (!artist.exists()) {
-      return;
+      return {
+        success: false,
+        message: "No se encontró el artista",
+        data: null,
+      };
     }
 
     const artistData = artist.data();
-    const artistCommunityData = {
-      ...artistCommunity.data(),
-      subscriptions: {
-        ...(artistCommunity.data()?.subscriptions || {
-          total: 0,
-          tiers: {},
-        }),
-      },
-    };
+    const artistCommunityData = artistCommunity.data();
+
+    if (!artistData || !artistCommunityData) {
+      return {
+        success: false,
+        message: "No se encontró el artista",
+        data: null,
+      };
+    }
+
+    const test = artistCommunityData.subscriptions.tiers.find(
+      ({ tier }) => tier.id === tierId
+    );
+
+    test?.subscribers.push(userId);
 
     await Promise.all([
       setDoc(
@@ -78,6 +91,8 @@ export async function subscribeToArtist(
             name: artistData.name,
             profileURL: artistData.profileURL,
             genres: artistData.genres,
+            tier: tierId,
+            active: true,
           }),
         },
         { merge: true }
@@ -86,7 +101,9 @@ export async function subscribeToArtist(
         artistRef,
         {
           fansSummary: {
-            total: artistCommunityData.subscriptions.total + 1,
+            total: artistData.fansSummary?.total
+              ? artistData.fansSummary.total + 1
+              : 1,
           },
         },
         { merge: true }
@@ -96,11 +113,7 @@ export async function subscribeToArtist(
         {
           subscriptions: {
             total: artistCommunityData.subscriptions.total + 1,
-            tiers: {
-              [tier]: {
-                subscribers: arrayUnion(userId),
-              },
-            },
+            tiers: [...artistCommunityData.subscriptions.tiers],
           },
         },
         { merge: true }
