@@ -1,8 +1,14 @@
-import { addDoc } from "firebase/firestore";
-import { ARTISTS } from "../../../constants";
-import { ServiceError } from "../../../utils/serviceError";
 import { FirebaseError } from "firebase/app";
-import { artistSubscriptionTiersCollection } from "../db";
+import {
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+  arrayUnion,
+} from "firebase/firestore";
+import { ARTISTS, SUBSCRIPTION_TIERS } from "../../../constants";
+import { ServiceError } from "../../../utils/serviceError";
+import { artistCommunityCollection, db } from "../db";
 import { ArtistSubscriptionTier } from "../../../schemas";
 
 async function createArtistSubscriptionTier(
@@ -10,13 +16,34 @@ async function createArtistSubscriptionTier(
   payload: Omit<ArtistSubscriptionTier, "id">
 ) {
   try {
-    const ref = artistSubscriptionTiersCollection(artistId);
+    const tiersRef = collection(db, ARTISTS, artistId, SUBSCRIPTION_TIERS);
+    const communityRef = doc(artistCommunityCollection(artistId), artistId);
 
-    await addDoc(ref, payload);
+    const { id } = await addDoc(tiersRef, payload);
+
+    await setDoc(
+      communityRef,
+      {
+        subscriptions: {
+          tiers: arrayUnion({
+            subscribers: [],
+            tier: {
+              id,
+              active: payload.active,
+              label: payload.label,
+            },
+          }),
+        },
+      },
+      { merge: true }
+    );
 
     return {
       success: true,
-      data: payload,
+      data: {
+        ...payload,
+        id,
+      },
     };
   } catch (e) {
     const error = e as FirebaseError;

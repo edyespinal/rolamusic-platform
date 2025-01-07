@@ -7,11 +7,14 @@ import { artistCommunityCollection } from "../db";
 async function updateArtistCommunity(
   id: string,
   data: Partial<ArtistCommunity>
-): Promise<boolean> {
+) {
   try {
     await setDoc(doc(artistCommunityCollection(id), id), data, { merge: true });
 
-    return true;
+    return {
+      success: true,
+      data,
+    };
   } catch (e) {
     const error = e as FirestoreError;
 
