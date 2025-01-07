@@ -3,6 +3,7 @@ import { z } from "zod";
 export const subscriptionTierSchema = z.object({
   id: z.string(),
   active: z.boolean(),
+  recommended: z.boolean(),
   name: z.string().min(1, "El nombre de la suscripción no puede estar vacío"),
   label: z.string().min(1, "El label de la suscripción no puede estar vacío"),
   description: z
@@ -23,6 +24,5 @@ export const subscriptionTierSchema = z.object({
       priceId: z.string(),
     }),
   }),
-
   perks: z.array(z.string().min(1, "El beneficio no puede estar vacío")),
 });

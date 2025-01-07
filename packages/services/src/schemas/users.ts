@@ -17,6 +17,7 @@ const userSchema = z.object({
       profileURL: z.string().url("La imagen de perfil no es válida"),
       genres: z.array(z.custom<Genre>()),
       tier: z.string(),
+      active: z.boolean(),
     })
   ),
   genres: z.array(z.string()),

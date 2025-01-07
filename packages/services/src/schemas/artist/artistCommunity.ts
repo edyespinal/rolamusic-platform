@@ -6,11 +6,14 @@ export const artistCommunitySchema = z.object({
   posts: z.array(artistPostSchema),
   subscriptions: z.object({
     total: z.number().nonnegative(),
-    tiers: z.record(
-      z.string(),
+    tiers: z.array(
       z.object({
         subscribers: z.array(z.string()),
-        tier: subscriptionTierSchema,
+        tier: subscriptionTierSchema.pick({
+          id: true,
+          active: true,
+          label: true,
+        }),
       })
     ),
     topFans: z.array(

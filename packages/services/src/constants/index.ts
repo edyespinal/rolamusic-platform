@@ -6,7 +6,7 @@ export const USERS = "users";
 export const PODCAST = "podcast";
 export const PODCAST_EPISODES = "podcastEpisodes";
 
-export const COMMUNITY_INFO = "supportInfo";
+export const COMMUNITY_INFO = "communityInfo";
 export const PAYMENT_DETAILS = "paymentInfo";
 
 export const INDIVIDUAL = "individual";
