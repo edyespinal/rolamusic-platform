@@ -7,19 +7,36 @@ async function activateArtist(
   tiersSetup: boolean,
   active: boolean
 ) {
-  if (!tiersSetup) {
+  try {
+    if (!tiersSetup) {
+      return {
+        success: false,
+        message: "No se han configurado los planes de suscripción",
+      };
+    }
+
+    const res = await db.artists.updateArtistActivation(id, active);
+
+    if (!res.success) {
+      throw new Error(
+        `No se pudo ${!active ? "activar" : "desactivar"} el artista`
+      );
+    }
+
+    fetch(`${process.env.NEXT_PUBLIC_FANS_APP}/api/revalidate?tag=artists`);
+
+    return {
+      success: true,
+      message: "Artista actualizado correctamente",
+    };
+  } catch (error) {
+    console.error(error);
+
     return {
       success: false,
-      message: "No se han configurado los planes de suscripción",
+      message: "No se pudo actualizar el artista",
     };
   }
-
-  await db.artists.updateArtistActivation(id, active);
-
-  return {
-    success: true,
-    message: "Artista actualizado correctamente",
-  };
 }
 
 export { activateArtist };
