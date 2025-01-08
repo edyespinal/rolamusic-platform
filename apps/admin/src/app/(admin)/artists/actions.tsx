@@ -8,18 +8,20 @@ async function activateArtist(
   active: boolean
 ) {
   try {
-    if (!tiersSetup) {
+    console.log({ active, tiersSetup });
+
+    if (!active && !tiersSetup) {
       return {
         success: false,
         message: "No se han configurado los planes de suscripción",
       };
     }
 
-    const res = await db.artists.updateArtistActivation(id, active);
+    const res = await db.artists.updateArtistActivation(id, !active);
 
     if (!res.success) {
       throw new Error(
-        `No se pudo ${!active ? "activar" : "desactivar"} el artista`
+        `No se pudo ${active ? "desactivar" : "activar"} el artista`
       );
     }
 

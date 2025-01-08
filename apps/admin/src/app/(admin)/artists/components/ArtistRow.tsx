@@ -58,7 +58,7 @@ function ArtistRow({
           <DropdownMenuContent align="end">
             <DropdownMenuItem
               onClick={async () => {
-                if (!artist.tiers?.length) {
+                if (!active && !artist.tiers?.length) {
                   toast({
                     title: "Artista sin suscripciones",
                     description: "El artista no tiene suscripciones",
@@ -71,7 +71,7 @@ function ArtistRow({
                 const res = await activateArtist(
                   artist.info.id,
                   !!artist.tiers?.length,
-                  !artist.info.active
+                  artist.info.active
                 );
 
                 if (!res.success) {
