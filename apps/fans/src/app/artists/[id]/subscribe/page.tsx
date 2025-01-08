@@ -41,6 +41,7 @@ async function SubscriptionPage({
     customerId: userInfo.stripeAccountId,
     stripeAccountId: paymentDetails.stripeAccountId,
     returnUrl: `${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}/subscribe/success?tier=${selectedTier.id}`,
+    cancelUrl: `${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`,
   });
 
   if (!checkoutSession?.url) {

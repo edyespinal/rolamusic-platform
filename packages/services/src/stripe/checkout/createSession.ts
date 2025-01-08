@@ -6,17 +6,22 @@ async function createSession({
   customerId,
   stripeAccountId,
   returnUrl,
+  cancelUrl,
 }: {
   priceId: string;
   customerId: string;
   stripeAccountId: string;
   returnUrl: string;
+  cancelUrl: string;
 }) {
   try {
     return stripe.checkout.sessions.create({
       ui_mode: "hosted",
       mode: "subscription",
       customer: customerId,
+      customer_update: {
+        address: "auto",
+      },
       line_items: [
         {
           price: priceId,
@@ -36,7 +41,7 @@ async function createSession({
         },
       },
       success_url: `${returnUrl}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${returnUrl}`,
+      cancel_url: cancelUrl,
     });
   } catch (e) {
     const error = e as Stripe.StripeRawError;

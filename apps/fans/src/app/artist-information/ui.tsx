@@ -62,7 +62,7 @@ function ArtistInformationPageUI() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="secondary">Ver a mi perfil de artista</Button>
+                <Button variant="secondary">Ir a mi perfil de artista</Button>
               </a>
             </div>
           </div>
