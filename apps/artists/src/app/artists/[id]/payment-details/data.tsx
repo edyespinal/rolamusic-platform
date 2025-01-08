@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ArtistPayment } from "@rola/services/schemas";
+import { Artist, ArtistPayment } from "@rola/services/schemas";
 import { db } from "@rola/services/firebase";
 import { useToast } from "@rola/ui/components";
 import {
@@ -51,7 +51,7 @@ type UseArtistPaymentDetailsData = {
 };
 
 const useArtistPaymentDetailsData = (
-  id: string,
+  artist: Artist,
   payment: ArtistPayment | null
 ): UseArtistPaymentDetailsData => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -111,12 +111,12 @@ const useArtistPaymentDetailsData = (
       const ipResponse = await fetch("https://api.ipify.org?format=json");
       const { ip } = await ipResponse.json();
 
-      const account = await createStripeAccount(id, {
+      const account = await createStripeAccount(artist.id, artist.name, {
         ...values,
         ip,
       });
 
-      await db.artists.updateArtistPaymentDetails(id, {
+      await db.artists.updateArtistPaymentDetails(artist.id, {
         type: values.type,
         firstName: values.firstName,
         lastName: values.lastName,
@@ -176,9 +176,9 @@ const useArtistPaymentDetailsData = (
           "No se pudo crear la cuenta de pagos. Revise los datos e inténtalo de nuevo.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   async function handleAddBankAccount(values: AddBankAccountFormValues) {
@@ -200,18 +200,30 @@ const useArtistPaymentDetailsData = (
         values
       );
 
-      await db.artists.updateArtistPaymentDetails(id, {
-        paymentPreferences: {
-          type: "bankTransfer",
-          country: "ES",
-          bank: {
-            bankName: values.bankName,
-            accountHolder: values.accountHolderName,
-            accountNumber: values.accountNumber,
-            stripeBankAccountId: bankAccount.id,
-          },
-          currency: "eur",
+      const updatedPaymentPreferences: ArtistPayment["paymentPreferences"] = {
+        type: "bankTransfer",
+        country: "ES",
+        bank: {
+          bankName: values.bankName,
+          accountHolder: values.accountHolderName,
+          accountNumber: values.accountNumber,
+          stripeBankAccountId: bankAccount.id,
         },
+        currency: "eur",
+      };
+
+      await db.artists.updateArtistPaymentDetails(artist.id, {
+        paymentPreferences: updatedPaymentPreferences,
+      });
+
+      setArtistPayment({
+        ...artistPayment,
+        paymentPreferences: updatedPaymentPreferences,
+      });
+
+      paymentDetailsForm.reset({
+        ...artistPayment,
+        paymentPreferences: updatedPaymentPreferences,
       });
 
       toast({
@@ -219,20 +231,6 @@ const useArtistPaymentDetailsData = (
         description: "Se ha actualizado la cuenta de pagos",
       });
 
-      setArtistPayment({
-        ...artistPayment,
-        paymentPreferences: {
-          type: "bankTransfer",
-          country: "ES",
-          bank: {
-            bankName: values.bankName,
-            accountHolder: values.accountHolderName,
-            accountNumber: values.accountNumber,
-            stripeBankAccountId: bankAccount.id,
-          },
-          currency: "eur",
-        },
-      });
       setStep("edit");
     } catch (error) {
       console.error(error);
@@ -243,9 +241,9 @@ const useArtistPaymentDetailsData = (
           "No se pudo actualizar la cuenta de pagos. Revisa los datos e inténtalo de nuevo.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   async function handleUpdatePaymentDetails(values: ArtistPayment) {
@@ -262,7 +260,7 @@ const useArtistPaymentDetailsData = (
     setIsLoading(true);
 
     try {
-      await db.artists.updateArtistPaymentDetails(id, values);
+      await db.artists.updateArtistPaymentDetails(artist.id, values);
 
       await updateStripeAccounts(
         artistPayment.stripeAccountId,
@@ -285,9 +283,9 @@ const useArtistPaymentDetailsData = (
           "No se pudo actualizar la cuenta de pagos. Revisa los datos e inténtalo de nuevo.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   return {

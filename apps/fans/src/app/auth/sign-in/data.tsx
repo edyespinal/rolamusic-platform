@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useToast } from "@rola/ui/components";
-import { setUserRole } from "./actions";
 
 const useSignInData = () => {
   const [loginType, setLoginType] = React.useState<LoginType>("google");
@@ -15,9 +14,6 @@ const useSignInData = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("redirect_url");
-
-  const role =
-    process.env.NEXT_PUBLIC_ARTISTS_APP === redirectUrl ? "artist" : "fan";
 
   const { toast } = useToast();
   const { signIn, setActive } = useSignIn();
@@ -166,8 +162,6 @@ const useSignInData = () => {
       await setActive({
         session: signUp.createdSessionId,
       });
-
-      await setUserRole(createdUserId, role);
 
       router.push("/auth/profile-creation");
     } catch (error: any) {

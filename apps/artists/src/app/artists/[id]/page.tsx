@@ -5,30 +5,17 @@ import { ArtistPageUI } from "./ui";
 
 async function ArtistPage(props: { params: { id: string } }) {
   const { id } = props.params;
-  const user = await currentUser();
-  const artist = await db.artists.getArtist(id);
-  let community = await db.artists.getArtistCommunity(id);
 
-  if (!community) {
-    community = {
-      message: "",
-      videoURL: "",
-      songs: [],
-      subscriptions: {
-        topFans: [],
-        total: 0,
-        types: [],
-      },
-    };
-  }
+  let [user, artist] = await Promise.all([
+    currentUser(),
+    db.artists.getArtist(id),
+  ]);
 
   if (!artist || !user) {
-    redirect("/404");
+    throw new Error("Algo ha salido mal cargando la información del artista");
   }
 
-  return (
-    <ArtistPageUI artist={artist} community={community} userId={user.id} />
-  );
+  return <ArtistPageUI userId={user.id} artist={artist} />;
 }
 
 export default ArtistPage;

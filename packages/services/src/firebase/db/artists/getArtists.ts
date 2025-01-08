@@ -4,13 +4,6 @@ import { Artist } from "../../../schemas/artist";
 import { ServiceError } from "../../../utils/serviceError";
 import { artistsCollection } from "../db";
 
-/**
- * Retrieves a list of artists from the artists collection.
- *
- * @param {number} [pageSize=10] - The number of artists to retrieve.
- * @return {Promise<Artist[]>} A Promise that resolves with an array of artist data, including the ID.
- * @throws {ServiceError} If the query fails.
- */
 export async function getArtists(pageSize = 10): Promise<Artist[]> {
   try {
     const artistsQuery = query(artistsCollection, limit(pageSize));

@@ -1,5 +1,6 @@
 import z from "zod";
 import { artistSchema } from "./artist";
+import { Genre } from "../utils/genres";
 
 const userSchema = z.object({
   id: z.string(),
@@ -10,9 +11,17 @@ const userSchema = z.object({
     artistSchema.pick({ id: true, name: true, profileURL: true, genres: true })
   ),
   supporting: z.array(
-    artistSchema.pick({ id: true, name: true, profileURL: true, genres: true })
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      profileURL: z.string().url("La imagen de perfil no es válida"),
+      genres: z.array(z.custom<Genre>()),
+      tier: z.string(),
+      active: z.boolean(),
+    })
   ),
   genres: z.array(z.string()),
+  stripeAccountId: z.string(),
 });
 
 export { userSchema };

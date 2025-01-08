@@ -192,59 +192,6 @@ function ArtistPageUI({
             Información de Comunidad
           </p>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <FormField
-                control={form.control}
-                name="community.videoURL"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Video de presentación</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="https://www.youtube.com/watch?v=..."
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {community?.videoURL && (
-                <Image
-                  src={`https://img.youtube.com/vi/${
-                    community.videoURL?.split("v=")[1]?.split("&")[0]
-                  }/0.jpg`}
-                  width={480}
-                  height={360}
-                  alt="Video de apadrinamiento"
-                  style={{
-                    maxWidth: "100%",
-                    height: "auto",
-                  }}
-                />
-              )}
-            </div>
-            <div>
-              <FormField
-                control={form.control}
-                name="community.songs"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Canciones</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="https://open.spotify.com/track/..."
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-
           <div className="text-center">
             <Button type="submit">Guardar</Button>
           </div>

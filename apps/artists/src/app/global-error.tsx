@@ -5,7 +5,7 @@ import { Header } from "@components/Header/Header";
 import { Button, Container, Text, Title } from "@rola/ui/components";
 import Link from "next/link";
 
-function GlobalError() {
+function GlobalError({ error }: { error: Error }) {
   return (
     <Container size="xl" className="grid h-svh grid-rows-[auto_1fr_auto]">
       <Header />
@@ -15,6 +15,8 @@ function GlobalError() {
           <Text className="pb-4">
             Lo sentimos, algo ha salido mal. Por favor, intenta de nuevo.
           </Text>
+
+          <Text>{error.message}</Text>
 
           <Link href="/">
             <Button>Volver al inicio</Button>

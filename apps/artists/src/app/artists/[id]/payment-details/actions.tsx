@@ -6,6 +6,7 @@ import { AddBankAccountFormValues, CreateAccountFormValues } from "./data";
 
 async function createStripeAccount(
   id: string,
+  artistName: string,
   payload: CreateAccountFormValues & { ip: string }
 ) {
   return stripe.accounts.createAccount({
@@ -58,6 +59,7 @@ async function createStripeAccount(
     email: payload.email,
     metadata: {
       artistId: id,
+      artistName,
       documentType: payload.documentType,
     },
     default_currency: "eur",
@@ -107,7 +109,7 @@ async function updateStripeAccounts(
         postal_code: payload.address.postalCode,
       },
       id_number: payload.document.number,
-      phone: `${payload.phone?.countryCode}${payload.phone?.number}`,
+      phone: `${payload.phone?.countryCode || "+34"}${payload.phone?.number}`,
     },
     email: payload.email,
     metadata: {

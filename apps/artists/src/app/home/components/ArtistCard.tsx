@@ -10,15 +10,11 @@ import {
 } from "@rola/ui/components";
 import { Artist } from "@rola/services/schemas";
 import { cn } from "@rola/tailwind-config/utils";
-import { useAtom } from "jotai";
-import { currentArtist } from "../../../store";
 import { useRouter } from "next/navigation";
+import { currentArtist } from "../../../store";
+import { useAtom } from "jotai";
 
-type ArtistCardProps = {
-  artist: Artist;
-};
-
-function ArtistCard({ artist }: ArtistCardProps) {
+function ArtistCard({ artist }: { artist: Artist }) {
   const router = useRouter();
   const [, setCurrentArtist] = useAtom(currentArtist);
 
@@ -30,15 +26,20 @@ function ArtistCard({ artist }: ArtistCardProps) {
   return (
     <Container
       className={cn(
-        "border-gray relative grid size-72 place-items-center gap-4 rounded border p-4",
-        "hover:cursor-pointer hover:bg-neutral-900",
+        "relative grid size-72 place-items-center gap-4 rounded-xl border p-4",
+        "hover:bg-background/50 hover:cursor-pointer",
         artist.active
-          ? "bg-transparent"
-          : "bg-gray-dark hover:bg-gray-dark opacity-50"
+          ? "border-gray hover:border-brand bg-transparent"
+          : "border-destructive bg-background-dark hover:border-gray"
       )}
       onClick={handleClick}
     >
-      <Icon name="square-pen" className="text-brand absolute right-2 top-2" />
+      {!artist.active && (
+        <span className="bg-destructive absolute -top-2 left-4 w-32 rounded-br-xl rounded-tl-xl px-4 text-sm">
+          No activo
+        </span>
+      )}
+      <Icon name="square-pen" className="text-brand absolute right-4 top-4" />
       <Avatar className="size-24">
         <AvatarImage src={artist.profileURL} alt={artist.name} />
         <AvatarFallback>

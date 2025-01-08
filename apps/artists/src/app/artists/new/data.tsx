@@ -7,20 +7,17 @@ import { useToast } from "@rola/ui/components";
 import { RequiredFields } from "../../../../../../packages/services/src/utils";
 import { Artist } from "@rola/services/schemas";
 import { useRouter } from "next/navigation";
-import { useAtom } from "jotai";
-import { currentArtist } from "../../../store";
 
-const useNewArtistData = () => {
+const useNewArtistData = (email = "") => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [, setArtist] = useAtom(currentArtist);
   const { toast } = useToast();
   const router = useRouter();
 
-  const form = useForm<RequiredFields<Omit<Artist, "id">> & { year: string }>({
+  const form = useForm<RequiredFields<Omit<Artist, "id">>>({
     defaultValues: {
       name: "",
       admin: "",
-      email: "",
+      email,
       genres: [],
       location: {},
       members: [],
@@ -33,21 +30,18 @@ const useNewArtistData = () => {
     name: "members",
   });
 
-  async function handleOnSubmit(
-    values: RequiredFields<Omit<Artist, "id">> & { year: string }
-  ) {
+  async function handleOnSubmit(values: RequiredFields<Omit<Artist, "id">>) {
     setIsLoading(true);
 
     try {
-      const artist = await createArtist(values);
-      setArtist(artist);
+      const res = await createArtist(values);
 
       toast({
         title: "Artista creado",
         description: "Artista creado correctamente",
       });
 
-      router.push(`/artists/${artist.id}`);
+      router.push(`/artists/${res.artist.id}`);
     } catch (error) {
       console.error(error);
       toast({

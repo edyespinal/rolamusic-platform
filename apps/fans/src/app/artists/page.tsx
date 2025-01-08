@@ -4,9 +4,10 @@ import { redirect } from "next/navigation";
 import { unstable_cache } from "next/cache";
 import { currentUser } from "@clerk/nextjs/server";
 import { User } from "@rola/services/schemas";
+import { userInfo } from "os";
 
 const getCachedArtists = unstable_cache(
-  async () => db.artists.getArtists(50),
+  async () => db.artists.getActiveArtists(50),
   ["artists"],
   {
     revalidate: false,
@@ -27,12 +28,9 @@ async function ArtistsPage() {
     redirect("/404");
   }
 
-  return (
-    <ArtistsPageUI
-      artists={artists}
-      supporting={userInfo?.supporting ?? null}
-    />
-  );
+  const supporting = userInfo?.supporting.filter((s) => s.active);
+
+  return <ArtistsPageUI artists={artists} supporting={supporting ?? null} />;
 }
 
 export default ArtistsPage;

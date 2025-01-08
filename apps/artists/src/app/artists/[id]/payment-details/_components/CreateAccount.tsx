@@ -305,7 +305,7 @@ function CreateAccount({
             align="left"
             className="text-brand mb-4 font-semibold uppercase"
           >
-            Website
+            Website / Redes sociales
           </Title>
 
           <Container className="grid grid-cols-2 gap-4 pb-12">
@@ -314,7 +314,7 @@ function CreateAccount({
               name="website"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel required>Sitio web</FormLabel>
+                  <FormLabel required>Enlace</FormLabel>
                   <FormControl>
                     <Input type="text" required {...field} />
                   </FormControl>
