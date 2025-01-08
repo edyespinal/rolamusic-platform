@@ -2,9 +2,10 @@ import { ServiceError } from "../../utils/serviceError";
 import Stripe from "stripe";
 import { stripe } from "../init";
 
-async function createCustomer(email: string) {
+async function createCustomer(name: string, email: string) {
   try {
     return stripe.customers.create({
+      name,
       email,
     });
   } catch (e) {
