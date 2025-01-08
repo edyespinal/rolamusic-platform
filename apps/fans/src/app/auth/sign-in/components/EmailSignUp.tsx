@@ -124,7 +124,7 @@ function EmailSignUp({
 
           <div className="pt-8 text-center">
             <Button type="submit" loading={isLoading}>
-              Crear cuenta de artista
+              Crear cuenta de usuario
             </Button>
           </div>
         </form>
