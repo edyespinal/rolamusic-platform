@@ -55,14 +55,14 @@ function ArtistInformationPageUI() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button>Ver artistas</Button>
+                <Button>Crear mi cuenta de artista</Button>
               </a>
               <a
                 href="https://artists.rolamusic.app/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="secondary">Ver artistas</Button>
+                <Button variant="secondary">Ver a mi perfil de artista</Button>
               </a>
             </div>
           </div>

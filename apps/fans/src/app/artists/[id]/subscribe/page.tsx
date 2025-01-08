@@ -38,6 +38,7 @@ async function SubscriptionPage({
 
   const checkoutSession = await stripe.checkout.createSession({
     priceId: selectedTier.prices.monthly.priceId,
+    customerId: userInfo.stripeAccountId,
     stripeAccountId: paymentDetails.stripeAccountId,
     returnUrl: `${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}/subscribe/success?tier=${selectedTier.id}`,
   });

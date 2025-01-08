@@ -32,7 +32,7 @@ function LoginUI() {
         fill
       />
       <div className="mb-12">
-        <Title order={2}>Cuenta de artista</Title>
+        <Title order={2}>Mi cuenta</Title>
         <Underline />
       </div>
 
