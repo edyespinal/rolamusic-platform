@@ -1,7 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { db } from "@rola/services/firebase";
 import { stripe } from "@rola/services/stripe";
-import { redirect } from "next/navigation";
 
 async function SubscriptionPage({
   params,
@@ -14,7 +14,13 @@ async function SubscriptionPage({
   const { id: artistId } = params;
   const { tier } = searchParams;
 
-  if (!user || !artistId || !tier) {
+  if (!user) {
+    redirect(
+      `/auth/sign-in?redirect_url=${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`
+    );
+  }
+
+  if (!artistId || !tier) {
     redirect("/404");
   }
 
