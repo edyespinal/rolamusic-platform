@@ -17,13 +17,7 @@ async function activateArtist(
       };
     }
 
-    const res = await db.artists.updateArtistActivation(id, !active);
-
-    if (!res.success) {
-      throw new Error(
-        `No se pudo ${active ? "desactivar" : "activar"} el artista`
-      );
-    }
+    await db.artists.updateArtistActivation(id, !active);
 
     fetch(`${process.env.NEXT_PUBLIC_FANS_APP}/api/revalidate?tag=artists`);
 
@@ -31,12 +25,12 @@ async function activateArtist(
       success: true,
       message: "Artista actualizado correctamente",
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
 
     return {
       success: false,
-      message: "No se pudo actualizar el artista",
+      message: `No se pudo ${active ? "desactivar" : "activar"} el artista`,
     };
   }
 }
