@@ -3,10 +3,12 @@ import { Stripe, stripe } from "../init";
 
 async function createSession({
   priceId,
+  customerId,
   stripeAccountId,
   returnUrl,
 }: {
   priceId: string;
+  customerId: string;
   stripeAccountId: string;
   returnUrl: string;
 }) {
@@ -14,6 +16,8 @@ async function createSession({
     return stripe.checkout.sessions.create({
       ui_mode: "hosted",
       mode: "subscription",
+      customer: customerId,
+      customer_creation: "if_required",
       line_items: [
         {
           price: priceId,
