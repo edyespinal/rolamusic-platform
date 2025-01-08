@@ -7,7 +7,7 @@ export default clerkMiddleware((auth, req) => {
     auth().protect();
   }
 
-  if (auth().sessionClaims?.role !== "admin") {
+  if (auth().sessionClaims && auth().sessionClaims?.role !== "admin") {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 });
