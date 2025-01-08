@@ -21,6 +21,7 @@ export * from "./Label/Label";
 export * from "./Loader/Loader";
 export * from "./Logo/Logo";
 export * from "./MultiSelect/MultiSelect";
+export * from "./PasswordInput/PasswordInput";
 export * from "./Popover/Popover";
 export * from "./Progress/Progress";
 export * from "./RadioGroup/RadioGroup";

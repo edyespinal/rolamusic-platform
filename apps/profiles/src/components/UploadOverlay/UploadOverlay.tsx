@@ -32,7 +32,7 @@ function UploadOverlay({
     }
 
     if (file.size > 1024 * 1024 * 1) {
-      console.log("file size too big");
+      console.error("file size too big");
     }
 
     if (
@@ -41,7 +41,7 @@ function UploadOverlay({
       file.type !== "image/jpg" &&
       file.type !== "image/webp"
     ) {
-      console.log("file type not supported");
+      console.error("file type not supported");
     }
 
     await user.setProfileImage({

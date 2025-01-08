@@ -1,17 +1,9 @@
 import { Footer } from "@components/Footer/Footer";
 import { Header } from "@components/Header/Header";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-  Container,
-  Icon,
-  Text,
-} from "@rola/ui/components";
+import { Container } from "@rola/ui/components";
 import { LayoutProps } from "@typings/globals";
 import { Sidebar } from "./_components/Sidebar/Sidebar";
 import { db } from "@rola/services/firebase";
-import { redirect } from "next/navigation";
 
 async function ArtistsLayout({
   children,
@@ -21,7 +13,7 @@ async function ArtistsLayout({
   const artist = await db.artists.getArtist(id);
 
   if (!artist) {
-    return redirect("/404");
+    throw new Error("Algo ha salido mal cargando el artista");
   }
 
   return (
@@ -35,17 +27,6 @@ async function ArtistsLayout({
           <Sidebar artist={artist} />
         </Container>
         <Container size="full" className="mt-12">
-          {!artist.active && (
-            <Container className="pb-8">
-              <Alert variant="destructive" title="Artista inactivo">
-                <AlertTitle>Artista inactivo</AlertTitle>
-                <AlertDescription className="flex items-center gap-2">
-                  <Icon name="alert-circle" />
-                  <Text>Este artista no está activo en la plataforma.</Text>
-                </AlertDescription>
-              </Alert>
-            </Container>
-          )}
           {children}
         </Container>
       </Container>

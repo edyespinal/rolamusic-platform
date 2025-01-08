@@ -11,18 +11,6 @@ import {
 } from "firebase/firestore";
 import { usersCollection, batch, artistsCollection } from "../db";
 
-/**
- * Creates a new user in the users collection, and if the user already exists
- * in the collection, migrates the user to the new Clerk Id.
- *
- * @param {User} newUser - The user data to be created, including the Clerk Id.
- * @return {Promise<{status: number, message: string}>}
- *   A promise that resolves with an object containing a status code and a
- *   message. If the user is created, the status code is 201. If the user is
- *   already migrated, the status code is 200. If the user is migrated, the
- *   status code is 200.
- * @throws {ServiceError} If the creation fails.
- */
 export async function createUser(newUser: User) {
   try {
     const userRef = doc(usersCollection, newUser.id);
@@ -45,6 +33,7 @@ export async function createUser(newUser: User) {
           artists: [],
           supporting: [],
           genres: [],
+          stripeAccountId: newUser.stripeAccountId,
         },
         { merge: true }
       );
@@ -77,6 +66,7 @@ export async function createUser(newUser: User) {
           })) || [],
         supporting: existingData.supporting || [],
         genres: existingData.genres || [],
+        stripeAccountId: newUser.stripeAccountId,
       };
 
       batch.set(userRef, updatedData, { merge: true });

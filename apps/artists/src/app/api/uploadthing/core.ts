@@ -7,7 +7,7 @@ import { db } from "@rola/services/firebase";
 
 const uploader = createUploadthing();
 
-const storageFileRouter: FileRouter = {
+const storageFileRouter = {
   artistProfileImage: uploader({
     "image/jpeg": {
       acl: "public-read",
@@ -47,24 +47,22 @@ const storageFileRouter: FileRouter = {
           name,
         };
       });
+
       return {
         artistId: input.artistId,
-        previousKey:
-          input.profileUrl !== "" && input.profileUrl.split("/f/")[1],
+        previousKey: input.profileUrl?.split("/f/")[1] ?? null,
         [UTFiles]: fileOverrides,
       };
     })
     .onUploadError((error) => {
-      console.log("onUploadError", error);
+      console.error("onUploadError", error);
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      // eslint-disable-next-line no-console
-      console.log("onUploadComplete", metadata, file);
-
       await db.artists.updateArtistProfileImage(metadata.artistId, file.url);
       if (metadata.previousKey) {
         await new UTApi().deleteFiles([metadata.previousKey]);
       }
+
       return {
         url: file.url,
       };
@@ -108,9 +106,10 @@ const storageFileRouter: FileRouter = {
           name,
         };
       });
+
       return {
         artistId: input.artistId,
-        previousKey: input.coverUrl?.split("/f/")[1] ?? "",
+        previousKey: input.coverUrl?.split("/f/")[1] ?? null,
         [UTFiles]: fileOverrides,
       };
     })
@@ -119,6 +118,7 @@ const storageFileRouter: FileRouter = {
       if (metadata.previousKey) {
         await new UTApi().deleteFiles([metadata.previousKey]);
       }
+
       return {
         url: file.url,
       };

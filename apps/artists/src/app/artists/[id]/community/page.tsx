@@ -1,8 +1,8 @@
 import React from "react";
 import { db } from "@rola/services/firebase";
 import { ArtistCommunityPageUI } from "./ui";
-import { redirect } from "next/navigation";
 import { stripe } from "@rola/services/stripe";
+import { IncompleteProfileUI } from "./incomplete-profile.ui";
 
 async function ArtistCommunityPage({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -16,20 +16,28 @@ async function ArtistCommunityPage({ params }: { params: { id: string } }) {
     artistCommunityPromise,
   ]);
 
-  if (!artist || !artistPayment?.stripeAccountId || !artistCommunity) {
-    return redirect("/404");
+  if (!artist || !artistPayment?.stripeAccountId) {
+    const link = !artist
+      ? {
+          href: `/artists/${id}`,
+          text: "tu información de artista",
+        }
+      : {
+          href: `/artists/${id}/payment-details`,
+          text: "tus datos bancarios y fiscales",
+        };
+
+    return <IncompleteProfileUI link={link} />;
   }
 
   const artistBalance = await stripe.accounts.getBalance(
     artistPayment.stripeAccountId
   );
 
-  console.log("Artist", artistBalance, artistCommunity);
-
   return (
     <ArtistCommunityPageUI
       artist={artist}
-      community={artistCommunity}
+      community={artistCommunity || null}
       balance={artistBalance}
     />
   );

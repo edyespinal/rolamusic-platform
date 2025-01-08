@@ -6,7 +6,7 @@ async function HomePage() {
   const user = await currentUser();
 
   if (!user) {
-    throw new Error("User not found");
+    throw new Error("No se ha encontrado tu usuario");
   }
 
   const userArtists = await db.users.getUserArtists(user.id);

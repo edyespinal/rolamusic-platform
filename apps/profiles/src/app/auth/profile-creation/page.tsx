@@ -17,6 +17,7 @@ async function ProfileCreationPage() {
     artists: [],
     supporting: [],
     genres: [],
+    stripeAccountId: "",
   });
 
   return <ProfileCreationUI />;

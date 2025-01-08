@@ -6,10 +6,10 @@ function Footer() {
   return (
     <footer className="border-brand border-t text-center lg:pt-0">
       <Container
-        size="xl"
+        size="lg"
         className="flex flex-col items-center justify-between gap-4 px-8 lg:flex-row lg:px-0"
       >
-        <div className="flex flex-col gap-4 lg:flex-row">
+        <div className="flex flex-col gap-3 text-sm lg:flex-row">
           <Link href="/legal-notice" className="hover:underline">
             Aviso legal
           </Link>
@@ -21,11 +21,12 @@ function Footer() {
           </Link>
         </div>
 
-        <div className="hidden text-sm text-neutral-500 lg:block">
-          Todos los derechos reservados &copy; {new Date().getFullYear()}
+        <div className="hidden text-xs text-neutral-500 lg:block">
+          Todos los derechos <br />
+          reservados &copy; {new Date().getFullYear()}
         </div>
 
-        <div className="flex flex-col items-center gap-4 lg:flex-row">
+        <div className="flex flex-col items-center gap-3 text-sm lg:flex-row">
           <Link href="/faq" className="text-brand hover:underline">
             Preguntas frecuentes
           </Link>
@@ -35,7 +36,7 @@ function Footer() {
           >
             Contacto
           </a>
-          <div className="bg-brand flex gap-8 px-8 py-4 text-black">
+          <div className="bg-brand flex gap-6 px-6 py-4 text-black">
             <a
               href="http://www.instagram.com/rolamusic.app/"
               className="hover:text-white"
@@ -50,7 +51,7 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Icon name="youtube" size={24} strokeWidth={2} />
+              <Icon name="youtube" size={26} strokeWidth={2} />
             </a>
           </div>
         </div>

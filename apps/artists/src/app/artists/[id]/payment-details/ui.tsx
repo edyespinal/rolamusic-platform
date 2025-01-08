@@ -7,6 +7,7 @@ import { useArtistPaymentDetailsData } from "./data";
 import { AddBankAccount } from "./_components/AddBankAccount";
 import { CreateAccount } from "./_components/CreateAccount";
 import { EditPaymentDetails } from "./_components/EditPaymentDetails";
+import { InactiveArtistAlert } from "../_components/InactiveArtist";
 
 function ArtistPaymentDetailsUI({
   artist,
@@ -24,10 +25,12 @@ function ArtistPaymentDetailsUI({
     handleCreateAccount,
     handleAddBankAccount,
     handleUpdatePaymentDetails,
-  } = useArtistPaymentDetailsData(artist.id, payment);
+  } = useArtistPaymentDetailsData(artist, payment);
 
   return (
     <Container className="pb-24">
+      {!artist.active && <InactiveArtistAlert />}
+
       <Container className="pb-12">
         <Title order={2} align="left" underline>
           Datos bancarios y fiscales

@@ -8,19 +8,18 @@ function AdminLayout(props: Readonly<LayoutProps>) {
   const { children } = props;
 
   return (
-    <Container size="lg" className={cn("grid h-[100dvh] grid-rows-[auto_1fr]")}>
+    <Container size="xl" className={cn("grid h-[100dvh] grid-rows-[auto_1fr]")}>
       <Header />
 
       <main className="flex flex-col gap-12 py-12">
         <div>
-          <Title order={4} align="left">
+          <Title order={3} underline>
             Admin Dashboard
           </Title>
-          <Underline align="left" size="xs" />
         </div>
 
         <div className="flex gap-12">
-          <div className="basis-40">
+          <div className="basis-48">
             <Sidebar />
           </div>
           <section className="grow">{children}</section>

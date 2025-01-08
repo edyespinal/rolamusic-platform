@@ -12,6 +12,7 @@ import {
   FormMessage,
   Icon,
   Input,
+  PasswordInput,
   Text,
 } from "@rola/ui/components";
 import { EmailAuthProps } from "../types";
@@ -62,12 +63,7 @@ function EmailSignUp({
               <FormItem>
                 <FormLabel>Contraseña</FormLabel>
                 <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="Contraseña"
-                    required
-                    {...field}
-                  />
+                  <PasswordInput placeholder="Contraseña" required {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -113,7 +109,7 @@ function EmailSignUp({
             )}
           />
 
-          <Text size="sm" className="text-justify text-gray-light">
+          <Text size="sm" className="text-gray-light text-justify">
             ROLA MUSIC propietaria del dominio web rolamusic.app y en virtud del
             que establece el Reglamento General de Protección de Datos
             (UE1679/2016) Te informamos que tratamos los datos que nos facilitas
@@ -126,7 +122,7 @@ function EmailSignUp({
             enviar un correo a: hola@rolamusic.app
           </Text>
 
-          <div className="text-center pt-8">
+          <div className="pt-8 text-center">
             <Button type="submit" loading={isLoading}>
               Crear cuenta de artista
             </Button>

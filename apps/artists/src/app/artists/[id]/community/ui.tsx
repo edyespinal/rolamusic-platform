@@ -9,18 +9,11 @@ function ArtistCommunityPageUI({
   balance,
 }: {
   artist: Artist;
-  community: ArtistCommunity;
+  community: ArtistCommunity | null;
   balance: Stripe.Balance;
 }) {
   return (
     <Container className="pb-24">
-      <Container className="pb-12">
-        <Title order={2} align="left">
-          Mi Comunidad
-        </Title>
-        <Underline align="left" />
-      </Container>
-
       {!artist.active && (
         <Container className="pb-8">
           <Alert variant="destructive" title="Artista inactivo">
@@ -28,6 +21,13 @@ function ArtistCommunityPageUI({
           </Alert>
         </Container>
       )}
+
+      <Container className="pb-12">
+        <Title order={2} align="left">
+          Mi Comunidad
+        </Title>
+        <Underline align="left" />
+      </Container>
 
       <Container>
         <Text>
@@ -43,7 +43,7 @@ function ArtistCommunityPageUI({
             Subscriptores
           </Title>
           <Title className="text-brand" align="left">
-            {community.subscriptions?.total ?? 0}
+            {community?.subscriptions?.total ?? 0}
           </Title>
         </div>
         <div className="bg-background min-w-64 rounded p-4">
