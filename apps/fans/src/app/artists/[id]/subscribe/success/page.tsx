@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import { db } from "@rola/services/firebase";
 import { currentUser } from "@clerk/nextjs/server";
-import { OrderPlacedPageUI } from "./ui";
+import { SubscriptionSuccessPageUI } from "./ui";
 
-async function OrderPlacedPage({
+async function SubscriptionSuccessPage({
   params,
   searchParams,
 }: {
@@ -15,12 +15,12 @@ async function OrderPlacedPage({
   const user = await currentUser();
 
   if (!user || !session_id || !tier) {
-    return redirect("/404");
+    throw new Error("Algo ha salido mal");
   }
 
   await db.users.subscribeToArtist(user.id, artistId, tier as string);
 
-  return <OrderPlacedPageUI />;
+  return <SubscriptionSuccessPageUI artistId={artistId} />;
 }
 
-export default OrderPlacedPage;
+export default SubscriptionSuccessPage;
