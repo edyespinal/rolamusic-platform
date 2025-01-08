@@ -11,7 +11,10 @@ async function ProfileCreationPage() {
   }
 
   const [customer] = await Promise.all([
-    stripe.customers.createCustomer(user.emailAddresses[0]?.emailAddress || ""),
+    stripe.customers.createCustomer(
+      user.fullName || "",
+      user.emailAddresses[0]?.emailAddress || ""
+    ),
     clerkClient().users.updateUserMetadata(user.id, {
       publicMetadata: {
         role: "artist",
