@@ -17,7 +17,6 @@ async function createSession({
       ui_mode: "hosted",
       mode: "subscription",
       customer: customerId,
-      customer_creation: "if_required",
       line_items: [
         {
           price: priceId,
