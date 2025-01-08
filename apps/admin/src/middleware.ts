@@ -4,11 +4,11 @@ const isPublicRoute = createRouteMatcher(["/auth(.*)"]);
 
 export default clerkMiddleware((auth, req) => {
   if (!isPublicRoute(req)) {
-    auth().protect();
-  }
+    if (auth().sessionClaims && auth().sessionClaims?.role !== "admin") {
+      return Response.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-  if (auth().sessionClaims && auth().sessionClaims?.role !== "admin") {
-    return Response.json({ error: "Unauthorized" }, { status: 401 });
+    auth().protect();
   }
 });
 
