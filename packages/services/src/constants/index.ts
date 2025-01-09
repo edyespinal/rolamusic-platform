@@ -28,4 +28,5 @@ export const ARTIST_POST_TYPES = {
   VIDEO: "video",
   LINK: "link",
   PDF: "pdf",
+  POLL: "poll",
 };

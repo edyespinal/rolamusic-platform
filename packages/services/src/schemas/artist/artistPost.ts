@@ -19,6 +19,7 @@ export const artistPostSchema = z.object({
     z.literal(ARTIST_POST_TYPES.PHOTO),
     z.literal(ARTIST_POST_TYPES.TEXT),
     z.literal(ARTIST_POST_TYPES.VIDEO),
+    z.literal(ARTIST_POST_TYPES.POLL),
   ]),
   title: z.string().min(1, "El titulo del post no puede estar vacío"),
   image: z.string().url("La imagen no es valida").optional(),
