@@ -6,7 +6,7 @@ function Header() {
   return (
     <Container className="bg-background-dark z-[99] flex h-20 items-center lg:bg-transparent lg:bg-gradient-to-b lg:from-black lg:to-transparent lg:shadow-none">
       <Container
-        size="lg"
+        size="xl"
         className="flex items-center justify-between px-4 lg:px-0"
       >
         <Link href="/">

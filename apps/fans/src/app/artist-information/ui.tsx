@@ -14,11 +14,11 @@ function ArtistInformationPageUI() {
         className={cn(
           "z-0 flex min-h-[100vh] items-start justify-center bg-cover bg-center bg-no-repeat",
           "bg-[url('/static/img/artist-info-header-mobile.png')] lg:bg-[url('/static/img/artist-info-header.png')]",
-          "3xl:min-h-[800px] -mt-20 lg:min-h-[75vh]"
+          "3xl:min-h-[800px] -mt-20 lg:min-h-[50vh]"
         )}
       >
         <Container
-          size="lg"
+          size="xl"
           className="mt-36 flex flex-col items-start justify-center px-4 lg:flex-row lg:px-0"
         >
           <div className="mx-auto flex flex-col items-center lg:mx-0 lg:flex-row lg:gap-4">
@@ -71,7 +71,7 @@ function ArtistInformationPageUI() {
 
       <Container className="bg-background-dark z-10">
         <Container
-          size="lg"
+          size="xl"
           className="flex min-h-[50vh] flex-col pb-0 pt-24 lg:flex-row lg:justify-between xl:min-h-[auto]"
         >
           <Container className="z-20 flex-1 pb-24">
@@ -116,7 +116,7 @@ function ArtistInformationPageUI() {
       </Container>
 
       <Container className="bg-[url('/static/img/artist-info-section-3.png')] bg-cover bg-center bg-no-repeat py-32">
-        <Container size="lg" className="px-4">
+        <Container size="xl" className="px-4">
           <Title type="rola" order={2} className="mb-8 text-black">
             Comparte el contenido que quieras y olvídate de seguir tendencias y
             algoritmos.
@@ -140,7 +140,7 @@ function ArtistInformationPageUI() {
 
       <Container className="bg-background-dark z-10">
         <Container
-          size="lg"
+          size="xl"
           className="flex min-h-[50vh] flex-col px-4 pb-0 pt-20 lg:flex-row lg:justify-between lg:px-0 xl:min-h-[auto]"
         >
           <Image

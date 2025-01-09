@@ -10,8 +10,6 @@ import {
   CarouselNext,
   CarouselPrevious,
   Container,
-  Dialog,
-  DialogContent,
   Text,
   Title,
 } from "@rola/ui/components";
@@ -47,7 +45,7 @@ function ArtistPageUI({
 }: ArtistPageProps) {
   return (
     <Container>
-      <Container className="bg-background-dark relative -mt-20 min-h-[25vh] lg:min-h-[50vh]">
+      <Container className="bg-background-dark relative -mt-20 min-h-[40vh] lg:min-h-[50vh]">
         <Image
           src={coverURL ?? "/static/img/artists-landing-header.jpg"}
           alt={name}
@@ -58,7 +56,7 @@ function ArtistPageUI({
         />
       </Container>
 
-      <Container size="lg" className="flex justify-center">
+      <Container size="xl" className="flex justify-center">
         <ArtistAvatar
           image={profileURL}
           name={name}
@@ -68,7 +66,7 @@ function ArtistPageUI({
       </Container>
 
       <Container
-        size="lg"
+        size="xl"
         className="mb-24 flex flex-col px-4 lg:flex-row lg:gap-12 lg:px-0"
       >
         <Container className="flex flex-col">
@@ -87,7 +85,7 @@ function ArtistPageUI({
           <Text className="pb-8 text-justify">{bio}</Text>
 
           {!supporting && subscriptionTiers.length > 0 && (
-            <Container>
+            <Container className="mx-auto max-w-80 lg:max-w-full">
               <Title order={2} underline className="pb-12 uppercase">
                 Elige tu suscripción
               </Title>
@@ -99,7 +97,7 @@ function ArtistPageUI({
                     }
 
                     return (
-                      <CarouselItem className="mx-auto lg:basis-1/3">
+                      <CarouselItem key={i} className="mx-auto lg:basis-1/3">
                         <SubscriptionTier
                           key={tier.name}
                           artistId={id}
@@ -112,10 +110,9 @@ function ArtistPageUI({
                     );
                   })}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="-left-8 lg:-left-12" />
+                <CarouselNext className="-right-8 lg:-right-12" />
               </Carousel>
-              <Container className="mb-4 flex flex-col justify-between gap-8 pb-2 lg:flex-row"></Container>
             </Container>
           )}
         </Container>

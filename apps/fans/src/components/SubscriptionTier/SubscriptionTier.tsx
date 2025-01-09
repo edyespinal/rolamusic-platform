@@ -20,12 +20,12 @@ function SubscriptionTier({
   return (
     <Container
       className={cn(
-        "relative flex grow flex-col gap-4 rounded-2xl border-2 px-8 py-4",
-        highlighted ? "border-brand" : "border"
+        "relative flex h-full max-w-80 flex-col gap-4 rounded-2xl border-2 px-6 py-6 lg:max-w-full lg:px-8",
+        highlighted ? "border-brand" : "border-gray"
       )}
     >
       {highlighted && (
-        <span className="bg-brand absolute -top-4 right-3 rounded-bl-xl rounded-tr-xl px-4 py-2 font-semibold text-black">
+        <span className="bg-brand absolute -top-5 right-3 rounded-bl-xl rounded-tr-xl px-4 py-2 text-sm font-semibold text-black">
           {highlighted}
         </span>
       )}
@@ -50,7 +50,7 @@ function SubscriptionTier({
 
       <Link href={`/artists/${artistId}/subscribe?tier=${tier.id}`}>
         <Button loading={isLoading} onClick={() => setIsLoading(true)}>
-          Unirme a la comunidad
+          Suscribirme
         </Button>
       </Link>
 

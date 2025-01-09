@@ -47,7 +47,7 @@ function ArtistsPageUI({
     <Container>
       <PageHeader background="bg-[url('/static/img/artists-header-mobile.png')] lg:bg-[url('/static/img/artists-header.png')]">
         <Container
-          size="lg"
+          size="xl"
           className="flex h-full justify-center lg:mt-0 lg:items-center"
         >
           <Title
@@ -107,7 +107,7 @@ function ArtistsPageUI({
         ) : null}
       </SignedIn>
 
-      <Container size="lg" className="pb-24 pt-12">
+      <Container size="xl" className="pb-24 pt-12">
         <Title order={3} underline className="pb-8 uppercase">
           Artistas ROLA
         </Title>
@@ -128,11 +128,7 @@ function ArtistsPageUI({
               </SelectTrigger>
               <SelectContent>
                 {sortingOptions.map((option) => (
-                  <SelectItem
-                    key={option.value}
-                    value={option.value}
-                    className="text-brand"
-                  >
+                  <SelectItem key={option.value} value={option.value}>
                     {option.label}
                   </SelectItem>
                 ))}
@@ -158,11 +154,7 @@ function ArtistsPageUI({
               </SelectTrigger>
               <SelectContent>
                 {filterOptions.map((filter) => (
-                  <SelectItem
-                    key={filter.value}
-                    value={filter.value}
-                    className="text-brand bg-teal-500"
-                  >
+                  <SelectItem key={filter.value} value={filter.value}>
                     {filter.label}
                   </SelectItem>
                 ))}
@@ -204,7 +196,7 @@ function ArtistsPageUI({
       </Container>
 
       <Container className="bg-[url('/static/img/artists-footer.png')] bg-cover bg-center bg-no-repeat py-32">
-        <Container size="lg" className="flex flex-col gap-y-8 px-4 lg:px-0">
+        <Container size="xl" className="flex flex-col gap-y-8 px-4 lg:px-0">
           <Title type="rola" order={2} align="left" className="text-black">
             ¿Eres músico y te gustaría crear <br />
             tu propia comunidad de fans en ROLA?

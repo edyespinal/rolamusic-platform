@@ -29,7 +29,7 @@ function HomePageUI() {
         )}
       >
         <Container
-          size="lg"
+          size="xl"
           className="mt-36 flex flex-col items-start justify-center px-4 lg:flex-row lg:px-0"
         >
           <div className="mx-auto flex flex-col items-center lg:mx-0 lg:flex-row lg:gap-4">
@@ -71,7 +71,10 @@ function HomePageUI() {
       </Container>
 
       <Container className="bg-background-dark z-10">
-        <Container className="flex min-h-[50vh] flex-col px-4 pb-0 pt-24 lg:flex-row lg:px-0 xl:min-h-[auto]">
+        <Container
+          size="xl"
+          className="flex min-h-[50vh] flex-col px-4 pb-0 pt-24 lg:flex-row lg:px-0 xl:min-h-[auto]"
+        >
           <Image
             src={Curilero}
             alt="Rola en móvil"
@@ -110,7 +113,7 @@ function HomePageUI() {
       </Container>
 
       <Container className="bg-[url('/static/img/landing-section-3.png')] bg-cover bg-center bg-no-repeat py-32">
-        <Container size="lg" className="px-4">
+        <Container size="xl" className="px-4">
           <Title type="rola" order={2} className="mb-8 text-black">
             ¿Y si ese artista que tanto te inspira es el próximo gran exponente
             de la música?
@@ -129,7 +132,7 @@ function HomePageUI() {
       </Container>
 
       <Container
-        size="lg"
+        size="xl"
         className="flex flex-col items-center gap-16 px-4 py-24 lg:flex-row"
       >
         <Container className="lg:w-2/5">
@@ -154,21 +157,19 @@ function HomePageUI() {
             <CarouselContent>
               {highlightedArtists.map(({ id, url, alt }, i) => (
                 <CarouselItem key={i} className="lg:basis-1/3">
-                  <Link href={`/artists/${id}`} prefetch>
-                    <AspectRatio ratio={2 / 3}>
-                      <Image
-                        src={url}
-                        alt={alt}
-                        fill
-                        className="bg-brand h-full w-full rounded-lg object-cover hover:opacity-65"
-                      />
-                    </AspectRatio>
-                  </Link>
+                  <AspectRatio ratio={2 / 3}>
+                    <Image
+                      src={url}
+                      alt={alt}
+                      fill
+                      className="bg-brand h-full w-full rounded-lg object-cover"
+                    />
+                  </AspectRatio>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-2 lg:-left-12" />
-            <CarouselNext className="right-2 lg:-right-12" />
+            {/* <CarouselPrevious className="left-2 lg:-left-12" />
+            <CarouselNext className="right-2 lg:-right-12" /> */}
           </Carousel>
         </Container>
       </Container>

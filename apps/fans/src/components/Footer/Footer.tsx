@@ -3,10 +3,10 @@ import { Container, Icon } from "@rola/ui/components";
 function Footer() {
   return (
     <Container
-      size="lg"
-      className="border-brand flex w-full flex-col justify-between border-t p-0 text-sm lg:flex-row"
+      size="xl"
+      className="border-brand flex w-full flex-col justify-between border-t p-0 lg:flex-row"
     >
-      <div className="flex flex-col gap-2 pt-2 text-center lg:flex-row">
+      <div className="flex flex-col gap-2 pt-2 text-center lg:flex-row lg:items-center">
         <a
           href="https://help.rolamusic.app/legal-notice"
           target="_blank"
@@ -34,7 +34,7 @@ function Footer() {
         </a>
       </div>
 
-      <div className="hidden pt-2 text-center text-xs font-thin lg:block">
+      <div className="hidden pt-2 text-center text-sm font-thin lg:block">
         Todos los derechos reservados <br />
         ROLA &reg; {new Date().getFullYear()}
       </div>
