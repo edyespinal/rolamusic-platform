@@ -1,4 +1,4 @@
-import { Icon } from "../Icon/Icon";
+import { Loader2 } from "lucide-react";
 
 const loaderVariants = {
   xs: 20,
@@ -14,11 +14,10 @@ type LoaderProps = {
 
 const Loader = ({ size = "md" }: LoaderProps) => {
   return (
-    <Icon
-      name="loader-2"
+    <Loader2
       size={loaderVariants[size]}
       strokeWidth={2}
-      className="animate-spin text-brand antialiased"
+      className="text-brand animate-spin antialiased"
     />
   );
 };

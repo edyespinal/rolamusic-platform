@@ -61,6 +61,7 @@
     "./tailwind.config": "./tailwind.config.ts",
     "./lib/*": "./src/lib/*.ts",
     "./components": "./src/components/ui/index.tsx",
+    "./icons": "./src/icons/index.tsx",
     "./hooks": "./src/hooks/index.tsx"
   }
 }

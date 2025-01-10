@@ -14,7 +14,6 @@ export * from "./Dialog/Dialog";
 export * from "./DropdownMenu/DropdownMenu";
 export * from "./FileInput/FileInput";
 export * from "./Form/Form";
-export * from "./Icon/Icon";
 export * from "./Input/Input";
 export * from "./InputOTP/InputOTP";
 export * from "./Label/Label";

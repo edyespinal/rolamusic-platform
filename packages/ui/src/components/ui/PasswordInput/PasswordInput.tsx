@@ -1,6 +1,6 @@
 import React from "react";
 import { cn } from "@rola/tailwind-config/utils";
-import { Icon } from "../Icon/Icon";
+import { Eye, EyeOff } from "lucide-react";
 import { Input } from "../Input/Input";
 
 type PasswordInputProps = React.InputHTMLAttributes<HTMLInputElement>;
@@ -18,14 +18,12 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
           {...props}
         />
         {showPassword ? (
-          <Icon
-            name="eye-off"
+          <EyeOff
             className="absolute right-3 cursor-pointer"
             onClick={() => setShowPassword(!showPassword)}
           />
         ) : (
-          <Icon
-            name="eye"
+          <Eye
             className="absolute right-3 cursor-pointer"
             onClick={() => setShowPassword(!showPassword)}
           />

@@ -1,7 +1,7 @@
 import React from "react";
 import Dropzone, { DropzoneProps, FileRejection } from "react-dropzone";
 import { cn } from "@rola/tailwind-config/utils";
-import { Icon } from "../Icon/Icon";
+import { Upload } from "lucide-react";
 import { ScrollArea } from "../ScrollArea/ScrollArea";
 import { FileCard } from "./FileCard";
 import { useControllableState } from "../../../hooks/useControllableState";
@@ -126,8 +126,8 @@ function FileInput(props: FileInputProps) {
         {({ getRootProps, getInputProps }) => (
           <div
             className={cn(
-              "group relative grid h-52 w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-gray-dark px-5 py-2.5 text-center transition hover:bg-background/50",
-              "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+              "border-gray-dark hover:bg-background/50 group relative grid h-52 w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed px-5 py-2.5 text-center transition",
+              "ring-offset-background focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
               className
             )}
             {...getRootProps()}
@@ -136,17 +136,16 @@ function FileInput(props: FileInputProps) {
             <input {...getInputProps()} />
             <div className="flex flex-col items-center justify-center gap-4 sm:px-5">
               <div className="rounded-full border border-dashed p-3">
-                <Icon
-                  name="upload"
-                  className="size-7 text-muted-foreground"
+                <Upload
+                  className="text-muted-foreground size-7"
                   aria-hidden="true"
                 />
               </div>
               <div className="space-y-px">
-                <p className="font-medium text-muted-foreground">
+                <p className="text-muted-foreground font-medium">
                   Arrastra y suelta los archivos aquí, o haz clic para cargar
                 </p>
-                <p className="text-sm text-muted-foreground/70">
+                <p className="text-muted-foreground/70 text-sm">
                   Puedes subir
                   {maxFiles > 1
                     ? ` ${maxFiles === Infinity ? "multiple" : maxFiles}

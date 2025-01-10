@@ -4,10 +4,9 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Dot } from "lucide-react";
 import { cn } from "@rola/tailwind-config/utils";
 import { Button } from "../Button/Button";
-import { Icon } from "../Icon/Icon";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -270,8 +269,7 @@ const CarouselDots = React.forwardRef<
       {api
         ?.slideNodes()
         .map((_, index) => (
-          <Icon
-            name="dot"
+          <Dot
             size={48}
             className={cn(
               "cursor-pointer",
