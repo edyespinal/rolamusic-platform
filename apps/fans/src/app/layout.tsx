@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import { Toaster } from "@rola/ui/components";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Provider as JotaiProvider } from "jotai";
-import { LayoutProps } from "../typings/globals";
+import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "@rola/ui/components";
 import { cn } from "@rola/tailwind-config/utils";
+import { LayoutProps } from "../typings/globals";
 import { Header } from "@components/Header/Header";
 import { Footer } from "@components/Footer/Footer";
 import "../styles/globals.css";
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: Readonly<LayoutProps>) {
           <JotaiProvider>
             <Header />
             {children}
+            <Analytics />
             <Footer />
           </JotaiProvider>
           <Toaster />
