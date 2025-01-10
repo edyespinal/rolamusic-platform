@@ -6,6 +6,7 @@ import { formatGenres, Genre } from "@rola/services/utils";
 import {
   Carousel,
   CarouselContent,
+  CarouselDots,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
@@ -97,7 +98,10 @@ function ArtistPageUI({
                     }
 
                     return (
-                      <CarouselItem key={i} className="mx-auto lg:basis-1/3">
+                      <CarouselItem
+                        key={i}
+                        className="mx-auto basis-11/12 lg:basis-1/3"
+                      >
                         <SubscriptionTier
                           key={tier.name}
                           artistId={id}
@@ -112,6 +116,7 @@ function ArtistPageUI({
                 </CarouselContent>
                 <CarouselPrevious className="-left-8 lg:-left-12" />
                 <CarouselNext className="-right-8 lg:-right-12" />
+                <CarouselDots />
               </Carousel>
             </Container>
           )}
