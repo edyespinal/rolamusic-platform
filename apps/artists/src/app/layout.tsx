@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { extractRouterConfig } from "uploadthing/server";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { Provider } from "jotai";
+import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@rola/ui/components";
 import { LayoutProps } from "@typings/globals";
 import { storageFileRouter } from "./api/uploadthing/core";
@@ -24,7 +25,10 @@ export default function RootLayout({ children }: Readonly<LayoutProps>) {
           <NextSSRPlugin
             routerConfig={extractRouterConfig(storageFileRouter)}
           />
-          <Provider>{children}</Provider>
+          <Provider>
+            {children}
+            <Analytics />
+          </Provider>
           <Toaster />
         </body>
       </html>

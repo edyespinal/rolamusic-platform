@@ -13,6 +13,7 @@
     "@rola/services": "workspace:^",
     "@rola/ui": "workspace:^",
     "@uploadthing/react": "^7.0.3",
+    "@vercel/analytics": "^1.4.1",
     "jotai": "^2.8.4",
     "next": "14.2.7",
     "react": "^18",

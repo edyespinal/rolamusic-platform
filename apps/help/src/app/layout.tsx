@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@rola/tailwind-config/utils";
 import { Header } from "@components/Header/Header";
 import { Footer } from "@components/Footer/Footer";
 import { LayoutProps } from "@typings/globals";
-import "@styles/globals.css";
 import { Container } from "@rola/ui/components";
+import "@styles/globals.css";
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -26,7 +27,10 @@ function RootLayout(props: Readonly<LayoutProps>) {
         )}
       >
         <Header />
-        <Container size="md">{children}</Container>
+        <Container size="md">
+          {children}
+          <Analytics />
+        </Container>
         <Footer />
       </body>
     </html>
