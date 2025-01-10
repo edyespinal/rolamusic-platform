@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-
 import {
   Artist,
   ArtistCommunity,
@@ -10,12 +9,12 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
   Button,
-  Icon,
   DropdownMenuContent,
   DropdownMenuItem,
   Container,
   useToast,
 } from "@rola/ui/components";
+import { MoreVerticalIcon } from "@rola/ui/icons";
 import { activateArtist } from "../actions";
 
 function ArtistRow({
@@ -52,7 +51,7 @@ function ArtistRow({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost">
-              <Icon name="more-vertical" />
+              <MoreVerticalIcon />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

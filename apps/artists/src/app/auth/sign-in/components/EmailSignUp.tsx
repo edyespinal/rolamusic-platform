@@ -10,11 +10,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Icon,
   Input,
   PasswordInput,
   Text,
 } from "@rola/ui/components";
+import { ArrowLeftIcon } from "@rola/ui/icons";
 import { EmailAuthProps } from "../types";
 
 function EmailSignUp({
@@ -30,7 +30,7 @@ function EmailSignUp({
         size="icon"
         onClick={() => handleSignInTypeChange("google")}
       >
-        <Icon name="arrow-left" />
+        <ArrowLeftIcon />
       </Button>
       <Form {...form}>
         <form

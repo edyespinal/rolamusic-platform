@@ -9,9 +9,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Icon,
   Input,
+  PasswordInput,
 } from "@rola/ui/components";
+import { ArrowLeftIcon } from "@rola/ui/icons";
 import { EmailAuthProps } from "../types";
 
 function EmailSignIn({
@@ -27,7 +28,7 @@ function EmailSignIn({
         size="icon"
         onClick={() => handleSignInTypeChange("google")}
       >
-        <Icon name="arrow-left" />
+        <ArrowLeftIcon />
       </Button>
 
       <Form {...form}>
@@ -60,14 +61,14 @@ function EmailSignIn({
               <FormItem>
                 <FormLabel>Contraseña</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Contraseña" {...field} />
+                  <PasswordInput placeholder="Contraseña" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="text-center pt-8">
+          <div className="pt-8 text-center">
             <Button type="submit" loading={isLoading}>
               Iniciar sesión
             </Button>

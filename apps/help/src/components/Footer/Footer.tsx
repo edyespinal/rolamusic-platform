@@ -1,6 +1,7 @@
 import React from "react";
-import { Container, Icon } from "@rola/ui/components";
 import Link from "next/link";
+import { Container } from "@rola/ui/components";
+import { InstagramIcon, YouTubeIcon } from "@rola/ui/icons";
 
 function Footer() {
   return (
@@ -43,7 +44,7 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Icon name="instagram" size={24} strokeWidth={2} />
+              <InstagramIcon size={24} strokeWidth={2} />
             </a>
             <a
               href="http://www.youtube.com/@rolamusicapp"
@@ -51,7 +52,7 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Icon name="youtube" size={26} strokeWidth={2} />
+              <YouTubeIcon size={26} strokeWidth={2} />
             </a>
           </div>
         </div>

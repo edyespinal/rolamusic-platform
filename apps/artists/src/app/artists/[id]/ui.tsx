@@ -10,7 +10,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  Icon,
   Input,
   Loader,
   MultiSelector,
@@ -29,8 +28,9 @@ import {
   Title,
   Underline,
 } from "@rola/ui/components";
+import { PlusIcon, XIcon } from "@rola/ui/icons";
 import { UTUploadButton } from "../../../utils/uploadthing";
-import { Artist, ArtistCommunity } from "@rola/services/schemas";
+import { Artist } from "@rola/services/schemas";
 import {
   genresListOptions,
   states,
@@ -373,7 +373,7 @@ function ArtistPageUI({ userId, artist }: { userId: string; artist: Artist }) {
                 size="icon"
                 onClick={() => removeMember(index)}
               >
-                <Icon name="x" />
+                <XIcon />
               </Button>
             </Container>
           ))}
@@ -384,7 +384,7 @@ function ArtistPageUI({ userId, artist }: { userId: string; artist: Artist }) {
             variant="outline"
             onClick={() => addMember({ name: "", role: "" })}
           >
-            <Icon name="plus" />
+            <PlusIcon />
             Agregar integrante
           </Button>
 

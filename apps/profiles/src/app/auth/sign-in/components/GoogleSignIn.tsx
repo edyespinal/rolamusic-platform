@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Button, Container, Icon, Text } from "@rola/ui/components";
+import { Button, Container, Text } from "@rola/ui/components";
+import { MailIcon } from "@rola/ui/icons";
 import { GoogleSignInProps } from "../types";
 
 function GoogleSignIn({
@@ -22,12 +23,12 @@ function GoogleSignIn({
           Continuar con Google
         </Button>
         <Button onClick={() => handleLoginTypeChange("register")}>
-          <Icon name="mail" className="mr-2" />
+          <MailIcon className="mr-2" />
           Continuar con email
         </Button>
       </div>
 
-      <div className="py-16 text-center text-brand">
+      <div className="text-brand py-16 text-center">
         <Text>¿Ya tienes una cuenta?</Text>
         <Button variant="link" onClick={() => handleLoginTypeChange("email")}>
           Iniciar sesión

@@ -8,12 +8,9 @@ import {
   Text,
   Title,
   Underline,
-  Button,
-  Icon,
 } from "@rola/ui/components";
-import { artistFaq, userFaq } from "./faq";
-import Link from "next/link";
 import { BackButton } from "@components/BackButton/BackButton";
+import { artistFaq, userFaq } from "./faq";
 
 function FAQPageUI() {
   return (

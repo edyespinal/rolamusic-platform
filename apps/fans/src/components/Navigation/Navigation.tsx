@@ -1,18 +1,18 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import {
   Button,
   Container,
-  Icon,
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@rola/ui/components";
+import { ArrowRightIcon } from "@rola/ui/icons";
 import { NavLink } from "@components/Header/NavLink";
 import { UserMenu } from "@components/UserMenu/UserMenu";
 import MenuIcon from "@assets/img/icons/menu.svg";
-import Link from "next/link";
 
 function Navigation() {
   return (
@@ -31,14 +31,14 @@ function Navigation() {
         >
           <Button size="xs">
             Iniciar sesión de artista
-            <Icon name="arrow-right" className="ml-2" />
+            <ArrowRightIcon className="ml-2" />
           </Button>
         </a>
         <SignedOut>
           <Link href="/auth/sign-in">
             <Button variant="outline" size="xs">
               Iniciar sesión de fan
-              <Icon name="arrow-right" className="ml-2" />
+              <ArrowRightIcon className="ml-2" />
             </Button>
           </Link>
         </SignedOut>
@@ -62,7 +62,7 @@ function Navigation() {
             <SignedOut>
               <Button variant="outline" size="xs">
                 Iniciar sesión de fan
-                <Icon name="arrow-right" className="ml-2" />
+                <ArrowRightIcon className="ml-2" />
               </Button>
             </SignedOut>
             <SignedIn>

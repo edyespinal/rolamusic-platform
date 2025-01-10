@@ -9,8 +9,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  Icon,
   Input,
   Text,
   Title,
@@ -18,6 +16,7 @@ import {
 import Image from "next/image";
 import { useRolaTalksData } from "./data";
 import { PageHeader } from "@components/PageHeader/PageHeader";
+import { PlayCircleIcon } from "@rola/ui/icons";
 
 function RolaTalksPageUI({ episodes }: { episodes: PodcastEpisode[] }) {
   const { form, handleSubmit, isLoading } = useRolaTalksData(episodes);
@@ -80,8 +79,7 @@ function RolaTalksPageUI({ episodes }: { episodes: PodcastEpisode[] }) {
                     width={400}
                     height={300}
                   />
-                  <Icon
-                    name="play-circle"
+                  <PlayCircleIcon
                     size={64}
                     strokeWidth={1.5}
                     className="text-brand absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/50 p-1"

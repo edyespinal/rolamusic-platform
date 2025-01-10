@@ -24,7 +24,7 @@ function LoginUI() {
   } = useSignInData();
 
   return (
-    <Container size="sm" className="flex flex-col justify-center">
+    <Container size="sm" className="flex flex-col pt-24">
       <Image
         src={Background}
         alt="Background"

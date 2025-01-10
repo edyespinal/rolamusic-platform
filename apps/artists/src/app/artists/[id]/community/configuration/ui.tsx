@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Button, Container, Form, Icon, Title } from "@rola/ui/components";
+import { Button, Container, Form, Title } from "@rola/ui/components";
+import { PlusIcon } from "@rola/ui/icons";
 import { ArtistSubscriptionTier } from "@rola/services/schemas";
 import { useCommunityConfigurationData } from "./data";
 import { Tier } from "./_components/Tier";
@@ -63,7 +64,7 @@ function CommunityConfigurationPageUI({
                   })
                 }
               >
-                <Icon name="plus" className="mr-2" />
+                <PlusIcon className="mr-2" />
                 Agregar suscripción
               </Button>
             </Container>

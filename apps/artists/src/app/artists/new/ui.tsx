@@ -10,7 +10,6 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Icon,
   Input,
   Select,
   SelectContent,
@@ -20,6 +19,7 @@ import {
   Title,
   Underline,
 } from "@rola/ui/components";
+import { PlusIcon, XIcon } from "@rola/ui/icons";
 import { useNewArtistData } from "./data";
 import {
   statesOptions,
@@ -184,7 +184,7 @@ function NewArtistPageUI({ userEmail }: { userEmail?: string }) {
                   variant="destructive"
                   onClick={() => remove(index)}
                 >
-                  <Icon name="x" />
+                  <XIcon />
                 </Button>
               </Container>
             ))}
@@ -195,7 +195,7 @@ function NewArtistPageUI({ userEmail }: { userEmail?: string }) {
               variant="outline"
               onClick={() => append({ name: "", role: "" })}
             >
-              <Icon name="plus" />
+              <PlusIcon />
             </Button>
 
             <Container className="text-center">

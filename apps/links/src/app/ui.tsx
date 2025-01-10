@@ -1,9 +1,17 @@
 "use client";
 
 import React from "react";
-import { Button, Container, Icon, Logo, Text } from "@rola/ui/components";
-import { Platforms, links } from "@helpers/links";
 import Image from "next/image";
+import { Button, Container, Logo, Text } from "@rola/ui/components";
+import {
+  AudioWaveFormIcon,
+  GlobeIcon,
+  InstagramIcon,
+  Music2Icon,
+  ShoppingBasketIcon,
+  YouTubeIcon,
+} from "@rola/ui/icons";
+import { Platforms, links } from "@helpers/links";
 import Talks from "@assets/img/rola-talks.jpg";
 import Sessions from "@assets/img/rola-sessions.jpg";
 import Shop from "@assets/img/rola-shop.webp";
@@ -54,27 +62,28 @@ function HomePageUI() {
 
       <Container className="mb-16 w-60 items-center space-y-4">
         <Button full onClick={() => redirectTo("youtube")}>
-          <Icon name="youtube" className="mr-2" />
+          <YouTubeIcon className="mr-2" />
           YouTube
         </Button>
-        <Button full onClick={() => redirectTo("instagram")}>
-          <Icon name="instagram" className="mr-2" />
-          Instagram
+        <Button full onClick={() => redirectTo("rolaShop")}>
+          <ShoppingBasketIcon className="mr-2" />
+          ROLA Shop
         </Button>
+
         <Button full onClick={() => redirectTo("spotify")}>
-          <Icon name="audio-waveform" className="mr-2" />
+          <AudioWaveFormIcon className="mr-2" />
           ROLA Playlists
         </Button>
         <Button full onClick={() => redirectTo("tiktok")}>
-          <Icon name="music-2" className="mr-2" />
+          <Music2Icon className="mr-2" />
           TikTok
         </Button>
-        <Button full onClick={() => redirectTo("rolaShop")}>
-          <Icon name="shopping-basket" className="mr-2" />
-          ROLA Shop
+        <Button full onClick={() => redirectTo("instagram")}>
+          <InstagramIcon className="mr-2" />
+          Instagram
         </Button>
         <Button full onClick={() => redirectTo("web")}>
-          <Icon name="globe" className="mr-2" />
+          <GlobeIcon className="mr-2" />
           Web
         </Button>
       </Container>

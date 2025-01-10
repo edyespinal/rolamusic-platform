@@ -1,10 +1,11 @@
-import { Container, Icon } from "@rola/ui/components";
+import { Container } from "@rola/ui/components";
+import { InstagramIcon, YouTubeIcon } from "@rola/ui/icons";
 
 function Footer() {
   return (
     <Container
       size="xl"
-      className="flex w-full flex-col justify-between border-t border-brand p-0 text-sm lg:flex-row"
+      className="border-brand flex w-full flex-col justify-between border-t p-0 text-sm lg:flex-row"
     >
       <div className="flex flex-col gap-4 pt-2 text-center lg:flex-row">
         <a
@@ -40,7 +41,7 @@ function Footer() {
 
       <div className="mt-2 w-full text-center lg:mt-0 lg:w-auto">
         <div className="lg:flex lg:justify-between">
-          <div className="mb-4 mt-2 flex w-full flex-col justify-center gap-4 px-2 font-medium text-brand lg:flex-row">
+          <div className="text-brand mb-4 mt-2 flex w-full flex-col justify-center gap-4 px-2 font-medium lg:flex-row">
             <a
               href="https://help.rolamusic.app/faq"
               className="hover:text-white"
@@ -55,7 +56,7 @@ function Footer() {
             </a>
           </div>
 
-          <div className="mx-auto flex max-w-[30%] items-center justify-center gap-4 bg-brand px-4 py-2 text-xl text-neutral-900">
+          <div className="bg-brand mx-auto flex max-w-[30%] items-center justify-center gap-4 px-4 py-2 text-xl text-neutral-900">
             <a
               href="https://www.instagram.com/rolamusic.app"
               className="hover:text-white"
@@ -63,7 +64,7 @@ function Footer() {
               rel="noopener noreferrer"
             >
               <span className="hidden">Síguenos en Facebook</span>
-              <Icon name="instagram" size={21} />
+              <InstagramIcon size={21} />
             </a>
 
             <a
@@ -73,7 +74,7 @@ function Footer() {
               rel="noopener noreferrer"
             >
               <span className="hidden">Suscríbete a nuestro canal YouTube</span>
-              <Icon name="youtube" size={26} />
+              <YouTubeIcon size={26} />
             </a>
           </div>
         </div>

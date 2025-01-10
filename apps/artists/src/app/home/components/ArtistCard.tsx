@@ -1,18 +1,18 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useAtom } from "jotai";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
   Container,
-  Icon,
   Text,
 } from "@rola/ui/components";
+import { SquarePenIcon } from "@rola/ui/icons";
 import { Artist } from "@rola/services/schemas";
 import { cn } from "@rola/tailwind-config/utils";
-import { useRouter } from "next/navigation";
 import { currentArtist } from "../../../store";
-import { useAtom } from "jotai";
 
 function ArtistCard({ artist }: { artist: Artist }) {
   const router = useRouter();
@@ -39,7 +39,7 @@ function ArtistCard({ artist }: { artist: Artist }) {
           No activo
         </span>
       )}
-      <Icon name="square-pen" className="text-brand absolute right-4 top-4" />
+      <SquarePenIcon className="text-brand absolute right-4 top-4" />
       <Avatar className="size-24">
         <AvatarImage src={artist.profileURL} alt={artist.name} />
         <AvatarFallback>

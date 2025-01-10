@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { PencilIcon, PlusIcon, XIcon } from "@rola/ui/icons";
 import {
   Button,
   Container,
@@ -8,7 +9,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  Icon,
   Input,
   Switch,
   Title,
@@ -67,12 +67,12 @@ function Tier({
         >
           {isEditable ? (
             <React.Fragment>
-              <Icon name="x" className="mr-2" />
+              <XIcon className="mr-2" />
               Cancelar
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Icon name="pencil" className="mr-2" />
+              <PencilIcon className="mr-2" />
               Editar suscripción
             </React.Fragment>
           )}
@@ -207,7 +207,7 @@ function Tier({
           disabled={!isEditable}
           onClick={() => addPerk({ name: "" })}
         >
-          <Icon name="plus" />
+          <PlusIcon />
         </Button>
 
         {isEditable && (

@@ -1,10 +1,11 @@
 "use client";
 
+import React from "react";
+import Link from "next/link";
 import { ArtistSubscriptionTier } from "@rola/services/schemas";
 import { cn } from "@rola/tailwind-config/utils";
-import { Button, Container, Icon, Text, Title } from "@rola/ui/components";
-import Link from "next/link";
-import React from "react";
+import { Button, Container, Text, Title } from "@rola/ui/components";
+import { CheckIcon } from "@rola/ui/icons";
 
 function SubscriptionTier({
   artistId,
@@ -58,7 +59,7 @@ function SubscriptionTier({
         <Text className="text-brand">¡Gracias por tu apoyo!</Text>
         {tier.perks?.map((perk, i) => (
           <Text key={i} className="flex">
-            <Icon name="check" size={20} className="text-brand mr-1" />
+            <CheckIcon size={20} className="text-brand mr-1" />
             {perk}
           </Text>
         ))}

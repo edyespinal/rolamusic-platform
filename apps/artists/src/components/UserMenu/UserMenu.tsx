@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
   Button,
   Container,
-  Icon,
   Loader,
   Popover,
   PopoverContent,
@@ -15,8 +16,7 @@ import {
   Separator,
   Title,
 } from "@rola/ui/components";
-import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
-import Link from "next/link";
+import { CircleUserIcon } from "@rola/ui/icons";
 
 function UserMenu() {
   const { user, isLoaded } = useUser();
@@ -67,7 +67,7 @@ function UserMenu() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Icon name="circle-user" />
+                <CircleUserIcon />
                 Mi Perfil
               </a>
               <Separator />

@@ -6,9 +6,9 @@ import {
   AlertDescription,
   AlertTitle,
   Container,
-  Icon,
   Text,
 } from "@rola/ui/components";
+import { AlertCircleIcon } from "@rola/ui/icons";
 
 function InactiveArtistAlert() {
   return (
@@ -16,7 +16,7 @@ function InactiveArtistAlert() {
       <Alert variant="destructive" title="Artista inactivo">
         <AlertTitle>Artista inactivo</AlertTitle>
         <AlertDescription className="flex items-center gap-2">
-          <Icon name="alert-circle" />
+          <AlertCircleIcon />
           <Text>Este artista no está activo en la plataforma.</Text>
         </AlertDescription>
       </Alert>

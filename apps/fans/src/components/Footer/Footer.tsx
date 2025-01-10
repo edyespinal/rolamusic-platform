@@ -1,4 +1,5 @@
-import { Container, Icon } from "@rola/ui/components";
+import { Container } from "@rola/ui/components";
+import { InstagramIcon, YouTubeIcon } from "@rola/ui/icons";
 
 function Footer() {
   return (
@@ -64,7 +65,7 @@ function Footer() {
               rel="noopener noreferrer"
             >
               <span className="hidden">Síguenos en Facebook</span>
-              <Icon name="instagram" size={21} />
+              <InstagramIcon size={21} />
             </a>
 
             <a
@@ -74,7 +75,7 @@ function Footer() {
               rel="noopener noreferrer"
             >
               <span className="hidden">Suscríbete a nuestro canal YouTube</span>
-              <Icon name="youtube" size={26} />
+              <YouTubeIcon size={26} />
             </a>
           </div>
         </div>

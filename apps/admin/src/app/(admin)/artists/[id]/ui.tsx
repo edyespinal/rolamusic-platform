@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-
+import Link from "next/link";
 import { statesOptions, years } from "@rola/services/utils";
 import {
   Button,
@@ -14,7 +14,6 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Icon,
   Input,
   Select,
   SelectContent,
@@ -24,9 +23,8 @@ import {
   Switch,
   Textarea,
 } from "@rola/ui/components";
-import { PageUIProps } from "./types";
+import { ArrowLeftIcon } from "@rola/ui/icons";
 import { useArtistsPageData } from "./data";
-import Link from "next/link";
 import { Artist, ArtistCommunity, User } from "@rola/services/schemas";
 
 function ArtistPageUI({
@@ -52,7 +50,7 @@ function ArtistPageUI({
     <Container>
       <Link href="/artists">
         <Button size="icon" variant="outline">
-          <Icon name="arrow-left" />
+          <ArrowLeftIcon />
         </Button>
       </Link>
 

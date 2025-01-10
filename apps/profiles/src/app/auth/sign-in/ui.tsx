@@ -22,9 +22,9 @@ function LoginUI() {
   } = useSignInData();
 
   return (
-    <Container size="sm" className="pt-12 pb-24">
+    <Container size="sm" className="pb-24 pt-12">
       <div className="mb-12">
-        <Title order={2}>Cuenta de artista</Title>
+        <Title order={2}>Mi cuenta</Title>
         <Underline />
       </div>
 

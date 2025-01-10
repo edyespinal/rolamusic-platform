@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-
-import { Container, Icon, Text, useToast } from "@rola/ui/components";
-import { cn } from "@rola/tailwind-config/utils";
 import { useUser } from "@clerk/nextjs";
+import { Container, Text, useToast } from "@rola/ui/components";
+import { CheckIcon } from "@rola/ui/icons";
+import { cn } from "@rola/tailwind-config/utils";
 
 function UploadOverlay({
   children,
@@ -53,7 +53,7 @@ function UploadOverlay({
     toast({
       title: "Imagen actualizada",
       description: "Imagen de perfil actualizada correctamente",
-      icon: <Icon name="check" />,
+      icon: <CheckIcon />,
     });
   }
 

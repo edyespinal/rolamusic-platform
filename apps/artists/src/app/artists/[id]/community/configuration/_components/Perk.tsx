@@ -1,16 +1,15 @@
 "use client";
 
 import React from "react";
-import { ArtistSubscriptionTier } from "@rola/services/schemas";
+import { UseFieldArrayRemove, UseFormReturn } from "react-hook-form";
 import {
   Button,
   FormControl,
   FormField,
   FormItem,
-  Icon,
   Input,
 } from "@rola/ui/components";
-import { UseFieldArrayRemove, UseFormReturn } from "react-hook-form";
+import { TrashIcon } from "@rola/ui/icons";
 import { FormValues } from "../types";
 
 function Perk({
@@ -53,7 +52,7 @@ function Perk({
           removePerk(perkIndex);
         }}
       >
-        <Icon name="trash" />
+        <TrashIcon />
       </Button>
     </div>
   );
