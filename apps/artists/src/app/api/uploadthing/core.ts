@@ -123,8 +123,75 @@ const storageFileRouter = {
         url: file.url,
       };
     }),
+  artistPostFile: uploader({
+    "image/jpeg": {
+      acl: "public-read",
+      maxFileSize: "4MB",
+      maxFileCount: 1,
+      minFileCount: 1,
+    },
+    "image/png": {
+      acl: "public-read",
+      maxFileSize: "4MB",
+      maxFileCount: 1,
+      minFileCount: 1,
+    },
+    "image/webp": {
+      acl: "public-read",
+      maxFileSize: "4MB",
+      maxFileCount: 1,
+      minFileCount: 1,
+    },
+    "audio/mpeg": {
+      acl: "public-read",
+      maxFileSize: "4MB",
+      maxFileCount: 1,
+      minFileCount: 1,
+    },
+    "audio/mp4": {
+      acl: "public-read",
+      maxFileSize: "4MB",
+      maxFileCount: 1,
+      minFileCount: 1,
+    },
+  })
+    .input(
+      z.object({
+        artistId: z.string(),
+        postId: z.string(),
+      })
+    )
+    .middleware(async ({ input, files }) => {
+      const user = await currentUser();
+      if (!user) {
+        throw new Error("Unauthorized");
+      }
+
+      const fileOverrides = files.map((file) => {
+        const name = `${input.artistId}-${input.postId}.${file.type.split("/")[1]}`;
+        return {
+          ...file,
+          name,
+        };
+      });
+
+      return {
+        artistId: input.artistId,
+        [UTFiles]: fileOverrides,
+      };
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      return {
+        url: file.url,
+      };
+    }),
 } satisfies FileRouter;
 
 type StorageFileRouter = typeof storageFileRouter;
+type StorageFileRouterKeys = keyof StorageFileRouter;
 
-export { storageFileRouter, type StorageFileRouter };
+export {
+  storageFileRouter,
+  type StorageFileRouter,
+  type StorageFileRouterKeys,
+};

@@ -19,6 +19,7 @@ async function createNewSubscriptionTier(
 
   await db.artists.createArtistSubscriptionTier(artistId, {
     active: payload.active,
+    access: payload.access,
     recommended: payload.recommended,
     name: payload.name,
     label: payload.label,

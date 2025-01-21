@@ -51,6 +51,7 @@ function CommunityConfigurationPageUI({
                 onClick={() =>
                   addTier({
                     active: true,
+                    access: tiers.length + 1,
                     recommended: false,
                     name: "",
                     label: "",

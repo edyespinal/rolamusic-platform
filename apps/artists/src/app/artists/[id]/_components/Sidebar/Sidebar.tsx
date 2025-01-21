@@ -14,8 +14,6 @@ import {
 import { usePathname } from "next/navigation";
 import { SidebarLink } from "./SidebarLink";
 import { Artist } from "@rola/services/schemas";
-import { useAtom } from "jotai";
-import { currentArtist } from "../../../../../store";
 
 function Sidebar({ artist }: { artist: Artist }) {
   const pathname = usePathname();
@@ -63,6 +61,12 @@ function Sidebar({ artist }: { artist: Artist }) {
               pathname={pathname}
             >
               Mi Comunidad
+            </SidebarLink>
+            <SidebarLink
+              href={`/artists/${artist?.id}/community/posts`}
+              pathname={pathname}
+            >
+              Mi contenido
             </SidebarLink>
             <SidebarLink
               href={`/artists/${artist?.id}/community/configuration`}

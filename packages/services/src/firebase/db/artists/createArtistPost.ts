@@ -2,7 +2,7 @@ import { arrayUnion, doc, FirestoreError, setDoc } from "firebase/firestore";
 import { ServiceError } from "../../../utils/serviceError";
 import { ARTISTS, COMMUNITY_INFO } from "../../../constants";
 import { db } from "../db";
-import { ArtistPost } from "@/schemas";
+import { ArtistPost } from "../../../schemas";
 
 async function createArtistPost(artistId: string, post: ArtistPost) {
   try {

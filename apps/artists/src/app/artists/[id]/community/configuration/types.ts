@@ -1,6 +1,7 @@
 export type FormTier = {
   tierId?: string;
   active: boolean;
+  access: number;
   recommended: boolean;
   name: string;
   label: string;
