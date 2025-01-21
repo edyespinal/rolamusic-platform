@@ -261,7 +261,7 @@ const CarouselDots = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute -bottom-12 left-1/2 flex -translate-x-1/2",
+        "absolute -bottom-12 left-1/2 flex -translate-x-1/2 items-center",
         className
       )}
       {...props}
@@ -270,7 +270,7 @@ const CarouselDots = React.forwardRef<
         ?.slideNodes()
         .map((_, index) => (
           <Dot
-            size={48}
+            size={api.selectedScrollSnap() === index ? 64 : 48}
             className={cn(
               "cursor-pointer",
               api.selectedScrollSnap() === index ? "text-brand" : "text-gray"
