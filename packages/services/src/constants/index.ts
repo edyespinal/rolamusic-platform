@@ -21,12 +21,8 @@ export const NIF = "NIF";
 export const BANK_TRANSFER = "bankTransfer";
 export const PAYPAL = "paypal";
 
-export const ARTIST_POST_TYPES = {
-  TEXT: "text",
-  PHOTO: "photo",
-  AUDIO: "audio",
-  VIDEO: "video",
-  LINK: "link",
-  PDF: "pdf",
-  POLL: "poll",
-};
+export const POST_TYPES = {
+  TEXT: "TEXT",
+  IMAGE: "IMAGE",
+  VIDEO: "VIDEO",
+} as const;

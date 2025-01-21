@@ -1,5 +1,6 @@
 import { createArtist } from "./createArtist";
 import { createArtistCommunity } from "./createArtistCommunity";
+import { createArtistPost } from "./createArtistPost";
 import { createArtistSubscriptionTier } from "./createArtistSubscriptionTier";
 import { getArtists } from "./getArtists";
 import { getArtist } from "./getArtist";
@@ -18,6 +19,7 @@ import { updateArtistSubscriptionTier } from "./updateArtistSubscriptionTier";
 export const artistsServices = {
   createArtist,
   createArtistCommunity,
+  createArtistPost,
   createArtistSubscriptionTier,
   getArtists,
   getArtist,

@@ -1,5 +1,5 @@
-import { ARTIST_POST_TYPES } from "../../constants";
 import { z } from "zod";
+import { POST_TYPES } from "../../constants";
 
 export const postComment = z.object({
   id: z.string(),
@@ -12,22 +12,22 @@ export const postComment = z.object({
 
 export const artistPostSchema = z.object({
   id: z.string(),
+  active: z.boolean(),
+  access: z.number().nonnegative().int(),
   type: z.union([
-    z.literal(ARTIST_POST_TYPES.AUDIO),
-    z.literal(ARTIST_POST_TYPES.LINK),
-    z.literal(ARTIST_POST_TYPES.PDF),
-    z.literal(ARTIST_POST_TYPES.PHOTO),
-    z.literal(ARTIST_POST_TYPES.TEXT),
-    z.literal(ARTIST_POST_TYPES.VIDEO),
-    z.literal(ARTIST_POST_TYPES.POLL),
+    z.literal(POST_TYPES.TEXT),
+    z.literal(POST_TYPES.IMAGE),
+    z.literal(POST_TYPES.VIDEO),
   ]),
-  title: z.string().min(1, "El titulo del post no puede estar vacío"),
-  image: z.string().url("La imagen no es valida").optional(),
+  url: z.string().optional(),
   caption: z.string().min(1, "El contenido del post no puede estar vacío"),
   date: z.date(),
-  likes: z.number().nonnegative(),
-  comments: z.object({
-    total: z.number().nonnegative(),
-    topComments: z.array(postComment).max(3),
-  }),
+  likes: z.array(z.string()),
+  comments: z.array(postComment),
+  commentsSummary: z
+    .object({
+      total: z.number().nonnegative(),
+      topComments: z.array(postComment).max(3),
+    })
+    .optional(),
 });

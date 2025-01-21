@@ -19,7 +19,7 @@ async function getArtistSubscriptionTiers(
 
     return snapshot.docs
       .map((doc) => ({ ...doc.data(), id: doc.id }))
-      .sort((a, b) => a.prices.monthly.value - b.prices.monthly.value);
+      .sort((a, b) => a.access - b.access);
   } catch (e) {
     const error = e as FirebaseError;
 

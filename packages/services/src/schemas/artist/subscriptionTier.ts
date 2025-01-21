@@ -3,6 +3,7 @@ import { z } from "zod";
 export const subscriptionTierSchema = z.object({
   id: z.string(),
   active: z.boolean(),
+  access: z.number().nonnegative().int(),
   recommended: z.boolean(),
   name: z.string().min(1, "El nombre de la suscripción no puede estar vacío"),
   label: z.string().min(1, "El label de la suscripción no puede estar vacío"),
