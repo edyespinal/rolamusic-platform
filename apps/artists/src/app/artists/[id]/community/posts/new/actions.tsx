@@ -13,7 +13,7 @@ async function createArtistPost(artistId: string, post: ArtistPost) {
 
   const result = artistPostSchema.omit({ id: true }).safeParse({
     ...post,
-    likes: 0,
+    likes: [],
     comments: [],
   });
 
