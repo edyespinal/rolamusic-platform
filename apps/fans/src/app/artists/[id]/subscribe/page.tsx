@@ -31,12 +31,12 @@ async function SubscriptionPage({
   if (
     !userInfo?.stripeAccountId ||
     !paymentDetails?.stripeAccountId ||
-    !tiers
+    !tiers.data
   ) {
     redirect("/404");
   }
 
-  const selectedTier = tiers.find((t) => t.id === tier);
+  const selectedTier = tiers.data.find((t) => t.id === tier);
 
   if (!selectedTier) {
     redirect("/404");
@@ -46,7 +46,7 @@ async function SubscriptionPage({
     priceId: selectedTier.prices.monthly.priceId,
     customerId: userInfo.stripeAccountId,
     stripeAccountId: paymentDetails.stripeAccountId,
-    returnUrl: `${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}/subscribe/success?tier=${selectedTier.id}`,
+    returnUrl: `${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}/subscribe/success?tier=${selectedTier.id}&access=${selectedTier.access}`,
     cancelUrl: `${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`,
   });
 

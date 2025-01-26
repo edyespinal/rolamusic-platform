@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
+import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { db } from "@rola/services/firebase";
-import { currentUser } from "@clerk/nextjs/server";
 import { SubscriptionSuccessPageUI } from "./ui";
 
 async function SubscriptionSuccessPage({
@@ -11,7 +10,7 @@ async function SubscriptionSuccessPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const { id: artistId } = params;
-  const { tier, session_id } = searchParams;
+  const { tier, access, session_id } = searchParams;
   const user = await currentUser();
 
   if (!user || !session_id || !tier) {
@@ -19,6 +18,19 @@ async function SubscriptionSuccessPage({
   }
 
   await db.users.subscribeToArtist(user.id, artistId, tier as string);
+
+  await clerkClient.users.updateUserMetadata(user.id, {
+    publicMetadata: {
+      supporting: [
+        ...(user.publicMetadata.supporting as any[]),
+        {
+          artist: artistId,
+          tier: tier as string,
+          access: access as string,
+        },
+      ],
+    },
+  });
 
   return <SubscriptionSuccessPageUI artistId={artistId} />;
 }
