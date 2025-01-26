@@ -24,7 +24,7 @@ async function ArtistsPage() {
     artistsInfo.push({
       info: artist,
       community,
-      tiers,
+      tiers: tiers?.data,
     });
   }
 
