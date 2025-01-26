@@ -10,7 +10,7 @@ import {
   getDocs,
   FirestoreError,
 } from "firebase/firestore";
-import { podcastEpisodeCollection } from "../db";
+import { podcastEpisodeCollection } from "../utils";
 
 export async function getEpisodes({
   pageSize = 3,

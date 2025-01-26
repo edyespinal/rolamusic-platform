@@ -3,17 +3,9 @@ import { ARTISTS } from "../../../constants";
 import { Artist } from "../../../schemas/artist";
 import { RequiredFields } from "../../../utils/types";
 import { ServiceError } from "../../../utils/serviceError";
-import { artistsCollection, usersCollection, batch } from "../db";
+import { artistsCollection, usersCollection } from "../utils";
+import { batch } from "../db";
 
-/**
- * Creates a new artist in the artists collection, and adds the artist to the
- * admin's artists array.
- *
- * @param {RequiredFields<Omit<Artist, "id">> & { year: string }} newArtist
- *   The artist data to be created, including the admin's ID.
- * @return {Promise<Artist>} A promise that resolves with the created artist.
- * @throws {ServiceError} If the creation fails.
- */
 export async function createArtist(
   newArtist: RequiredFields<Omit<Artist, "id">> & { year: string }
 ): Promise<Artist> {

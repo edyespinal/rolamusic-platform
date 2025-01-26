@@ -1,14 +1,14 @@
-import { getDoc, doc, FirestoreError } from "firebase/firestore";
+import { getDoc, FirestoreError } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
-import { artistPaymentCollection } from "../db";
 import { ArtistPayment } from "../../../schemas";
+import { artistPaymentCollection } from "../utils";
 
 async function getArtistPaymentDetails(
-  id: string
+  artistId: string
 ): Promise<ArtistPayment | null> {
   try {
-    const ref = doc(artistPaymentCollection(id), id);
+    const ref = artistPaymentCollection(artistId);
     const paymentDoc = await getDoc(ref);
 
     if (!paymentDoc.exists()) {

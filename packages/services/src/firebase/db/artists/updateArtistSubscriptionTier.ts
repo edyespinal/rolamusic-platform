@@ -1,9 +1,9 @@
 import { doc, setDoc } from "firebase/firestore";
-import { ARTISTS, SUBSCRIPTION_TIERS } from "../../../constants";
+import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { FirebaseError } from "firebase/app";
-import { db } from "../db";
 import { ArtistSubscriptionTier } from "../../../schemas";
+import { subscriptionTiersCollection } from "../utils";
 
 async function updateArtistSubscriptionTier(
   artistId: string,
@@ -11,7 +11,7 @@ async function updateArtistSubscriptionTier(
   payload: Partial<ArtistSubscriptionTier>
 ) {
   try {
-    const ref = doc(db, ARTISTS, artistId, SUBSCRIPTION_TIERS, subscriptionId);
+    const ref = doc(subscriptionTiersCollection(artistId), subscriptionId);
 
     await setDoc(ref, payload, { merge: true });
 

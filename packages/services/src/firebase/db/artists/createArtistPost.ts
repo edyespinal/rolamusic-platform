@@ -1,26 +1,18 @@
-import { arrayUnion, doc, FirestoreError, setDoc } from "firebase/firestore";
+import { addDoc, FirestoreError, setDoc } from "firebase/firestore";
 import { ServiceError } from "../../../utils/serviceError";
-import { ARTISTS, COMMUNITY_INFO } from "../../../constants";
-import { db } from "../db";
+import { ARTISTS } from "../../../constants";
 import { ArtistPost } from "../../../schemas";
+import { artistPostCollectionDoc } from "../utils";
 
 async function createArtistPost(artistId: string, post: ArtistPost) {
   try {
-    const ref = doc(db, ARTISTS, artistId, COMMUNITY_INFO, artistId);
+    const ref = artistPostCollectionDoc(artistId, post.id);
 
-    await setDoc(
-      ref,
-      {
-        posts: arrayUnion(post),
-      },
-      {
-        merge: true,
-      }
-    );
+    const newPost = await setDoc(ref, post);
 
     return {
       success: true,
-      data: post,
+      data: newPost,
     };
   } catch (e) {
     const error = e as FirestoreError;

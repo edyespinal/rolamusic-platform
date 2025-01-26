@@ -7,6 +7,7 @@ import { getArtist } from "./getArtist";
 import { getActiveArtists } from "./getActiveArtists";
 import { getArtistCommunity } from "./getArtistCommunity";
 import { getArtistPaymentDetails } from "./getArtistPaymentDetails";
+import { getArtistPosts } from "./getArtistPosts";
 import { getArtistSubscriptionTiers } from "./getArtistSubscriptionTiers";
 import { updateArtist } from "./updateArtist";
 import { updateArtistActivation } from "./updateArtistActivation";
@@ -15,6 +16,7 @@ import { updateArtistCoverImage } from "./updateArtistCoverImage";
 import { updateArtistPaymentDetails } from "./updateArtistPaymentDetails";
 import { updateArtistProfileImage } from "./updateArtistProfileImage";
 import { updateArtistSubscriptionTier } from "./updateArtistSubscriptionTier";
+import { getArtistPost } from "./getArtistPost";
 
 export const artistsServices = {
   createArtist,
@@ -26,6 +28,8 @@ export const artistsServices = {
   getActiveArtists,
   getArtistCommunity,
   getArtistPaymentDetails,
+  getArtistPost,
+  getArtistPosts,
   getArtistSubscriptionTiers,
   updateArtist,
   updateArtistActivation,

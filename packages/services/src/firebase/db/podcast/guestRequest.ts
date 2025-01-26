@@ -2,18 +2,13 @@ import { setDoc, doc, FirestoreError } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { Guest } from "../../../schemas/guest";
 import { ServiceError } from "../../../utils/serviceError";
-import { guestsCollection } from "../db";
+import { guestsCollection } from "../utils";
 
-/**
- * Submits a guest request to the guests collection.
- *
- * @param guest The guest request data, without an ID.
- * @return A promise that resolves with true if the request is successful.
- * @throws ServiceError if the request fails.
- */
 async function guestRequest(guest: Omit<Guest, "id">) {
   try {
-    await setDoc(doc(guestsCollection), guest);
+    const ref = doc(guestsCollection);
+
+    await setDoc(ref, guest);
 
     return true;
   } catch (e) {

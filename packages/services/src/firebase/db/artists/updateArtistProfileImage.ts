@@ -1,15 +1,13 @@
 import { setDoc, doc, FirestoreError } from "firebase/firestore";
-import { artistsCollection } from "../db";
 import { ServiceError } from "../../../utils/serviceError";
 import { ARTISTS } from "../../../constants";
+import { artistsCollection } from "../utils";
 
 async function updateArtistProfileImage(id: string, imgUrl: string) {
   try {
-    await setDoc(
-      doc(artistsCollection, id),
-      { profileURL: imgUrl },
-      { merge: true }
-    );
+    const ref = doc(artistsCollection, id);
+
+    await setDoc(ref, { profileURL: imgUrl }, { merge: true });
 
     return {
       success: true,

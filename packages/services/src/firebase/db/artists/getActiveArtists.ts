@@ -8,7 +8,7 @@ import {
 import { ARTISTS } from "../../../constants";
 import { Artist } from "../../../schemas/artist";
 import { ServiceError } from "../../../utils/serviceError";
-import { artistsCollection } from "../db";
+import { artistsCollection } from "../utils";
 
 export async function getActiveArtists(pageSize = 10): Promise<Artist[]> {
   try {

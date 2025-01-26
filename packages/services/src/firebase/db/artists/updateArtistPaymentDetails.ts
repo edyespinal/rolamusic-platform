@@ -2,22 +2,16 @@ import { ARTISTS } from "../../../constants";
 import { ArtistPayment } from "../../../schemas/artist";
 import { ServiceError } from "../../../utils/serviceError";
 import { setDoc, doc, FirestoreError } from "firebase/firestore";
-import { artistPaymentCollection } from "../db";
+import { artistPaymentCollection } from "../utils";
 
-/**
- * Updates an artist payment details in the artist payment collection.
- *
- * @param {string} id - The ID of the artist to update.
- * @param {Partial<ArtistPayment>} data - The data to update the artist payment with.
- * @return {Promise<boolean>} A Promise that resolves with a boolean indicating if the update was successful.
- * @throws {ServiceError} If the update fails.
- */
 async function updateArtistPaymentDetails(
-  id: string,
+  artistId: string,
   data: Partial<ArtistPayment>
 ) {
   try {
-    await setDoc(doc(artistPaymentCollection(id), id), data, { merge: true });
+    const ref = artistPaymentCollection(artistId);
+
+    await setDoc(ref, data, { merge: true });
 
     return true;
   } catch (e) {

@@ -1,12 +1,14 @@
-import { getDoc, doc, FirestoreError } from "firebase/firestore";
+import { getDoc, FirestoreError } from "firebase/firestore";
 import { ArtistCommunity } from "../../../schemas/artist";
 import { ServiceError } from "../../../utils/serviceError";
 import { ARTISTS } from "../../../constants";
-import { artistCommunityCollection } from "../db";
+import { artistCommunityCollection } from "../utils";
 
-async function getArtistCommunity(id: string): Promise<ArtistCommunity | null> {
+async function getArtistCommunity(
+  artistId: string
+): Promise<ArtistCommunity | null> {
   try {
-    const ref = doc(artistCommunityCollection(id), id);
+    const ref = artistCommunityCollection(artistId);
 
     const communityDoc = await getDoc(ref);
 

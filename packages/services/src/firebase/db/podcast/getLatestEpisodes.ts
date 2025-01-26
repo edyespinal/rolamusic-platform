@@ -5,9 +5,9 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { podcastEpisodeCollection } from "../db";
 import { ServiceError } from "../../../utils/serviceError";
 import { PODCAST } from "../../../constants";
+import { podcastEpisodeCollection } from "../utils";
 
 export async function getLatestEpisodes(pageSize = 3) {
   try {

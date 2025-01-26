@@ -1,23 +1,20 @@
 import { FirebaseError } from "firebase/app";
-import {
-  collection,
-  addDoc,
-  doc,
-  setDoc,
-  arrayUnion,
-} from "firebase/firestore";
-import { ARTISTS, SUBSCRIPTION_TIERS } from "../../../constants";
+import { addDoc, setDoc, arrayUnion } from "firebase/firestore";
+import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
-import { artistCommunityCollection, db } from "../db";
 import { ArtistSubscriptionTier } from "../../../schemas";
+import {
+  artistCommunityCollection,
+  subscriptionTiersCollection,
+} from "../utils";
 
 async function createArtistSubscriptionTier(
   artistId: string,
   payload: Omit<ArtistSubscriptionTier, "id">
 ) {
   try {
-    const tiersRef = collection(db, ARTISTS, artistId, SUBSCRIPTION_TIERS);
-    const communityRef = doc(artistCommunityCollection(artistId), artistId);
+    const tiersRef = subscriptionTiersCollection(artistId);
+    const communityRef = artistCommunityCollection(artistId);
 
     const { id } = await addDoc(tiersRef, payload);
 

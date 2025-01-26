@@ -1,11 +1,13 @@
 import { doc, FirestoreError, setDoc } from "firebase/firestore";
-import { artistsCollection } from "../db";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
+import { artistsCollection } from "../utils";
 
 async function updateArtistActivation(id: string, active: boolean) {
   try {
-    await setDoc(doc(artistsCollection, id), { active }, { merge: true });
+    const ref = doc(artistsCollection, id);
+
+    await setDoc(ref, { active }, { merge: true });
 
     return {
       success: true,

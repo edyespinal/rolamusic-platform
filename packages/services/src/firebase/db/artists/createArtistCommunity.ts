@@ -1,14 +1,13 @@
-import { doc, FirestoreError, setDoc } from "firebase/firestore";
+import { FirestoreError, setDoc } from "firebase/firestore";
 import { ServiceError } from "../../../utils/serviceError";
-import { ARTISTS, COMMUNITY_INFO } from "../../../constants";
-import { db } from "../db";
+import { ARTISTS } from "../../../constants";
+import { artistCommunityCollection } from "../utils";
 
 async function createArtistCommunity(artistId: string) {
   try {
-    const ref = doc(db, ARTISTS, artistId, COMMUNITY_INFO, artistId);
+    const ref = artistCommunityCollection(artistId);
 
     await setDoc(ref, {
-      posts: [],
       subscriptions: {
         total: 0,
         topFans: [],

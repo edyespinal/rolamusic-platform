@@ -2,7 +2,7 @@ import { getDocs, FirestoreError } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { Guest } from "../../../schemas/guest";
 import { ServiceError } from "../../../utils/serviceError";
-import { guestsCollection } from "../db";
+import { guestsCollection } from "../utils";
 
 async function getGuests(): Promise<Guest[]> {
   try {

@@ -1,17 +1,12 @@
-import {
-  arrayUnion,
-  doc,
-  FirestoreError,
-  getDoc,
-  setDoc,
-} from "firebase/firestore";
+import { arrayUnion, doc, FirestoreError, getDoc } from "firebase/firestore";
+import { ServiceError } from "../../../utils/serviceError";
+import { USERS } from "../../../constants";
 import {
   artistCommunityCollection,
   artistsCollection,
   usersCollection,
-} from "../db";
-import { ServiceError } from "../../../utils/serviceError";
-import { USERS } from "../../../constants";
+} from "../utils";
+import { batch } from "../db";
 
 export async function subscribeToArtist(
   userId: string,
@@ -47,10 +42,7 @@ export async function subscribeToArtist(
     }
 
     const artistRef = doc(artistsCollection, artistId);
-    const artistCommunityRef = doc(
-      artistCommunityCollection(artistId),
-      artistId
-    );
+    const artistCommunityRef = artistCommunityCollection(artistId);
 
     const [artist, artistCommunity] = await Promise.all([
       getDoc(artistRef),
@@ -82,43 +74,33 @@ export async function subscribeToArtist(
 
     test?.subscribers.push(userId);
 
-    await Promise.all([
-      setDoc(
-        userRef,
-        {
-          supporting: arrayUnion({
-            id: artist.id,
-            name: artistData.name,
-            profileURL: artistData.profileURL,
-            genres: artistData.genres,
-            tier: tierId,
-            active: true,
-          }),
-        },
-        { merge: true }
-      ),
-      setDoc(
-        artistRef,
-        {
-          fansSummary: {
-            total: artistData.fansSummary?.total
-              ? artistData.fansSummary.total + 1
-              : 1,
-          },
-        },
-        { merge: true }
-      ),
-      setDoc(
-        artistCommunityRef,
-        {
-          subscriptions: {
-            total: artistCommunityData.subscriptions.total + 1,
-            tiers: [...artistCommunityData.subscriptions.tiers],
-          },
-        },
-        { merge: true }
-      ),
-    ]);
+    batch.update(userRef, {
+      supporting: arrayUnion({
+        id: artist.id,
+        name: artistData.name,
+        profileURL: artistData.profileURL,
+        genres: artistData.genres,
+        tier: tierId,
+        active: true,
+      }),
+    });
+
+    batch.update(artistRef, {
+      fansSummary: {
+        total: artistData.fansSummary?.total
+          ? artistData.fansSummary.total + 1
+          : 1,
+      },
+    });
+
+    batch.update(artistCommunityRef, {
+      subscriptions: {
+        total: artistCommunityData.subscriptions.total + 1,
+        tiers: [...artistCommunityData.subscriptions.tiers],
+      },
+    });
+
+    await batch.commit();
 
     return {
       success: true,

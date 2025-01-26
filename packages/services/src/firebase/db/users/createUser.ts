@@ -1,5 +1,5 @@
 import { ARTISTS } from "../../../constants";
-import { User } from "../../../schemas/users";
+import { User } from "../../../schemas/user/user";
 import { ServiceError } from "../../../utils/serviceError";
 import {
   doc,
@@ -9,7 +9,8 @@ import {
   setDoc,
   FirestoreError,
 } from "firebase/firestore";
-import { usersCollection, batch, artistsCollection } from "../db";
+import { batch } from "../db";
+import { artistsCollection, usersCollection } from "../utils";
 
 export async function createUser(newUser: User) {
   try {

@@ -1,9 +1,9 @@
 import { setDoc, doc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 import { Artist } from "../../../schemas";
-import { artistsCollection } from "../db";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
+import { artistsCollection } from "../utils";
 
 async function updateArtist(id: string, data: Partial<Artist>) {
   try {
@@ -13,6 +13,7 @@ async function updateArtist(id: string, data: Partial<Artist>) {
 
     return {
       success: true,
+      data,
     };
   } catch (e) {
     const error = e as FirebaseError;

@@ -2,24 +2,28 @@ import { getDocs } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { FirebaseError } from "firebase/app";
-import { artistSubscriptionTiersCollection } from "../db";
 import { ArtistSubscriptionTier } from "../../../schemas";
+import { subscriptionTiersCollection } from "../utils";
 
-async function getArtistSubscriptionTiers(
-  artistId: string
-): Promise<ArtistSubscriptionTier[] | null> {
+async function getArtistSubscriptionTiers(artistId: string) {
   try {
-    const ref = artistSubscriptionTiersCollection(artistId);
+    const ref = subscriptionTiersCollection(artistId);
 
     const snapshot = await getDocs(ref);
 
     if (snapshot.empty) {
-      return null;
+      return {
+        success: false,
+        data: [],
+      };
     }
 
-    return snapshot.docs
-      .map((doc) => ({ ...doc.data(), id: doc.id }))
-      .sort((a, b) => a.access - b.access);
+    return {
+      success: true,
+      data: snapshot.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }))
+        .sort((a, b) => a.access - b.access),
+    };
   } catch (e) {
     const error = e as FirebaseError;
 
