@@ -108,17 +108,15 @@ function ArtistPageUI({
             </Container>
           )}
 
-          {supporting && (
-            <Container size="sm" className="flex flex-col gap-12">
-              <Title order={2} underline className="pb-12 uppercase">
-                Contenido de {name}
-              </Title>
-              {posts.length > 0 &&
-                posts.map((post) => (
-                  <Publication key={post.id} artistId={id} post={post} />
-                ))}
-            </Container>
-          )}
+          <Container size="sm" className="flex flex-col gap-12">
+            <Title order={2} underline className="pb-12 uppercase">
+              Contenido de {name}
+            </Title>
+            {posts.length > 0 &&
+              posts.map((post) => (
+                <Publication key={post.id} artistId={id} post={post} />
+              ))}
+          </Container>
         </Container>
       </Container>
     </Container>
