@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { User } from "@clerk/nextjs/server";
-import { SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import {
   Avatar,
   AvatarFallback,
@@ -98,13 +98,18 @@ function ArtistPostPageUI({
 
         <div className="flex gap-6">
           <div className="flex items-center gap-2">
-            <Button size="icon" variant="ghost" onClick={handleLike}>
-              <HeartIcon
-                size={24}
-                fill={likedByUser ? "red" : "none"}
-                stroke={likedByUser ? "red" : "currentColor"}
-              />
-            </Button>
+            <SignedIn>
+              <Button size="icon" variant="ghost" onClick={handleLike}>
+                <HeartIcon
+                  size={24}
+                  fill={likedByUser ? "red" : "none"}
+                  stroke={likedByUser ? "red" : "currentColor"}
+                />
+              </Button>
+            </SignedIn>
+            <SignedOut>
+              <HeartIcon size={24} />
+            </SignedOut>
             <Text>{likes}</Text>
           </div>
 
@@ -145,7 +150,7 @@ function ArtistPostPageUI({
         )}
 
         <SignedOut>
-          <span className="flex gap-2">
+          <span className="mt-6 flex gap-2">
             <Avatar>
               <AvatarImage src={userProfileImage} />
               <AvatarFallback>R</AvatarFallback>
@@ -154,67 +159,69 @@ function ArtistPostPageUI({
           </span>
         </SignedOut>
 
-        <form
-          className="mt-6"
-          onSubmit={form.handleSubmit(handleSubmitComment)}
-        >
-          <Form {...form}>
-            <span className="flex gap-2">
-              <Avatar>
-                <AvatarImage src={userProfileImage} />
-                <AvatarFallback>R</AvatarFallback>
-              </Avatar>
+        <SignedIn>
+          <form
+            className="mt-6"
+            onSubmit={form.handleSubmit(handleSubmitComment)}
+          >
+            <Form {...form}>
+              <span className="flex gap-2">
+                <Avatar>
+                  <AvatarImage src={userProfileImage} />
+                  <AvatarFallback>R</AvatarFallback>
+                </Avatar>
 
-              <FormField
-                name="artistId"
-                control={form.control}
-                render={() => (
-                  <FormControl>
-                    <Input type="hidden" value={artist.id} />
-                  </FormControl>
-                )}
-                defaultValue={artist.id}
-              />
-
-              <FormField
-                name="postId"
-                control={form.control}
-                render={() => (
-                  <FormControl>
-                    <Input type="hidden" value={post.id} />
-                  </FormControl>
-                )}
-                defaultValue={post.id}
-              />
-
-              <Container className="relative flex items-center">
                 <FormField
-                  name="comment"
+                  name="artistId"
                   control={form.control}
-                  render={({ field }) => (
+                  render={() => (
                     <FormControl>
-                      <Input
-                        placeholder="Escribe tu comentario..."
-                        {...field}
-                      />
+                      <Input type="hidden" value={artist.id} />
                     </FormControl>
                   )}
+                  defaultValue={artist.id}
                 />
 
-                {form.watch("comment") && (
-                  <Button
-                    size="xs"
-                    type="submit"
-                    loading={isLoading}
-                    className="absolute right-2"
-                  >
-                    Comentar
-                  </Button>
-                )}
-              </Container>
-            </span>
-          </Form>
-        </form>
+                <FormField
+                  name="postId"
+                  control={form.control}
+                  render={() => (
+                    <FormControl>
+                      <Input type="hidden" value={post.id} />
+                    </FormControl>
+                  )}
+                  defaultValue={post.id}
+                />
+
+                <Container className="relative flex items-center">
+                  <FormField
+                    name="comment"
+                    control={form.control}
+                    render={({ field }) => (
+                      <FormControl>
+                        <Input
+                          placeholder="Escribe tu comentario..."
+                          {...field}
+                        />
+                      </FormControl>
+                    )}
+                  />
+
+                  {form.watch("comment") && (
+                    <Button
+                      size="xs"
+                      type="submit"
+                      loading={isLoading}
+                      className="absolute right-2"
+                    >
+                      Comentar
+                    </Button>
+                  )}
+                </Container>
+              </span>
+            </Form>
+          </form>
+        </SignedIn>
       </div>
 
       <div className="bg-background flex flex-col gap-4 rounded-xl p-6 lg:w-1/4">

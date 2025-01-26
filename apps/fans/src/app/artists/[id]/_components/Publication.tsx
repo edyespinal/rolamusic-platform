@@ -9,6 +9,7 @@ import { POST_TYPES } from "@rola/services/constants";
 import { HeartIcon, MessageCircleIcon } from "@rola/ui/icons";
 import { ArtistPagePost } from "../types";
 import { useArtistPageData } from "../data";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 function PrivatePublication({ tier }: { tier: string }) {
   return (
@@ -49,42 +50,44 @@ function Publication({
 
   return (
     <Container className="bg-background flex w-full flex-col overflow-hidden rounded-xl">
-      <Link href={`/artists/${artistId}/posts/${post.id}`}>
-        {post.type === POST_TYPES.TEXT && (
-          <Container className="group relative grow bg-neutral-800 px-6">
-            {post.access ? (
+      {post.type === POST_TYPES.TEXT && (
+        <Container className="group relative grow bg-neutral-800 px-6">
+          {post.access ? (
+            <Link href={`/artists/${artistId}/posts/${post.id}`}>
               <Container className="py-8">
                 <PublicationOverlay />
                 <Text className="line-clamp-6">{post.caption}</Text>
               </Container>
-            ) : (
-              <PrivatePublication tier={post.tier} />
-            )}
-          </Container>
-        )}
+            </Link>
+          ) : (
+            <PrivatePublication tier={post.tier} />
+          )}
+        </Container>
+      )}
 
-        {post.type === POST_TYPES.IMAGE && (
-          <Container className="group relative h-96 grow bg-neutral-800 px-6">
-            {post.url ? (
-              <Container>
-                <PublicationOverlay />
-                <Image
-                  src={post.url || ""}
-                  alt={post.caption}
-                  objectFit="cover"
-                  fill
-                  className="peer hover:opacity-60"
-                />
-              </Container>
-            ) : (
-              <PrivatePublication tier={post.tier} />
-            )}
-          </Container>
-        )}
+      {post.type === POST_TYPES.IMAGE && (
+        <Container className="group relative h-96 grow bg-neutral-800 px-6">
+          {post.url ? (
+            <Link href={`/artists/${artistId}/posts/${post.id}`}>
+              <PublicationOverlay />
+              <Image
+                src={post.url || ""}
+                alt={post.caption}
+                objectFit="cover"
+                fill
+                className="peer hover:opacity-60"
+              />
+            </Link>
+          ) : (
+            <PrivatePublication tier={post.tier} />
+          )}
+        </Container>
+      )}
 
-        {post.type === POST_TYPES.VIDEO && (
-          <Container className="h-96 grow bg-neutral-800">
-            {post.url ? (
+      {post.type === POST_TYPES.VIDEO && (
+        <Container className="h-96 grow bg-neutral-800">
+          {post.url ? (
+            <Link href={`/artists/${artistId}/posts/${post.id}`}>
               <iframe
                 width="100%"
                 height="100%"
@@ -94,12 +97,12 @@ function Publication({
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
-            ) : (
-              <PrivatePublication tier={post.tier} />
-            )}
-          </Container>
-        )}
-      </Link>
+            </Link>
+          ) : (
+            <PrivatePublication tier={post.tier} />
+          )}
+        </Container>
+      )}
 
       <Container className="flex max-h-32 flex-row items-start px-6 py-4">
         <div className="grow">
@@ -116,23 +119,28 @@ function Publication({
           </Text>
         </div>
         <div className="flex-0 flex gap-4">
-          <Button
-            size="icon"
-            variant="ghost"
-            className="flex items-center gap-2"
-            onClick={handleLike}
-          >
-            <HeartIcon
-              fill={likedByUser ? "red" : "none"}
-              stroke={likedByUser ? "red" : "white"}
-              size={24}
-            />
-            {likes}
-          </Button>
+          <SignedIn>
+            <Button
+              size="icon"
+              variant="ghost"
+              className="flex items-center gap-2"
+              onClick={handleLike}
+            >
+              <HeartIcon
+                fill={likedByUser ? "red" : "none"}
+                stroke={likedByUser ? "red" : "white"}
+                size={24}
+              />
+            </Button>
+          </SignedIn>
+          <SignedOut>
+            <HeartIcon size={24} />
+          </SignedOut>
+          <Text>{likes}</Text>
 
           <span className="flex items-center gap-2">
             <MessageCircleIcon size={24} />
-            {post.comments}
+            <Text>{post.comments}</Text>
           </span>
         </div>
       </Container>
