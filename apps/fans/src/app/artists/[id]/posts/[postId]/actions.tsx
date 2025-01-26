@@ -25,7 +25,7 @@ async function submitComment({
   }
 
   const result = postCommentSchema.pick({ content: true }).safeParse({
-    comment,
+    content: comment,
   });
 
   if (!result.success) {
