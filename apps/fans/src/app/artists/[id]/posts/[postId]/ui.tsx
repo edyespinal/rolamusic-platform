@@ -155,7 +155,7 @@ function ArtistPostPageUI({
               <AvatarImage src={userProfileImage} />
               <AvatarFallback>R</AvatarFallback>
             </Avatar>
-            <Input placeholder="Inicia sesión para comentar..." />
+            <Input placeholder="Inicia sesión para comentar..." disabled />
           </span>
         </SignedOut>
 
