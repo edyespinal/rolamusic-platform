@@ -94,10 +94,10 @@ function ArtistPostPageUI({
           <p>{post.caption}</p>
         </Container>
 
-        <Separator className="my-12" />
+        <Separator className="my-8" />
 
         <div className="flex gap-6">
-          <div className="flex items-center gap-2">
+          <span className="flex items-center gap-2">
             <SignedIn>
               <Button size="icon" variant="ghost" onClick={handleLike}>
                 <HeartIcon
@@ -111,15 +111,15 @@ function ArtistPostPageUI({
               <HeartIcon size={24} />
             </SignedOut>
             <Text>{likes}</Text>
-          </div>
+          </span>
 
-          <div className="flex items-center gap-2">
+          <span className="flex items-center gap-2">
             <MessageCircleIcon size={24} />
             <Text>{postComments.length}</Text>
-          </div>
+          </span>
         </div>
 
-        <Separator className="my-12" />
+        <Separator className="my-8" />
 
         <Title order={4} align="left" className="mb-4 mt-12">
           Comentarios

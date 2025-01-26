@@ -119,24 +119,21 @@ function Publication({
           </Text>
         </div>
         <div className="flex-0 flex gap-4">
-          <SignedIn>
-            <Button
-              size="icon"
-              variant="ghost"
-              className="flex items-center gap-2"
-              onClick={handleLike}
-            >
-              <HeartIcon
-                fill={likedByUser ? "red" : "none"}
-                stroke={likedByUser ? "red" : "white"}
-                size={24}
-              />
-            </Button>
-          </SignedIn>
-          <SignedOut>
-            <HeartIcon size={24} />
-          </SignedOut>
-          <Text>{likes}</Text>
+          <span className="flex items-center gap-2">
+            <SignedIn>
+              <Button size="icon" variant="ghost" onClick={handleLike}>
+                <HeartIcon
+                  fill={likedByUser ? "red" : "none"}
+                  stroke={likedByUser ? "red" : "white"}
+                  size={24}
+                />
+              </Button>
+            </SignedIn>
+            <SignedOut>
+              <HeartIcon size={24} />
+            </SignedOut>
+            <Text>{likes}</Text>
+          </span>
 
           <span className="flex items-center gap-2">
             <MessageCircleIcon size={24} />
