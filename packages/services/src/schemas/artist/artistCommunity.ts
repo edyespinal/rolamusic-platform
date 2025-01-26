@@ -1,9 +1,7 @@
 import { z } from "zod";
 import { subscriptionTierSchema } from "./subscriptionTier";
-import { artistPostSchema } from "./artistPost";
 
 export const artistCommunitySchema = z.object({
-  posts: z.array(artistPostSchema),
   subscriptions: z.object({
     total: z.number().nonnegative(),
     tiers: z.array(

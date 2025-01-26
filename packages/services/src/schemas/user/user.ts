@@ -1,6 +1,6 @@
 import z from "zod";
-import { artistSchema } from "./artist";
-import { Genre } from "../utils/genres";
+import { artistSchema } from "../artist";
+import { Genre } from "../../utils/genres";
 
 const userSchema = z.object({
   id: z.string(),

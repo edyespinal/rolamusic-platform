@@ -1,16 +1,31 @@
 import { z } from "zod";
 import { POST_TYPES } from "../../constants";
 
-export const postComment = z.object({
+const postCommentSchema = z.object({
   id: z.string(),
+  user: z.object({
+    id: z.string(),
+    displayName: z.string(),
+    photoURL: z.string().url(),
+  }),
   content: z
     .string()
     .min(1, "El contenido del comentario no puede estar vacío"),
   date: z.date(),
   likes: z.number().nonnegative(),
+  comments: z.array(
+    z.object({
+      user: z.string(),
+      content: z
+        .string()
+        .min(1, "El contenido del comentario no puede estar vacío"),
+      date: z.date(),
+      likes: z.number().nonnegative(),
+    })
+  ),
 });
 
-export const artistPostSchema = z.object({
+const artistPostSchema = z.object({
   id: z.string(),
   active: z.boolean(),
   access: z.number().nonnegative().int(),
@@ -19,15 +34,23 @@ export const artistPostSchema = z.object({
     z.literal(POST_TYPES.IMAGE),
     z.literal(POST_TYPES.VIDEO),
   ]),
+  title: z
+    .string()
+    .min(1, "El título del post no puede estar vacío")
+    .max(64, "El título del post no puede tener mas de 64 caracteres"),
+  caption: z
+    .string()
+    .min(1, "El contenido del post no puede estar vacío")
+    .max(2048, "El contenido del post no puede tener mas de 1024 caracteres")
+    .optional(),
   url: z.string().optional(),
-  caption: z.string().min(1, "El contenido del post no puede estar vacío"),
   date: z.date(),
   likes: z.array(z.string()),
-  comments: z.array(postComment),
-  commentsSummary: z
-    .object({
-      total: z.number().nonnegative(),
-      topComments: z.array(postComment).max(3),
-    })
-    .optional(),
+  comments: z.array(postCommentSchema),
+  tags: z.array(z.string()).optional(),
 });
+
+export { artistPostSchema, postCommentSchema };
+
+export type ArtistPost = z.infer<typeof artistPostSchema>;
+export type PostComment = z.infer<typeof postCommentSchema>;
