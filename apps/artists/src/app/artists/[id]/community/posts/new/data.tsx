@@ -4,7 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { ArtistPost } from "@rola/services/schemas";
 import { postTypesLabels } from "@rola/services/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { createArtistPost } from "./actions";
 import { useToast } from "@rola/ui/components";
 import { ClientUploadedFileData } from "uploadthing/types";
@@ -24,7 +24,9 @@ const useNewArtistPostData = (artistId: string, postId: string) => {
     defaultValues: {
       id: postId,
       access: 0,
+      active: true,
       type: POST_TYPES.TEXT,
+      title: "",
       caption: "",
       date: new Date(),
       url: undefined,
@@ -64,7 +66,6 @@ const useNewArtistPostData = (artistId: string, postId: string) => {
     try {
       await createArtistPost(artistId, {
         ...values,
-        active: true,
         access: Number(values.access),
       });
 

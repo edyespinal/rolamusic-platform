@@ -11,21 +11,18 @@ async function createArtistPost(artistId: string, post: ArtistPost) {
     throw new Error("Tienes que iniciar sesión");
   }
 
-  const result = artistPostSchema.omit({ id: true }).safeParse({
+  const result = artistPostSchema.safeParse({
     ...post,
     likes: [],
     comments: [],
   });
 
   if (!result.success) {
-    console.log(JSON.stringify(result.error, null, 2));
-
     throw new Error("Los datos no son válidos");
   }
 
   return db.artists.createArtistPost(artistId, {
     ...result.data,
-    id: crypto.randomUUID(),
   });
 }
 

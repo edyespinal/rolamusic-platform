@@ -10,10 +10,15 @@ async function NewArtistPostPage({ params }: { params: { id: string } }) {
     throw new Error("Algo ha salido mal");
   }
 
-  const tierOptions = tiers.map((tier) => ({
+  const tierOptions = tiers.data.map((tier) => ({
     label: tier.label,
     access: tier.access,
   }));
+
+  tierOptions.unshift({
+    label: "Público",
+    access: 0,
+  });
 
   const postId = crypto.randomUUID();
 
@@ -21,13 +26,7 @@ async function NewArtistPostPage({ params }: { params: { id: string } }) {
     <NewArtistPostPageUI
       artistId={artistId}
       postId={postId}
-      tiers={[
-        {
-          label: "Público",
-          access: 0,
-        },
-        ...tierOptions,
-      ]}
+      tiers={tierOptions}
     />
   );
 }

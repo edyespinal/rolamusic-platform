@@ -29,16 +29,12 @@ async function CommunityConfigurationPage({
     return <IncompleteProfileUI link={link} />;
   }
 
-  if (!tiers) {
-    tiers = [];
-  }
-
   return (
     <CommunityConfigurationPageUI
       artistId={id}
       artistName={artist.name}
       stripeAccountId={payment.stripeAccountId}
-      tiers={tiers}
+      tiers={tiers.data || []}
     />
   );
 }

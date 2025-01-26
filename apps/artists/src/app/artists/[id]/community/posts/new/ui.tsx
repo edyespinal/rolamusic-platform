@@ -6,6 +6,7 @@ import {
   Container,
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -136,13 +137,27 @@ function NewArtistPostPageUI({
           </Container>
 
           <FormField
+            name="title"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel required>Título</FormLabel>
+                <FormControl>
+                  <Input required {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
             name="caption"
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel required>Texto de la publicación</FormLabel>
+                <FormLabel>Texto de la publicación</FormLabel>
                 <FormControl>
-                  <Textarea required {...field} />
+                  <Textarea {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -187,6 +202,10 @@ function NewArtistPostPageUI({
                     <FormControl>
                       <Input required {...field} />
                     </FormControl>
+                    <FormDescription>
+                      Recuerda que el video debe estar publicado y tener la
+                      visibilidad como privada.
+                    </FormDescription>
                   </FormItem>
                 )}
               />

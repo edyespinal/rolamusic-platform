@@ -1,6 +1,13 @@
 import { ArtistPost } from "@rola/services/schemas";
 import { postTypesLabels } from "@rola/services/utils";
-import { Button, Container, Switch, Title } from "@rola/ui/components";
+import {
+  Button,
+  Container,
+  Label,
+  Switch,
+  Text,
+  Title,
+} from "@rola/ui/components";
 import { PlusIcon } from "@rola/ui/icons";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +18,7 @@ function ArtistPostsPageUI({
   posts,
 }: {
   artistId: string;
-  posts: ArtistPost[];
+  posts: Array<ArtistPost & { tier: string }>;
 }) {
   return (
     <Container className="pb-24">
@@ -27,22 +34,25 @@ function ArtistPostsPageUI({
         </Link>
       </Container>
 
-      <Container className="flex flex-col gap-4">
+      <Container className="flex flex-wrap gap-4">
         {posts.map((post) => (
-          <div key={post.id} className="border-gray rounded-xl border-2 p-4">
-            <h1>{postTypesLabels[post.type]}</h1>
-            <Switch checked={post.active} />
+          <div key={post.id} className="bg-background rounded-xl px-6 py-4">
+            <Title order={3} align="left">
+              {post.title}
+            </Title>
+            <Text className="text-brand font-semibold">
+              Subscripción: {post.tier}
+            </Text>
+            <Text className="font-semibold">
+              Tipo: {postTypesLabels[post.type]}
+            </Text>
+            <span className="flex items-center gap-2 pb-8">
+              <Label htmlFor="active">Activo</Label>
+              <Switch id="active" className="text-xs" checked={post.active} />
+            </span>
+
             <p>{post.caption}</p>
             <p>{post.url}</p>
-            <p>{post.access}</p>
-            {post.type === "IMAGE" && (
-              <Image
-                src={post.url || ""}
-                alt="{post.caption}"
-                width={200}
-                height={200}
-              />
-            )}
           </div>
         ))}
       </Container>
