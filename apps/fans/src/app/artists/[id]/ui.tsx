@@ -14,24 +14,10 @@ import {
   Text,
   Title,
 } from "@rola/ui/components";
-import {
-  ArtistCommunity,
-  ArtistSubscriptionTier,
-  User,
-} from "@rola/services/schemas";
 import { SubscriptionTier } from "@components/SubscriptionTier/SubscriptionTier";
-
-type ArtistPageProps = {
-  id: string;
-  name: string;
-  coverURL?: string;
-  profileURL?: string;
-  genres: Genre[];
-  bio?: string;
-  community: ArtistCommunity;
-  subscriptionTiers: ArtistSubscriptionTier[];
-  supporting?: User["supporting"][number];
-};
+import { Publication } from "./_components/Publication";
+import { ArtistPageProps } from "./types";
+import { useArtistPageData } from "./data";
 
 function ArtistPageUI({
   id,
@@ -43,10 +29,11 @@ function ArtistPageUI({
   community,
   subscriptionTiers,
   supporting,
+  posts,
 }: ArtistPageProps) {
   return (
     <Container>
-      <Container className="bg-background-dark relative -mt-20 min-h-[40vh] lg:min-h-[50vh]">
+      <Container className="bg-background relative -mt-20 min-h-[40vh] lg:min-h-[50vh]">
         <Image
           src={coverURL ?? "/static/img/artists-landing-header.jpg"}
           alt={name}
@@ -78,7 +65,7 @@ function ArtistPageUI({
             <Text className="text-brand">{formatGenres(genres)}</Text>
             <Text className="py-4">
               {community?.subscriptions.total ?? 0} miembros{" "}
-              <span className="px-4"> | </span> {community?.posts.length ?? 0}{" "}
+              <span className="px-4"> | </span> {posts.length ?? 0}{" "}
               publicaciones
             </Text>
           </Container>
@@ -86,7 +73,7 @@ function ArtistPageUI({
           <Text className="pb-8 text-justify">{bio}</Text>
 
           {!supporting && subscriptionTiers.length > 0 && (
-            <Container className="mx-auto max-w-80 lg:max-w-full">
+            <Container className="mx-auto max-w-80 pb-24 lg:max-w-full">
               <Title order={2} underline className="pb-12 uppercase">
                 Elige tu suscripción
               </Title>
@@ -118,6 +105,18 @@ function ArtistPageUI({
                 <CarouselNext className="-right-8 lg:-right-12" />
                 <CarouselDots />
               </Carousel>
+            </Container>
+          )}
+
+          {supporting && (
+            <Container size="sm" className="flex flex-col gap-12">
+              <Title order={2} underline className="pb-12 uppercase">
+                Contenido de {name}
+              </Title>
+              {posts.length > 0 &&
+                posts.map((post) => (
+                  <Publication key={post.id} artistId={id} post={post} />
+                ))}
             </Container>
           )}
         </Container>
