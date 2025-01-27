@@ -77,7 +77,7 @@ function Navigation() {
               </NavLink>
             </div>
             <SignedOut>
-              <Link href="/auth/sign-in">
+              <Link href="/auth/sign-in" onClick={() => setIsOpen(false)}>
                 <Button variant="outline" size="xs">
                   Iniciar sesión de fan
                   <ArrowRightIcon className="ml-2" />
