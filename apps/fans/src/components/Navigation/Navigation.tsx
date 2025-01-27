@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +9,7 @@ import {
   Container,
   Sheet,
   SheetContent,
+  SheetTitle,
   SheetTrigger,
 } from "@rola/ui/components";
 import { ArrowRightIcon } from "@rola/ui/icons";
@@ -15,6 +18,8 @@ import { UserMenu } from "@components/UserMenu/UserMenu";
 import MenuIcon from "@assets/img/icons/menu.svg";
 
 function Navigation() {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
     <div className="items-center justify-end gap-4">
       <Container className="hidden items-center gap-8 lg:flex">
@@ -48,16 +53,28 @@ function Navigation() {
       </Container>
 
       <Container className="flex items-center gap-4 lg:hidden">
-        <Sheet>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger>
             <Image src={MenuIcon} alt="Menu" />
           </SheetTrigger>
           <SheetContent className="z-[999] py-16">
+            <SheetTitle className="hidden">Menu</SheetTitle>
             <div className="flex h-full flex-col justify-center gap-4 text-center">
-              <NavLink href="/">Inicio</NavLink>
-              <NavLink href="/artists">Artistas</NavLink>
-              <NavLink href="/rola-talks">ROLA Talks</NavLink>
-              <NavLink href="/artist-information">¿Eres artista?</NavLink>
+              <NavLink href="/" onClick={() => setIsOpen(false)}>
+                Inicio
+              </NavLink>
+              <NavLink href="/artists" onClick={() => setIsOpen(false)}>
+                Artistas
+              </NavLink>
+              <NavLink href="/rola-talks" onClick={() => setIsOpen(false)}>
+                ROLA Talks
+              </NavLink>
+              <NavLink
+                href="/artist-information"
+                onClick={() => setIsOpen(false)}
+              >
+                ¿Eres artista?
+              </NavLink>
             </div>
             <SignedOut>
               <Button variant="outline" size="xs">

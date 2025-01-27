@@ -1,18 +1,20 @@
 "use client";
 
-import { cn } from "@rola/tailwind-config/utils";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import { cn } from "@rola/tailwind-config/utils";
 
 function NavLink({
   href,
   prefetch = false,
   children,
+  onClick,
 }: {
   href: string;
   prefetch?: boolean;
   children: React.ReactNode;
+  onClick?: () => void;
 }) {
   const path = usePathname();
 
@@ -21,6 +23,7 @@ function NavLink({
       <Link
         href={href}
         prefetch={prefetch}
+        onClick={onClick}
         className={cn(
           "text-center text-lg font-semibold lg:text-sm",
           "hover:text-brand relative pb-1",
