@@ -77,10 +77,12 @@ function Navigation() {
               </NavLink>
             </div>
             <SignedOut>
-              <Button variant="outline" size="xs">
-                Iniciar sesión de fan
-                <ArrowRightIcon className="ml-2" />
-              </Button>
+              <Link href="/auth/sign-in">
+                <Button variant="outline" size="xs">
+                  Iniciar sesión de fan
+                  <ArrowRightIcon className="ml-2" />
+                </Button>
+              </Link>
             </SignedOut>
             <SignedIn>
               <UserMenu withInfo />
