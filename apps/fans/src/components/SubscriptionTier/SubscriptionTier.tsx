@@ -2,10 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
+import { SignedIn } from "@clerk/nextjs";
 import { ArtistSubscriptionTier } from "@rola/services/schemas";
-import { cn } from "@rola/tailwind-config/utils";
 import { Button, Container, Text, Title } from "@rola/ui/components";
 import { CheckIcon } from "@rola/ui/icons";
+import { cn } from "@rola/tailwind-config/utils";
 
 function SubscriptionTier({
   artistId,
@@ -49,11 +50,13 @@ function SubscriptionTier({
         {tier.label}
       </Title>
 
-      <Link href={`/artists/${artistId}/subscribe?tier=${tier.id}`}>
-        <Button loading={isLoading} onClick={() => setIsLoading(true)}>
-          Suscribirme
-        </Button>
-      </Link>
+      <SignedIn>
+        <Link href={`/artists/${artistId}/subscribe?tier=${tier.id}`}>
+          <Button loading={isLoading} onClick={() => setIsLoading(true)}>
+            Suscribirme
+          </Button>
+        </Link>
+      </SignedIn>
 
       <Container>
         <Text className="text-brand">¡Gracias por tu apoyo!</Text>

@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { SignedOut } from "@clerk/nextjs";
 import { ArtistAvatar } from "@components/ArtistAvatar/ArtistAvatar";
-import { formatGenres, Genre } from "@rola/services/utils";
+import { formatGenres } from "@rola/services/utils";
 import {
+  Button,
   Carousel,
   CarouselContent,
   CarouselDots,
@@ -17,10 +20,9 @@ import {
 import { SubscriptionTier } from "@components/SubscriptionTier/SubscriptionTier";
 import { Publication } from "./_components/Publication";
 import { ArtistPageProps } from "./types";
-import { useArtistPageData } from "./data";
 
 function ArtistPageUI({
-  id,
+  id: artistId,
   name,
   coverURL,
   profileURL,
@@ -91,7 +93,7 @@ function ArtistPageUI({
                       >
                         <SubscriptionTier
                           key={tier.name}
-                          artistId={id}
+                          artistId={artistId}
                           tier={tier}
                           highlighted={
                             tier.recommended ? "Recomendada" : undefined
@@ -108,13 +110,31 @@ function ArtistPageUI({
             </Container>
           )}
 
+          <SignedOut>
+            <Title order={4} className="mb-6">
+              Crea o inicia sesión para suscribirte a tu artista favorito
+            </Title>
+            <Container className="mb-20 flex items-center justify-center gap-6">
+              <Link
+                href={`/auth/sign-in?redirect_url=${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`}
+              >
+                <Button>Crea tu cuenta de fan</Button>
+              </Link>
+              <Link
+                href={`/auth/sign-in?redirect_url=${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`}
+              >
+                <Button variant="outline">Iniciar sesión de fan</Button>
+              </Link>
+            </Container>
+          </SignedOut>
+
           <Container size="sm" className="flex flex-col gap-12">
             <Title order={2} underline className="pb-12 uppercase">
               Contenido de {name}
             </Title>
             {posts.length > 0 &&
               posts.map((post) => (
-                <Publication key={post.id} artistId={id} post={post} />
+                <Publication key={post.id} artistId={artistId} post={post} />
               ))}
           </Container>
         </Container>
