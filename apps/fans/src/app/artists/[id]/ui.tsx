@@ -114,7 +114,7 @@ function ArtistPageUI({
             <Title order={4} className="mb-6">
               Crea o inicia sesión para suscribirte a tu artista favorito
             </Title>
-            <Container className="mb-20 flex items-center justify-center gap-6">
+            <Container className="mb-20 flex flex-col items-center justify-center gap-3 lg:flex-row lg:gap-6">
               <Link
                 href={`/auth/sign-in?redirect_url=${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`}
               >

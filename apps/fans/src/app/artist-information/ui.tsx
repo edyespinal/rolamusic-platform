@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Button, Container, Text, Title, Underline } from "@rola/ui/components";
+import { Button, Container, Text, Title } from "@rola/ui/components";
 import { cn } from "@rola/tailwind-config/utils";
 import RolaLogo from "@assets/img/logo-hand.png";
 import LineV from "@assets/img/linea-v.png";
@@ -13,13 +12,13 @@ function ArtistInformationPageUI() {
       <Container
         className={cn(
           "z-0 flex min-h-[100vh] items-start justify-center bg-cover bg-center bg-no-repeat",
-          "bg-[url('/static/img/artist-info-header-mobile.png')] lg:bg-[url('/static/img/artist-info-header.png')]",
+          "bg-[url('/static/img/artist-info-header.png')] lg:bg-[url('/static/img/artist-info-header.png')]",
           "3xl:min-h-[800px] -mt-20 lg:min-h-[50vh]"
         )}
       >
         <Container
           size="xl"
-          className="mt-36 flex flex-col items-start justify-center px-4 lg:flex-row lg:px-0"
+          className="mt-36 flex flex-col justify-center px-4 lg:flex-row lg:items-start lg:px-0"
         >
           <div className="mx-auto flex flex-col items-center lg:mx-0 lg:flex-row lg:gap-4">
             <Image
@@ -41,15 +40,13 @@ function ArtistInformationPageUI() {
               }}
             />
           </div>
+
           <div>
-            <Title
-              order={4}
-              className="mb-8 text-center font-normal uppercase lg:text-left"
-            >
+            <Title order={4} className="mb-8 text-center font-normal uppercase">
               Conecta con tus fans <br />
               Comparte <br />y crece con tu música
             </Title>
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 text-center lg:flex-row">
               <a
                 href="https://artists.rolamusic.app/"
                 target="_blank"
@@ -69,13 +66,13 @@ function ArtistInformationPageUI() {
         </Container>
       </Container>
 
-      <Container className="bg-background-dark z-10">
+      <Container className="bg-background-dark z-10 px-4 lg:px-0">
         <Container
           size="xl"
           className="flex min-h-[50vh] flex-col pb-0 pt-24 lg:flex-row lg:justify-between xl:min-h-[auto]"
         >
-          <Container className="z-20 flex-1 pb-24">
-            <Title type="rola" order={2} align="left" className="mb-8">
+          <Container className="z-20 flex-1 pb-24 text-center lg:text-left">
+            <Title type="rola" order={2} className="mb-8">
               Apoyo, gestión y financiación para artistas musicales
             </Title>
             <Text className="mb-4">
