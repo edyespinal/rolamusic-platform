@@ -54,9 +54,9 @@ const states: Record<string, string> = {
   ZARAGOZA: "Zaragoza",
 };
 
-const statesOptions = Object.keys(states).map((state) => ({
-  value: state,
-  label: states[state],
+const statesOptions = Object.entries(states).map(([key, value]) => ({
+  value: key,
+  label: value,
 }));
 
 export { states, statesOptions };

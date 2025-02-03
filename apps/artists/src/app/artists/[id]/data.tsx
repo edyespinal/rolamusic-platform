@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Artist, ArtistCommunity } from "@rola/services/schemas";
+import { Artist } from "@rola/services/schemas";
 import { useToast } from "@rola/ui/components";
 import { updateArtist } from "./actions";
 
@@ -25,6 +25,7 @@ const useArtistData = (artist: Artist) => {
       year: artist.year,
       location: {
         state: artist.location?.state ?? "",
+        country: artist.location?.country ?? "",
       },
       bio: artist.bio,
       members: artist.members,

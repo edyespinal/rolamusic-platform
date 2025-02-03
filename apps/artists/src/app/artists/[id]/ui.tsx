@@ -32,6 +32,8 @@ import { PlusIcon, XIcon } from "@rola/ui/icons";
 import { UTUploadButton } from "../../../utils/uploadthing";
 import { Artist } from "@rola/services/schemas";
 import {
+  countries,
+  countriesOptions,
   genresListOptions,
   states,
   statesOptions,
@@ -113,38 +115,6 @@ function ArtistPageUI({ userId, artist }: { userId: string; artist: Artist }) {
 
             <FormField
               control={form.control}
-              name="genres"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel required>Géneros</FormLabel>
-                  <FormControl>
-                    <MultiSelector
-                      values={field.value ?? []}
-                      onValuesChange={field.onChange}
-                    >
-                      <MultiSelectorTrigger>
-                        <MultiSelectorInput />
-                      </MultiSelectorTrigger>
-                      <MultiSelectorContent>
-                        <MultiSelectorList>
-                          {genresListOptions.map((genre) => (
-                            <MultiSelectorItem
-                              key={genre.value}
-                              value={genre.value}
-                            >
-                              {genre.label}
-                            </MultiSelectorItem>
-                          ))}
-                        </MultiSelectorList>
-                      </MultiSelectorContent>
-                    </MultiSelector>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
               name="year"
               render={({ field }) => (
                 <FormItem>
@@ -198,6 +168,67 @@ function ArtistPageUI({ userId, artist }: { userId: string; artist: Artist }) {
               )}
             />
 
+            <FormField
+              control={form.control}
+              name="location.country"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>País</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue>{countries[field.value]}</SelectValue>
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {countriesOptions.map((state) => (
+                        <SelectItem value={state.value} key={state.value}>
+                          {state.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="genres"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel required>Géneros</FormLabel>
+                  <FormControl>
+                    <MultiSelector
+                      values={field.value ?? []}
+                      onValuesChange={field.onChange}
+                    >
+                      <MultiSelectorTrigger>
+                        <MultiSelectorInput />
+                      </MultiSelectorTrigger>
+                      <MultiSelectorContent>
+                        <MultiSelectorList>
+                          {genresListOptions.map((genre) => (
+                            <MultiSelectorItem
+                              key={genre.value}
+                              value={genre.value}
+                            >
+                              {genre.label}
+                            </MultiSelectorItem>
+                          ))}
+                        </MultiSelectorList>
+                      </MultiSelectorContent>
+                    </MultiSelector>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </Container>
+
+          <Container className="grid gap-4 pb-8 lg:grid-cols-2">
             <Container className="flex flex-col items-center justify-center gap-4">
               <Text>Imagen de perfil</Text>
               <Container className="border-gray flex h-96 flex-col items-center justify-center gap-4 rounded border-2 border-dashed p-4">
@@ -220,12 +251,16 @@ function ArtistPageUI({ userId, artist }: { userId: string; artist: Artist }) {
                   }}
                   content={{
                     button({ isUploading }) {
-                      if (isUploading) return <Loader size="xs" />;
+                      if (isUploading) {
+                        return <Loader size="xs" />;
+                      }
 
                       return "Subir imagen";
                     },
                     allowedContent({ isUploading, uploadProgress }) {
-                      if (isUploading) return `${uploadProgress}%`;
+                      if (isUploading) {
+                        return `${uploadProgress}%`;
+                      }
 
                       return "Tamaño máximo: 512KB";
                     },
@@ -272,12 +307,16 @@ function ArtistPageUI({ userId, artist }: { userId: string; artist: Artist }) {
                   }}
                   content={{
                     button({ isUploading }) {
-                      if (isUploading) return <Loader size="xs" />;
+                      if (isUploading) {
+                        return <Loader size="xs" />;
+                      }
 
                       return "Subir imagen";
                     },
                     allowedContent({ isUploading, uploadProgress }) {
-                      if (isUploading) return `${uploadProgress}%`;
+                      if (isUploading) {
+                        return `${uploadProgress}%`;
+                      }
 
                       return "Tamaño máximo: 4MB";
                     },

@@ -14,6 +14,7 @@ async function updateArtist(artist: Artist, values: Partial<Artist>) {
       location: {
         ...artist.location,
         state: values.location?.state ?? "",
+        country: values.location?.country ?? "",
       },
       bio: values.bio,
       members: values.members,
