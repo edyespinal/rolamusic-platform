@@ -25,7 +25,7 @@ const useArtistData = (artist: Artist) => {
       year: artist.year,
       location: {
         state: artist.location?.state ?? "",
-        country: artist.location?.country ?? "",
+        country: "ES",
       },
       bio: artist.bio,
       members: artist.members,

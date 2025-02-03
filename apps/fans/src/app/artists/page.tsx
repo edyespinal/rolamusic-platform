@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { unstable_cache } from "next/cache";
 import { currentUser } from "@clerk/nextjs/server";
 import { User } from "@rola/services/schemas";
-import { userInfo } from "os";
 
 const getCachedArtists = unstable_cache(
   async () => db.artists.getActiveArtists(50),

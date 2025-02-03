@@ -174,13 +174,10 @@ function ArtistPageUI({ userId, artist }: { userId: string; artist: Artist }) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>País</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue>{countries[field.value]}</SelectValue>
+                        <SelectValue>{countries.ES}</SelectValue>
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
