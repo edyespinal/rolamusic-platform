@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@rola/services/firebase";
 import { ArtistPageUI } from "./ui";
@@ -6,7 +5,7 @@ import { ArtistPageUI } from "./ui";
 async function ArtistPage(props: { params: { id: string } }) {
   const { id } = props.params;
 
-  let [user, artist] = await Promise.all([
+  const [user, artist] = await Promise.all([
     currentUser(),
     db.artists.getArtist(id),
   ]);

@@ -13,7 +13,7 @@ import "../styles/globals.css";
 const font = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ROLA | Fans - Apoya a tus artistas independientes favoritos",
+  title: "ROLA - Apoya a tus artistas independientes favoritos",
   description: "ROLA - Apoya a tus artistas independientes favoritos",
 };
 
