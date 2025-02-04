@@ -51,8 +51,7 @@ const useNewArtistPostData = (artistId: string, postId: string) => {
   }
 
   function onUploadError(error: any) {
-    console.log(error);
-
+    console.error(error);
     toast({
       title: "Error",
       description: "No se ha podido subir la imagen",
@@ -76,10 +75,8 @@ const useNewArtistPostData = (artistId: string, postId: string) => {
 
       setTimeout(() => {
         router.push(`/artists/${artistId}/community/posts`);
-      }, 2000);
+      }, 500);
     } catch (error: Error | any) {
-      console.log(error);
-
       toast({
         title: "Error",
         description: error.message || "Ha ocurrido un error",

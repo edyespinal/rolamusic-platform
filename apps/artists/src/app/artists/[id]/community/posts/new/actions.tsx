@@ -18,7 +18,9 @@ async function createArtistPost(artistId: string, post: ArtistPost) {
   });
 
   if (!result.success) {
-    throw new Error("Los datos no son válidos");
+    throw new Error(
+      `${result.error.issues[0]?.message || "Los datos no son válidos"}`
+    );
   }
 
   return db.artists.createArtistPost(artistId, {

@@ -49,7 +49,7 @@ function NewArtistPostPageUI({
   } = useNewArtistPostData(artistId, postId);
 
   return (
-    <Container>
+    <Container className="pb-20">
       <Title order={2} align="left" underline className="pb-12">
         Nueva Publicación
       </Title>
@@ -69,8 +69,6 @@ function NewArtistPostPageUI({
                   <FormControl>
                     <Select
                       onValueChange={(value) => {
-                        console.log({ value });
-
                         setType(value as keyof typeof postTypesLabels);
 
                         if (value === POST_TYPES.TEXT) {
