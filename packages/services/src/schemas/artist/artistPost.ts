@@ -40,11 +40,10 @@ const artistPostSchema = z.object({
     .max(64, "El título del post no puede tener mas de 64 caracteres"),
   caption: z
     .string()
-    .min(1, "El contenido del post no puede estar vacío")
     .max(2048, "El contenido del post no puede tener mas de 1024 caracteres")
     .optional(),
   url: z.string().optional(),
-  date: z.date(),
+  date: z.date().or(z.object({ seconds: z.number(), nanoseconds: z.number() })),
   likes: z.array(z.string()),
   comments: z.array(postCommentSchema),
   tags: z.array(z.string()).optional(),

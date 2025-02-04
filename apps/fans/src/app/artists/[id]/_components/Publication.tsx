@@ -10,6 +10,7 @@ import { HeartIcon, MessageCircleIcon } from "@rola/ui/icons";
 import { ArtistPagePost } from "../types";
 import { useArtistPageData } from "../data";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { YouTubePlayer } from "@components/YouTubePlayer/YouTubePlayer";
 
 function PrivatePublication({ tier }: { tier: string }) {
   return (
@@ -88,15 +89,7 @@ function Publication({
         <Container className="h-96 grow bg-neutral-800">
           {post.url ? (
             <Link href={`/artists/${artistId}/posts/${post.id}`}>
-              <iframe
-                width="100%"
-                height="100%"
-                className="size-full"
-                src={`https://www.youtube.com/embed/${post.url?.split("v=").pop()?.split("&").shift()}`}
-                title={post.caption}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              <YouTubePlayer url={post.url} title={post.caption} />
             </Link>
           ) : (
             <PrivatePublication tier={post.tier} />
