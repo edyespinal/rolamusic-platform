@@ -1,8 +1,7 @@
-import { redirect } from "next/navigation";
-import { db } from "@rola/services/firebase";
-import { ArtistPageUI } from "./ui";
 import { currentUser } from "@clerk/nextjs/server";
+import { db } from "@rola/services/firebase";
 import { ArtistPagePost } from "./types";
+import { ArtistPageUI } from "./ui";
 
 async function ArtistPage({ params }: { params: { id: string } }) {
   const { id: artistId } = params;
