@@ -1,31 +1,8 @@
-export type FormTier = {
-  tierId?: string;
-  active: boolean;
-  access: number;
-  recommended: boolean;
-  name: string;
-  label: string;
-  description?: string;
-  prices?: {
-    monthly: {
-      value: number;
-      priceId: string;
-    };
-    yearly: {
-      value: number;
-      priceId: string;
-    };
-  };
-  price: number;
+import { ArtistSubscriptionTier } from "@rola/services/schemas";
+
+export type FormTier = Omit<ArtistSubscriptionTier, "perks" | "prices"> & {
   perks: {
-    name: string;
+    text: string;
   }[];
-};
-
-export type FormValues = {
-  tiers: FormTier[];
-};
-
-export type FormSubmitValues = {
-  tiers: FormTier[];
+  price: number;
 };

@@ -9,33 +9,25 @@ async function CommunityConfigurationPage({
 }) {
   const { id } = params;
 
-  let [artist, tiers, payment] = await Promise.all([
+  const [artist, tiers] = await Promise.all([
     db.artists.getArtist(id),
     db.artists.getArtistSubscriptionTiers(id),
     db.artists.getArtistPaymentDetails(id),
   ]);
 
-  if (!artist || !payment?.stripeAccountId) {
-    const link = !artist
-      ? {
+  if (!artist) {
+    return (
+      <IncompleteProfileUI
+        info={{
           href: `/artists/${id}`,
-          text: "tu información de artista",
-        }
-      : {
-          href: `/artists/${id}/payment-details`,
-          text: "tus datos bancarios y fiscales",
-        };
-
-    return <IncompleteProfileUI link={link} />;
+          missing: "tu información de artista",
+        }}
+      />
+    );
   }
 
   return (
-    <CommunityConfigurationPageUI
-      artistId={id}
-      artistName={artist.name}
-      stripeAccountId={payment.stripeAccountId}
-      tiers={tiers.data || []}
-    />
+    <CommunityConfigurationPageUI artistId={id} tiers={tiers.data || []} />
   );
 }
 
