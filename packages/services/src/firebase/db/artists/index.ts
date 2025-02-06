@@ -8,6 +8,7 @@ import { getActiveArtists } from "./getActiveArtists";
 import { getArtistCommunity } from "./getArtistCommunity";
 import { getArtistPaymentDetails } from "./getArtistPaymentDetails";
 import { getArtistPosts } from "./getArtistPosts";
+import { getArtistSubscriptionTier } from "./getArtistSubscriptionTier";
 import { getArtistSubscriptionTiers } from "./getArtistSubscriptionTiers";
 import { updateArtist } from "./updateArtist";
 import { updateArtistActivation } from "./updateArtistActivation";
@@ -17,6 +18,7 @@ import { updateArtistPaymentDetails } from "./updateArtistPaymentDetails";
 import { updateArtistProfileImage } from "./updateArtistProfileImage";
 import { updateArtistSubscriptionTier } from "./updateArtistSubscriptionTier";
 import { getArtistPost } from "./getArtistPost";
+import { updateArtistSubscriptionTiers } from "./updateSubscrtiptionTiers";
 
 export const artistsServices = {
   createArtist,
@@ -30,6 +32,7 @@ export const artistsServices = {
   getArtistPaymentDetails,
   getArtistPost,
   getArtistPosts,
+  getArtistSubscriptionTier,
   getArtistSubscriptionTiers,
   updateArtist,
   updateArtistActivation,
@@ -38,4 +41,5 @@ export const artistsServices = {
   updateArtistPaymentDetails,
   updateArtistProfileImage,
   updateArtistSubscriptionTier,
+  updateArtistSubscriptionTiers,
 };

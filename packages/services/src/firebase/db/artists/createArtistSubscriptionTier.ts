@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import { addDoc, setDoc, arrayUnion } from "firebase/firestore";
+import { arrayUnion, doc } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { ArtistSubscriptionTier } from "../../../schemas";
@@ -7,39 +7,38 @@ import {
   artistCommunityCollection,
   subscriptionTiersCollection,
 } from "../utils";
+import { batch } from "../db";
 
 async function createArtistSubscriptionTier(
   artistId: string,
   payload: Omit<ArtistSubscriptionTier, "id">
 ) {
   try {
-    const tiersRef = subscriptionTiersCollection(artistId);
+    const tierRef = doc(subscriptionTiersCollection(artistId));
     const communityRef = artistCommunityCollection(artistId);
 
-    const { id } = await addDoc(tiersRef, payload);
+    batch.set(tierRef, payload);
 
-    await setDoc(
-      communityRef,
-      {
-        subscriptions: {
-          tiers: arrayUnion({
-            subscribers: [],
-            tier: {
-              id,
-              active: payload.active,
-              label: payload.label,
-            },
-          }),
-        },
+    batch.update(communityRef, {
+      subscriptions: {
+        tiers: arrayUnion({
+          subscribers: [],
+          tier: {
+            id: tierRef.id,
+            active: payload.active,
+            label: payload.label,
+          },
+        }),
       },
-      { merge: true }
-    );
+    });
+
+    await batch.commit();
 
     return {
       success: true,
       data: {
         ...payload,
-        id,
+        id: tierRef.id,
       },
     };
   } catch (e) {
