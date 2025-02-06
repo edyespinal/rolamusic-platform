@@ -1,3 +1,5 @@
+import React from "react";
+import Link from "next/link";
 import { ArtistPost } from "@rola/services/schemas";
 import { postTypesLabels } from "@rola/services/utils";
 import {
@@ -9,9 +11,6 @@ import {
   Title,
 } from "@rola/ui/components";
 import { PlusIcon } from "@rola/ui/icons";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
 
 function ArtistPostsPageUI({
   artistId,
@@ -36,12 +35,15 @@ function ArtistPostsPageUI({
 
       <Container className="flex flex-wrap gap-4">
         {posts.map((post) => (
-          <div key={post.id} className="bg-background rounded-xl px-6 py-4">
+          <Container
+            key={post.id}
+            className="bg-background rounded-xl px-6 py-4"
+          >
             <Title order={3} align="left">
               {post.title}
             </Title>
             <Text className="text-brand font-semibold">
-              Subscripción: {post.tier}
+              Suscripción: {post.tier}
             </Text>
             <Text className="font-semibold">
               Tipo: {postTypesLabels[post.type]}
@@ -51,9 +53,11 @@ function ArtistPostsPageUI({
               <Switch id="active" className="text-xs" checked={post.active} />
             </span>
 
-            <p>{post.caption}</p>
-            <p>{post.url}</p>
-          </div>
+            <span className="">
+              <Text className="font-semibold">Descripción</Text>
+              <Text>{post.caption}</Text>
+            </span>
+          </Container>
         ))}
       </Container>
     </Container>
