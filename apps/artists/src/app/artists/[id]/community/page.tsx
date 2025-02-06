@@ -27,7 +27,7 @@ async function ArtistCommunityPage({ params }: { params: { id: string } }) {
           text: "tus datos bancarios y fiscales",
         };
 
-    return <IncompleteProfileUI link={link} />;
+    return <IncompleteProfileUI info={link} />;
   }
 
   const artistBalance = await stripe.accounts.getBalance(
