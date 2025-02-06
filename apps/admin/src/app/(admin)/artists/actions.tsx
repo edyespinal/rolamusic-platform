@@ -8,8 +8,6 @@ async function activateArtist(
   active: boolean
 ) {
   try {
-    console.log({ active, tiersSetup });
-
     if (!active && !tiersSetup) {
       return {
         success: false,
