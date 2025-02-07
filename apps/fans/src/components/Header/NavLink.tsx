@@ -25,10 +25,9 @@ function NavLink({
         prefetch={prefetch}
         onClick={onClick}
         className={cn(
-          "text-center text-lg font-semibold lg:text-sm",
-          "hover:text-brand relative pb-1",
+          "relative pb-1 text-center text-lg font-semibold lg:text-sm",
           path === href &&
-            'text-brand after:border-brand after:absolute after:bottom-0 after:left-1/2 after:-ml-2 after:h-1 after:w-4 after:border-b-2 after:content-[""] hover:text-white'
+            'text-white after:absolute after:bottom-0 after:left-1/2 after:-ml-4 after:h-1 after:w-8 after:border-b-2 after:border-white after:content-[""] hover:text-white'
         )}
       >
         {children}
