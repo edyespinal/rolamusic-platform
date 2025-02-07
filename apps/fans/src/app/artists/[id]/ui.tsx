@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { SignedOut } from "@clerk/nextjs";
+import { SignedOut, useAuth } from "@clerk/nextjs";
 import { ArtistAvatar } from "@components/ArtistAvatar/ArtistAvatar";
 import { formatGenres } from "@rola/services/utils";
 import {
@@ -20,6 +20,7 @@ import {
 import { SubscriptionTier } from "@components/SubscriptionTier/SubscriptionTier";
 import { Publication } from "./_components/Publication";
 import { ArtistPageProps } from "./types";
+import { cn } from "@rola/tailwind-config/utils";
 
 function ArtistPageUI({
   id: artistId,
@@ -33,6 +34,8 @@ function ArtistPageUI({
   supporting,
   posts,
 }: ArtistPageProps) {
+  const { isSignedIn } = useAuth();
+
   return (
     <Container>
       <Container className="bg-background relative -mt-20 min-h-[40vh] lg:min-h-[50vh]">
@@ -79,7 +82,26 @@ function ArtistPageUI({
               <Title order={2} underline className="pb-12 uppercase">
                 Elige tu suscripción
               </Title>
-              <Carousel>
+
+              <SignedOut>
+                <Title order={4} className="mb-6">
+                  Crea o inicia sesión para suscribirte a tu artista favorito
+                </Title>
+                <Container className="mb-8 flex flex-col items-center justify-center gap-3 lg:flex-row lg:gap-6">
+                  <Link
+                    href={`/auth/sign-in?redirect_url=${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`}
+                  >
+                    <Button>Crea tu cuenta de fan</Button>
+                  </Link>
+                  <Link
+                    href={`/auth/sign-in?redirect_url=${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`}
+                  >
+                    <Button variant="outline">Iniciar sesión de fan</Button>
+                  </Link>
+                </Container>
+              </SignedOut>
+
+              <Carousel className={cn(!isSignedIn && "opacity-40")}>
                 <CarouselContent>
                   {subscriptionTiers.map((tier, i) => {
                     if (!tier.active) {
@@ -109,24 +131,6 @@ function ArtistPageUI({
               </Carousel>
             </Container>
           )}
-
-          <SignedOut>
-            <Title order={4} className="mb-6">
-              Crea o inicia sesión para suscribirte a tu artista favorito
-            </Title>
-            <Container className="mb-20 flex flex-col items-center justify-center gap-3 lg:flex-row lg:gap-6">
-              <Link
-                href={`/auth/sign-in?redirect_url=${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`}
-              >
-                <Button>Crea tu cuenta de fan</Button>
-              </Link>
-              <Link
-                href={`/auth/sign-in?redirect_url=${process.env.NEXT_PUBLIC_FANS_APP}/artists/${artistId}`}
-              >
-                <Button variant="outline">Iniciar sesión de fan</Button>
-              </Link>
-            </Container>
-          </SignedOut>
 
           <Container size="sm" className="flex flex-col gap-12">
             <Title order={2} underline className="pb-12 uppercase">
