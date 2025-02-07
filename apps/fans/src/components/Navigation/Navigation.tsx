@@ -3,10 +3,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
 import {
   Button,
   Container,
+  Logo,
   Sheet,
   SheetContent,
   SheetTitle,
@@ -52,14 +53,19 @@ function Navigation() {
         </SignedIn>
       </Container>
 
-      <Container className="flex items-center gap-4 lg:hidden">
+      <Container className="flex gap-4 lg:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger>
             <Image src={MenuIcon} alt="Menu" />
           </SheetTrigger>
-          <SheetContent className="z-[999] py-16">
+          <SheetContent className="bg-brand z-[999] flex w-full flex-col justify-between py-16 text-black">
             <SheetTitle className="hidden">Menu</SheetTitle>
-            <div className="flex h-full flex-col justify-center gap-4 text-center">
+
+            <div className="-mt-14">
+              <Logo variant="icon" size="xs" alt />
+            </div>
+
+            <div className="flex flex-col gap-4 text-center">
               <NavLink href="/" onClick={() => setIsOpen(false)}>
                 Inicio
               </NavLink>
@@ -76,17 +82,55 @@ function Navigation() {
                 ¿Eres artista?
               </NavLink>
             </div>
-            <SignedOut>
-              <Link href="/auth/sign-in" onClick={() => setIsOpen(false)}>
-                <Button variant="outline" size="xs">
-                  Iniciar sesión de fan
-                  <ArrowRightIcon className="ml-2" />
-                </Button>
-              </Link>
-            </SignedOut>
-            <SignedIn>
-              <UserMenu withInfo />
-            </SignedIn>
+
+            <div className="mt-4 flex flex-col items-center gap-2">
+              <SignedOut>
+                <a
+                  href={process.env.NEXT_PUBLIC_ARTISTS_APP}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="secondary">Iniciar sesión artistas</Button>
+                </a>
+                <Link href="/auth/sign-in" onClick={() => setIsOpen(false)}>
+                  <Button variant="outlineAlt">Iniciar sesión de fan</Button>
+                </Link>
+              </SignedOut>
+
+              <SignedIn>
+                <SignOutButton>
+                  <Button variant="outlineAlt">Cerrar sesión</Button>
+                </SignOutButton>
+              </SignedIn>
+            </div>
+
+            <div className="mt-4 flex flex-col items-center gap-6 font-semibold">
+              <a
+                href="https://help.rolamusic.app/legal-notice"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Aviso legal
+              </a>
+              <span className="hidden lg:block">|</span>
+              <a
+                href="https://help.rolamusic.app/privacy-policy"
+                className="hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Política de privacidad
+              </a>
+              <span className="hidden lg:block">|</span>
+              <a
+                href="https://help.rolamusic.app/cookies-policy"
+                className="hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Política de cookies
+              </a>
+            </div>
           </SheetContent>
         </Sheet>
       </Container>
