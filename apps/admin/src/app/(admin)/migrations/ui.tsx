@@ -12,9 +12,7 @@ function MigrationsPageUI() {
     setIsLoading(true);
 
     try {
-      const response = await migration();
-
-      console.log({ response });
+      await migration();
 
       setMessage("Hooray");
     } catch (error: any) {

@@ -1,7 +1,7 @@
 import { cn } from "@rola/tailwind-config/utils";
 import { LayoutProps } from "@typings/globals";
 import { Header } from "@components/Header/Header";
-import { Container, Title, Underline } from "@rola/ui/components";
+import { Container, Title } from "@rola/ui/components";
 import { Sidebar } from "@components/Sidebar/Sidebar";
 
 function AdminLayout(props: Readonly<LayoutProps>) {

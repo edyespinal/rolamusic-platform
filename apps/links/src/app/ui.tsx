@@ -21,6 +21,7 @@ function HomePageUI() {
   const redirectTo = (platform: Platforms) => {
     window.open(links[platform], "_blank");
   };
+
   return (
     <main className="flex min-h-screen flex-col items-center px-8 py-24">
       <div className="pb-12 text-center">

@@ -4,6 +4,7 @@ import { USERS } from "../../../constants";
 import {
   artistCommunityCollection,
   artistsCollection,
+  subscriptionTiersCollection,
   usersCollection,
 } from "../utils";
 import { batch } from "../db";
@@ -42,10 +43,15 @@ export async function subscribeToArtist(
     }
 
     const artistRef = doc(artistsCollection, artistId);
+    const subscriptionTierRef = doc(
+      subscriptionTiersCollection(artistId),
+      tierId
+    );
     const artistCommunityRef = artistCommunityCollection(artistId);
 
-    const [artist, artistCommunity] = await Promise.all([
+    const [artist, subscriptionTier, artistCommunity] = await Promise.all([
       getDoc(artistRef),
+      getDoc(subscriptionTierRef),
       getDoc(artistCommunityRef),
     ]);
 
@@ -58,21 +64,16 @@ export async function subscribeToArtist(
     }
 
     const artistData = artist.data();
+    const subscriptionTierData = subscriptionTier.data();
     const artistCommunityData = artistCommunity.data();
 
-    if (!artistData || !artistCommunityData) {
+    if (!artistData || !subscriptionTierData || !artistCommunityData) {
       return {
         success: false,
         message: "No se encontró el artista",
         data: null,
       };
     }
-
-    const test = artistCommunityData.subscriptions.tiers.find(
-      ({ tier }) => tier.id === tierId
-    );
-
-    test?.subscribers.push(userId);
 
     batch.update(userRef, {
       supporting: arrayUnion({
@@ -93,11 +94,12 @@ export async function subscribeToArtist(
       },
     });
 
+    batch.update(subscriptionTierRef, {
+      subscribers: arrayUnion(userId),
+    });
+
     batch.update(artistCommunityRef, {
-      subscriptions: {
-        total: artistCommunityData.subscriptions.total + 1,
-        tiers: [...artistCommunityData.subscriptions.tiers],
-      },
+      totalSubscribers: artistCommunityData.totalSubscribers + 1,
     });
 
     await batch.commit();

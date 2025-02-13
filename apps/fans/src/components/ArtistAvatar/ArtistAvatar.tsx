@@ -1,4 +1,3 @@
-import { Artist } from "@rola/services/schemas";
 import { cn } from "@rola/tailwind-config/utils";
 import { Avatar, AvatarFallback, AvatarImage, Text } from "@rola/ui/components";
 import { cva, VariantProps } from "class-variance-authority";
