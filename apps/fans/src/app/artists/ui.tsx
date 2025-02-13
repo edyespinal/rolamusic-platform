@@ -1,7 +1,7 @@
 "use client";
 
 import { ArtistCard } from "@components/ArtistCard/ArtistCard";
-import { Artist, User } from "@rola/services/schemas";
+import { Artist } from "@rola/services/schemas";
 import {
   Button,
   Carousel,
@@ -23,13 +23,21 @@ import { SignedIn } from "@clerk/nextjs";
 import { useIsMobile } from "@rola/ui/hooks";
 import { PageHeader } from "@components/PageHeader/PageHeader";
 import { cn } from "@rola/tailwind-config/utils";
+import { Genre } from "@rola/services/utils";
 
 function ArtistsPageUI({
   artists,
   supporting,
 }: {
   artists: Artist[];
-  supporting: User["supporting"] | null;
+  supporting: Array<{
+    id: string;
+    name: string;
+    profileURL: string;
+    genres: Genre[];
+    tier: string;
+    active: boolean;
+  }> | null;
 }) {
   const {
     displayedArtists,

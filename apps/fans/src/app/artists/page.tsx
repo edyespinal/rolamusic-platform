@@ -1,35 +1,23 @@
+import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@rola/services/firebase";
 import { ArtistsPageUI } from "./ui";
-import { redirect } from "next/navigation";
-import { unstable_cache } from "next/cache";
-import { currentUser } from "@clerk/nextjs/server";
-import { User } from "@rola/services/schemas";
-
-const getCachedArtists = unstable_cache(
-  async () => db.artists.getActiveArtists(50),
-  ["artists"],
-  {
-    revalidate: false,
-    tags: ["artists"],
-  }
-);
 
 async function ArtistsPage() {
-  let userInfo: User | null = null;
-  const artists = await getCachedArtists();
-  const user = await currentUser();
-
-  if (user?.id) {
-    userInfo = await db.users.getUser(user.id);
-  }
+  const artists = await db.artists.getActiveArtists(20);
 
   if (!artists) {
-    redirect("/404");
+    throw new Error("Algo ha salido mal cargando los artistas");
   }
 
-  const supporting = userInfo?.supporting.filter((s) => s.active);
+  const user = await currentUser();
 
-  return <ArtistsPageUI artists={artists} supporting={supporting ?? null} />;
+  if (!user) {
+    return <ArtistsPageUI artists={artists} supporting={null} />;
+  }
+
+  const supporting = await db.users.getUserArtistsSubscriptions(user.id);
+
+  return <ArtistsPageUI artists={artists} supporting={supporting.data} />;
 }
 
 export default ArtistsPage;

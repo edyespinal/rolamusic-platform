@@ -69,7 +69,7 @@ function ArtistPageUI({
             </Title>
             <Text className="text-brand">{formatGenres(genres)}</Text>
             <Text className="py-4">
-              {community?.subscriptions.total ?? 0} miembros{" "}
+              {community?.totalSubscribers ?? 0} miembros{" "}
               <span className="px-4"> | </span> {posts.length ?? 0}{" "}
               publicaciones
             </Text>

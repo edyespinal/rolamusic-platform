@@ -2,7 +2,6 @@ import { POST_TYPES } from "@rola/services/constants";
 import {
   ArtistCommunity,
   ArtistSubscriptionTier,
-  User,
 } from "@rola/services/schemas";
 import { Genre } from "@rola/services/utils";
 
@@ -15,7 +14,7 @@ export type ArtistPageProps = {
   bio?: string;
   community: ArtistCommunity;
   subscriptionTiers: ArtistSubscriptionTier[];
-  supporting?: User["supporting"][number];
+  supporting?: boolean;
   posts: ArtistPagePost[];
 };
 
