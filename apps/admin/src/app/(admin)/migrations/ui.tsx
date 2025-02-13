@@ -3,9 +3,8 @@
 import React from "react";
 import { Button, Container, Text, Title } from "@rola/ui/components";
 import { migration } from "./actions";
-import { Artist } from "@rola/services/schemas";
 
-function MigrationsPageUI({ artists }: { artists: Artist[] }) {
+function MigrationsPageUI() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
 
@@ -13,13 +12,14 @@ function MigrationsPageUI({ artists }: { artists: Artist[] }) {
     setIsLoading(true);
 
     try {
-      await migration();
+      const response = await migration();
 
-      setMessage("Migración completa");
+      console.log({ response });
+
+      setMessage("Hooray");
     } catch (error: any) {
+      console.error(error.message);
       setMessage(error.message);
-
-      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -33,19 +33,10 @@ function MigrationsPageUI({ artists }: { artists: Artist[] }) {
 
       <Container>
         <Button size="sm" onClick={handleMigration} loading={isLoading}>
-          Migrar subscriptores
+          Run migration
         </Button>
         <Text>{message}</Text>
       </Container>
-
-      {artists.map((artist) => (
-        <Container
-          key={artist.id}
-          className="border-gray-dark flex items-center justify-between border-b pb-2"
-        >
-          <Text>{artist.name}</Text>
-        </Container>
-      ))}
     </Container>
   );
 }

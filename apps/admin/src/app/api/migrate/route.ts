@@ -1,38 +1,42 @@
 import { db } from "@rola/services/firebase";
-export async function POST() {
-  try {
-    const artists = await db.artists.getActiveArtists(50);
+export async function POST(request: Request) {
+  const authHeader = request.headers.get("Authorization");
 
-    if (!artists) {
-      return Response.json({ message: `No artists found` });
+  console.log({ authHeader });
+
+  if (!authHeader || authHeader !== process.env.NEXT_PUBLIC_ADMIN_KEY) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const artists = await db.artists.getActiveArtists(100);
+
+  for await (const artist of artists) {
+    const [community, tiers, posts] = await Promise.all([
+      db.artists.getArtistCommunity(artist.id),
+      db.artists.getArtistSubscriptionTiers(artist.id),
+      db.artists.getArtistPosts(artist.id),
+    ]);
+
+    if (!community || !tiers) {
+      return Response.json({ error: "Community not found" }, { status: 404 });
     }
 
-    for await (const artist of artists) {
-      const [subs, community] = await Promise.all([
-        db.artists.getArtistSubscriptionTiers(artist.id),
-        db.artists.getArtistCommunity(artist.id),
-      ]);
+    const totalPosts = posts.data.length;
+    const totalSubscribers = tiers.data.reduce(
+      (acc, tier) => acc + tier.subscribers.length,
+      0
+    );
 
-      if (!community?.subscriptions.tiers) {
-        continue;
-      }
-
-      for await (const tier of community.subscriptions.tiers) {
-        for await (const sub of subs.data) {
-          if (sub.id === tier.tier.id) {
-            await db.artists.updateArtistSubscriptionTier(artist.id, sub.id, {
-              subscribers: tier.subscribers,
-            });
-          }
-        }
-      }
-    }
-
-    return Response.json({ message: `Success` });
-  } catch (error: any) {
-    return Response.json(
-      { error: "Something went wrong", message: error.message },
-      { status: 500 }
+    await db.artists.updateArtistCommunity(
+      artist.id,
+      {
+        topFans: [],
+        totalPosts,
+        totalSubscribers,
+      },
+      false
     );
   }
+
+  return Response.json({ message: `Success` });
 }
