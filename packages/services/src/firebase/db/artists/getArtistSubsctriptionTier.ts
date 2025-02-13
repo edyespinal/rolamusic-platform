@@ -1,16 +1,16 @@
-import { getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { FirebaseError } from "firebase/app";
 import { subscriptionTiersCollection } from "../utils";
 
-async function getArtistSubscriptionTiers(artistId: string) {
+async function getArtistSubscriptionTier(artistId: string, tierId: string) {
   try {
-    const ref = subscriptionTiersCollection(artistId);
+    const ref = doc(subscriptionTiersCollection(artistId), tierId);
 
-    const snapshot = await getDocs(ref);
+    const snapshot = await getDoc(ref);
 
-    if (snapshot.empty) {
+    if (!snapshot.exists()) {
       return {
         success: false,
         data: [],
@@ -19,9 +19,10 @@ async function getArtistSubscriptionTiers(artistId: string) {
 
     return {
       success: true,
-      data: snapshot.docs
-        .map((doc) => ({ ...doc.data(), id: doc.id }))
-        .sort((a, b) => a.access - b.access),
+      data: {
+        ...snapshot.data(),
+        id: snapshot.id,
+      },
     };
   } catch (e) {
     const error = e as FirebaseError;
@@ -34,4 +35,4 @@ async function getArtistSubscriptionTiers(artistId: string) {
   }
 }
 
-export { getArtistSubscriptionTiers };
+export { getArtistSubscriptionTier };

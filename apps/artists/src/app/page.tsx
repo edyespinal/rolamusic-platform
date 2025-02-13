@@ -9,7 +9,7 @@ async function HomePage() {
     throw new Error("No se ha encontrado tu usuario");
   }
 
-  const userArtists = await db.users.getUserArtists(user.id);
+  const userArtists = await db.users.getUserManagedArtists(user.id);
 
   return <HomePageUI artists={userArtists} />;
 }

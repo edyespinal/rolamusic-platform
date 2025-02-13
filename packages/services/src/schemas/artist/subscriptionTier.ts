@@ -26,4 +26,5 @@ export const subscriptionTierSchema = z.object({
     }),
   }),
   perks: z.array(z.string().min(1, "El beneficio no puede estar vacío")),
+  subscribers: z.array(z.string()),
 });

@@ -1,25 +1,11 @@
 import { z } from "zod";
-import { subscriptionTierSchema } from "./subscriptionTier";
 
 export const artistCommunitySchema = z.object({
-  subscriptions: z.object({
-    total: z.number().nonnegative(),
-    tiers: z.array(
-      z.object({
-        subscribers: z.array(z.string()),
-        tier: subscriptionTierSchema.pick({
-          id: true,
-          active: true,
-          label: true,
-        }),
-      })
-    ),
-    topFans: z.array(
-      z.object({
-        id: z.string(),
-        displayName: z.string(),
-        photoURL: z.string().url(),
-      })
-    ),
-  }),
+  totalSubscribers: z.number().nonnegative(),
+  totalPosts: z.number().nonnegative(),
+  topFans: z.array(
+    z.object({
+      id: z.string(),
+    })
+  ),
 });

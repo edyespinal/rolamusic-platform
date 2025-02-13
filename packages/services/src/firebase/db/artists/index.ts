@@ -9,6 +9,7 @@ import { getArtistCommunity } from "./getArtistCommunity";
 import { getArtistPaymentDetails } from "./getArtistPaymentDetails";
 import { getArtistPosts } from "./getArtistPosts";
 import { getArtistSubscriptionTiers } from "./getArtistSubscriptionTiers";
+import { getArtistSubscriptionTier } from "./getArtistSubsctriptionTier";
 import { updateArtist } from "./updateArtist";
 import { updateArtistActivation } from "./updateArtistActivation";
 import { updateArtistCommunity } from "./updateArtistCommunity";
@@ -30,6 +31,7 @@ export const artistsServices = {
   getArtistPaymentDetails,
   getArtistPost,
   getArtistPosts,
+  getArtistSubscriptionTier,
   getArtistSubscriptionTiers,
   updateArtist,
   updateArtistActivation,

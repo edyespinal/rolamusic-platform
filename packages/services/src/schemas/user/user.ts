@@ -13,9 +13,6 @@ const userSchema = z.object({
   supporting: z.array(
     z.object({
       id: z.string(),
-      name: z.string(),
-      profileURL: z.string().url("La imagen de perfil no es válida"),
-      genres: z.array(z.custom<Genre>()),
       tier: z.string(),
       active: z.boolean(),
     })

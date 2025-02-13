@@ -6,12 +6,13 @@ import { artistCommunityCollection } from "../utils";
 
 async function updateArtistCommunity(
   artistId: string,
-  data: Partial<ArtistCommunity>
+  data: Partial<ArtistCommunity>,
+  merge = true
 ) {
   try {
     const ref = artistCommunityCollection(artistId);
 
-    await setDoc(ref, data, { merge: true });
+    await setDoc(ref, data, { merge });
 
     return {
       success: true,
