@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Title } from "@rola/ui/components";
+import { Container } from "@rola/ui/components";
 import { cn } from "@rola/tailwind-config/utils";
 
 function PageHeader({

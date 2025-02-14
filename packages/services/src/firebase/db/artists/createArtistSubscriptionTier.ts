@@ -1,44 +1,24 @@
 import { FirebaseError } from "firebase/app";
-import { arrayUnion, doc } from "firebase/firestore";
+import { addDoc } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { ArtistSubscriptionTier } from "../../../schemas";
-import {
-  artistCommunityCollection,
-  subscriptionTiersCollection,
-} from "../utils";
-import { batch } from "../db";
+import { subscriptionTiersCollection } from "../utils";
 
 async function createArtistSubscriptionTier(
   artistId: string,
   payload: Omit<ArtistSubscriptionTier, "id">
 ) {
   try {
-    const tierRef = doc(subscriptionTiersCollection(artistId));
-    const communityRef = artistCommunityCollection(artistId);
+    const tiersRef = subscriptionTiersCollection(artistId);
 
-    batch.set(tierRef, payload);
-
-    batch.update(communityRef, {
-      subscriptions: {
-        tiers: arrayUnion({
-          subscribers: [],
-          tier: {
-            id: tierRef.id,
-            active: payload.active,
-            label: payload.label,
-          },
-        }),
-      },
-    });
-
-    await batch.commit();
+    const { id } = await addDoc(tiersRef, payload);
 
     return {
       success: true,
       data: {
         ...payload,
-        id: tierRef.id,
+        id,
       },
     };
   } catch (e) {

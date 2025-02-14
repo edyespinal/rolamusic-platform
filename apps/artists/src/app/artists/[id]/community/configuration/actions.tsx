@@ -35,6 +35,7 @@ async function createNewSubscriptionTier(
       },
     },
     perks: payload.perks.map((perk) => perk.name),
+    subscribers: [],
   });
 }
 

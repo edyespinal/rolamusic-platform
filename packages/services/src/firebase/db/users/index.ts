@@ -1,13 +1,15 @@
 import { createUser } from "./createUser";
 import { getUsers } from "./getUsers";
 import { getUser } from "./getUser";
-import { getUserArtists } from "./getUserArtists";
+import { getUserArtistsSubscriptions } from "./getUserArtistsSubscriptions";
+import { getUserManagedArtists } from "./getUserArtists";
 import { subscribeToArtist } from "./subscribeToArtist";
 
 export const usersServices = {
   createUser,
   getUsers,
   getUser,
-  getUserArtists,
+  getUserArtistsSubscriptions,
+  getUserManagedArtists,
   subscribeToArtist,
 };

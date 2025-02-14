@@ -10,6 +10,7 @@ import { getArtistPaymentDetails } from "./getArtistPaymentDetails";
 import { getArtistPosts } from "./getArtistPosts";
 import { getArtistSubscriptionTier } from "./getArtistSubscriptionTier";
 import { getArtistSubscriptionTiers } from "./getArtistSubscriptionTiers";
+import { getArtistSubscriptionTier } from "./getArtistSubsctriptionTier";
 import { updateArtist } from "./updateArtist";
 import { updateArtistActivation } from "./updateArtistActivation";
 import { updateArtistCommunity } from "./updateArtistCommunity";

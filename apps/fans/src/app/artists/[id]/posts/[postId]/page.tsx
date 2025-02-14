@@ -1,8 +1,8 @@
 import React from "react";
 import { ArtistPostPageUI } from "./ui";
 import { db } from "@rola/services/firebase";
-import { ArtistPagePost } from "../../types";
 import { currentUser } from "@clerk/nextjs/server";
+import { NoAccessToPost } from "./_components/NoAccessToPost";
 
 async function ArtistPostPage({
   params,
@@ -10,33 +10,30 @@ async function ArtistPostPage({
   params: { id: string; postId: string };
 }) {
   const { id: artistId, postId } = params;
-  const user = await currentUser();
 
-  if (!params.postId || !artistId) {
-    throw new Error("No hemos encontrado el post");
-  }
-
-  const [artist, post] = await Promise.all([
+  const [user, artist, { data: post }, tiers] = await Promise.all([
+    currentUser(),
     db.artists.getArtist(artistId),
     db.artists.getArtistPost(artistId, postId),
+    db.artists.getArtistSubscriptionTiers(artistId),
   ]);
 
-  if (!artist || !post?.data) {
+  if (!artist || !post) {
     throw new Error("No hemos encontrado el post");
   }
 
   let userAccess = 0;
 
   if (user) {
-    const supportedArtists = user.publicMetadata.supporting as any[];
+    const userTier = tiers.data.find((tier) =>
+      tier.subscribers.includes(user.id)
+    );
 
-    userAccess = supportedArtists.find(
-      (item) => item.artist === artistId
-    ).access;
+    userAccess = userTier?.access || 0;
   }
 
-  if (post.data.access > userAccess) {
-    throw new Error("No tienes acceso a este post");
+  if (post.access > userAccess) {
+    return <NoAccessToPost artistId={artist.id} />;
   }
 
   return (
@@ -44,8 +41,8 @@ async function ArtistPostPage({
       artist={artist}
       userProfileImage={user?.imageUrl ?? ""}
       post={{
-        ...post.data,
-        likedByUser: !user ? false : post.data.likes.includes(user.id),
+        ...post,
+        likedByUser: !user ? false : post.likes.includes(user.id),
       }}
     />
   );

@@ -3,7 +3,7 @@ import { artistsCollection } from "../utils";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils";
 
-async function getUserArtists(userId: string) {
+async function getUserManagedArtists(userId: string) {
   try {
     const artistsQuery = query(artistsCollection, where("admin", "==", userId));
     const { docs } = await getDocs(artistsQuery);
@@ -31,4 +31,4 @@ async function getUserArtists(userId: string) {
   }
 }
 
-export { getUserArtists };
+export { getUserManagedArtists };

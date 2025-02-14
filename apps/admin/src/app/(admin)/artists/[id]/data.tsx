@@ -4,7 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { db } from "@rola/services/firebase";
 import { useToast } from "@rola/ui/components";
-import { FormValues, PageUIProps } from "./types";
+import { FormValues } from "./types";
 import { Artist, ArtistCommunity } from "@rola/services/schemas";
 
 const useArtistsPageData = ({
@@ -26,7 +26,7 @@ const useArtistsPageData = ({
     },
   });
 
-  async function uploadProfileImage(files: File[]) {
+  async function uploadProfileImage() {
     setIsUploading(true);
 
     const imagUrl = await db.artists.updateArtistProfileImage(artist.id, "");
@@ -40,7 +40,7 @@ const useArtistsPageData = ({
     });
   }
 
-  async function uploadCoverImage(files: File[]) {
+  async function uploadCoverImage() {
     setIsUploading(true);
 
     const imagUrl = await db.artists.updateArtistCoverImage(artist.id, "");

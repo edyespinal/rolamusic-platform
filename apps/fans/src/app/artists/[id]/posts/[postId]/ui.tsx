@@ -14,7 +14,6 @@ import {
   Form,
   FormControl,
   FormField,
-  FormItem,
   Input,
   Separator,
   Text,
@@ -24,6 +23,7 @@ import { Artist, ArtistPost } from "@rola/services/schemas";
 import { ArrowLeftIcon, HeartIcon, MessageCircleIcon } from "@rola/ui/icons";
 import { useArtistPageData } from "../../data";
 import { useArtistPostPageData } from "./data";
+import { YouTubePlayer } from "@components/YouTubePlayer/YouTubePlayer";
 
 function ArtistPostPageUI({
   artist,
@@ -74,14 +74,10 @@ function ArtistPostPageUI({
 
         {post.type === "VIDEO" && (
           <Container size="md" className="mb-12 h-96">
-            <iframe
-              width="100%"
-              height="100%"
+            <YouTubePlayer
+              title={post.title}
+              url={post.url as string}
               className="size-full rounded-xl"
-              src={`https://www.youtube.com/embed/${post.url?.split("v=").pop()?.split("&").shift()}`}
-              title={post.caption}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
             />
           </Container>
         )}

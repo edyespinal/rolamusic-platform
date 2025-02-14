@@ -1,16 +1,8 @@
 "use client";
 
 import { Header } from "@components/Header/Header";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  Container,
-  Loader,
-  Title,
-} from "@rola/ui/components";
+import { Avatar, AvatarFallback, Container, Title } from "@rola/ui/components";
 import { UploadOverlay } from "@components/UploadOverlay/UploadOverlay";
-import { useUser } from "@clerk/nextjs";
 
 function HomePageUI() {
   return (

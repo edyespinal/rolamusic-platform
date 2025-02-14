@@ -24,7 +24,8 @@
     "STRIPE_CONNECT_ACCOUNT_ID",
     "NEXT_PUBLIC_POSTHOG_KEY",
     "NEXT_PUBLIC_POSTHOG_HOST",
-    "UPLOADTHING_TOKEN"
+    "UPLOADTHING_TOKEN",
+    "NEXT_PUBLIC_ADMIN_KEY"
   ],
   "globalDependencies": [".env"],
   "tasks": {

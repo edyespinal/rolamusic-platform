@@ -43,7 +43,7 @@ function ArtistCommunityPageUI({
             Subscriptores
           </Title>
           <Title className="text-brand" align="left">
-            {community?.subscriptions?.total ?? 0}
+            {community?.totalSubscribers ?? 0}
           </Title>
         </div>
         <div className="bg-background min-w-64 rounded p-4">

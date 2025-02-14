@@ -6,10 +6,11 @@ import { Icon } from "./variants/Icon";
 type ComponentProps = {
   variant?: "default" | "horizontal" | "vertical" | "icon";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
+  alt?: boolean;
 };
 
 function Logo(props: ComponentProps) {
-  const { variant = "default", size = "sm" } = props;
+  const { variant = "default", size = "sm", alt = false } = props;
 
   const sizeMap = {
     xs: 120,
@@ -27,7 +28,7 @@ function Logo(props: ComponentProps) {
       return <Vertical size={sizeMap[size]} />;
 
     case "icon":
-      return <Icon size={sizeMap[size]} />;
+      return <Icon size={sizeMap[size]} alt={alt} />;
 
     default:
       return <Main size={sizeMap[size]} />;

@@ -15,7 +15,7 @@ async function ArtistsPage() {
     tiers?: ArtistSubscriptionTier[] | null;
   }> = [];
 
-  for (const artist of artists) {
+  for await (const artist of artists) {
     const [community, tiers] = await Promise.all([
       db.artists.getArtistCommunity(artist.id),
       db.artists.getArtistSubscriptionTiers(artist.id),

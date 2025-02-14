@@ -2,12 +2,13 @@ import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@rola/services/firebase";
 import { ArtistPagePost } from "./types";
 import { ArtistPageUI } from "./ui";
+import { ArtistSubscriptionTier } from "@rola/services/schemas";
 
 async function ArtistPage({ params }: { params: { id: string } }) {
   const { id: artistId } = params;
-  const userAuth = await currentUser();
 
-  const [artist, tiers, community, posts] = await Promise.all([
+  const [userAuth, artist, tiers, community, posts] = await Promise.all([
+    currentUser(),
     db.artists.getArtist(artistId),
     db.artists.getArtistSubscriptionTiers(artistId),
     db.artists.getArtistCommunity(artistId),
@@ -18,24 +19,23 @@ async function ArtistPage({ params }: { params: { id: string } }) {
     throw new Error("Algo ha salido mal cargando la información del artista");
   }
 
-  let isSupporting = undefined;
+  let userTier: ArtistSubscriptionTier | undefined;
 
   if (userAuth) {
-    const user = await db.users.getUser(userAuth.id);
-    const supported = user.supporting.find((s) => s.id === artist.id);
-
-    isSupporting = supported?.active ? supported : undefined;
+    userTier = tiers.data.find((tier) =>
+      tier.subscribers.includes(userAuth.id)
+    );
   }
-
-  const userAccess =
-    tiers?.data.find((tier) => {
-      return isSupporting?.tier === tier.id;
-    })?.access || 0;
 
   const pagePosts: ArtistPagePost[] = posts.data.map((post) => {
     const date = post.date as any;
     const postDate = new Date(date.seconds * 1000);
-    const access = post.access <= userAccess;
+    const access =
+      post.access === 0
+        ? true
+        : userTier
+          ? userTier.access >= post.access
+          : false;
 
     return {
       id: post.id,
@@ -66,7 +66,7 @@ async function ArtistPage({ params }: { params: { id: string } }) {
       bio={artist.bio}
       community={community}
       subscriptionTiers={tiers.data || []}
-      supporting={isSupporting}
+      supporting={!!userTier}
       posts={pagePosts}
     />
   );

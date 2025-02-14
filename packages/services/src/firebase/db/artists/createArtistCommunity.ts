@@ -8,11 +8,9 @@ async function createArtistCommunity(artistId: string) {
     const ref = artistCommunityCollection(artistId);
 
     await setDoc(ref, {
-      subscriptions: {
-        total: 0,
-        topFans: [],
-        tiers: [],
-      },
+      totalSubscribers: 0,
+      totalPosts: 0,
+      topFans: [],
     });
   } catch (e) {
     const error = e as FirestoreError;
