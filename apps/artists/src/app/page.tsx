@@ -1,17 +1,10 @@
-import { currentUser } from "@clerk/nextjs/server";
-import { HomePageUI } from "./home/ui";
-import { db } from "@rola/services/firebase";
+import { homePageController } from "./controller";
+import { HomePageUI } from "./ui";
 
 async function HomePage() {
-  const user = await currentUser();
+  const { artists } = await homePageController();
 
-  if (!user) {
-    throw new Error("No se ha encontrado tu usuario");
-  }
-
-  const userArtists = await db.users.getUserManagedArtists(user.id);
-
-  return <HomePageUI artists={userArtists} />;
+  return <HomePageUI artists={artists} />;
 }
 
 export default HomePage;

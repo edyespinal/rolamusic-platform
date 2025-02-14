@@ -12,7 +12,7 @@ import {
 import { SquarePenIcon } from "@rola/ui/icons";
 import { Artist } from "@rola/services/schemas";
 import { cn } from "@rola/tailwind-config/utils";
-import { currentArtist } from "../../../store";
+import { currentArtist } from "../../store";
 
 function ArtistCard({ artist }: { artist: Artist }) {
   const router = useRouter();
@@ -48,7 +48,7 @@ function ArtistCard({ artist }: { artist: Artist }) {
       </Avatar>
       <Container className="text-center">
         <Text className="mb-4 font-semibold">{artist.name}</Text>
-        <Text>Fans: {artist.fans.length}</Text>
+        <Text>Fans: {artist.fansSummary?.total || 0}</Text>
       </Container>
     </Container>
   );

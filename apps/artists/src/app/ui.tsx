@@ -3,7 +3,7 @@ import { Footer } from "@components/Footer/Footer";
 import { Header } from "@components/Header/Header";
 import { Button, Container, Text, Title, Underline } from "@rola/ui/components";
 import { Artist } from "@rola/services/schemas";
-import { ArtistCard } from "./components/ArtistCard";
+import { ArtistCard } from "@components/ArtistCard/ArtistCard";
 import React from "react";
 
 function HomePageUI({ artists }: { artists: Artist[] }) {
