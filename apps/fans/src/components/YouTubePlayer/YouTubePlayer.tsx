@@ -1,4 +1,14 @@
-function YouTubePlayer({ url, title }: { url: string; title: string }) {
+import { cn } from "@rola/tailwind-config/utils";
+
+function YouTubePlayer({
+  url,
+  title,
+  className,
+}: {
+  url: string;
+  title: string;
+  className?: string;
+}) {
   let src = "";
 
   switch (true) {
@@ -19,7 +29,7 @@ function YouTubePlayer({ url, title }: { url: string; title: string }) {
     <iframe
       width="100%"
       height="100%"
-      className="size-full"
+      className={cn("size-full", className)}
       src={src}
       title={title}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
