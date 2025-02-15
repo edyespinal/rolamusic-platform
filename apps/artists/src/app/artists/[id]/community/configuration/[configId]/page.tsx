@@ -15,7 +15,7 @@ async function EditSubscriptionTierPage({
     params.configId
   );
 
-  if (!tier || !tier.success) {
+  if (!tier.data || !tier.success) {
     throw new Error("Algo ha salido mal cargando la suscripción");
   }
 

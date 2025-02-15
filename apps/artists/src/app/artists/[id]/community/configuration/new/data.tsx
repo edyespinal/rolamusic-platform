@@ -49,6 +49,7 @@ const useNewSubscriptionPageData = (
         price: values.price,
         perks: values.perks,
         recommended: values.recommended,
+        subscribers: [],
       });
 
       toast({
@@ -58,7 +59,7 @@ const useNewSubscriptionPageData = (
 
       setTimeout(() => {
         window.location.href = `/artists/${artistId}/community/configuration/update`;
-      }, 1000);
+      }, 500);
     } catch (error) {
       console.error(error);
 

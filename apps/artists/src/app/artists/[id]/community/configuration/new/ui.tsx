@@ -7,6 +7,7 @@ import {
   Container,
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -88,6 +89,9 @@ function NewSubscriptionTierPageUI({
                     <FormControl>
                       <Input type="text" required {...field} />
                     </FormControl>
+                    <FormDescription>
+                      Este campo no será visible para tus fans
+                    </FormDescription>
                   </FormItem>
                 )}
               />
@@ -193,21 +197,17 @@ function NewSubscriptionTierPageUI({
           </Title>
           <SubscriptionPreview
             tier={{
-              id: "tier-1",
-              active: true,
-              access: 0,
-              name: form.watch("name"),
+              recommended: form.watch("recommended"),
               label: form.watch("label"),
               description: form.watch("description"),
-              recommended: form.watch("recommended"),
               prices: {
                 monthly: {
-                  value: form.watch("price") * 100,
                   priceId: "",
+                  value: form.watch("price"),
                 },
                 yearly: {
-                  value: form.watch("price") * 1200,
                   priceId: "",
+                  value: form.watch("price") * 12,
                 },
               },
               perks: form

@@ -59,10 +59,11 @@ function SubscriptionTier({
       </SignedIn>
 
       <Container>
-        <Text className="text-brand">¡Gracias por tu apoyo!</Text>
+        <Text className="pb-4 pt-2">{tier.description}</Text>
+        <Text className="text-brand font-semibold">Beneficios</Text>
         {tier.perks?.map((perk, i) => (
-          <Text key={i} className="flex">
-            <CheckIcon size={20} className="text-brand mr-1" />
+          <Text key={i} className="flex items-baseline">
+            <CheckIcon className="text-brand mr-1 shrink-0" />
             {perk}
           </Text>
         ))}

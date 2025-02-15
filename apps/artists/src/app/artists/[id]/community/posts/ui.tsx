@@ -33,11 +33,11 @@ function ArtistPostsPageUI({
         </Link>
       </Container>
 
-      <Container className="flex flex-wrap gap-4">
+      <Container className="grid gap-6 lg:grid-cols-2">
         {posts.map((post) => (
-          <Container
+          <div
             key={post.id}
-            className="bg-background rounded-xl px-6 py-4"
+            className="bg-background-dark rounded-xl px-6 py-4"
           >
             <Title order={3} align="left">
               {post.title}
@@ -52,12 +52,7 @@ function ArtistPostsPageUI({
               <Label htmlFor="active">Activo</Label>
               <Switch id="active" className="text-xs" checked={post.active} />
             </span>
-
-            <span className="">
-              <Text className="font-semibold">Descripción</Text>
-              <Text>{post.caption}</Text>
-            </span>
-          </Container>
+          </div>
         ))}
       </Container>
     </Container>

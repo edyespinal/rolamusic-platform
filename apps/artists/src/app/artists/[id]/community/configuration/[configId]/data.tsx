@@ -43,6 +43,10 @@ const useEditSubscriptionTierData = (
         title: "Suscripción actualizada",
         description: "La suscripción ha sido actualizada correctamente",
       });
+
+      setTimeout(() => {
+        window.location.href = `/artists/${artistId}/community/configuration/update`;
+      }, 500);
     } catch (error) {
       console.error(error);
 

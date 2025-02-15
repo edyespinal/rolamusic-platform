@@ -7,7 +7,14 @@ import { Button, Container, Text, Title } from "@rola/ui/components";
 import { CheckIcon } from "@rola/ui/icons";
 import { cn } from "@rola/tailwind-config/utils";
 
-function SubscriptionPreview({ tier }: { tier: ArtistSubscriptionTier }) {
+function SubscriptionPreview({
+  tier,
+}: {
+  tier: Pick<
+    ArtistSubscriptionTier,
+    "recommended" | "label" | "description" | "perks" | "prices"
+  >;
+}) {
   const [isLoading, setIsLoading] = React.useState(false);
 
   return (
@@ -48,10 +55,11 @@ function SubscriptionPreview({ tier }: { tier: ArtistSubscriptionTier }) {
       </SignedIn>
 
       <Container>
-        <Text className="text-brand">¡Gracias por tu apoyo!</Text>
+        <Text className="pb-4 pt-2">{tier.description}</Text>
+        <Text className="text-brand font-semibold">Beneficios</Text>
         {tier.perks?.map((perk, i) => (
-          <Text key={i} className="flex">
-            <CheckIcon size={20} className="text-brand mr-1" />
+          <Text key={i} className="flex items-baseline">
+            <CheckIcon className="text-brand mr-1 shrink-0" />
             {perk}
           </Text>
         ))}
