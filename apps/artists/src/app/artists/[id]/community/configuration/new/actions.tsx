@@ -1,14 +1,14 @@
 "use server";
 
 import { stripe } from "@rola/services/stripe";
-import { FormTier } from "./types";
 import { db } from "@rola/services/firebase";
+import { FormTier } from "../types";
 
 async function createNewSubscriptionTier(
   artistId: string,
   artistName: string,
   stripeAccountId: string,
-  payload: FormTier
+  payload: Omit<FormTier, "id">
 ) {
   const price = await stripe.prices.createPrice(
     artistName,
@@ -34,23 +34,9 @@ async function createNewSubscriptionTier(
         priceId: price.data.yearly.id,
       },
     },
-    perks: payload.perks.map((perk) => perk.name),
+    perks: payload.perks.map((perk) => perk.text),
     subscribers: [],
   });
 }
 
-async function updateSubscriptionTier(
-  artistId: string,
-  subscriptionId: string,
-  payload: Partial<FormTier>
-) {
-  await db.artists.updateArtistSubscriptionTier(artistId, subscriptionId, {
-    active: payload.active,
-    recommended: payload.recommended,
-    label: payload.label,
-    description: payload.description,
-    perks: payload.perks?.map((perk) => perk.name).filter(Boolean) || [],
-  });
-}
-
-export { createNewSubscriptionTier, updateSubscriptionTier };
+export { createNewSubscriptionTier };

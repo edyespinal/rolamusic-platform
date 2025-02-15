@@ -4,7 +4,7 @@ import { InstagramIcon, YouTubeIcon } from "@rola/ui/icons";
 function Footer() {
   return (
     <Container
-      size="xl"
+      size="xxl"
       className="border-brand flex w-full flex-col justify-between border-t p-0 text-sm lg:flex-row"
     >
       <div className="flex flex-col gap-4 pt-2 text-center lg:flex-row">

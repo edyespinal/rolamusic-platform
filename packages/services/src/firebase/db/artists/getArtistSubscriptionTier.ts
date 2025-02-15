@@ -1,7 +1,8 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { FirebaseError } from "firebase/app";
+import { ArtistSubscriptionTier } from "../../../schemas";
 import { subscriptionTiersCollection } from "../utils";
 
 async function getArtistSubscriptionTier(artistId: string, tierId: string) {
@@ -13,7 +14,7 @@ async function getArtistSubscriptionTier(artistId: string, tierId: string) {
     if (!snapshot.exists()) {
       return {
         success: false,
-        data: null,
+        data: {} as ArtistSubscriptionTier,
       };
     }
 

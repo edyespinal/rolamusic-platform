@@ -72,7 +72,7 @@ function Sidebar({ artist }: { artist: Artist }) {
               href={`/artists/${artist?.id}/community/configuration`}
               pathname={pathname}
             >
-              Configuración
+              Configurar suscripciones
             </SidebarLink>
           </Container>
         </Container>

@@ -18,6 +18,7 @@ import { updateArtistPaymentDetails } from "./updateArtistPaymentDetails";
 import { updateArtistProfileImage } from "./updateArtistProfileImage";
 import { updateArtistSubscriptionTier } from "./updateArtistSubscriptionTier";
 import { getArtistPost } from "./getArtistPost";
+import { updateArtistSubscriptionTiers } from "./updateSubscrtiptionTiers";
 
 export const artistsServices = {
   createArtist,
@@ -40,4 +41,5 @@ export const artistsServices = {
   updateArtistPaymentDetails,
   updateArtistProfileImage,
   updateArtistSubscriptionTier,
+  updateArtistSubscriptionTiers,
 };

@@ -1,34 +1,32 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { SignedIn } from "@clerk/nextjs";
 import { ArtistSubscriptionTier } from "@rola/services/schemas";
 import { Button, Container, Text, Title } from "@rola/ui/components";
 import { CheckIcon } from "@rola/ui/icons";
 import { cn } from "@rola/tailwind-config/utils";
 
-function SubscriptionTier({
-  artistId,
+function SubscriptionPreview({
   tier,
-  highlighted,
 }: {
-  artistId: string;
-  tier: ArtistSubscriptionTier;
-  highlighted?: string;
+  tier: Pick<
+    ArtistSubscriptionTier,
+    "recommended" | "label" | "description" | "perks" | "prices"
+  >;
 }) {
   const [isLoading, setIsLoading] = React.useState(false);
 
   return (
     <Container
       className={cn(
-        "relative flex h-full max-w-80 flex-col gap-4 rounded-2xl border-2 px-6 py-6 lg:max-w-full lg:px-8",
-        highlighted ? "border-brand" : "border-gray"
+        "relative flex max-w-80 flex-col gap-4 rounded-2xl border-2 px-6 py-6 lg:max-w-full lg:px-8",
+        tier.recommended ? "border-brand" : "border-gray"
       )}
     >
-      {highlighted && (
+      {tier.recommended && (
         <span className="bg-brand absolute -top-5 right-3 rounded-bl-xl rounded-tr-xl px-4 py-2 text-sm font-semibold text-black">
-          {highlighted}
+          Recomendada
         </span>
       )}
       <div className="flex items-end">
@@ -51,11 +49,9 @@ function SubscriptionTier({
       </Title>
 
       <SignedIn>
-        <Link href={`/artists/${artistId}/subscribe?tier=${tier.id}`}>
-          <Button loading={isLoading} onClick={() => setIsLoading(true)}>
-            Suscribirme
-          </Button>
-        </Link>
+        <Button loading={isLoading} onClick={() => setIsLoading(true)}>
+          Suscribirme
+        </Button>
       </SignedIn>
 
       <Container>
@@ -72,4 +68,4 @@ function SubscriptionTier({
   );
 }
 
-export { SubscriptionTier };
+export { SubscriptionPreview };

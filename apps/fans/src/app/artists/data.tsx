@@ -1,7 +1,7 @@
 "use client";
 
 import { Artist } from "@rola/services/schemas";
-import { Genre, genresList, genresListOptions } from "@rola/services/utils";
+import { Genre, genresListOptions } from "@rola/services/utils";
 import React from "react";
 
 const useArtistsPageData = (artists: Artist[]) => {

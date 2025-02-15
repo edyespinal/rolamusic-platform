@@ -20,14 +20,14 @@ async function ArtistCommunityPage({ params }: { params: { id: string } }) {
     const link = !artist
       ? {
           href: `/artists/${id}`,
-          text: "tu información de artista",
+          missing: "tu información de artista",
         }
       : {
           href: `/artists/${id}/payment-details`,
-          text: "tus datos bancarios y fiscales",
+          missing: "tus datos bancarios y fiscales",
         };
 
-    return <IncompleteProfileUI link={link} />;
+    return <IncompleteProfileUI info={link} />;
   }
 
   const artistBalance = await stripe.accounts.getBalance(

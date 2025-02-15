@@ -18,7 +18,7 @@ async function ArtistsLayout({
 
   return (
     <Container
-      size="xl"
+      size="xxl"
       className="grid h-svh grid-rows-[auto_1fr_auto] px-4 lg:px-4"
     >
       <Header />
