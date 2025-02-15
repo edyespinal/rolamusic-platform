@@ -12,18 +12,25 @@ async function updateArtistSubscriptionTier(
   payload: Partial<ArtistSubscriptionTier>
 ) {
   try {
-    const ref = doc(subscriptionTiersCollection(artistId), subscriptionId);
+    const tierRef = doc(subscriptionTiersCollection(artistId), subscriptionId);
 
-    batch.update(ref, payload);
+    if (!payload.recommended) {
+      await setDoc(tierRef, payload, { merge: true });
 
-    if (payload.recommended) {
-      const ref = subscriptionTiersCollection(artistId);
-      const docs = await getDocs(ref);
+      return {
+        success: true,
+        data: payload,
+      };
+    }
 
-      for (const doc of docs.docs) {
-        if (doc.id !== subscriptionId) {
-          batch.update(doc.ref, { recommended: false });
-        }
+    batch.update(tierRef, payload);
+
+    const tiersCollectionRef = subscriptionTiersCollection(artistId);
+    const docs = await getDocs(tiersCollectionRef);
+
+    for (const doc of docs.docs) {
+      if (doc.id !== subscriptionId) {
+        batch.update(doc.ref, { recommended: false });
       }
     }
 

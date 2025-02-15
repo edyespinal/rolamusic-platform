@@ -13,7 +13,7 @@ async function getArtistSubscriptionTier(artistId: string, tierId: string) {
     if (!snapshot.exists()) {
       return {
         success: false,
-        data: [],
+        data: null,
       };
     }
 

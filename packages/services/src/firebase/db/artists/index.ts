@@ -8,7 +8,6 @@ import { getActiveArtists } from "./getActiveArtists";
 import { getArtistCommunity } from "./getArtistCommunity";
 import { getArtistPaymentDetails } from "./getArtistPaymentDetails";
 import { getArtistPosts } from "./getArtistPosts";
-import { getArtistSubscriptionTier } from "./getArtistSubscriptionTier";
 import { getArtistSubscriptionTiers } from "./getArtistSubscriptionTiers";
 import { getArtistSubscriptionTier } from "./getArtistSubsctriptionTier";
 import { updateArtist } from "./updateArtist";
