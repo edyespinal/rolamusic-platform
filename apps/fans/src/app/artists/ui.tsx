@@ -170,7 +170,7 @@ function ArtistsPageUI({
             </Select>
           </div>
         </Container>
-        <Container className="grid grid-cols-2 gap-y-8 px-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:px-0">
+        <Container className="flex flex-wrap justify-center gap-8 px-4 lg:px-0">
           {displayedArtists.map((artist) => (
             <ArtistCard
               key={artist.id}

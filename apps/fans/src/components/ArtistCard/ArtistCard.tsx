@@ -22,7 +22,7 @@ function ArtistCard({
   return (
     <Link
       href={`/artists/${id}`}
-      className={cn("mx-auto max-w-48 text-center", classNames)}
+      className={cn("max-w-48 text-center", classNames)}
     >
       <ArtistAvatar
         image={image}
