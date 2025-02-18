@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^5.0.9",
     "@rola/services": "workspace:^",
     "@rola/ui": "workspace:^",
+    "@sentry/nextjs": "^9",
     "@vercel/analytics": "^1.4.1",
     "class-variance-authority": "^0.7.0",
     "jotai": "^2.8.4",

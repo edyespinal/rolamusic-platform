@@ -1,10 +1,17 @@
 "use client";
 
+import React from "react";
+import Error from "next/error";
+import Link from "next/link";
+import * as Sentry from "@sentry/nextjs";
 import { Header } from "@components/Header/Header";
 import { Button, Container, Text, Title } from "@rola/ui/components";
-import Link from "next/link";
 
-function GlobalError() {
+function GlobalError({ error }: { error: Error }) {
+  React.useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
+
   return (
     <Container className="grid h-svh grid-rows-[auto_1fr_auto]">
       <Header />

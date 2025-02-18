@@ -25,7 +25,8 @@
     "NEXT_PUBLIC_POSTHOG_KEY",
     "NEXT_PUBLIC_POSTHOG_HOST",
     "UPLOADTHING_TOKEN",
-    "NEXT_PUBLIC_ADMIN_KEY"
+    "NEXT_PUBLIC_ADMIN_KEY",
+    "SENTRY_AUTH_TOKEN"
   ],
   "globalDependencies": [".env"],
   "tasks": {
