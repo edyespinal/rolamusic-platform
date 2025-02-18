@@ -23,7 +23,7 @@ function UserMenu({ withInfo = false }: { withInfo?: boolean }) {
 
   function handleSignOut() {
     signOut({
-      redirectUrl: "/auth/sign-in",
+      redirectUrl: window.location.pathname || "/",
     });
   }
 

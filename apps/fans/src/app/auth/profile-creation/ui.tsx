@@ -1,16 +1,19 @@
 "use client";
 
 import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Container, Loader, Text } from "@rola/ui/components";
-import { useRouter } from "next/navigation";
 
-function ProfileCreationUI() {
+function ProfileCreationUI({ redirectUrl }: { redirectUrl?: string }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      router.push("/");
-    }, 2000);
+      return router.push(
+        redirectUrl || searchParams.get("redirect_url") || "/"
+      );
+    }, 1000);
 
     return () => {
       clearTimeout(timer);
@@ -18,7 +21,7 @@ function ProfileCreationUI() {
   });
 
   return (
-    <Container size="sm" className="py-24 flex flex-col items-center gap-4">
+    <Container size="sm" className="flex flex-col items-center gap-4 py-24">
       <Loader size="xl" />
       <div className="text-center">
         <Text>Estamos creando tu cuenta...</Text>

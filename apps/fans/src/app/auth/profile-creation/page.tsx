@@ -3,8 +3,13 @@ import { ProfileCreationUI } from "./ui";
 import { db } from "@rola/services/firebase";
 import { stripe } from "@rola/services/stripe";
 
-async function ProfileCreationPage() {
+async function ProfileCreationPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const user = await currentUser();
+  const redirectUrl = (searchParams?.redirect_url as string) || "/";
 
   if (!user) {
     throw new Error("User not found");
@@ -33,7 +38,7 @@ async function ProfileCreationPage() {
     stripeAccountId: customer.id,
   });
 
-  return <ProfileCreationUI />;
+  return <ProfileCreationUI redirectUrl={redirectUrl} />;
 }
 
 export default ProfileCreationPage;

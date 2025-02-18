@@ -122,7 +122,7 @@ function EmailSignUp({
             enviar un correo a: hola@rolamusic.app
           </Text>
 
-          <div className="pt-8 text-center">
+          <div className="py-16 pt-8 text-center">
             <Button type="submit" loading={isLoading}>
               Crear cuenta de usuario
             </Button>

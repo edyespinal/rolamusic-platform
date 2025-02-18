@@ -45,7 +45,7 @@ const useSignInData = () => {
 
     signIn.authenticateWithRedirect({
       strategy: "oauth_google",
-      redirectUrl: "/auth/sso-callback",
+      redirectUrl: `/auth/sso-callback?redirect_url=${redirectUrl}`,
       redirectUrlComplete: redirectUrl || "/",
     });
   }
@@ -163,7 +163,7 @@ const useSignInData = () => {
         session: signUp.createdSessionId,
       });
 
-      router.push("/auth/profile-creation");
+      router.push(`/auth/profile-creation?redirect_url=${redirectUrl}`);
     } catch (error: any) {
       toast({
         title: "Error",
