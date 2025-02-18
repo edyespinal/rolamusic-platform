@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^5.0.9",
     "@rola/services": "workspace:^",
     "@rola/ui": "workspace:^",
+    "@sentry/nextjs": "^9",
     "@uploadthing/react": "^7.0.3",
     "@vercel/analytics": "^1.4.1",
     "jotai": "^2.8.4",
