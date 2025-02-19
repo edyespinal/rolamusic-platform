@@ -31,7 +31,7 @@ function SubscriptionPreview({
       )}
       <div className="flex items-end">
         <Text className="pr-1 text-6xl font-bold">
-          {tier.prices.monthly.value / 100}
+          {tier.prices.monthly.value}
         </Text>
         <div className="mr-2 text-xl font-bold">
           <div>,00</div>

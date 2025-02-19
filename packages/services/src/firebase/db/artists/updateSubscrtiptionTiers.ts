@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import { doc, getDocs } from "firebase/firestore";
+import { doc, getDocs, setDoc } from "firebase/firestore";
 import { ARTISTS } from "../../../constants";
 import { ServiceError } from "../../../utils/serviceError";
 import { subscriptionTiersCollection } from "../utils";
@@ -28,13 +28,19 @@ async function updateArtistSubscriptionTiers(artistId: string) {
       })
       .sort((a, b) => a.prices.monthly.value - b.prices.monthly.value);
 
+    const promises = [];
+
     for (let i = 0; i < tiersOrderedByPrice.length; i++) {
-      batch.update(doc(collectionRef, tiersOrderedByPrice[i]?.id), {
-        access: i + 1,
-      });
+      promises.push(
+        setDoc(
+          doc(collectionRef, tiersOrderedByPrice[i]?.id),
+          { access: i + 1 },
+          { merge: true }
+        )
+      );
     }
 
-    await batch.commit();
+    await Promise.all(promises);
 
     return {
       success: true,

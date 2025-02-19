@@ -209,6 +209,13 @@ function EditSubscriptionTierPageUI({
               recommended: form.watch("recommended"),
               label: form.watch("label"),
               description: form.watch("description"),
+              prices: {
+                ...tier.prices,
+                monthly: {
+                  ...tier.prices.monthly,
+                  value: form.watch("price"),
+                },
+              },
               perks: form
                 .watch("perks")
                 .map((perk) => perk.text)

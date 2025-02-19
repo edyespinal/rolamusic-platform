@@ -17,7 +17,7 @@ const useEditSubscriptionTierData = (
   const form = useForm<FormTier>({
     defaultValues: {
       ...tier,
-      price: tier.prices.monthly.value,
+      price: tier.prices.monthly.value / 100,
       perks: tier.perks.map((perk) => ({
         text: perk,
       })),
