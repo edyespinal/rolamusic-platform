@@ -15,9 +15,9 @@ async function ProfileCreationPage({
     throw new Error("User not found");
   }
 
-  const [customer] = await Promise.all([
-    stripe.customers.createCustomer(
-      user.fullName || "",
+  const [searchResult] = await Promise.all([
+    stripe.customers.searchCustomers(
+      "email",
       user.emailAddresses[0]?.emailAddress || ""
     ),
     clerkClient().users.updateUserMetadata(user.id, {
@@ -26,6 +26,15 @@ async function ProfileCreationPage({
       },
     }),
   ]);
+
+  let customer = searchResult?.data[0];
+
+  if (!customer) {
+    customer = await stripe.customers.createCustomer(
+      user.fullName || "",
+      user.emailAddresses[0]?.emailAddress || ""
+    );
+  }
 
   await db.users.createUser({
     id: user.id,
