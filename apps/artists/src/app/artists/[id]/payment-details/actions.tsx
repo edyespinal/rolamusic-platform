@@ -23,6 +23,13 @@ async function createStripeAccount(
         requested: true,
       },
     },
+    settings: {
+      payouts: {
+        schedule: {
+          interval: "manual",
+        },
+      },
+    },
     controller: {
       fees: {
         payer: "application",
