@@ -32,7 +32,7 @@ async function ArtistPostPage({
     userAccess = userTier?.access || 0;
   }
 
-  if (post.access > userAccess) {
+  if (post.access > userAccess && artist.admin !== user?.id) {
     return <NoAccessToPost artistId={artist.id} />;
   }
 
