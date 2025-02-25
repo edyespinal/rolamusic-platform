@@ -15,6 +15,8 @@ async function ArtistPage({ params }: { params: { id: string } }) {
     db.artists.getArtistPosts(artistId),
   ]);
 
+  console.log("Artist admin", artist?.admin, "User id", userAuth?.id);
+
   if (!artist || !community) {
     throw new Error("Algo ha salido mal cargando la información del artista");
   }
@@ -30,12 +32,19 @@ async function ArtistPage({ params }: { params: { id: string } }) {
   const pagePosts: ArtistPagePost[] = posts.data.map((post) => {
     const date = post.date as any;
     const postDate = new Date(date.seconds * 1000);
-    const access =
-      post.access === 0
-        ? true
-        : userTier
-          ? userTier.access >= post.access
-          : false;
+    let access = false;
+
+    switch (true) {
+      case artist.admin === userAuth?.id:
+        access = true;
+        break;
+      case post.access === 0:
+        access = true;
+        break;
+      case userTier && userTier?.access >= post.access:
+        access = true;
+        break;
+    }
 
     return {
       id: post.id,
