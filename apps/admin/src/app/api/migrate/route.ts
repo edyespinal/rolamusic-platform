@@ -2,7 +2,7 @@ import { db } from "@rola/services/firebase";
 export async function POST(request: Request) {
   const authHeader = request.headers.get("Authorization");
 
-  if (!authHeader || authHeader !== process.env.NEXT_PUBLIC_ADMIN_KEY) {
+  if (!authHeader || authHeader !== process.env.ROLA_ADMIN_KEY) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
