@@ -198,7 +198,7 @@ const MultiSelector = ({
       <Command
         onKeyDown={handleKeyDown}
         className={cn(
-          "overflow-visible bg-transparent flex flex-col",
+          "flex flex-col overflow-visible bg-transparent",
           className
         )}
         dir={dir}
@@ -225,10 +225,10 @@ const MultiSelectorTrigger = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex flex-wrap gap-1 p-1 py-2 ring-1 ring-offset-brand ring-gray-dark rounded bg-background-dark",
-        "focus:outline-none focus:ring-1 focus:ring-brand-dark",
+        "ring-offset-brand border-gray-dark ring-gray-dark flex flex-wrap gap-1 border-2 bg-black/50 px-3 py-2 text-sm",
+        "focus-visible:ring-brand-dark focus-visible:border-brand-dark focus-visible:outline-none focus-visible:ring-1",
         {
-          "ring-1 focus-within:ring-ring": activeIndex === -1,
+          "focus-within:ring-ring ring-1": activeIndex === -1,
         },
         className
       )}
@@ -238,7 +238,7 @@ const MultiSelectorTrigger = React.forwardRef<
         <Badge
           key={item}
           className={cn(
-            activeIndex === index && "ring-2 ring-muted-foreground "
+            activeIndex === index && "ring-muted-foreground ring-2"
           )}
           variant="outline"
         >
@@ -251,7 +251,7 @@ const MultiSelectorTrigger = React.forwardRef<
             onClick={() => onValueChange(item)}
           >
             <span className="sr-only">Remove {item} option</span>
-            <RemoveIcon className="h-4 w-4 hover:stroke-destructive" />
+            <RemoveIcon className="hover:stroke-destructive h-4 w-4" />
           </button>
         </Badge>
       ))}
@@ -288,7 +288,7 @@ const MultiSelectorInput = React.forwardRef<
       onFocus={() => setOpen(true)}
       onClick={() => setActiveIndex(-1)}
       className={cn(
-        "ml-2 bg-transparent outline-none placeholder:text-muted-foreground flex-1",
+        "placeholder:text-muted-foreground ml-2 flex-1 bg-transparent outline-none",
         className,
         activeIndex !== -1 && "caret-transparent"
       )}
@@ -320,7 +320,7 @@ const MultiSelectorList = React.forwardRef<
     <CommandList
       ref={ref}
       className={cn(
-        "p-2 flex flex-col gap-2 rounded-md scrollbar-thin scrollbar-track-transparent transition-colors scrollbar-thumb-muted-foreground dark:scrollbar-thumb-muted scrollbar-thumb-rounded-lg w-full absolute bg-background shadow-md z-10 border border-muted top-0",
+        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground scrollbar-thumb-rounded-lg bg-background-dark border-muted absolute top-0 z-10 flex w-full flex-col gap-2 border p-2 shadow-md transition-colors",
         className
       )}
     >
@@ -357,10 +357,10 @@ const MultiSelectorItem = React.forwardRef<
         setInputValue("");
       }}
       className={cn(
-        "rounded-md cursor-pointer px-2 py-1 transition-colors flex justify-between ",
+        "flex cursor-pointer justify-between px-2 py-1 transition-colors",
         className,
-        isIncluded && "opacity-50 cursor-default",
-        props.disabled && "opacity-50 cursor-not-allowed"
+        isIncluded && "cursor-default opacity-50",
+        props.disabled && "cursor-not-allowed opacity-50"
       )}
       onMouseDown={mousePreventDefault}
     >
