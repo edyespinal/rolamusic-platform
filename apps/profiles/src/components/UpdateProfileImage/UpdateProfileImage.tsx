@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useUser } from "@clerk/nextjs";
-import { Button, useToast } from "@rola/ui/components";
+import { Container, useToast } from "@rola/ui/components";
 import { CheckIcon, XIcon } from "@rola/ui/icons";
 
 function UpdateProfileImage() {
@@ -29,7 +29,7 @@ function UpdateProfileImage() {
         return;
       }
 
-      if (file.size > 1024 * 1024 * 0.5) {
+      if (file.size > 1024 * 512) {
         throw new Error("El tamaño de la imagen es demasiado grande");
       }
 
@@ -66,15 +66,20 @@ function UpdateProfileImage() {
   }
 
   return (
-    <label className="hover:bg-background cursor-pointer rounded-full px-4 py-2 text-sm">
-      Cambiar imagen de perfil
-      <input
-        type="file"
-        accept="image/jpeg, image/png, image/jpg, image/webp"
-        onChange={updatePic}
-        className="hidden"
-      />
-    </label>
+    <Container className="flex flex-col items-center">
+      <label className="hover:bg-background cursor-pointer rounded-full px-4 py-2 text-sm">
+        Cambiar imagen de perfil
+        <input
+          type="file"
+          accept="image/jpeg, image/png, image/jpg, image/webp"
+          onChange={updatePic}
+          className="hidden"
+        />
+      </label>
+      <span className="text-muted-foreground text-xs">
+        (tamaño máximo: 512kb)
+      </span>
+    </Container>
   );
 }
 
