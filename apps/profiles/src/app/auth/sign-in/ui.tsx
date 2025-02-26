@@ -22,7 +22,7 @@ function LoginUI() {
   } = useSignInData();
 
   return (
-    <Container size="sm" className="pb-24 pt-12">
+    <Container size="sm" className="pb-24 pt-40">
       <div className="mb-12">
         <Title order={2}>Mi cuenta</Title>
         <Underline />

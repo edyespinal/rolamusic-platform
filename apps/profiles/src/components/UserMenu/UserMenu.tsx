@@ -54,10 +54,13 @@ function UserMenu() {
           </PopoverTrigger>
           <PopoverContent align="end" className="mt-4">
             <Container className="flex flex-col space-y-2 text-center">
-              <Container className="flex items-center gap-2">
+              <a
+                href={`${process.env.NEXT_PUBLIC_PROFILES_APP}`}
+                className="flex items-center gap-2"
+              >
                 <CircleUserIcon />
                 Mi Perfil
-              </Container>
+              </a>
               <Separator />
               <Button size="sm" onClick={handleSignOut}>
                 Cerrar sesión

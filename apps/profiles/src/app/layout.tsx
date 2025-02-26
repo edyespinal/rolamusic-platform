@@ -1,14 +1,16 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@rola/tailwind-config/utils";
-import { Toaster } from "@rola/ui/components";
+import { Container, Toaster } from "@rola/ui/components";
+import { Header } from "@components/Header/Header";
+import { Footer } from "@components/Footer/Footer";
 import "@styles/globals.css";
 
 const fonts = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ROLA | Profiles",
+  title: "ROLA | Perfiles",
   description: "Perfil de usuario de ROLA",
 };
 
@@ -22,11 +24,13 @@ function RootLayout({
       <html lang="es">
         <body
           className={cn(
-            "grid h-[100dvh] grid-rows-[auto_1fr_auto]",
+            "grid h-svh grid-rows-[auto_1fr_auto]",
             fonts.className
           )}
         >
+          <Header />
           <main>{children}</main>
+          <Footer />
           <Toaster />
         </body>
       </html>

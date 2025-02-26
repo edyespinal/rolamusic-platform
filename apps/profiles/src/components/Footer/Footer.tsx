@@ -5,9 +5,9 @@ function Footer() {
   return (
     <Container
       size="xl"
-      className="border-brand flex w-full flex-col justify-between border-t p-0 text-sm lg:flex-row"
+      className="border-brand flex w-full flex-col justify-between border-t p-0 lg:flex-row"
     >
-      <div className="flex flex-col gap-4 pt-2 text-center lg:flex-row">
+      <div className="hidden gap-2 py-4 text-center lg:flex lg:flex-row lg:items-center">
         <a
           href="https://help.rolamusic.app/legal-notice"
           target="_blank"
@@ -35,13 +35,14 @@ function Footer() {
         </a>
       </div>
 
-      <div className="hidden pt-2 font-thin lg:block">
-        Todos los derechos reservados - ROLA &reg; {new Date().getFullYear()}
+      <div className="hidden pt-2 text-center text-sm font-thin lg:block">
+        Todos los derechos reservados <br />
+        ROLA &reg; {new Date().getFullYear()}
       </div>
 
-      <div className="mt-2 w-full text-center lg:mt-0 lg:w-auto">
-        <div className="lg:flex lg:justify-between">
-          <div className="text-brand mb-4 mt-2 flex w-full flex-col justify-center gap-4 px-2 font-medium lg:flex-row">
+      <div className="w-full lg:w-auto">
+        <div className="flex justify-between">
+          <div className="text-brand flex w-full justify-between px-2 py-4 text-sm font-medium lg:flex-row lg:justify-center lg:gap-4 lg:text-base">
             <a
               href="https://help.rolamusic.app/faq"
               className="hover:text-white"
