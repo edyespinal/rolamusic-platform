@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignOutButton, useUser } from "@clerk/nextjs";
 import {
   Button,
   Container,
@@ -20,6 +20,7 @@ import MenuIcon from "@assets/img/icons/menu.svg";
 
 function Navigation() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { user, isSignedIn } = useUser();
 
   return (
     <div className="items-center justify-end gap-4">
@@ -30,13 +31,24 @@ function Navigation() {
         </NavLink>
         <NavLink href="/rola-talks">ROLA Talks</NavLink>
         <NavLink href="/artist-information">¿Eres artista?</NavLink>
-        <a href={`${process.env.NEXT_PUBLIC_ARTISTS_APP}`}>
-          <Button size="xs">
-            <SignedIn>Ir a mi perfil de artista</SignedIn>
-            <SignedOut>Iniciar sesión de artista</SignedOut>
-            <ArrowRightIcon className="ml-2" />
-          </Button>
-        </a>
+        <SignedOut>
+          <a href={`${process.env.NEXT_PUBLIC_ARTISTS_APP}`}>
+            <Button size="xs">
+              Iniciar sesión de artista
+              <ArrowRightIcon className="ml-2" />
+            </Button>
+          </a>
+        </SignedOut>
+
+        {isSignedIn && user?.publicMetadata.role !== "fan" && (
+          <a href={`${process.env.NEXT_PUBLIC_ARTISTS_APP}`}>
+            <Button size="xs">
+              Ir a mi perfil de artista
+              <ArrowRightIcon className="ml-2" />
+            </Button>
+          </a>
+        )}
+
         <SignedOut>
           <Link href="/auth/sign-in">
             <Button variant="outline" size="xs">
