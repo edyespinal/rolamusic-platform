@@ -13,8 +13,10 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Separator,
   Title,
 } from "@rola/ui/components";
+import { CircleUserIcon } from "@rola/ui/icons";
 
 function UserMenu() {
   const { user, isLoaded } = useUser();
@@ -59,6 +61,14 @@ function UserMenu() {
           </PopoverTrigger>
           <PopoverContent align="end" className="mt-4">
             <Container className="flex flex-col space-y-2 text-center">
+              <a
+                href={`${process.env.NEXT_PUBLIC_PROFILES_APP}`}
+                className="flex items-center gap-2"
+              >
+                <CircleUserIcon />
+                Mi Perfil
+              </a>
+              <Separator />
               <Button size="sm" onClick={handleSignOut}>
                 Cerrar sesión
               </Button>

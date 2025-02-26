@@ -11,11 +11,13 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Separator,
   Text,
   Title,
 } from "@rola/ui/components";
 import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
+import { CircleUserIcon } from "@rola/ui/icons";
 
 function UserMenu({ withInfo = false }: { withInfo?: boolean }) {
   const { user, isLoaded } = useUser();
@@ -63,7 +65,15 @@ function UserMenu({ withInfo = false }: { withInfo?: boolean }) {
               </Avatar>
             </PopoverTrigger>
             <PopoverContent align="end" className="mt-4">
-              <Container className="text-center">
+              <Container className="flex flex-col space-y-2 text-center">
+                <a
+                  href={`${process.env.NEXT_PUBLIC_PROFILES_APP}`}
+                  className="flex items-center gap-2"
+                >
+                  <CircleUserIcon />
+                  Mi Perfil
+                </a>
+                <Separator />
                 <Button size="sm" onClick={handleSignOut}>
                   Cerrar sesión
                 </Button>

@@ -1,17 +1,21 @@
-import { SignedIn } from "@clerk/nextjs";
-import { UserMenu } from "@components/UserMenu/UserMenu";
-import { Container, Logo } from "@rola/ui/components";
 import Link from "next/link";
+import { Container, Logo } from "@rola/ui/components";
+import { Navigation } from "@components/Navigation/Navigation";
 
 function Header() {
   return (
-    <Container size="xl" className="flex items-center justify-between py-4">
-      <Link href="/">
-        <Logo variant="horizontal" size="xs" />
-      </Link>
-      <SignedIn>
-        <UserMenu />
-      </SignedIn>
+    <Container className="bg-background-dark z-[99] flex h-20 items-center px-4 lg:bg-transparent lg:bg-gradient-to-b lg:from-black lg:to-transparent lg:px-0 lg:shadow-none">
+      <Container size="xl" className="flex items-center justify-between">
+        <Link href="/">
+          <div className="hidden lg:block">
+            <Logo variant="horizontal" size="xs" />
+          </div>
+          <div className="block lg:hidden">
+            <Logo variant="icon" size="xs" />
+          </div>
+        </Link>
+        <Navigation />
+      </Container>
     </Container>
   );
 }

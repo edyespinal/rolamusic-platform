@@ -30,7 +30,10 @@ function GoogleSignIn({
 
       <div className="text-brand py-16 text-center">
         <Text>¿Ya tienes una cuenta?</Text>
-        <Button variant="link" onClick={() => handleLoginTypeChange("email")}>
+        <Button
+          variant="outline"
+          onClick={() => handleLoginTypeChange("email")}
+        >
           Iniciar sesión
         </Button>
       </div>

@@ -15,8 +15,6 @@ async function ArtistPage({ params }: { params: { id: string } }) {
     db.artists.getArtistPosts(artistId),
   ]);
 
-  console.log("Artist admin", artist?.admin, "User id", userAuth?.id);
-
   if (!artist || !community) {
     throw new Error("Algo ha salido mal cargando la información del artista");
   }

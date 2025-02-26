@@ -13,8 +13,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@rola/ui/components";
-import { ArrowRightIcon } from "@rola/ui/icons";
-import { NavLink } from "@components/Header/NavLink";
 import { UserMenu } from "@components/UserMenu/UserMenu";
 import MenuIcon from "@assets/img/icons/menu.svg";
 
@@ -24,27 +22,12 @@ function Navigation() {
   return (
     <div className="items-center justify-end gap-4">
       <Container className="hidden items-center gap-8 lg:flex">
-        <NavLink href="/">Inicio</NavLink>
-        <NavLink href="/artists" prefetch>
-          Artistas
-        </NavLink>
-        <NavLink href="/rola-talks">ROLA Talks</NavLink>
-        <NavLink href="/artist-information">¿Eres artista?</NavLink>
-        <a href={`${process.env.NEXT_PUBLIC_ARTISTS_APP}`}>
-          <Button size="xs">
-            <SignedIn>Ir a mi perfil de artista</SignedIn>
-            <SignedOut>Iniciar sesión de artista</SignedOut>
-            <ArrowRightIcon className="ml-2" />
+        <a href={`${process.env.NEXT_PUBLIC_FANS_APP}`}>
+          <Button variant="outline" size="xs">
+            Ir a la app
           </Button>
         </a>
-        <SignedOut>
-          <Link href="/auth/sign-in">
-            <Button variant="outline" size="xs">
-              Iniciar sesión de fan
-              <ArrowRightIcon className="ml-2" />
-            </Button>
-          </Link>
-        </SignedOut>
+
         <SignedIn>
           <UserMenu />
         </SignedIn>
@@ -63,37 +46,27 @@ function Navigation() {
             </div>
 
             <div className="flex flex-col gap-4 text-center">
-              <NavLink href="/" onClick={() => setIsOpen(false)}>
-                Inicio
-              </NavLink>
-              <NavLink href="/artists" onClick={() => setIsOpen(false)}>
-                Artistas
-              </NavLink>
-              <NavLink href="/rola-talks" onClick={() => setIsOpen(false)}>
-                ROLA Talks
-              </NavLink>
-              <NavLink
-                href="/artist-information"
-                onClick={() => setIsOpen(false)}
+              <a
+                href={`${process.env.NEXT_PUBLIC_FANS_APP}`}
+                className="text-center text-lg font-semibold lg:text-sm"
               >
-                ¿Eres artista?
-              </NavLink>
+                Ir a la app
+              </a>
             </div>
 
             <div className="mt-4 flex flex-col items-center gap-2">
-              <a
-                href={process.env.NEXT_PUBLIC_ARTISTS_APP}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="secondary">
-                  <SignedIn>Ir a mi perfil de artista</SignedIn>
-                  <SignedOut>Iniciar sesión de artista</SignedOut>
-                </Button>
-              </a>
-              <Link href="/auth/sign-in" onClick={() => setIsOpen(false)}>
-                <Button variant="outlineAlt">Iniciar sesión de fan</Button>
-              </Link>
+              <SignedOut>
+                <a
+                  href={process.env.NEXT_PUBLIC_ARTISTS_APP}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="secondary">Iniciar sesión artistas</Button>
+                </a>
+                <Link href="/auth/sign-in" onClick={() => setIsOpen(false)}>
+                  <Button variant="outlineAlt">Iniciar sesión de fan</Button>
+                </Link>
+              </SignedOut>
 
               <SignedIn>
                 <SignOutButton>

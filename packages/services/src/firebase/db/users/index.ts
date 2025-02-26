@@ -4,6 +4,7 @@ import { getUser } from "./getUser";
 import { getUserArtistsSubscriptions } from "./getUserArtistsSubscriptions";
 import { getUserManagedArtists } from "./getUserArtists";
 import { subscribeToArtist } from "./subscribeToArtist";
+import { updateUser } from "./updateUser";
 
 export const usersServices = {
   createUser,
@@ -12,4 +13,5 @@ export const usersServices = {
   getUserArtistsSubscriptions,
   getUserManagedArtists,
   subscribeToArtist,
+  updateUser,
 };
