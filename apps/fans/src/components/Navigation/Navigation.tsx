@@ -30,13 +30,10 @@ function Navigation() {
         </NavLink>
         <NavLink href="/rola-talks">ROLA Talks</NavLink>
         <NavLink href="/artist-information">¿Eres artista?</NavLink>
-        <a
-          href="https://artists.rolamusic.app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={`${process.env.NEXT_PUBLIC_ARTISTS_APP}`}>
           <Button size="xs">
-            Iniciar sesión de artista
+            <SignedIn>Ir a mi perfil de artista</SignedIn>
+            <SignedOut>Iniciar sesión de artista</SignedOut>
             <ArrowRightIcon className="ml-2" />
           </Button>
         </a>
@@ -84,18 +81,19 @@ function Navigation() {
             </div>
 
             <div className="mt-4 flex flex-col items-center gap-2">
-              <SignedOut>
-                <a
-                  href={process.env.NEXT_PUBLIC_ARTISTS_APP}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button variant="secondary">Iniciar sesión artistas</Button>
-                </a>
-                <Link href="/auth/sign-in" onClick={() => setIsOpen(false)}>
-                  <Button variant="outlineAlt">Iniciar sesión de fan</Button>
-                </Link>
-              </SignedOut>
+              <a
+                href={process.env.NEXT_PUBLIC_ARTISTS_APP}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="secondary">
+                  <SignedIn>Ir a mi perfil de artista</SignedIn>
+                  <SignedOut>Iniciar sesión de artista</SignedOut>
+                </Button>
+              </a>
+              <Link href="/auth/sign-in" onClick={() => setIsOpen(false)}>
+                <Button variant="outlineAlt">Iniciar sesión de fan</Button>
+              </Link>
 
               <SignedIn>
                 <SignOutButton>
