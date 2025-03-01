@@ -3,6 +3,7 @@ export const FANS = "fans";
 export const SUBSCRIPTION_TIERS = "subscriptionTiers";
 export const GUESTS = "guestlist";
 export const USERS = "users";
+export const USER_SUBSCRIPTIONS = "userSubscriptions";
 export const POSTS = "posts";
 export const PODCAST = "podcast";
 export const PODCAST_EPISODES = "podcastEpisodes";

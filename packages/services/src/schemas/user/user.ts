@@ -15,6 +15,7 @@ const userSchema = z.object({
       id: z.string(),
       tier: z.string(),
       active: z.boolean(),
+      subscriptionId: z.string(),
     })
   ),
   genres: z.array(z.string()),
@@ -22,5 +23,4 @@ const userSchema = z.object({
 });
 
 export { userSchema };
-
 export type User = z.infer<typeof userSchema>;

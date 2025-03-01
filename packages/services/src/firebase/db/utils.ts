@@ -25,9 +25,10 @@ import {
   PODCAST_EPISODES,
   SUBSCRIPTION_TIERS,
   USER_INTERACTIONS,
+  USER_SUBSCRIPTIONS,
   USERS,
 } from "../../constants";
-import { UserInteractions } from "../../schemas/user";
+import { UserInteractions, UserSubscription } from "../../schemas/user";
 
 function createCollection<T = DocumentData>(collectionName: string) {
   return collection(db, collectionName) as CollectionReference<T>;
@@ -58,11 +59,11 @@ function createSubCollectionDocumentWithId<T = DocumentData>(
   collectionName: string,
   subCollectionName: string
 ) {
-  return (artistId: string, docId: string) =>
+  return (id: string, docId: string) =>
     doc(
       db,
       collectionName,
-      artistId,
+      id,
       subCollectionName,
       docId
     ) as DocumentReference<T>;
@@ -97,6 +98,17 @@ const subscriptionTiersCollection = createSubCollection<ArtistSubscriptionTier>(
 
 const usersCollection = createCollection<User>(USERS);
 
+const userSubscriptionsCollection = createSubCollection<UserSubscription>(
+  USERS,
+  USER_SUBSCRIPTIONS
+);
+
+const userSubscriptionsCollectionDoc =
+  createSubCollectionDocumentWithId<UserSubscription>(
+    USERS,
+    USER_SUBSCRIPTIONS
+  );
+
 const userInteractionsCollection = createSubCollectionWithId<UserInteractions>(
   USERS,
   USER_INTERACTIONS
@@ -116,5 +128,7 @@ export {
   guestsCollection,
   podcastEpisodeCollection,
   usersCollection,
+  userSubscriptionsCollection,
+  userSubscriptionsCollectionDoc,
   userInteractionsCollection,
 };

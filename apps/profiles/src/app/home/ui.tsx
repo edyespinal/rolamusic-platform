@@ -7,6 +7,7 @@ import {
   ArrowRightIcon,
   LockIcon,
   LogOutIcon,
+  Music2Icon,
   PencilIcon,
 } from "@rola/ui/icons";
 import Link from "next/link";
@@ -33,18 +34,20 @@ function HomePageUI() {
             <ArrowRightIcon />
           </Link>
 
-          {/* <Separator className="bg-background" />
+          <Container className="px-6">
+            <Separator />
+          </Container>
 
           <Link
             href="/subscriptions"
-            className="flex items-center justify-between px-6 py-2 hover:bg-black"
+            className="hover:bg-background-dark flex items-center justify-between px-6 py-2"
           >
             <Text className="flex items-center gap-2">
               <Music2Icon color="grey" />
               Mis suscripciones
             </Text>
             <ArrowRightIcon />
-          </Link> */}
+          </Link>
         </Container>
       </Container>
 
