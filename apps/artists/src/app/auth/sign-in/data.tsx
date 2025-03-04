@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useToast } from "@rola/ui/components";
+import { XIcon } from "@rola/ui/icons";
 
 const useSignInData = () => {
   const [loginType, setLoginType] = React.useState<LoginType>("google");
@@ -68,13 +69,28 @@ const useSignInData = () => {
 
         router.push("/");
       }
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
+
+      if (
+        error.message ===
+        "You're currently in single session mode. You can only be signed into one account at a time."
+      ) {
+        toast({
+          title: "Error",
+          description: "Ya tienes una sesión iniciada",
+          variant: "destructive",
+          icon: <XIcon />,
+        });
+
+        return;
+      }
 
       toast({
         title: "Error",
         description: "No se pudo iniciar sesión",
         variant: "destructive",
+        icon: <XIcon />,
       });
     }
   }
