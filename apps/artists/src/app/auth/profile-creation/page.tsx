@@ -13,7 +13,7 @@ async function ProfileCreationPage() {
   const [searchResult] = await Promise.all([
     stripe.customers.searchCustomers(
       "email",
-      user.emailAddresses[0]?.emailAddress || ""
+      user.primaryEmailAddress?.emailAddress || ""
     ),
     clerkClient().users.updateUserMetadata(user.id, {
       publicMetadata: {
@@ -27,13 +27,13 @@ async function ProfileCreationPage() {
   if (!customer) {
     customer = await stripe.customers.createCustomer(
       user.fullName || "",
-      user.emailAddresses[0]?.emailAddress || ""
+      user.primaryEmailAddress?.emailAddress || ""
     );
   }
 
   await db.users.createUser({
     id: user.id,
-    email: user.emailAddresses[0]?.emailAddress || "",
+    email: user.primaryEmailAddress?.emailAddress || "",
     displayName: user.fullName || "",
     photoURL: user.imageUrl,
     artists: [],
