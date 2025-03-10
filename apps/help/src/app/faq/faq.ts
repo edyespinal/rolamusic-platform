@@ -1,9 +1,15 @@
-type Faq = {
+type FAQ = {
   question: string;
   answer: string;
+  link?: string;
 };
 
-export const artistFaq: Faq[] = [
+const artistFaq: FAQ[] = [
+  {
+    question: "¿Cómo funcionan los pagos en ROLA?",
+    answer: "Visita nuestra sección de pagos para saber más.",
+    link: "/faq/artists/payments",
+  },
   {
     question: "¿Quién puede formar parte de ROLA?",
     answer:
@@ -48,7 +54,7 @@ export const artistFaq: Faq[] = [
   },
 ];
 
-export const userFaq: Faq[] = [
+const userFaq: FAQ[] = [
   {
     question: "   ¿Cómo puedo apoyar a un Artista en ROLA?",
     answer: "-- a definir --",
@@ -71,3 +77,6 @@ export const userFaq: Faq[] = [
   },
   { question: " ¿Cómo cancelar mi suscripción?", answer: "-- a definir --" },
 ];
+
+export { artistFaq, userFaq };
+export type { FAQ };
