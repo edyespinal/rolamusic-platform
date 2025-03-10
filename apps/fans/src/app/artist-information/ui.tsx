@@ -153,19 +153,23 @@ function ArtistInformationPageUI() {
             <Title type="rola" order={2} className="mb-8">
               Gana dinero con tu música e impulsa tu carrera.
             </Title>
-            <Text className="mb-4">
+            <Text className="mb-6">
               Con ROLA puedes obtener ingresos recurrentes a través de la
               suscripción de los fans a tu comunidad y generar otros ingresos
               con las actividades que realizamos para potenciar tu proyecto
-              musical.
+              musical. <br />
+            </Text>
+
+            <Text className="mb-3">
+              ¿Quieres más información sobre los pagos a artistas?
             </Text>
 
             <a
-              href="https://artists.rolamusic.app/"
+              href="https://help.rolamusic.app/faq/artists/payments"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button>Comenzar</Button>
+              <Button>Saber más</Button>
             </a>
           </div>
 
