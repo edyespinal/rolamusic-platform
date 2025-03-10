@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Title, Text, Underline, Button } from "@rola/ui/components";
 import Link from "next/link";
+import { Container, Title, Text, Underline, Button } from "@rola/ui/components";
 
 function HomePageUI() {
   return (
@@ -23,9 +23,20 @@ function HomePageUI() {
       </Container>
 
       <Container className="flex flex-col items-center gap-2">
-        <Link href="/faq">
-          <Button variant="link">Preguntas frecuentes</Button>
-        </Link>
+        <Title order={4}>Preguntas frecuentes</Title>
+        <Container className="mb-8 flex justify-center gap-4">
+          <Link href="/faq/artists">
+            <div className="bg-background hover:bg-background-dark rounded-xl px-12 py-8 text-center hover:cursor-pointer">
+              <Title order={5}>Artistas</Title>
+            </div>
+          </Link>
+          <Link href="/faq/users">
+            <div className="bg-background hover:bg-background-dark rounded-xl px-12 py-8 text-center hover:cursor-pointer">
+              <Title order={5}>Usuarios</Title>
+            </div>
+          </Link>
+        </Container>
+
         <Link href="/legal-notice">
           <Button variant="link">Aviso legal</Button>
         </Link>
